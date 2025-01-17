@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/course/domain/models/map_model.dart';
-import 'package:solo_play_application/src/course/presentation/cubit/map_view_cubit.dart';
 import 'package:solo_play_application/src/course/presentation/page/map_detail_page.dart';
 import 'package:solo_play_application/src/course/presentation/widget/hexagon_grid.dart';
 
@@ -68,7 +66,6 @@ class _MapViewState extends State<MapView> {
           for (var entry in _regionPaths.entries) {
             for (Path path in entry.value) {
               if (path.contains(realOffset)) {
-                print(entry.key);
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => MapDetailPage(mapModel: entry.key)));
               }

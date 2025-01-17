@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/course/presentation/cubit/main_view_cubit.dart';
 import 'package:solo_play_application/src/course/presentation/view/map_view.dart';
 import 'package:solo_play_application/src/course/presentation/view/recommend_view.dart';
 
@@ -12,18 +10,14 @@ class MainView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         bottom: false,
-        child: BlocBuilder<MainViewCubit, bool>(
-            bloc: MainViewCubit(),
-            builder: (context, state) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _recommend(),
-                  _map(),
-                ],
-              );
-            }),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _recommend(),
+            _map(),
+          ],
+        ),
       ),
     );
   }
