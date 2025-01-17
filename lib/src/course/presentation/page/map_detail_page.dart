@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/course/domain/models/map_model.dart';
-import 'package:solo_play_application/src/course/presentation/cubit/map/map_state.dart';
-import 'package:solo_play_application/src/course/presentation/cubit/map/map_bloc.dart';
+import 'package:solo_play_application/src/course/presentation/bloc/map/map_state.dart';
+import 'package:solo_play_application/src/course/presentation/bloc/map/map_bloc.dart';
 import 'package:solo_play_application/src/course/presentation/view/map_detail_view.dart';
 
 class MapDetailPage extends StatelessWidget {

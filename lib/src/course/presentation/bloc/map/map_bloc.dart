@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/course/domain/models/map_model.dart';
-import 'package:solo_play_application/src/course/presentation/cubit/map/map_event.dart';
-import 'package:solo_play_application/src/course/presentation/cubit/map/map_state.dart';
+import 'package:solo_play_application/src/course/presentation/bloc/map/map_event.dart';
+import 'package:solo_play_application/src/course/presentation/bloc/map/map_state.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
   final MapModel mapModel;
