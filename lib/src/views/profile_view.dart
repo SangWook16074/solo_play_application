@@ -25,7 +25,12 @@ class ProfileView extends StatelessWidget {
               color: Colors.black87,
             ),
           ),
-          actions: const [Icon(Icons.more_vert)],
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Icon(Icons.more_vert),
+            )
+          ],
         ),
       ),
       body: SingleChildScrollView(
