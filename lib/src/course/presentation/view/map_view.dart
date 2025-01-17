@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/course/domain/models/map_model.dart';
 import 'package:solo_play_application/src/course/presentation/cubit/map_view_cubit.dart';
 import 'package:solo_play_application/src/course/presentation/page/map_detail_page.dart';
-import 'package:solo_play_application/src/course/presentation/view/map_detail_view.dart';
 import 'package:solo_play_application/src/course/presentation/widget/hexagon_grid.dart';
 
 class MapView extends StatefulWidget {
@@ -64,56 +63,45 @@ class _MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onDoubleTapDown: (details) {
-        final realOffset = _controller.toScene(details.localPosition);
-        for (var entry in _regionPaths.entries) {
-          for (Path path in entry.value) {
-            if (path.contains(realOffset)) {
-              print(entry.key);
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => MapDetailPage(mapModel: entry.key)));
+        onDoubleTapDown: (details) {
+          final realOffset = _controller.toScene(details.localPosition);
+          for (var entry in _regionPaths.entries) {
+            for (Path path in entry.value) {
+              if (path.contains(realOffset)) {
+                print(entry.key);
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => MapDetailPage(mapModel: entry.key)));
+              }
             }
           }
-        }
-      },
-      child: InteractiveViewer(
-        key: _viewportKey,
-        transformationController: _controller,
-        constrained: false,
-        minScale: 0.1,
-        maxScale: 1.7,
-        child: FittedBox(
-          child: BlocBuilder<MapViewCubit, MapModel>(builder: (context, state) {
-            return HexagonGrid(
-              key: _contentKey,
-              space: 4.0,
-              offsets: [
-                ...state
-                    .getMap(MapModel.dosim)
-                    .map((it) => it.copy(color: const Color(0xffE3EFED))),
-                ...state
-                    .getMap(MapModel.gangbuk)
-                    .map((it) => it.copy(color: const Color(0xffD4D7EA))),
-                ...state
-                    .getMap(MapModel.dongseoul)
-                    .map((it) => it.copy(color: const Color(0xff91C4EF))),
-                ...state
-                    .getMap(MapModel.seonam)
-                    .map((it) => it.copy(color: const Color(0xffECDFBB))),
-                ...state
-                    .getMap(MapModel.namseoul)
-                    .map((it) => it.copy(color: const Color(0xffD9E4A9))),
-                ...state
-                    .getMap(MapModel.gangnam)
-                    .map((it) => it.copy(color: const Color(0xffF592A4))),
-                ...state
-                    .getMap(MapModel.dongnam)
-                    .map((it) => it.copy(color: const Color(0xffDAA0DD))),
-              ],
-            );
-          }),
-        ),
-      ),
-    );
+        },
+        child: InteractiveViewer(
+            key: _viewportKey,
+            transformationController: _controller,
+            constrained: false,
+            minScale: 0.1,
+            maxScale: 1.7,
+            child: FittedBox(
+              child: HexagonGrid(
+                key: _contentKey,
+                space: 4.0,
+                offsets: [
+                  ...MapModel.getMap(MapModel.dosim)
+                      .map((it) => it.copy(color: const Color(0xffE3EFED))),
+                  ...MapModel.getMap(MapModel.gangbuk)
+                      .map((it) => it.copy(color: const Color(0xffD4D7EA))),
+                  ...MapModel.getMap(MapModel.dongseoul)
+                      .map((it) => it.copy(color: const Color(0xff91C4EF))),
+                  ...MapModel.getMap(MapModel.seonam)
+                      .map((it) => it.copy(color: const Color(0xffECDFBB))),
+                  ...MapModel.getMap(MapModel.namseoul)
+                      .map((it) => it.copy(color: const Color(0xffD9E4A9))),
+                  ...MapModel.getMap(MapModel.gangnam)
+                      .map((it) => it.copy(color: const Color(0xffF592A4))),
+                  ...MapModel.getMap(MapModel.dongnam)
+                      .map((it) => it.copy(color: const Color(0xffDAA0DD))),
+                ],
+              ),
+            )));
   }
 }

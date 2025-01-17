@@ -16,7 +16,7 @@ enum MapModel {
     this.label,
   );
 
-  List<HexagonPosition> getMap(MapModel type) {
+  static List<HexagonPosition> getMap(MapModel type) {
     switch (type) {
       case MapModel.gangbuk:
         return [

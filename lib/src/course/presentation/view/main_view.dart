@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/course/presentation/cubit/main_view_cubit.dart';
-import 'package:solo_play_application/src/course/presentation/page/map_page.dart';
+import 'package:solo_play_application/src/course/presentation/view/map_view.dart';
 import 'package:solo_play_application/src/course/presentation/view/recommend_view.dart';
 
 class MainView extends StatelessWidget {
@@ -39,6 +39,6 @@ class MainView extends StatelessWidget {
 
   // 메인 화면 서울 전체 지도 헥사곤 그리드 뷰
   Widget _map() => const Expanded(
-        child: MapPage(),
+        child: MapView(),
       );
 }
