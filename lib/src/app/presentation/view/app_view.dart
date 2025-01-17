@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/views/add_post_view.dart';
-import 'package:solo_play_application/src/views/home_view.dart';
-import 'package:solo_play_application/src/views/my_profile_view.dart';
-import 'package:solo_play_application/src/views/post_view.dart';
-import 'package:solo_play_application/src/views/rank_view.dart';
+import 'package:solo_play_application/src/course/presentation/page/main_page.dart';
+import 'package:solo_play_application/src/post/presentation/view/add_post_view.dart';
+import 'package:solo_play_application/src/user/presentation/view/my_profile_view.dart';
+import 'package:solo_play_application/src/post/presentation/view/post_view.dart';
+import 'package:solo_play_application/src/rank/presentation/view/rank_view.dart';
 
 class AppView extends StatefulWidget {
   const AppView({super.key});
@@ -16,7 +16,7 @@ class _AppState extends State<AppView> {
   var _index = 0;
 
   final List<Widget> _pages = [
-    const HomeView(),
+    const MainPage(),
     const RankView(),
     const AddPostView(),
     const PostView(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:solo_play_application/src/style/theme_color.dart';
-import 'package:solo_play_application/src/widgets/course_widget.dart';
-import 'package:solo_play_application/src/widgets/post_widget.dart';
+import 'package:solo_play_application/src/course/presentation/widget/course_widget.dart';
+import 'package:solo_play_application/src/post/presentation/widget/post_widget.dart';
 
 class MyProfileView extends StatelessWidget {
   const MyProfileView({super.key});
@@ -25,9 +25,9 @@ class MyProfileView extends StatelessWidget {
               color: Colors.black87,
             ),
           ),
-          actions: [
+          actions: const [
             Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+              padding: EdgeInsets.only(right: 8.0),
               child: Icon(Icons.more_vert),
             )
           ],
@@ -210,9 +210,7 @@ class MyProfileView extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 23),
-          const CourseWidget(),
-          const CourseWidget(),
-          const CourseWidget(),
+          for (var i = 0; i < 3; i++) const CourseWidget(),
           const SizedBox(height: 23),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
