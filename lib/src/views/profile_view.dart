@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:solo_play_application/src/style/theme_color.dart';
 import 'package:solo_play_application/src/widgets/course_widget.dart';
+import 'package:solo_play_application/src/widgets/post_widget.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -58,7 +60,7 @@ class ProfileView extends StatelessWidget {
               child: Container(
                 width: 72,
                 height: 72,
-                color: Colors.grey,
+                color: ThemeColor.basicGrey,
               ),
             ),
           ),
@@ -106,7 +108,7 @@ class ProfileView extends StatelessWidget {
               const Text(
                 '너구리',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 28,
                   fontWeight: FontWeight.w600,
                   color: Colors.black87,
                 ),
@@ -115,7 +117,7 @@ class ProfileView extends StatelessWidget {
               Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.grey,
+                  color: ThemeColor.basicGrey,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Padding(
@@ -135,16 +137,16 @@ class ProfileView extends StatelessWidget {
             children: List.generate(
               3,
               (index) {
-                return const Row(
+                return Row(
                   children: [
                     Text(
                       '#혼자서 잘놀아요',
                       style: TextStyle(
                         fontSize: 15,
-                        color: Colors.grey,
+                        color: ThemeColor.basicGrey,
                       ),
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                   ],
                 );
               },
@@ -165,8 +167,8 @@ class ProfileView extends StatelessWidget {
           height: 30,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(20),
+            color: ThemeColor.basicGrey,
+            borderRadius: BorderRadius.circular(10),
           ),
           child: const Text(
             '프로필 편집',
@@ -191,7 +193,7 @@ class ProfileView extends StatelessWidget {
               const Text(
                 '가장 추천을 많이 받은 코스',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 24,
                   fontWeight: FontWeight.w600,
                   color: Colors.black87,
                 ),
@@ -203,11 +205,45 @@ class ProfileView extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 23),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 2,
-            itemBuilder: (context, index) => const CourseWidget(),
+          const CourseWidget(),
+          const CourseWidget(),
+          const CourseWidget(),
+          const SizedBox(height: 23),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Row(
+                children: [
+                  Text(
+                    '너구리',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  Text(
+                    '님의 포스팅',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ],
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: const Icon(Icons.arrow_forward_ios),
+              ),
+            ],
+          ),
+          const SizedBox(height: 23),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              PostWidget(),
+              PostWidget(),
+            ],
           ),
         ],
       ),

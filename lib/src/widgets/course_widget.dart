@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:solo_play_application/src/style/theme_color.dart';
 
 class CourseWidget extends StatelessWidget {
   const CourseWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final List<String> items = List<String>.generate(3, (i) => "$i");
-
     return Column(
       children: [
         /// 코스 지도 영역
         Container(
           width: double.infinity,
           height: 336,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.vertical(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.vertical(
               top: Radius.circular(10),
               bottom: Radius.zero,
             ),
-            color: Colors.grey,
+            color: ThemeColor.basicGrey,
           ),
+
+          /// 후에 지도 코스 보여주는 화면 넣을 것.
           child: Container(),
         ),
 
