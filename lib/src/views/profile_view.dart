@@ -250,6 +250,7 @@ class ProfileView extends StatelessWidget {
               PostWidget(),
             ],
           ),
+          const SizedBox(height: 23),
         ],
       ),
     );
