@@ -3,8 +3,8 @@ import 'package:solo_play_application/src/style/theme_color.dart';
 import 'package:solo_play_application/src/widgets/course_widget.dart';
 import 'package:solo_play_application/src/widgets/post_widget.dart';
 
-class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+class MyProfileView extends StatelessWidget {
+  const MyProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
