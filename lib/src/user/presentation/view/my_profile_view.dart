@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/style/theme_color.dart';
+import 'package:solo_play_application/src/utils/style/theme_color.dart';
 import 'package:solo_play_application/src/course/presentation/widget/course_widget.dart';
 import 'package:solo_play_application/src/post/presentation/widget/post_widget.dart';
 
