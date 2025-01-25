@@ -57,7 +57,7 @@ class RecommendView extends StatelessWidget {
       );
 }
 
-class RecommendItemWidget extends StatelessWidget {
+class RecommendItemWidget extends StatefulWidget {
   final String title;
   final double width;
   final double height;
@@ -65,26 +65,75 @@ class RecommendItemWidget extends StatelessWidget {
       {super.key, required this.title, this.width = 135, this.height = 109});
 
   @override
+  State<RecommendItemWidget> createState() => _RecommendItemWidgetState();
+}
+
+class _RecommendItemWidgetState extends State<RecommendItemWidget> {
+  bool isTaped = false;
+
+  @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10.0),
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-            border: Border.all(width: 2.0, color: const Color(0xffaaaaaa)),
-            borderRadius: BorderRadius.circular(10.0)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(child: _thumNail()),
-            _title(),
-          ],
-        ),
-      ),
-    );
+    return GestureDetector(
+        onTapDown: (details) {
+          setState(() {
+            isTaped = true;
+          });
+        },
+        onTapUp: (details) {
+          setState(() {
+            isTaped = false;
+          });
+        },
+        onTapCancel: () {
+          setState(() {
+            isTaped = false;
+          });
+        },
+        child: SizedBox(
+          width: widget.width,
+          height: widget.height,
+          child: (isTaped) ? _selectedItem() : _unSelectedItem(),
+        ));
   }
+
+  Widget _selectedItem() => Container(
+      padding: const EdgeInsets.all(2.0),
+      decoration: BoxDecoration(
+          color: const Color(0xffaaaaaa),
+          gradient: const LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Color(0xff00AFB9),
+              Color(0xff1D4799),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(10.0)),
+      child: _basicItem());
+
+  Widget _unSelectedItem() => Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: _basicItem(),
+      );
+
+  Widget _basicItem() => ClipRRect(
+        borderRadius: BorderRadius.circular(8.0),
+        child: Container(
+          // margin: const EdgeInsets.all(1.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(child: _thumNail()),
+              _title(),
+            ],
+          ),
+        ),
+      );
 
   Widget _thumNail() => Container(
         key: const Key("recommend item row thum nail"),
@@ -95,5 +144,5 @@ class RecommendItemWidget extends StatelessWidget {
 
   Widget _title() => SizedBox(
       height: 24,
-      child: Text(key: const Key("recommend item row title"), title));
+      child: Text(key: const Key("recommend item row title"), widget.title));
 }
