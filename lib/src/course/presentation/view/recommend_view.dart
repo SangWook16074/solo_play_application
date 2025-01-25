@@ -74,6 +74,7 @@ class _RecommendItemWidgetState extends State<RecommendItemWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+        key: const Key("recommend-item"),
         onTapDown: (details) {
           setState(() {
             isTaped = true;
@@ -97,6 +98,7 @@ class _RecommendItemWidgetState extends State<RecommendItemWidget> {
   }
 
   Widget _selectedItem() => Container(
+      key: const Key("select-recommend-item"),
       padding: const EdgeInsets.all(2.0),
       decoration: BoxDecoration(
           color: const Color(0xffaaaaaa),
@@ -112,6 +114,7 @@ class _RecommendItemWidgetState extends State<RecommendItemWidget> {
       child: _basicItem());
 
   Widget _unSelectedItem() => Padding(
+        key: const Key("unselect-recommemd-item"),
         padding: const EdgeInsets.all(2.0),
         child: _basicItem(),
       );
