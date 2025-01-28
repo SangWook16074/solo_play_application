@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/course/domain/models/map_model.dart';
+import 'package:solo_play_application/src/course/presentation/bloc/main/main_bloc.dart';
+import 'package:solo_play_application/src/course/presentation/bloc/main/main_event.dart';
 import 'package:solo_play_application/src/course/presentation/page/map_detail_page.dart';
 import 'package:solo_play_application/src/course/presentation/widget/hexagon_grid.dart';
 

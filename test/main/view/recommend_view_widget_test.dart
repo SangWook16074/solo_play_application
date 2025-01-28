@@ -24,6 +24,7 @@ void main() {
     setUp(() {
       widget = const MaterialApp(
         home: RecommendView(
+          isShow: true,
           title: "test title",
         ),
       );
@@ -39,6 +40,21 @@ void main() {
     testWidgets("사용자는 title을 지정할 수 있다.", (tester) async {
       await tester.pumpWidget(widget);
       expect(find.bySemanticsLabel("test title"), findsOneWidget);
+    });
+  });
+
+  group("Recommend View UI 테스트", () {
+    setUp(() {
+      widget = const MaterialApp(
+        home: RecommendView(
+          isShow: false,
+          title: "test title",
+        ),
+      );
+    });
+
+    testWidgets("showappbar가 false면", (tester) async {
+      await tester.pumpWidget(widget);
     });
   });
 }
