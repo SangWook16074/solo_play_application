@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:solo_play_application/src/course/presentation/page/main_page.dart';
 import 'package:solo_play_application/src/course/presentation/view/main_view.dart';
 import 'package:solo_play_application/src/course/presentation/view/recommend_view.dart';
 
@@ -8,7 +9,7 @@ void main() {
   group("Main View UI 테스트", () {
     setUp(() {
       widget = const MaterialApp(
-        home: MainView(),
+        home: MainPage(),
       );
     });
     testWidgets("Main View에서 추천 영역이 잘 랜더링 된다.", (tester) async {
