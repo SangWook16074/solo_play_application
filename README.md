@@ -20,7 +20,7 @@ UI/UX Design : 백진아
 
 ## 채택 기술 스택
 
-Flutter / Bloc / Dio / Freezed / Retrofit / MVVM
+Flutter / Bloc / Dio / Freezed / Retrofit / MVVM \
 Spring / Spring boot / Spring Webflux / R2DBC / MySQL / AWS
 
 ## ERD
