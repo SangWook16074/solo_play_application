@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:solo_play_application/src/post/presentation/view/my_posting_view.dart';
 import 'package:solo_play_application/src/utils/style/theme_color.dart';
 import 'package:solo_play_application/src/course/presentation/widget/course_widget.dart';
 import 'package:solo_play_application/src/post/presentation/widget/post_widget.dart';
@@ -9,30 +10,7 @@ class MyProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(65),
-        child: AppBar(
-          leading: GestureDetector(
-            onTap: () {},
-            child: const Icon(Icons.arrow_back_ios),
-          ),
-          elevation: 0.0,
-          title: const Text(
-            '나의 포스팅',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-            ),
-          ),
-          actions: const [
-            Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(Icons.more_vert),
-            )
-          ],
-        ),
-      ),
+      appBar: _appBar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,9 +22,36 @@ class MyProfileView extends StatelessWidget {
             const SizedBox(height: 11),
             _profileEditBtn(),
             const SizedBox(height: 11),
-            _bestCourse(),
+            _bestCourse(context),
           ],
         ),
+      ),
+    );
+  }
+
+  PreferredSize _appBar() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(65),
+      child: AppBar(
+        leading: GestureDetector(
+          onTap: () {},
+          child: const Icon(Icons.arrow_back_ios),
+        ),
+        elevation: 0.0,
+        title: const Text(
+          '나의 포스팅',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.black87,
+          ),
+        ),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Icon(Icons.more_vert),
+          )
+        ],
       ),
     );
   }
@@ -187,7 +192,7 @@ class MyProfileView extends StatelessWidget {
   }
 
   /// 나의 코스 몰아보기 화면으로 넘어가는 버튼과 가장 추천을 많이 받은 코스들 1,2,3 순위를 보여줌.
-  Widget _bestCourse() {
+  Widget _bestCourse(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(
@@ -235,7 +240,13 @@ class MyProfileView extends StatelessWidget {
                 ],
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const MyPostingView(),
+                    ),
+                  );
+                },
                 child: const Icon(Icons.arrow_forward_ios),
               ),
             ],
