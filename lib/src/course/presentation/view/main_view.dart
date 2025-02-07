@@ -27,7 +27,7 @@ class MainView extends StatelessWidget {
             children: [
               _map(),
               _search(),
-              // _recommend(),
+              _recommend(),
             ],
           ),
         ),
@@ -54,4 +54,7 @@ class MainView extends StatelessWidget {
             },
             child: const MapView());
       });
+
+  Widget _recommend() => const Align(
+      alignment: Alignment.bottomCenter, child: RecommendModalSheet());
 }
