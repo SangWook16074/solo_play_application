@@ -14,25 +14,17 @@ class _RecommendModalSheetState extends State<RecommendModalSheet> {
   final double minHeight = 0.09;
   final double maxHeight = 0.9;
 
+  final GlobalKey _sheet = GlobalKey();
+
+  DraggableScrollableSheet get sheet =>
+      (_sheet.currentWidget as DraggableScrollableSheet);
+
+  double currSize = 0.3;
+
   @override
   void initState() {
     _controller = DraggableScrollableController();
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      // _controller.addListener(_onChange);
-    });
     super.initState();
-  }
-
-  void _onChange() {
-    final currSize = _controller.size;
-    print(currSize);
-    if (currSize > 0.75) {
-      _sheetAnimation(0.9);
-    } else if (currSize > 0.2) {
-      _sheetAnimation(0.3);
-    } else {
-      _sheetAnimation(0.09);
-    }
   }
 
   void _sheetAnimation(double size) {
@@ -58,6 +50,11 @@ class _RecommendModalSheetState extends State<RecommendModalSheet> {
       initialChildSize: 0.3,
       minChildSize: 0.1,
       maxChildSize: 0.9,
+      snap: true,
+      snapSizes: const [
+        0.3,
+        0.9,
+      ],
       builder: (context, scrollController) => Container(
         decoration: const BoxDecoration(
             color: Colors.white,
