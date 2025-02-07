@@ -13,7 +13,7 @@ class AppView extends StatefulWidget {
 }
 
 class _AppState extends State<AppView> {
-  var _index = 0;
+  int _selectedIndex = 0;
 
   final List<Widget> _pages = [
     const MainPage(),
@@ -23,10 +23,19 @@ class _AppState extends State<AppView> {
     const MyProfileView(),
   ];
 
+  void _onItemTepped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_index],
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages,
+      ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           boxShadow: <BoxShadow>[
@@ -37,12 +46,8 @@ class _AppState extends State<AppView> {
           selectedItemColor: Colors.black,
           unselectedItemColor: Colors.black,
           type: BottomNavigationBarType.fixed,
-          onTap: (value) {
-            setState(() {
-              _index = value;
-            });
-          },
-          currentIndex: _index,
+          onTap: _onItemTepped,
+          currentIndex: _selectedIndex,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined),
