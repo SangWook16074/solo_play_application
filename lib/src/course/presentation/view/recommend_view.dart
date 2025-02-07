@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
+/// [RecommendModalSheet]는 메인 UI에서 추천 장소를 사용자에게
+/// 보여줍니다.
+/// snap 을 통하여 사용자는 [RecommendModalSheet]의 사이즈를
+/// 조절할 수 있습니다.
 class RecommendModalSheet extends StatefulWidget {
   const RecommendModalSheet({super.key});
 
@@ -11,13 +14,10 @@ class RecommendModalSheet extends StatefulWidget {
 class _RecommendModalSheetState extends State<RecommendModalSheet> {
   late final DraggableScrollableController _controller;
 
+  // 최소 크기
   final double minHeight = 0.09;
+  // 최대 크기
   final double maxHeight = 0.9;
-
-  final GlobalKey _sheet = GlobalKey();
-
-  DraggableScrollableSheet get sheet =>
-      (_sheet.currentWidget as DraggableScrollableSheet);
 
   double currSize = 0.3;
 
@@ -27,20 +27,10 @@ class _RecommendModalSheetState extends State<RecommendModalSheet> {
     super.initState();
   }
 
-  void _sheetAnimation(double size) {
-    _controller.animateTo(size,
-        duration: const Duration(milliseconds: 300), curve: Curves.linear);
-  }
-
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-
-  void changeHeight(DragUpdateDetails details) {
-    final move = details.localPosition.dy;
-    print("move : $move");
   }
 
   @override
