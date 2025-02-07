@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/course/domain/models/map_model.dart';
-import 'package:solo_play_application/src/course/presentation/cubit/map_detail_view_cubit.dart';
+import 'package:solo_play_application/src/course/presentation/bloc/map/map_event.dart';
+import 'package:solo_play_application/src/course/presentation/bloc/map/map_bloc.dart';
 import 'package:solo_play_application/src/course/presentation/widget/hexagon_grid.dart';
 import 'package:solo_play_application/src/course/presentation/widget/label_button.dart';
 
 class MapDetailView extends StatefulWidget {
-  final MapModel mapModel;
-  const MapDetailView({super.key, required this.mapModel});
+  final String title;
+  final List<HexagonPosition> offsets;
+  const MapDetailView({
+    super.key,
+    required this.title,
+    required this.offsets,
+  });
 
   @override
   State<MapDetailView> createState() => _MapDetailViewState();
@@ -18,6 +23,7 @@ class _MapDetailViewState extends State<MapDetailView> {
   final GlobalKey _childKey = GlobalKey();
   final GlobalKey _parentsKey = GlobalKey();
   final double _initialScale = 1.0;
+  late double _currScale;
 
   void _centerContent() {
     // 전체 지도 제약 조건
@@ -35,24 +41,43 @@ class _MapDetailViewState extends State<MapDetailView> {
     final double dy =
         -(contentSize.height - viewportSize.height) * _initialScale / 2;
     // 이동
-    print((dx, dy));
     _controller.value = Matrix4.identity()
       ..translate(dx, dy)
-      ..scale(_initialScale);
+      ..scale(_currScale);
+  }
+
+  _onDoubleTapDown(TapDownDetails details) {
+    final currOffset = _controller.toScene(details.localPosition);
+    final mapBloc = context.read<MapBloc>();
+    final nearMap = mapBloc.state.mapModel.nearArea;
+    for (var entry in nearMap.entries) {
+      for (var local in entry.value) {
+        final x = local.x;
+        final y = local.y;
+        const radius = 71.5;
+        const space = 4.0;
+        final center = local.center(x, y, radius, 30);
+        final path = local.getHexagonPath(
+            radius: radius, space: space, center: center, borderRadius: 10.0);
+        if (path.contains(currOffset)) {
+          final dest = entry.key;
+          mapBloc.add(MapMoveEvent(mapModel: dest));
+        }
+      }
+    }
   }
 
   @override
   void initState() {
     _controller = TransformationController();
     WidgetsBinding.instance.addPostFrameCallback((_) => _centerContent());
+    _currScale = _initialScale;
     super.initState();
   }
 
   @override
   void didUpdateWidget(covariant MapDetailView oldWidget) {
-    if (oldWidget.mapModel != widget.mapModel) {
-      WidgetsBinding.instance.addPostFrameCallback((_) => _centerContent());
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) => _centerContent());
     super.didUpdateWidget(oldWidget);
   }
 
@@ -66,13 +91,10 @@ class _MapDetailViewState extends State<MapDetailView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: BlocBuilder<MapDetailViewCubit, MapModel>(
-            builder: (context, state) {
-          return Text(
-            "${state.label}권",
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
-          );
-        }),
+        title: Text(
+          "${widget.title}권",
+          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+        ),
         centerTitle: true,
         actions: const [
           Padding(
@@ -126,44 +148,18 @@ class _MapDetailViewState extends State<MapDetailView> {
   Widget _map() {
     return Expanded(
       child: GestureDetector(
-        onDoubleTapDown: (details) {
-          final currOffset = _controller.toScene(details.localPosition);
-          final cubit = context.read<MapDetailViewCubit>();
-          final nearMap = cubit.nearArea;
-          for (var entry in nearMap.entries) {
-            for (var local in entry.value) {
-              final x = local.x;
-              final y = local.y;
-              const radius = 71.5;
-              const space = 4.0;
-              final center = local.center(x, y, radius, 30);
-              final path = local.getHexagonPath(
-                  radius: radius,
-                  space: space,
-                  center: center,
-                  borderRadius: 10.0);
-              if (path.contains(currOffset)) {
-                final dest = entry.key;
-                cubit.moveTo(dest);
-              }
-            }
-          }
-        },
+        onDoubleTapDown: _onDoubleTapDown,
         child: InteractiveViewer(
             key: _parentsKey,
             constrained: false,
             transformationController: _controller,
-            minScale: 0.7,
+            minScale: 1.0,
             maxScale: 2.0,
-            child: BlocBuilder<MapDetailViewCubit, MapModel>(
-                builder: (context, state) {
-              final cubit = context.read<MapDetailViewCubit>();
-              return HexagonGrid(key: _childKey, space: 4.0, offsets: [
-                ...cubit.map,
-                for (List<HexagonPosition> near in cubit.nearArea.values)
-                  ...near.map((n) => n.copy(color: const Color(0xffdbdbdb)))
-              ]);
-            })),
+            onInteractionEnd: (details) {
+              _currScale = details.scaleVelocity;
+            },
+            child: HexagonGrid(
+                key: _childKey, space: 4.0, offsets: widget.offsets)),
       ),
     );
   }

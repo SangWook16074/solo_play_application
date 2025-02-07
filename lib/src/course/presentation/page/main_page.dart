@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/course/presentation/cubit/main_view_cubit.dart';
+import 'package:solo_play_application/src/course/presentation/bloc/main/main_bloc.dart';
 import 'package:solo_play_application/src/course/presentation/view/main_view.dart';
 
 class MainPage extends StatelessWidget {
@@ -9,7 +9,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MainViewCubit(),
+      create: (context) => MainBloc(),
       child: const MainView(),
     );
   }
