@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:solo_play_application/main.dart';
 import 'package:solo_play_application/src/post/presentation/view/my_posting_view.dart';
 import 'package:solo_play_application/src/utils/style/theme_color.dart';
 import 'package:solo_play_application/src/course/presentation/widget/course_widget.dart';
@@ -241,11 +243,7 @@ class MyProfileView extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const MyPostingView(),
-                    ),
-                  );
+                  context.push('/myPostingView');
                 },
                 child: const Icon(Icons.arrow_forward_ios),
               ),

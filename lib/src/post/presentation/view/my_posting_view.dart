@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/post/presentation/widget/my_posting_widget.dart';
 import 'package:solo_play_application/src/utils/style/theme_color.dart';
 
@@ -8,7 +9,7 @@ class MyPostingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(),
+      appBar: _appBar(context),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -30,12 +31,14 @@ class MyPostingView extends StatelessWidget {
     );
   }
 
-  PreferredSize _appBar() {
+  PreferredSize _appBar(BuildContext context) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(65),
       child: AppBar(
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            context.pop();
+          },
           child: const Icon(Icons.arrow_back_ios),
         ),
         elevation: 0.0,
