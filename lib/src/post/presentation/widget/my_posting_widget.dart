@@ -9,10 +9,7 @@ class MyPostingWidget extends StatelessWidget {
     return Container(
       height: 355,
       width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: ThemeColor.rightGrey,
-      ),
+      color: ThemeColor.rightGrey,
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -26,58 +23,7 @@ class MyPostingWidget extends StatelessWidget {
               '영업중 서울 강서구',
               style: TextStyle(fontSize: 10),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
-              child: SizedBox(
-                height: 200,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return Stack(
-                      children: [
-                        Container(
-                          width: 135,
-                          height: 200,
-                          margin: const EdgeInsets.only(right: 12),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: ThemeColor.basicGrey,
-                          ),
-                        ),
-                        Positioned(
-                          left: 2,
-                          bottom: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Container(
-                              height: 20,
-                              width: 20,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const Positioned(
-                          left: 25,
-                          bottom: 4,
-                          child: Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text(
-                              '너구리',
-                              style: TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ),
+            _post(),
             const Text(
               '베레프트',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -89,6 +35,62 @@ class MyPostingWidget extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  /// 포스팅을 보여주는 부분
+  Padding _post() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12.0),
+      child: SizedBox(
+        height: 200,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 3,
+          itemBuilder: (context, index) {
+            return Stack(
+              children: [
+                Container(
+                  width: 135,
+                  height: 200,
+                  margin: const EdgeInsets.only(right: 12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ThemeColor.basicGrey,
+                  ),
+                ),
+                Positioned(
+                  left: 2,
+                  bottom: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Container(
+                      height: 20,
+                      width: 20,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ),
+                const Positioned(
+                  left: 25,
+                  bottom: 4,
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      '너구리',
+                      style:
+                          TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

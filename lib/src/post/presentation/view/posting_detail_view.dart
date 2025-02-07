@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:solo_play_application/src/course/presentation/widget/course_header_widget.dart';
 import 'package:solo_play_application/src/post/presentation/widget/my_posting_widget.dart';
-import 'package:solo_play_application/src/utils/style/theme_color.dart';
 
-class MyPostingView extends StatelessWidget {
-  const MyPostingView({super.key});
+class PostingDetailView extends StatelessWidget {
+  const PostingDetailView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class MyPostingView extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _header(),
+            const CourseHeaderWidget(),
             const SizedBox(height: 12),
             Column(
               children: List.generate(
@@ -48,29 +48,6 @@ class MyPostingView extends StatelessWidget {
             fontSize: 20,
             fontWeight: FontWeight.w600,
             color: Colors.black87,
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// 시, 구 들어간 순서대로 보여줌
-  Widget _header() {
-    return Center(
-      child: Container(
-        height: 40,
-        width: 358,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: ThemeColor.basicGrey,
-        ),
-        child: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Center(
-            child: Text(
-              '서울시 > 동대문구',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-            ),
           ),
         ),
       ),

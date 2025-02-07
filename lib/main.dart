@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/app/presentation/page/app_page.dart';
-import 'package:solo_play_application/src/post/presentation/view/my_posting_view.dart';
+import 'package:solo_play_application/src/course/presentation/view/course_detail_view.dart';
+import 'package:solo_play_application/src/post/presentation/view/posting_detail_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,8 +16,12 @@ final GoRouter _router = GoRouter(
       builder: (context, state) => const AppPage(),
     ),
     GoRoute(
-      path: '/myPostingView',
-      builder: (context, state) => const MyPostingView(),
+      path: '/postingDetailView',
+      builder: (context, state) => const PostingDetailView(),
+    ),
+    GoRoute(
+      path: '/courseDetailView',
+      builder: (context, state) => const CourseDetailView(),
     ),
   ],
 );
