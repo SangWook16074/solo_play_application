@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:solo_play_application/src/course/presentation/page/main_page.dart';
-import 'package:solo_play_application/src/course/presentation/view/main_view.dart';
-import 'package:solo_play_application/src/course/presentation/view/recommend_view.dart';
 
 void main() {
   late Widget widget;
@@ -12,9 +10,10 @@ void main() {
         home: MainPage(),
       );
     });
-    testWidgets("Main View에서 추천 영역이 잘 랜더링 된다.", (tester) async {
+    testWidgets("Main View는 검색 버튼과 지도 뷰로 이루어져 있다.", (tester) async {
       await tester.pumpWidget(widget);
-      expect(find.byType(RecommendView), findsOneWidget);
+      expect(find.byKey(const Key("main-view-search-button")), findsOneWidget);
+      expect(find.byKey(const Key("main-view-map-view")), findsOneWidget);
     });
   });
 }
