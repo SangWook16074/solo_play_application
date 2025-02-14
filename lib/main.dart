@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/app/presentation/page/app_page.dart';
+import 'package:solo_play_application/src/route/router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,8 +10,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: AppPage(),
+    return MaterialApp.router(
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
     );
   }
