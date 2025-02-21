@@ -1,9 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/course/domain/models/map_model.dart';
-import 'package:solo_play_application/src/course/presentation/bloc/map/map_bloc.dart';
-import 'package:solo_play_application/src/course/presentation/bloc/map/map_event.dart';
-import 'package:solo_play_application/src/course/presentation/bloc/map/map_state.dart';
+import 'package:solo_play_application/src/presentation/course/models/map_model.dart';
+import 'package:solo_play_application/src/presentation/course/bloc/map/map_bloc.dart';
+import 'package:solo_play_application/src/presentation/course/bloc/map/map_event.dart';
+import 'package:solo_play_application/src/presentation/course/bloc/map/map_state.dart';
 
 void main() {
   late MapBloc mapBloc;

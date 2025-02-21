@@ -1,4 +1,4 @@
-import 'package:solo_play_application/src/app/presentation/cubit/bottom_nav_cubit.dart';
+import 'package:solo_play_application/src/presentation/app/cubit/bottom_nav_cubit.dart';
 import 'package:test/test.dart';
 
 void main() {
