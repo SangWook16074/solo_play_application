@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/presentation/course/models/map_model.dart';
-import 'package:solo_play_application/src/presentation/course/bloc/main/main_bloc.dart';
-import 'package:solo_play_application/src/presentation/course/bloc/main/main_event.dart';
 import 'package:solo_play_application/src/presentation/course/page/map_detail_page.dart';
 import 'package:solo_play_application/src/presentation/course/widget/hexagon_grid.dart';
+import 'package:solo_play_application/src/presentation/course/widget/region_label.dart';
 
 class MapView extends StatefulWidget {
   const MapView({super.key});
@@ -82,26 +80,76 @@ class _MapViewState extends State<MapView> {
             minScale: 0.1,
             maxScale: 1.7,
             child: FittedBox(
-              child: HexagonGrid(
-                key: _contentKey,
-                space: 4.0,
-                offsets: [
-                  ...MapModel.getMap(MapModel.dosim)
-                      .map((it) => it.copy(color: const Color(0xffE3EFED))),
-                  ...MapModel.getMap(MapModel.gangbuk)
-                      .map((it) => it.copy(color: const Color(0xffD4D7EA))),
-                  ...MapModel.getMap(MapModel.dongseoul)
-                      .map((it) => it.copy(color: const Color(0xff91C4EF))),
-                  ...MapModel.getMap(MapModel.seonam)
-                      .map((it) => it.copy(color: const Color(0xffECDFBB))),
-                  ...MapModel.getMap(MapModel.namseoul)
-                      .map((it) => it.copy(color: const Color(0xffD9E4A9))),
-                  ...MapModel.getMap(MapModel.gangnam)
-                      .map((it) => it.copy(color: const Color(0xffF592A4))),
-                  ...MapModel.getMap(MapModel.dongnam)
-                      .map((it) => it.copy(color: const Color(0xffDAA0DD))),
-                ],
+              child: Stack(
+                alignment: Alignment.center,
+                children: [_mapGrid(), ..._labels()],
               ),
             )));
   }
+
+  Widget _mapGrid() => HexagonGrid(
+        key: _contentKey,
+        space: 4.0,
+        offsets: [
+          ...MapModel.getMap(MapModel.dosim)
+              .map((it) => it.copy(color: const Color(0xffF791A9))),
+          ...MapModel.getMap(MapModel.gangbuk)
+              .map((it) => it.copy(color: const Color(0xffFFDBDF))),
+          ...MapModel.getMap(MapModel.dongseoul)
+              .map((it) => it.copy(color: const Color(0xffFFE797))),
+          ...MapModel.getMap(MapModel.seonam)
+              .map((it) => it.copy(color: const Color(0xffDDDD7B))),
+          ...MapModel.getMap(MapModel.namseoul)
+              .map((it) => it.copy(color: const Color(0xffC8EDF1))),
+          ...MapModel.getMap(MapModel.gangnam)
+              .map((it) => it.copy(color: const Color(0xffBAD6DA))),
+          ...MapModel.getMap(MapModel.dongnam)
+              .map((it) => it.copy(color: const Color(0xff86C9CA))),
+        ],
+      );
+
+  List<Widget> _labels() => [
+        // 도심권
+        Positioned(
+            top: 360,
+            left: 463,
+            child: RegionLabel(
+                label: "도심권", borderColor: const Color(0xffF791A9))),
+        // 강북권
+        Positioned(
+            top: 120,
+            left: 570,
+            child: RegionLabel(
+                label: "강북권", borderColor: const Color(0xffFFDBDF))),
+        // 동서울권
+        Positioned(
+            top: 330,
+            left: 720,
+            child: RegionLabel(
+                label: "동서울권", borderColor: const Color(0xffFFE797))),
+        // 서남권
+        Positioned(
+            top: 500,
+            left: 190,
+            child: RegionLabel(
+                label: "서남권", borderColor: const Color(0xffDDDD7B))),
+        // 남서울권
+        Positioned(
+            top: 650,
+            left: 350,
+            child: RegionLabel(
+                label: "남서울권", borderColor: const Color(0xffC8EDF1))),
+        // 강남권
+        Positioned(
+            top: 550,
+            left: 620,
+            child: RegionLabel(
+                label: "강남권", borderColor: const Color(0xffBAD6DA))),
+        // 동남권
+        Positioned(
+            top: 550,
+            left: 850,
+            child: RegionLabel(
+                label: "동남권", borderColor: const Color(0xff86C9CA))),
+      ];
 }

@@ -1,11 +1,39 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
+/// 육각형 지도 영역 그리드 뷰
+///
+/// 전달받은 Offset값을 통해 하나의 영역을 렌더링합니다.
 class HexagonGrid extends StatelessWidget {
+  /// 육각형의 radius
+  ///
+  /// 전달받은 육각형은 중앙점으로부터 꼭지점까지의 거리를 radius로 두고
+  /// 모양을 렌더링합니다.
+  /// 개발자는 육각형의 radius를 이용해서 값을 전달해야 합니다.
+  /// 만약, radius가 1이라면 1인 정삼각형을 6개 합친형태의 육각형이 렌더링됩니다.
   final double radius;
+
+  /// 육각형의 좌표 모음
+  ///
+  /// 개발자는 육각형의 좌표를 전달하여 하나의 개별적인 육각형을 렌더링할 수 있습니다.
   final List<HexagonPosition> offsets;
+
+  /// 한 영역에 속하는 모든 육각형은 동일한 색상으로 지정됩니다.
+  ///
+  /// 전달받은 색이 없으면 앱의 primary color가 사용됩니다.
+  final Color? tileColor;
+
+  /// 육각형은 borderRadius를 지정할 수 있습니다.
+  ///
+  /// 만약 radius와 borderRadius가 동일하면 원이 렌더링됩니다.
   final double? borderRadius;
+
+  /// 육각형 타일은 특정 space를 지정할 수 있습니다.
+  ///
+  /// 해당 space를 padding으로 육각형이 지정됩니다.
   final double? space;
+
+  /// 특정 영역은 distance를 통해서 하단으로 이동시킬 수 있습니다.
   final double? distance;
   const HexagonGrid(
       {super.key,
@@ -13,7 +41,8 @@ class HexagonGrid extends StatelessWidget {
       this.borderRadius = 10,
       this.space = 0.0,
       required this.offsets,
-      this.distance = 30});
+      this.distance = 30,
+      this.tileColor});
 
   Offset getCanvasOffset() {
     var x = 0.0;
@@ -47,21 +76,35 @@ class HexagonGrid extends StatelessWidget {
 }
 
 class HexagonPainter extends CustomPainter {
+  /// [HexagonGrid]에서 전달받은 radius
   final double radius;
+
+  /// [HexagonGrid]에서 전달받은 space
   final double space;
+
+  /// [HexagonGrid]에서 전달받은 borderRadius
   final double borderRadius;
+
+  /// [HexagonGrid]에서 전달받은 distance
   final double distance;
+
+  /// [HexagonGrid]에서 전달받은 영역 좌표
   final List<HexagonPosition> positions;
+
+  /// [HexagonGrid]에서 전달받은 label 영역
+  final bool? showLabel;
   const HexagonPainter({
     required this.radius,
     required this.space,
     required this.borderRadius,
     required this.positions,
     required this.distance,
+    this.showLabel = false,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
+    // 좌표마다 육각형 렌더링
     for (HexagonPosition postion in positions) {
       final x = postion.x;
       final y = postion.y;
@@ -69,6 +112,8 @@ class HexagonPainter extends CustomPainter {
       Paint paint = Paint()
         ..color = postion.color!
         ..style = PaintingStyle.fill;
+
+      /// 육각형의 radius, space, borderRadius를 고려하여 지정
       final path = postion.getHexagonPath(
           radius: radius,
           space: space,
@@ -82,6 +127,10 @@ class HexagonPainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
 
+/// [HexagonGrid]는 위 아래로 distance만큼 떨어질 수 있음.
+/// default는 top
+///
+/// distance가 주어지면 bottom으로 지정된 타일은 모두 하단으로 distance만큼 이동함.
 enum HexagonSectionType {
   top,
   bottom,

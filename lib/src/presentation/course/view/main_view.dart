@@ -23,7 +23,7 @@ class MainView extends StatelessWidget {
             children: [
               _map(),
               _search(),
-              _recommend(),
+              // _recommend(),
             ],
           ),
         ),
