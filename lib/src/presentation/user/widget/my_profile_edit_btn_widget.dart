@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:solo_play_application/src/utils/style/theme_color.dart';
 
-class MyProfileEditBtn extends StatelessWidget {
-  const MyProfileEditBtn({super.key});
+class MyProfileEditBtnWidget extends StatelessWidget {
+  const MyProfileEditBtnWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      key: const Key("Profile Edit Button"),
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: GestureDetector(
+        key: const Key("My Profile Edit Button Widget"),
         onTap: () {},
         child: Container(
           height: 30,

@@ -1,31 +1,25 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:solo_play_application/src/presentation/user/%08widget/my_profile_edit_btn_widget.dart';
 
-// void main() {
-//   late widget;
+void main() {
+  late Widget widget;
 
-//   group(description, () {
-//     setUpAll(() {
-//       widget = MaterialApp(
-//         home: ProfileEditButton(
-//           onTap: () {
-            
-//           },
-//         ),
-//       );
+  group('My Profile View UI Test', () {
+    setUp(() {
+      widget = const MaterialApp(home: MyProfileEditBtnWidget());
+    });
 
-//     });
+    testWidgets('Edit Button을 눌렀을 때, 잘 동작한다.', (tester) async {
+      await tester.pumpWidget(widget);
+      await tester.pumpAndSettle();
 
-//     testWidgets("description", (tester)  async {
-//       bool isTap = false;
-      
-//       tester.pumpWidget(widget);
+      final editButtonFinder =
+          find.byKey(const Key('My Profile Edit Button Widget'));
+      expect(editButtonFinder, findsOneWidget);
 
-//       await tester.tap(find.byType(ProfileEditButton));
-
-//       expect(isTap, true);
-//     });
-//   });
-
-
-// }
+      await tester.tap(editButtonFinder);
+      await tester.pump();
+    });
+  });
+}
