@@ -8,10 +8,20 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   final MapModel mapModel;
   MapBloc({required this.mapModel}) : super(MapState(mapModel: mapModel)) {
     on<MapMoveEvent>(_moveTo);
+    on<MapFocusEvent>(_focusTo);
+    on<MapUnFocusEvent>(_unFocus);
   }
 
   void _moveTo(MapMoveEvent event, Emitter<MapState> emit) {
     emit(state.copyWith(mapModel: event.mapModel));
+  }
+
+  void _focusTo(MapFocusEvent event, Emitter<MapState> emit) {
+    emit(state.copyWith(mapModel: event.mapModel));
+  }
+
+  void _unFocus(MapUnFocusEvent event, Emitter<MapState> emit) {
+    emit(state.copyWith(mapModel: MapModel.init));
   }
 
   @override

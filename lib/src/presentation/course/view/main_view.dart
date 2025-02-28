@@ -1,14 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/presentation/course/bloc/main/main_bloc.dart';
-import 'package:solo_play_application/src/presentation/course/bloc/main/main_event.dart';
-import 'package:solo_play_application/src/presentation/course/bloc/main/main_state.dart';
 import 'package:solo_play_application/src/presentation/course/view/map_view.dart';
 import 'package:solo_play_application/src/presentation/course/view/recommend_view.dart';
 import 'package:solo_play_application/src/presentation/course/widget/search_button.dart';
-import 'package:solo_play_application/src/presentation/course/widget/search_text_field.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
@@ -27,7 +20,7 @@ class MainView extends StatelessWidget {
             children: [
               _map(),
               _search(),
-              _recommend(),
+              // _recommend(),
             ],
           ),
         ),
@@ -43,17 +36,9 @@ class MainView extends StatelessWidget {
       ));
 
   // 메인 화면 서울 전체 지도 헥사곤 그리드 뷰
-  Widget _map() => Builder(builder: (context) {
-        return Listener(
-            key: const Key("main-view-map-view"),
-            onPointerDown: (event) {
-              context.read<MainBloc>().add(MainTouchEvent());
-            },
-            onPointerUp: (event) {
-              context.read<MainBloc>().add(MainUnfocusEvent());
-            },
-            child: const MapView());
-      });
+  Widget _map() => const MapView(
+        key: Key("main-view-map-view"),
+      );
 
   Widget _recommend() => const Align(
       alignment: Alignment.bottomCenter, child: RecommendModalSheet());
