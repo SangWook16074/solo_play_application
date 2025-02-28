@@ -5,15 +5,6 @@ import 'package:solo_play_application/src/presentation/user/view/my_profile_view
 void main() {
   late final MaterialApp widget;
 
-<<<<<<< HEAD
-  group("My Profile View UI Test", () {
-    setUpAll(() {
-      widget = const MaterialApp(
-        home: MyProfileView(),
-      );
-    });
-  });
-=======
   group(
     'My Profile View UI Test',
     () {
@@ -38,5 +29,4 @@ void main() {
       });
     },
   );
->>>>>>> develop
 }

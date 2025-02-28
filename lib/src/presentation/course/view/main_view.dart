@@ -36,7 +36,9 @@ class MainView extends StatelessWidget {
       ));
 
   // 메인 화면 서울 전체 지도 헥사곤 그리드 뷰
-  Widget _map() => const MapView();
+  Widget _map() => const MapView(
+        key: Key("main-view-map-view"),
+      );
 
   Widget _recommend() => const Align(
       alignment: Alignment.bottomCenter, child: RecommendModalSheet());
