@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:solo_play_application/src/presentation/user/view/my_profile_view.dart';
 
 void main() {
-  late final widget;
+  late final MaterialApp widget;
 
   group(
     'My Profile View UI Test',

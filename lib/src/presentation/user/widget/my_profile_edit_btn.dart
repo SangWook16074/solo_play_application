@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/utils/style/theme_color.dart';
+import 'package:solo_play_application/src/core/style/theme_color.dart';
 
 class MyProfileEditBtn extends StatelessWidget {
   const MyProfileEditBtn({super.key});

@@ -9,7 +9,8 @@ enum MapModel {
   seonam("서남"),
   namseoul("남서울"),
   gangnam("강남"),
-  dongnam("동남");
+  dongnam("동남"),
+  init("선택안함");
 
   final String label;
   const MapModel(
@@ -65,6 +66,8 @@ enum MapModel {
           const HexagonPosition(x: 2, y: 0, type: HexagonSectionType.bottom),
           const HexagonPosition(x: 1, y: 1, type: HexagonSectionType.bottom),
         ];
+      default:
+        return [];
     }
   }
 
@@ -165,6 +168,8 @@ enum MapModel {
             const HexagonPosition(x: 1, y: 0),
           ],
         };
+      default:
+        return {};
     }
   }
 
@@ -220,6 +225,8 @@ enum MapModel {
           const HexagonPosition(x: 7, y: 4, type: HexagonSectionType.bottom),
           const HexagonPosition(x: 8, y: 3, type: HexagonSectionType.bottom),
         ];
+      default:
+        return [];
     }
   }
 

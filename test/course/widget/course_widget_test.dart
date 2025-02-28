@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:solo_play_application/src/presentation/course/widget/course_widget.dart';
 
 void main() {
-  late final widget;
+  late final MaterialApp widget;
 
   group("Course Widget Tests", () {
     setUpAll(() {
