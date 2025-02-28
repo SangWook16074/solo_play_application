@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/app/presentation/page/app_page.dart';
+import 'package:solo_play_application/src/presentation/app/page/app_page.dart';
 
 void main() {
   runApp(const MyApp());
