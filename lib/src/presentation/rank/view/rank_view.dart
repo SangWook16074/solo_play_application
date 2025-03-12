@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/style/theme_color.dart';
+import 'package:solo_play_application/src/presentation/rank/widget/best_place_widget.dart';
 
-class RankView extends StatelessWidget {
+class RankView extends StatefulWidget {
   const RankView({super.key});
 
+  @override
+  State<RankView> createState() => _RankViewState();
+}
+
+class _RankViewState extends State<RankView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,6 +21,20 @@ class RankView extends StatelessWidget {
     );
   }
 
+  /// 랭킹별 장소를 보여주는 위젯을 5등까지 보여줌
+  Widget _ranking() {
+    return SliverList.builder(
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: BestPlaceWidget(
+              rank: index + 1,
+            ),
+          );
+        });
+  }
+
   /// appbar 영역
   PreferredSize _appbar() {
     return PreferredSize(
@@ -25,19 +44,6 @@ class RankView extends StatelessWidget {
           '이번 주 가장 인기있는 장소',
           style: TextStyle(
               fontSize: 24, fontWeight: FontWeight.w600, color: Colors.black87),
-        ),
-      ),
-    );
-  }
-
-  Widget _ranking() {
-    return SliverToBoxAdapter(
-      child: Container(
-        height: 275,
-        width: 390,
-        decoration: BoxDecoration(
-          color: ThemeColor.basicGrey,
-          borderRadius: BorderRadius.circular(10),
         ),
       ),
     );
