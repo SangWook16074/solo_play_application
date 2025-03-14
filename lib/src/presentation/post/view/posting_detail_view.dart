@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/style/theme_color.dart';
 import 'package:solo_play_application/src/presentation/course/widget/course_header_widget.dart';
-import 'package:solo_play_application/src/presentation/post/widget/my_posting_widget.dart';
+import 'package:solo_play_application/src/presentation/post/widget/place_photo_list_widget.dart';
 
 class PostingDetailView extends StatelessWidget {
   const PostingDetailView({super.key});
@@ -50,7 +50,7 @@ class PostingDetailView extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 12.0),
-                    child: MyPostingWidget(),
+                    child: PlacePhotoListWidget(),
                   ),
                   Text(
                     '베레프트',

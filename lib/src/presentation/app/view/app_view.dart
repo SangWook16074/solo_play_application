@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/presentation/app/cubit/bottom_nav_cubit.dart';
 import 'package:solo_play_application/src/presentation/course/page/main_page.dart';
-import 'package:solo_play_application/src/presentation/post/view/add_post_view.dart';
+import 'package:solo_play_application/src/presentation/create/view/create_view.dart';
 import 'package:solo_play_application/src/presentation/user/view/my_profile_view.dart';
 import 'package:solo_play_application/src/presentation/post/view/post_view.dart';
 import 'package:solo_play_application/src/presentation/rank/view/rank_view.dart';
@@ -35,7 +35,7 @@ class AppView extends StatelessWidget {
             RankView(
               key: Key("app-view-rank-page"),
             ),
-            AddPostView(
+            CreateView(
               key: Key("app-view-add-page"),
             ),
             PostView(
