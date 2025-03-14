@@ -62,43 +62,43 @@ class MyProfileView extends StatelessWidget {
 
   /// 프로필 사진, 게시물, 팔로워, 팔로잉을 보여줌.
   Widget _header() {
-    return SliverPadding(
-      padding: const EdgeInsets.only(bottom: 22.0),
+    return const SliverPadding(
+      padding: EdgeInsets.only(bottom: 22.0),
       sliver: SliverToBoxAdapter(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             /// 사용자 프로필 사진 영역
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: MyAvatarWidget(radius: 36, color: ThemeColor.basicGrey),
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: MyAvatarWidget(width: 100),
             ),
 
             /// 사용자의 게시물 수를 나타냄
-            const Column(
+            Column(
               children: [
-                Text('50', style: TextStyle(fontSize: 30)),
-                Text('게시물', style: TextStyle(fontSize: 15)),
+                Text('50', style: TextStyle(fontSize: 24)),
+                Text('게시물', style: TextStyle(fontSize: 12)),
               ],
             ),
 
             /// 사용자의 팔로워 수를 나타냄
 
-            const Column(
+            Column(
               children: [
-                Text('50', style: TextStyle(fontSize: 30)),
-                Text('팔로워', style: TextStyle(fontSize: 15)),
+                Text('50', style: TextStyle(fontSize: 24)),
+                Text('팔로워', style: TextStyle(fontSize: 12)),
               ],
             ),
 
             /// 사용자의 팔로잉 수를 나타냄
 
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(right: 50.0),
               child: Column(
                 children: [
-                  Text('50', style: TextStyle(fontSize: 30)),
-                  Text('팔로잉', style: TextStyle(fontSize: 15)),
+                  Text('50', style: TextStyle(fontSize: 24)),
+                  Text('팔로잉', style: TextStyle(fontSize: 12)),
                 ],
               ),
             ),

@@ -23,17 +23,18 @@ class PlacePhotoWidget extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(5.0),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             /// 글쓴이의 프로필 사진
-            MyAvatarWidget(radius: 10, color: Colors.grey),
+            Padding(
+              padding: EdgeInsets.only(right: 2.0),
+              child: MyAvatarWidget(width: 35),
+            ),
 
             /// 글쓴이의 닉네임
-            Padding(
-              padding: EdgeInsets.all(5.0),
-              child: Text(
-                '너구리',
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
-              ),
+            Text(
+              '너구리',
+              style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
             ),
           ],
         ),

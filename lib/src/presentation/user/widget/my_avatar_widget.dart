@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
 class MyAvatarWidget extends StatelessWidget {
-  const MyAvatarWidget({super.key, required this.radius, required this.color});
-  final double radius;
-  final Color color;
+  const MyAvatarWidget({super.key, required this.width});
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(100),
-      child: CircleAvatar(
-        radius: radius,
-        backgroundColor: color,
-        // backgroundImage: , 후에 넣을 것
+      child: Container(
+        width: width,
+        decoration: const BoxDecoration(shape: BoxShape.circle),
+        child: Image.asset("assets/images/raccoon.png", fit: BoxFit.cover),
       ),
     );
   }
