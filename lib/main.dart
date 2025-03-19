@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:solo_play_application/src/core/style/app_theme.dart';
 import 'package:solo_play_application/src/presentation/route/router.dart';
 
 void main() {
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: router,
+      theme: appTheme,
       debugShowCheckedModeBanner: false,
     );
   }

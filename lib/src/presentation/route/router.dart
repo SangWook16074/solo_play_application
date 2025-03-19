@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:solo_play_application/src/presentation/app/page/app_page.dart';
+import 'package:solo_play_application/src/presentation/app_page.dart';
 import 'package:solo_play_application/src/presentation/course/view/course_detail_view.dart';
 import 'package:solo_play_application/src/presentation/post/view/posting_detail_view.dart';
 
