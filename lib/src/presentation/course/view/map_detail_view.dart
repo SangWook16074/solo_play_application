@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/presentation/course/bloc/map/map_event.dart';
 import 'package:solo_play_application/src/presentation/course/bloc/map/map_bloc.dart';
+import 'package:solo_play_application/src/presentation/course/bloc/map/map_state.dart';
 import 'package:solo_play_application/src/presentation/course/widget/hexagon_grid.dart';
 import 'package:solo_play_application/src/presentation/course/widget/label_button.dart';
 
@@ -49,7 +50,8 @@ class _MapDetailViewState extends State<MapDetailView> {
   _onDoubleTapDown(TapDownDetails details) {
     final currOffset = _controller.toScene(details.localPosition);
     final mapBloc = context.read<MapBloc>();
-    final nearMap = mapBloc.state.mapModel.nearArea;
+    final state = mapBloc.state as MapSelect;
+    final nearMap = state.mapModel.nearArea;
     for (var entry in nearMap.entries) {
       for (var local in entry.value) {
         final x = local.x;

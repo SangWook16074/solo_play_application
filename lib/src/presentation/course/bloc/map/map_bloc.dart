@@ -1,33 +1,27 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/presentation/course/models/map_model.dart';
 import 'package:solo_play_application/src/presentation/course/bloc/map/map_event.dart';
 import 'package:solo_play_application/src/presentation/course/bloc/map/map_state.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
-  final MapModel mapModel;
-  MapBloc({required this.mapModel}) : super(MapState(mapModel: mapModel)) {
-    on<MapMoveEvent>(_moveTo);
-    on<MapFocusEvent>(_focusTo);
+  MapBloc() : super(MapUnSelect()) {
+    on<MapFocusEvent>(_focus);
     on<MapUnFocusEvent>(_unFocus);
   }
 
-  void _moveTo(MapMoveEvent event, Emitter<MapState> emit) {
-    emit(state.copyWith(mapModel: event.mapModel));
-  }
-
-  void _focusTo(MapFocusEvent event, Emitter<MapState> emit) {
-    emit(state.copyWith(mapModel: event.mapModel));
+  void _focus(MapFocusEvent event, Emitter<MapState> emit) {
+    log("${event.mapModel}");
+    emit(MapSelect(mapModel: event.mapModel));
   }
 
   void _unFocus(MapUnFocusEvent event, Emitter<MapState> emit) {
-    emit(state.copyWith(mapModel: MapModel.init));
+    emit(MapUnSelect());
   }
 
   @override
   void onChange(Change<MapState> change) {
-    debugPrint(
-        "curr MapModel State: ${change.currentState}\nnext MapModel State ${change.nextState}");
+    log("curr MapModel State: ${change.currentState}\nnext MapModel State ${change.nextState}");
     super.onChange(change);
   }
 }

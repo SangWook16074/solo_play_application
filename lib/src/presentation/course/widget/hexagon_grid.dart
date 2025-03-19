@@ -110,7 +110,7 @@ class HexagonPainter extends CustomPainter {
       final y = postion.y;
       final center = postion.center(x, y, radius, distance);
       Paint paint = Paint()
-        ..color = postion.color!
+        ..color = postion.color
         ..style = PaintingStyle.fill;
 
       /// 육각형의 radius, space, borderRadius를 고려하여 지정
@@ -139,7 +139,7 @@ enum HexagonSectionType {
 class HexagonPosition {
   final double x;
   final double y;
-  final Color? color;
+  final Color color;
   final HexagonSectionType type;
 
   const HexagonPosition({
