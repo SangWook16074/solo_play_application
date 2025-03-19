@@ -11,22 +11,15 @@ class MapDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final cubit = MapViewCubit(mapModel);
-    final mapBloc = MapBloc(mapModel: mapModel);
-    return BlocProvider<MapBloc>(
-      create: (context) => mapBloc,
-      child: BlocBuilder<MapBloc, MapState>(
-          bloc: mapBloc,
-          builder: (context, state) {
-            return MapDetailView(
-              title: mapBloc.state.mapModel.label,
-              offsets: [
-                ...mapBloc.state.mapModel.map,
-                for (var near in mapBloc.state.mapModel.nearArea.values)
-                  ...near.map((n) => n.copy(color: const Color(0xffdbdbdb)))
-              ],
-            );
-          }),
+    final mapBloc = context.watch<MapBloc>();
+    final state = mapBloc.state as MapSelect;
+    return MapDetailView(
+      title: state.mapModel.label,
+      offsets: [
+        ...state.mapModel.map,
+        for (var near in state.mapModel.nearArea.values)
+          ...near.map((n) => n.copy(color: const Color(0xffdbdbdb)))
+      ],
     );
   }
 }

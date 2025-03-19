@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:solo_play_application/src/core/region_map.dart';
 import 'package:solo_play_application/src/presentation/course/bloc/map/map_bloc.dart';
 import 'package:solo_play_application/src/presentation/course/bloc/map/map_event.dart';
 import 'package:solo_play_application/src/presentation/course/bloc/map/map_state.dart';
@@ -20,7 +21,7 @@ class _MapViewState extends State<MapView> {
   final GlobalKey _contentKey = GlobalKey();
   final GlobalKey _viewportKey = GlobalKey();
   final double _initialScale = 1.0;
-  final Map<MapModel, List<Path>> _regionPaths = {};
+  final RegionMap _regionPaths = {};
 
   @override
   void initState() {
@@ -65,38 +66,50 @@ class _MapViewState extends State<MapView> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onDoubleTapDown: (details) {
-          final realOffset = _controller.toScene(details.localPosition);
-          for (var entry in _regionPaths.entries) {
-            for (Path path in entry.value) {
-              if (path.contains(realOffset)) {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => MapDetailPage(mapModel: entry.key)));
+    final viewModel = context.watch<MapBloc>();
+    final state = viewModel.state;
+    return GestureDetector(onDoubleTapDown: (details) {
+      final realOffset = _controller.toScene(details.localPosition);
+      for (var (entry) in _regionPaths.entries) {
+        for (Path path in entry.value) {
+          if (path.contains(realOffset)) {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => MapDetailPage(mapModel: entry.key)));
+          }
+        }
+      }
+    }, onTapDown: (details) {
+      final realOffset = _controller.toScene(details.localPosition);
+      for (var entry in _regionPaths.entries) {
+        for (Path path in entry.value) {
+          if (path.contains(realOffset)) {
+            if (state is MapSelect) {
+              final currMap = state.mapModel;
+              if (currMap == entry.key) {
+                viewModel.add(MapUnFocusEvent());
+                return;
+              } else {
+                viewModel.add(MapFocusEvent(mapModel: entry.key));
+
+                return;
               }
+            } else {
+              viewModel.add(MapFocusEvent(mapModel: entry.key));
+
+              return;
             }
           }
-        },
-        onTapDown: (details) {
-          final realOffset = _controller.toScene(details.localPosition);
-          for (var entry in _regionPaths.entries) {
-            for (Path path in entry.value) {
-              if (path.contains(realOffset)) {
-                if (context.read<MapBloc>().state.mapModel == entry.key) {
-                  context.read<MapBloc>().add(MapUnFocusEvent());
-                  return;
-                } else {
-                  context
-                      .read<MapBloc>()
-                      .add(MapFocusEvent(mapModel: entry.key));
-                  return;
-                }
-              }
-            }
-          }
-          context.read<MapBloc>().add(MapUnFocusEvent());
-        },
-        child: InteractiveViewer(
+        }
+      }
+      viewModel.add(MapUnFocusEvent());
+    }, child: BlocBuilder<MapBloc, MapState>(
+      builder: (context, state) {
+        MapModel? currMap;
+        if (state is MapSelect) {
+          currMap = state.mapModel;
+        }
+
+        return InteractiveViewer(
             key: _viewportKey,
             transformationController: _controller,
             constrained: false,
@@ -105,129 +118,46 @@ class _MapViewState extends State<MapView> {
             child: FittedBox(
               child: Stack(
                 alignment: Alignment.center,
-                children: [_mapGrid(), ..._labels()],
+                children: [
+                  HexagonGrid(
+                    key: _contentKey,
+                    space: 4.0,
+                    offsets: [
+                      for (var mapModel in MapModel.values)
+                        ..._buildMap(mapModel,
+                            state is MapUnSelect || currMap == mapModel),
+                    ],
+                  ),
+                  for (var mapModel in MapModel.values)
+                    _buildLabel(
+                        mapModel: mapModel,
+                        isSelected:
+                            (state is MapUnSelect || currMap == mapModel))
+                ],
               ),
-            )));
+            ));
+      },
+    ));
   }
 
-  Widget _mapGrid() => BlocBuilder<MapBloc, MapState>(
-        builder: (context, state) {
-          return HexagonGrid(
-            key: _contentKey,
-            space: 4.0,
-            offsets: [
-              ...MapModel.getMap(MapModel.dosim).map((it) => it.copy(
-                  color: const Color(0xffF791A9).withOpacity(
-                      (state.mapModel == MapModel.dosim ||
-                              state.mapModel == MapModel.init)
-                          ? 1
-                          : 0.7))),
-              ...MapModel.getMap(MapModel.gangbuk).map((it) => it.copy(
-                  color: const Color(0xffFFDBDF).withOpacity(
-                      (state.mapModel == MapModel.gangbuk ||
-                              state.mapModel == MapModel.init)
-                          ? 1
-                          : 0.7))),
-              ...MapModel.getMap(MapModel.dongseoul).map((it) => it.copy(
-                  color: const Color(0xffFFE797).withOpacity(
-                      (state.mapModel == MapModel.dongseoul ||
-                              state.mapModel == MapModel.init)
-                          ? 1
-                          : 0.7))),
-              ...MapModel.getMap(MapModel.seonam).map((it) => it.copy(
-                  color: const Color(0xffDDDD7B).withOpacity(
-                      (state.mapModel == MapModel.seonam ||
-                              state.mapModel == MapModel.init)
-                          ? 1
-                          : 0.7))),
-              ...MapModel.getMap(MapModel.namseoul).map((it) => it.copy(
-                  color: const Color(0xffC8EDF1).withOpacity(
-                      (state.mapModel == MapModel.namseoul ||
-                              state.mapModel == MapModel.init)
-                          ? 1
-                          : 0.7))),
-              ...MapModel.getMap(MapModel.gangnam).map((it) => it.copy(
-                  color: const Color(0xffBAD6DA).withOpacity(
-                      (state.mapModel == MapModel.gangnam ||
-                              state.mapModel == MapModel.init)
-                          ? 1
-                          : 0.7))),
-              ...MapModel.getMap(MapModel.dongnam).map((it) => it.copy(
-                  color: const Color(0xff86C9CA).withOpacity(
-                      (state.mapModel == MapModel.dongnam ||
-                              state.mapModel == MapModel.init)
-                          ? 1
-                          : 0.7))),
-            ],
-          );
-        },
-      );
+  List<HexagonPosition> _buildMap(MapModel mapModel, bool isSelected) {
+    return MapModel.getMap(mapModel)
+        .map((it) => it.copy(
+            color:
+                isSelected ? mapModel.color : mapModel.color.withOpacity(0.7)))
+        .toList();
+  }
 
   Widget _buildLabel({
-    required double top,
-    required double left,
-    required MapModel map,
-    required Color color,
+    required MapModel mapModel,
+    required bool isSelected,
   }) {
-    return BlocBuilder<MapBloc, MapState>(
-      builder: (context, state) {
-        return (state.mapModel == map || state.mapModel == MapModel.init)
-            ? Positioned(
-                top: top,
-                left: left,
-                child: RegionLabel(label: "${map.label}권", borderColor: color))
-            : Container();
-      },
-    );
+    return (isSelected)
+        ? Positioned(
+            top: mapModel.offset.dx,
+            left: mapModel.offset.dy,
+            child: RegionLabel(
+                label: "${mapModel.label}권", borderColor: mapModel.color))
+        : Container();
   }
-
-  List<Widget> _labels() => [
-        // 도심권
-        _buildLabel(
-            top: 360,
-            left: 463,
-            map: MapModel.dosim,
-            color: const Color(0xffF791A9)),
-        // 강북권
-        _buildLabel(
-            top: 120,
-            left: 570,
-            map: MapModel.gangbuk,
-            color: const Color(0xffFFDBDF)),
-
-        // 동서울권
-        _buildLabel(
-            top: 330,
-            left: 720,
-            map: MapModel.dongseoul,
-            color: const Color(0xffFFE797)),
-
-        // 서남권
-        _buildLabel(
-            top: 500,
-            left: 190,
-            map: MapModel.seonam,
-            color: const Color(0xffDDDD7B)),
-
-        // 남서울권
-        _buildLabel(
-            top: 650,
-            left: 350,
-            map: MapModel.namseoul,
-            color: const Color(0xffC8EDF1)),
-
-        // 강남권
-        _buildLabel(
-            top: 550,
-            left: 620,
-            map: MapModel.gangnam,
-            color: const Color(0xffBAD6DA)),
-
-        // 동남권
-        _buildLabel(
-            top: 550,
-            left: 850,
-            map: MapModel.dongnam,
-            color: const Color(0xff86C9CA)),
-      ];
 }
