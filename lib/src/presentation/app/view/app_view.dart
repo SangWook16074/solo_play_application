@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:solo_play_application/src/core/style/theme_color.dart';
 import 'package:solo_play_application/src/presentation/app/cubit/bottom_nav_cubit.dart';
 import 'package:solo_play_application/src/presentation/course/page/main_page.dart';
 import 'package:solo_play_application/src/presentation/add/view/add_view.dart';
@@ -14,13 +15,11 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _body(),
-      bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-            boxShadow: <BoxShadow>[
-              BoxShadow(color: Colors.grey, blurRadius: 10),
-            ],
-          ),
-          child: _bottomNav()),
+      extendBody: true,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
+        child: _bottomNav(),
+      ),
     );
   }
 
@@ -50,44 +49,65 @@ class AppView extends StatelessWidget {
 
   Widget _bottomNav() => BlocBuilder<BottomNavCubit, PageType>(
         builder: (context, state) {
-          return BottomNavigationBar(
-            selectedItemColor: Colors.black,
-            unselectedItemColor: Colors.black,
-            type: BottomNavigationBarType.fixed,
-            onTap: context.read<BottomNavCubit>().changeIndex,
-            currentIndex: state.index,
-            items: const [
-              BottomNavigationBarItem(
-                key: Key("app-view-bottom-nav-home"),
-                icon: Icon(Icons.home_outlined),
-                label: 'Home',
-                activeIcon: Icon(Icons.home),
+          return SafeArea(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 6,
+                    color: ThemeColor.basicGrey,
+                  )
+                ],
               ),
-              BottomNavigationBarItem(
-                key: Key("app-view-bottom-nav-rank"),
-                icon: Icon(Icons.local_fire_department_outlined),
-                label: 'Rank',
-                activeIcon: Icon(Icons.local_fire_department),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: BottomNavigationBar(
+                  backgroundColor: Colors.white,
+                  selectedItemColor: Colors.black,
+                  unselectedItemColor: Colors.black,
+                  type: BottomNavigationBarType.fixed,
+                  onTap: context.read<BottomNavCubit>().changeIndex,
+                  currentIndex: state.index,
+                  iconSize: 24,
+                  showSelectedLabels: false,
+                  showUnselectedLabels: false,
+                  elevation: 0,
+                  items: const [
+                    BottomNavigationBarItem(
+                      key: Key("app-view-bottom-nav-home"),
+                      icon: Icon(Icons.home_outlined),
+                      label: 'Home',
+                      activeIcon: Icon(Icons.home),
+                    ),
+                    BottomNavigationBarItem(
+                      key: Key("app-view-bottom-nav-rank"),
+                      icon: Icon(Icons.local_fire_department_outlined),
+                      label: 'Rank',
+                      activeIcon: Icon(Icons.local_fire_department),
+                    ),
+                    BottomNavigationBarItem(
+                      key: Key("app-view-bottom-nav-add"),
+                      icon: Icon(Icons.add_outlined),
+                      label: 'Add',
+                      activeIcon: Icon(Icons.add),
+                    ),
+                    BottomNavigationBarItem(
+                      key: Key("app-view-bottom-nav-post"),
+                      icon: Icon(Icons.bookmark_outline),
+                      label: 'Post',
+                      activeIcon: Icon(Icons.bookmark),
+                    ),
+                    BottomNavigationBarItem(
+                      key: Key("app-view-bottom-nav-mypage"),
+                      icon: Icon(Icons.person_outline),
+                      label: 'My',
+                      activeIcon: Icon(Icons.person),
+                    ),
+                  ],
+                ),
               ),
-              BottomNavigationBarItem(
-                key: Key("app-view-bottom-nav-add"),
-                icon: Icon(Icons.add_outlined),
-                label: 'Add',
-                activeIcon: Icon(Icons.add),
-              ),
-              BottomNavigationBarItem(
-                key: Key("app-view-bottom-nav-post"),
-                icon: Icon(Icons.bookmark_outline),
-                label: 'Post',
-                activeIcon: Icon(Icons.bookmark),
-              ),
-              BottomNavigationBarItem(
-                key: Key("app-view-bottom-nav-mypage"),
-                icon: Icon(Icons.person_outline),
-                label: 'My',
-                activeIcon: Icon(Icons.person),
-              ),
-            ],
+            ),
           );
         },
       );
