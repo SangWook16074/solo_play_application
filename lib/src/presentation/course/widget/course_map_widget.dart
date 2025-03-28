@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:solo_play_application/src/core/style/theme_color.dart';
 
-class CourseWidget extends StatelessWidget {
-  const CourseWidget({super.key});
+class CourseMapWidget extends StatefulWidget {
+  const CourseMapWidget({super.key});
+
+  @override
+  State<CourseMapWidget> createState() => _CourseMapWidgetState();
+}
+
+class _CourseMapWidgetState extends State<CourseMapWidget> {
+  bool _clickedIcon = false;
 
   @override
   Widget build(BuildContext context) {
@@ -10,14 +17,13 @@ class CourseWidget extends StatelessWidget {
       children: [
         _map(),
         _description(),
-        const SizedBox(height: 8),
       ],
     );
   }
 
   /// 코스 지도 영역
   Widget _map() => Container(
-        key: const Key("Course Widget Map"),
+        key: const Key("Course Map Widget Map"),
         width: double.infinity,
         height: 336,
         decoration: BoxDecoration(
@@ -35,8 +41,9 @@ class CourseWidget extends StatelessWidget {
 
   /// 코스 태그, 위치, 관심을 둔 사람들 프로필을 보여주는 영역
   Widget _description() => Container(
-        key: const Key("Course Widget Description"),
+        key: const Key("Course Map Widget Description"),
         width: double.infinity,
+        height: 64,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.vertical(
             top: Radius.zero,
@@ -45,16 +52,17 @@ class CourseWidget extends StatelessWidget {
           border: Border.all(color: Colors.grey, width: 1),
           color: Colors.white,
         ),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               /// 태그 및 위치 영역
-              Column(
+              const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '#소품샵',
+                    '#카페투어',
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -62,38 +70,26 @@ class CourseWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '연남동',
+                    '용산구',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600,
                       color: Colors.black87,
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 4),
 
               /// 관심을 둔 사람들 프로필을 보여주는 영역
-              SizedBox(
-                width: 150,
-                height: 70,
-                child: Stack(
-                  alignment: Alignment.centerLeft,
-                  children: [
-                    Positioned(
-                      right: 40,
-                      child: Icon(Icons.favorite, size: 30),
-                    ),
-                    Positioned(
-                      right: 10,
-                      child: Text(
-                        '14',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _clickedIcon = !_clickedIcon;
+                  });
+                },
+                child: _clickedIcon
+                    ? const Icon(Icons.bookmark)
+                    : const Icon(Icons.bookmark_outline),
               ),
             ],
           ),

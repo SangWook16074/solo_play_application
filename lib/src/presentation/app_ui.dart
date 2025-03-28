@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/core/utils/bottom_nav_icon.dart';
 import 'package:solo_play_application/src/presentation/bottom_nav_cubit.dart';
 import 'package:solo_play_application/src/presentation/common/widgets/image_icon.dart';
+import 'package:solo_play_application/src/presentation/create/view/create_view.dart';
 import 'package:solo_play_application/src/presentation/home_ui.dart';
-import 'package:solo_play_application/src/presentation/post/view/add_post_view.dart';
 import 'package:solo_play_application/src/presentation/user/view/my_profile_view.dart';
 import 'package:solo_play_application/src/presentation/post/view/post_view.dart';
 import 'package:solo_play_application/src/presentation/rank/view/rank_view.dart';
@@ -31,7 +31,7 @@ class AppUI extends StatelessWidget {
           const RankView(
             key: Key("app-view-rank-page"),
           ),
-          const AddPostView(
+          const CreateView(
             key: Key("app-view-add-page"),
           ),
           const PostView(

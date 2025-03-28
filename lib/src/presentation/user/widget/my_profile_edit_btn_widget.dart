@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/style/theme_color.dart';
 
-class MyProfileEditBtn extends StatelessWidget {
-  const MyProfileEditBtn({super.key});
+class MyProfileEditBtnWidget extends StatelessWidget {
+  const MyProfileEditBtnWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      key: const Key("Profile Edit Button"),
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 38.0),
       child: GestureDetector(
+        key: const Key("My Profile Edit Button Widget"),
         onTap: () {},
         child: Container(
-          height: 30,
+          height: 24,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: ThemeColor.basicGrey,
+            color: Colors.black,
             borderRadius: BorderRadius.circular(10),
           ),
           child: const Text(
             '프로필 편집',
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 12,
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ),

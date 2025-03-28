@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:solo_play_application/src/core/style/theme_color.dart';
 
-class PostWidget extends StatefulWidget {
-  const PostWidget({super.key});
+class PostingThumbnailWidget extends StatefulWidget {
+  const PostingThumbnailWidget({super.key});
 
   @override
-  State<PostWidget> createState() => _PostWidgetState();
+  State<PostingThumbnailWidget> createState() => _PostWidgetState();
 }
 
-class _PostWidgetState extends State<PostWidget> {
+class _PostWidgetState extends State<PostingThumbnailWidget> {
   final PageController _controller = PageController();
   int _currentPage = 0;
 
