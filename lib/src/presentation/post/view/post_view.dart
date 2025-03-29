@@ -1,30 +1,57 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/style/theme_color.dart';
 import 'package:solo_play_application/src/presentation/course/widget/list_button.dart';
-import 'package:solo_play_application/src/presentation/course/widget/location_label.dart';
 
-class PostView extends StatelessWidget {
+class PostView extends StatefulWidget {
   const PostView({super.key});
 
   @override
+  State<PostView> createState() => _PostViewState();
+}
+
+class _PostViewState extends State<PostView> {
+  bool isSelected = false;
+  bool changeStyle = false;
+
+  Map<String, List<String>> districts = {
+    "도심권": ["은평구", "서대문구", "마포구", "종로구", "중구", "용산구"],
+    "강북권": ["강북구", "도봉구", "노원구"],
+    "동서울권": ["성동구", "광진구", "중랑구"],
+    "서남권": ["구로구", "금천구", "영등포구"],
+    "남서울권": ["동작구", "관악구"],
+    "강남권": ["서초구", "강남구"],
+    "동남권": ["송파구", "강동구"],
+  };
+
+  String selectedRegion = "";
+  String selectedDistrict = "";
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ThemeColor.basicGrey,
-      appBar: _appBar(),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 20.0),
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(10), topRight: Radius.circular(10)),
         child: Container(
           decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10), topRight: Radius.circular(10)),
           ),
           child: Stack(
             alignment: Alignment.centerLeft,
             children: [
               /// 주요 지역 선택에 따른 구 선택 영역
-              Container(
-                color: const Color(0xfff8f8f8),
+              ListView(
+                children: (districts[selectedRegion] ?? []).map((district) {
+                  return ListButton(
+                    text: district,
+                    onTap: () {
+                      setState(() {
+                        selectedDistrict = district;
+                      });
+                    },
+                    isSelected: selectedDistrict == district,
+                  );
+                }).toList(),
               ),
 
               /// 주요 지역 선택 영역
@@ -36,7 +63,6 @@ class PostView extends StatelessWidget {
                       const BorderRadius.only(topLeft: Radius.circular(10)),
                   boxShadow: [
                     BoxShadow(
-                      // color: Color(0xffF8F8F8),
                       color: const Color(0xff000000).withOpacity(0.1),
                       spreadRadius: 0,
                       blurRadius: 26,
@@ -44,81 +70,23 @@ class PostView extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Column(
-                  children: [
-                    /// 도심권
-                    ListButton(
-                      text: "도심권",
-                      onTap: () {},
-                    ),
-
-                    /// 동서울권
-                    ListButton(
-                      text: "동서울권",
-                      onTap: () {},
-                    ),
-
-                    /// 강북권
-                    ListButton(
-                      text: "강북권",
-                      onTap: () {},
-                    ),
-
-                    /// 서남권
-                    ListButton(
-                      text: "서남권",
-                      onTap: () {},
-                    ),
-
-                    /// 남서울권
-                    ListButton(
-                      text: "남서울권",
-                      onTap: () {},
-                    ),
-
-                    /// 강남권
-                    ListButton(
-                      text: "강남권",
-                      onTap: () {},
-                    ),
-
-                    /// 동남권
-                    ListButton(
-                      text: "동남권",
-                      onTap: () {},
-                    ),
-                  ],
+                child: ListView(
+                  children: districts.keys.map((region) {
+                    return ListButton(
+                      text: region,
+                      onTap: () {
+                        setState(() {
+                          selectedRegion = region;
+                          selectedDistrict = "";
+                        });
+                      },
+                      isSelected: selectedRegion == region,
+                    );
+                  }).toList(),
                 ),
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  /// appbar 영역
-  /// title과 선택한 지역을 보여주는 label이 같이 appbar 영역으로 들어감.
-  AppBar _appBar() {
-    return AppBar(
-      title: const Text(
-        '저장됨',
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.w600,
-          color: Colors.black87,
-        ),
-      ),
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10))),
-      bottom: const PreferredSize(
-        preferredSize: Size.fromHeight(65),
-        child: Padding(
-          padding: EdgeInsets.only(bottom: 14.0),
-          child: LocationLabel(),
         ),
       ),
     );
