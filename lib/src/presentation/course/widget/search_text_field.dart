@@ -10,38 +10,28 @@ class SearchTextField extends StatelessWidget {
     return Container(
         height: 40,
         decoration: BoxDecoration(
+            color: const Color(0xffffffff),
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: [
               BoxShadow(
                   blurStyle: BlurStyle.outer,
-                  blurRadius: 10.0,
+                  blurRadius: 6.0,
                   color: const Color(0xff000000).withOpacity(0.3))
             ]),
-        alignment: Alignment.center,
-        child: TextField(
-          controller: controller,
-          decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: 8,
-                horizontal: 11,
+        alignment: Alignment.centerLeft,
+        padding: const EdgeInsets.symmetric(horizontal: 7.0, vertical: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              hintLabel!,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
               ),
-              suffixIcon: const Icon(
-                Icons.search,
-                size: 16,
-              ),
-              filled: true,
-              fillColor: const Color(0xffffffff),
-              hintText: hintLabel,
-              hintStyle:
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-              border: InputBorder.none,
-              focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(10)),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(10)),
-              isDense: true),
+            ),
+            const Icon(Icons.search)
+          ],
         ));
   }
 }

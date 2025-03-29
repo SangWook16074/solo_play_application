@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:solo_play_application/src/presentation/course/widget/hexagon_grid.dart';
 
-enum MapModel {
+enum Region {
   gangbuk("강북", Color(0xffFFDBDF), Offset(120, 570)),
   dosim("도심", Color(0xffF791A9), Offset(360, 463)),
   dongseoul("동서울", Color(0xffFFE797), Offset(330, 720)),
@@ -15,22 +15,22 @@ enum MapModel {
   final String label;
   final Color color;
   final Offset offset;
-  const MapModel(
+  const Region(
     this.label,
     this.color,
     this.offset,
   );
 
-  List<HexagonPosition> get map {
+  List<HexagonPosition> get region {
     switch (this) {
-      case MapModel.gangbuk:
+      case Region.gangbuk:
         return [
           const HexagonPosition(x: 2, y: 0),
           const HexagonPosition(x: 1, y: 1),
           const HexagonPosition(x: 2, y: 1),
           const HexagonPosition(x: 3, y: 1),
         ];
-      case MapModel.dosim:
+      case Region.dosim:
         return [
           const HexagonPosition(x: 1, y: 1),
           const HexagonPosition(x: 2, y: 1),
@@ -39,19 +39,19 @@ enum MapModel {
           const HexagonPosition(x: 2, y: 2),
           const HexagonPosition(x: 1, y: 3),
         ];
-      case MapModel.dongseoul:
+      case Region.dongseoul:
         return [
           const HexagonPosition(x: 1, y: 1),
           const HexagonPosition(x: 2, y: 1),
           const HexagonPosition(x: 1, y: 2),
           const HexagonPosition(x: 2, y: 2),
         ];
-      case MapModel.seonam:
+      case Region.seonam:
         return [
           const HexagonPosition(x: 0, y: 0, type: HexagonSectionType.bottom),
           const HexagonPosition(x: 1, y: 1, type: HexagonSectionType.bottom),
         ];
-      case MapModel.namseoul:
+      case Region.namseoul:
         return [
           const HexagonPosition(x: 0, y: 1, type: HexagonSectionType.bottom),
           const HexagonPosition(x: 1, y: 1, type: HexagonSectionType.bottom),
@@ -60,12 +60,12 @@ enum MapModel {
           const HexagonPosition(x: 1, y: 2, type: HexagonSectionType.bottom),
         ];
 
-      case MapModel.gangnam:
+      case Region.gangnam:
         return [
           const HexagonPosition(x: 2, y: 1, type: HexagonSectionType.bottom),
           const HexagonPosition(x: 1, y: 2, type: HexagonSectionType.bottom),
         ];
-      case MapModel.dongnam:
+      case Region.dongnam:
         return [
           const HexagonPosition(x: 2, y: 0, type: HexagonSectionType.bottom),
           const HexagonPosition(x: 1, y: 1, type: HexagonSectionType.bottom),
@@ -75,100 +75,100 @@ enum MapModel {
     }
   }
 
-  Map<MapModel, List<HexagonPosition>> get nearArea {
+  Map<Region, List<HexagonPosition>> get nearArea {
     switch (this) {
-      case MapModel.gangbuk:
+      case Region.gangbuk:
         return {
-          MapModel.dosim: [
+          Region.dosim: [
             const HexagonPosition(x: 0, y: 1),
             const HexagonPosition(x: 1, y: 2),
           ],
-          MapModel.dongseoul: [
+          Region.dongseoul: [
             const HexagonPosition(x: 4, y: 1),
             const HexagonPosition(x: 3, y: 2),
           ],
         };
-      case MapModel.dosim:
+      case Region.dosim:
         return {
-          MapModel.gangbuk: [
+          Region.gangbuk: [
             const HexagonPosition(x: 2, y: 0),
           ],
-          MapModel.dongseoul: [
+          Region.dongseoul: [
             const HexagonPosition(x: 3, y: 1),
             const HexagonPosition(x: 3, y: 2),
           ],
-          MapModel.namseoul: [
+          Region.namseoul: [
             const HexagonPosition(x: 0, y: 3, type: HexagonSectionType.bottom),
             const HexagonPosition(x: 1, y: 4, type: HexagonSectionType.bottom),
           ],
-          MapModel.gangnam: [
+          Region.gangnam: [
             const HexagonPosition(x: 2, y: 3, type: HexagonSectionType.bottom)
           ],
         };
-      case MapModel.dongseoul:
+      case Region.dongseoul:
         return {
-          MapModel.gangbuk: [
+          Region.gangbuk: [
             const HexagonPosition(x: 0, y: 0),
             const HexagonPosition(x: 1, y: 0),
           ],
-          MapModel.dosim: [
+          Region.dosim: [
             const HexagonPosition(x: 0, y: 1),
             const HexagonPosition(x: 0, y: 2),
           ],
-          MapModel.gangnam: [
+          Region.gangnam: [
             const HexagonPosition(x: 1, y: 3, type: HexagonSectionType.bottom),
           ],
-          MapModel.dongnam: [
+          Region.dongnam: [
             const HexagonPosition(x: 2, y: 3, type: HexagonSectionType.bottom),
             const HexagonPosition(x: 3, y: 3, type: HexagonSectionType.bottom),
           ],
         };
-      case MapModel.seonam:
+      case Region.seonam:
         return {
-          MapModel.dosim: [
+          Region.dosim: [
             const HexagonPosition(x: 2, y: 0),
           ],
-          MapModel.namseoul: [
+          Region.namseoul: [
             const HexagonPosition(x: 2, y: 1, type: HexagonSectionType.bottom),
             const HexagonPosition(x: 1, y: 2, type: HexagonSectionType.bottom),
           ],
         };
-      case MapModel.namseoul:
+      case Region.namseoul:
         return {
-          MapModel.seonam: [
+          Region.seonam: [
             const HexagonPosition(x: 0, y: 0, type: HexagonSectionType.bottom),
           ],
-          MapModel.dosim: [
+          Region.dosim: [
             const HexagonPosition(x: 1, y: 0),
             const HexagonPosition(x: 2, y: 0),
           ],
-          MapModel.gangnam: [
+          Region.gangnam: [
             const HexagonPosition(x: 3, y: 1, type: HexagonSectionType.bottom),
           ],
         };
-      case MapModel.gangnam:
+      case Region.gangnam:
         return {
-          MapModel.namseoul: [
+          Region.namseoul: [
             const HexagonPosition(x: 0, y: 2, type: HexagonSectionType.bottom)
           ],
-          MapModel.dosim: [
+          Region.dosim: [
             const HexagonPosition(x: 0, y: 1),
             const HexagonPosition(x: 1, y: 1),
           ],
-          MapModel.dongseoul: [
+          Region.dongseoul: [
             const HexagonPosition(x: 2, y: 0),
             const HexagonPosition(x: 3, y: 1),
           ],
-          MapModel.dongnam: [
+          Region.dongnam: [
             const HexagonPosition(x: 3, y: 2, type: HexagonSectionType.bottom),
           ],
         };
-      case MapModel.dongnam:
+      case Region.dongnam:
         return {
-          MapModel.gangnam: [
+          Region.gangnam: [
             const HexagonPosition(x: 0, y: 0, type: HexagonSectionType.bottom)
           ],
-          MapModel.dongseoul: [
+          Region.dongseoul: [
             const HexagonPosition(x: 1, y: 0),
           ],
         };
@@ -177,16 +177,16 @@ enum MapModel {
     }
   }
 
-  static List<HexagonPosition> getMap(MapModel type) {
+  static List<HexagonPosition> getMap(Region type) {
     switch (type) {
-      case MapModel.gangbuk:
+      case Region.gangbuk:
         return [
           const HexagonPosition(x: 4, y: 0),
           const HexagonPosition(x: 5, y: 0),
           const HexagonPosition(x: 6, y: 0),
           const HexagonPosition(x: 5, y: 1),
         ];
-      case MapModel.dosim:
+      case Region.dosim:
         return [
           const HexagonPosition(x: 3, y: 3),
           const HexagonPosition(x: 4, y: 1),
@@ -196,7 +196,7 @@ enum MapModel {
           const HexagonPosition(x: 5, y: 3),
         ];
 
-      case MapModel.dongseoul:
+      case Region.dongseoul:
         return [
           const HexagonPosition(x: 6, y: 1),
           const HexagonPosition(x: 6, y: 2),
@@ -204,13 +204,13 @@ enum MapModel {
           const HexagonPosition(x: 7, y: 3),
         ];
 
-      case MapModel.seonam:
+      case Region.seonam:
         return [
           const HexagonPosition(x: 1, y: 3, type: HexagonSectionType.bottom),
           const HexagonPosition(x: 2, y: 3, type: HexagonSectionType.bottom),
         ];
 
-      case MapModel.namseoul:
+      case Region.namseoul:
         return [
           const HexagonPosition(x: 2, y: 4, type: HexagonSectionType.bottom),
           const HexagonPosition(x: 2, y: 5, type: HexagonSectionType.bottom),
@@ -219,12 +219,12 @@ enum MapModel {
           const HexagonPosition(x: 4, y: 4, type: HexagonSectionType.bottom),
         ];
 
-      case MapModel.gangnam:
+      case Region.gangnam:
         return [
           const HexagonPosition(x: 5, y: 4, type: HexagonSectionType.bottom),
           const HexagonPosition(x: 6, y: 3, type: HexagonSectionType.bottom),
         ];
-      case MapModel.dongnam:
+      case Region.dongnam:
         return [
           const HexagonPosition(x: 7, y: 4, type: HexagonSectionType.bottom),
           const HexagonPosition(x: 8, y: 3, type: HexagonSectionType.bottom),
@@ -235,7 +235,7 @@ enum MapModel {
   }
 
   List<Path> getPaths(
-    MapModel type, {
+    Region type, {
     required double radius,
     required double borderRadius,
     required double distance,

@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/region_map.dart';
-import 'package:solo_play_application/src/presentation/course/bloc/map/map_bloc.dart';
-import 'package:solo_play_application/src/presentation/course/bloc/map/map_event.dart';
-import 'package:solo_play_application/src/presentation/course/bloc/map/map_state.dart';
-import 'package:solo_play_application/src/presentation/course/models/map_model.dart';
-import 'package:solo_play_application/src/presentation/course/page/map_detail_page.dart';
+import 'package:solo_play_application/src/core/route/go_router_builder.dart';
+import 'package:solo_play_application/src/presentation/course/bloc/region_bloc.dart';
+import 'package:solo_play_application/src/presentation/course/bloc/region_view_event.dart';
+import 'package:solo_play_application/src/presentation/course/bloc/region_view_state.dart';
+import 'package:solo_play_application/src/presentation/course/models/region.dart';
+import 'package:solo_play_application/src/presentation/course/page/region_detail_page.dart';
 import 'package:solo_play_application/src/presentation/course/widget/hexagon_grid.dart';
 import 'package:solo_play_application/src/presentation/course/widget/region_label.dart';
 
-class MapView extends StatefulWidget {
-  const MapView({super.key});
+class RegionView extends StatefulWidget {
+  const RegionView({super.key});
 
   @override
-  State<MapView> createState() => _MapViewState();
+  State<RegionView> createState() => _RegionViewState();
 }
 
-class _MapViewState extends State<MapView> {
+class _RegionViewState extends State<RegionView> {
   late final TransformationController _controller;
   final GlobalKey _contentKey = GlobalKey();
   final GlobalKey _viewportKey = GlobalKey();
@@ -27,10 +29,10 @@ class _MapViewState extends State<MapView> {
   void initState() {
     _controller = TransformationController();
     WidgetsBinding.instance.addPostFrameCallback((_) => _centerContent());
-    for (MapModel model in MapModel.values) {
-      final List<Path> paths = model.getPaths(model,
+    for (Region region in Region.values) {
+      final List<Path> paths = region.getPaths(region,
           radius: 71.5, borderRadius: 0, distance: 30, space: 4.0);
-      _regionPaths[model] = paths;
+      _regionPaths[region] = paths;
     }
     super.initState();
   }
@@ -66,15 +68,15 @@ class _MapViewState extends State<MapView> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<MapBloc>();
+    final viewModel = context.watch<RegionViewBloc>();
     final state = viewModel.state;
     return GestureDetector(onDoubleTapDown: (details) {
       final realOffset = _controller.toScene(details.localPosition);
       for (var (entry) in _regionPaths.entries) {
         for (Path path in entry.value) {
           if (path.contains(realOffset)) {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (_) => MapDetailPage(mapModel: entry.key)));
+            viewModel.add(FocusEvent(region: entry.key));
+            RegionDetailRoute(region: entry.key).go(context);
           }
         }
       }
@@ -83,30 +85,30 @@ class _MapViewState extends State<MapView> {
       for (var entry in _regionPaths.entries) {
         for (Path path in entry.value) {
           if (path.contains(realOffset)) {
-            if (state is MapSelect) {
-              final currMap = state.mapModel;
+            if (state is RegionSelect) {
+              final currMap = state.region;
               if (currMap == entry.key) {
-                viewModel.add(MapUnFocusEvent());
+                viewModel.add(UnFocusEvent());
                 return;
               } else {
-                viewModel.add(MapFocusEvent(mapModel: entry.key));
+                viewModel.add(FocusEvent(region: entry.key));
 
                 return;
               }
             } else {
-              viewModel.add(MapFocusEvent(mapModel: entry.key));
+              viewModel.add(FocusEvent(region: entry.key));
 
               return;
             }
           }
         }
       }
-      viewModel.add(MapUnFocusEvent());
-    }, child: BlocBuilder<MapBloc, MapState>(
+      viewModel.add(UnFocusEvent());
+    }, child: BlocBuilder<RegionViewBloc, RegionViewState>(
       builder: (context, state) {
-        MapModel? currMap;
-        if (state is MapSelect) {
-          currMap = state.mapModel;
+        Region? currMap;
+        if (state is RegionSelect) {
+          currMap = state.region;
         }
 
         return InteractiveViewer(
@@ -123,16 +125,16 @@ class _MapViewState extends State<MapView> {
                     key: _contentKey,
                     space: 4.0,
                     offsets: [
-                      for (var mapModel in MapModel.values)
-                        ..._buildMap(mapModel,
-                            state is MapUnSelect || currMap == mapModel),
+                      for (var region in Region.values)
+                        ..._buildMap(region,
+                            state is RegionUnSelect || currMap == region),
                     ],
                   ),
-                  for (var mapModel in MapModel.values)
+                  for (var region in Region.values)
                     _buildLabel(
-                        mapModel: mapModel,
+                        region: region,
                         isSelected:
-                            (state is MapUnSelect || currMap == mapModel))
+                            (state is RegionUnSelect || currMap == region))
                 ],
               ),
             ));
@@ -140,24 +142,23 @@ class _MapViewState extends State<MapView> {
     ));
   }
 
-  List<HexagonPosition> _buildMap(MapModel mapModel, bool isSelected) {
-    return MapModel.getMap(mapModel)
+  List<HexagonPosition> _buildMap(Region region, bool isSelected) {
+    return Region.getMap(region)
         .map((it) => it.copy(
-            color:
-                isSelected ? mapModel.color : mapModel.color.withOpacity(0.7)))
+            color: isSelected ? region.color : region.color.withOpacity(0.7)))
         .toList();
   }
 
   Widget _buildLabel({
-    required MapModel mapModel,
+    required Region region,
     required bool isSelected,
   }) {
     return (isSelected)
         ? Positioned(
-            top: mapModel.offset.dx,
-            left: mapModel.offset.dy,
+            top: region.offset.dx,
+            left: region.offset.dy,
             child: RegionLabel(
-                label: "${mapModel.label}권", borderColor: mapModel.color))
+                label: "${region.label}권", borderColor: region.color))
         : Container();
   }
 }

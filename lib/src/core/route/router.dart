@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:solo_play_application/src/presentation/app/page/app_page.dart';
+import 'package:solo_play_application/src/core/route/go_router_builder.dart';
+import 'package:solo_play_application/src/presentation/app_page.dart';
 import 'package:solo_play_application/src/presentation/course/view/course_detail_view.dart';
 import 'package:solo_play_application/src/presentation/post/view/posting_detail_view.dart';
 
@@ -9,6 +10,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => const AppPage(),
+      routes: $appRoutes,
     ),
 
     /// 나의 포스팅 화면으로 전환

@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/presentation/course/bloc/map/map_event.dart';
-import 'package:solo_play_application/src/presentation/course/bloc/map/map_bloc.dart';
-import 'package:solo_play_application/src/presentation/course/bloc/map/map_state.dart';
+import 'package:solo_play_application/src/presentation/course/cubit/region_detail_cubit.dart';
+import 'package:solo_play_application/src/presentation/course/cubit/region_detail_view_state.dart';
 import 'package:solo_play_application/src/presentation/course/widget/hexagon_grid.dart';
 import 'package:solo_play_application/src/presentation/course/widget/label_button.dart';
 
-class MapDetailView extends StatefulWidget {
-  final String title;
-  final List<HexagonPosition> offsets;
-  const MapDetailView({
+class RegionDetailView extends StatefulWidget {
+  const RegionDetailView({
     super.key,
-    required this.title,
-    required this.offsets,
   });
 
   @override
-  State<MapDetailView> createState() => _MapDetailViewState();
+  State<RegionDetailView> createState() => _RegionDetailViewState();
 }
 
-class _MapDetailViewState extends State<MapDetailView> {
+class _RegionDetailViewState extends State<RegionDetailView> {
   late TransformationController _controller;
   final GlobalKey _childKey = GlobalKey();
   final GlobalKey _parentsKey = GlobalKey();
@@ -49,9 +44,9 @@ class _MapDetailViewState extends State<MapDetailView> {
 
   _onDoubleTapDown(TapDownDetails details) {
     final currOffset = _controller.toScene(details.localPosition);
-    final mapBloc = context.read<MapBloc>();
-    final state = mapBloc.state as MapSelect;
-    final nearMap = state.mapModel.nearArea;
+    final cubit = context.read<RegionDetailCubit>();
+    final state = cubit.state;
+    final nearMap = state.region.nearArea;
     for (var entry in nearMap.entries) {
       for (var local in entry.value) {
         final x = local.x;
@@ -63,7 +58,7 @@ class _MapDetailViewState extends State<MapDetailView> {
             radius: radius, space: space, center: center, borderRadius: 10.0);
         if (path.contains(currOffset)) {
           final dest = entry.key;
-          mapBloc.add(MapMoveEvent(mapModel: dest));
+          cubit.moveTo(dest);
         }
       }
     }
@@ -74,11 +69,12 @@ class _MapDetailViewState extends State<MapDetailView> {
     _controller = TransformationController();
     WidgetsBinding.instance.addPostFrameCallback((_) => _centerContent());
     _currScale = _initialScale;
+
     super.initState();
   }
 
   @override
-  void didUpdateWidget(covariant MapDetailView oldWidget) {
+  void didUpdateWidget(covariant RegionDetailView oldWidget) {
     WidgetsBinding.instance.addPostFrameCallback((_) => _centerContent());
     super.didUpdateWidget(oldWidget);
   }
@@ -91,10 +87,12 @@ class _MapDetailViewState extends State<MapDetailView> {
 
   @override
   Widget build(BuildContext context) {
+    final title = context
+        .select<RegionDetailCubit, String>((ref) => ref.state.region.label);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "${widget.title}권",
+          "$title권",
           style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
         ),
         centerTitle: true,
@@ -152,6 +150,7 @@ class _MapDetailViewState extends State<MapDetailView> {
       child: GestureDetector(
         onDoubleTapDown: _onDoubleTapDown,
         child: InteractiveViewer(
+            panEnabled: false,
             key: _parentsKey,
             constrained: false,
             transformationController: _controller,
@@ -160,8 +159,19 @@ class _MapDetailViewState extends State<MapDetailView> {
             onInteractionEnd: (details) {
               _currScale = details.scaleVelocity;
             },
-            child: HexagonGrid(
-                key: _childKey, space: 4.0, offsets: widget.offsets)),
+            child: BlocBuilder<RegionDetailCubit, RegionDetailViewState>(
+              builder: (context, state) {
+                final region = state.region;
+                final nearArea = region.nearArea;
+                return HexagonGrid(key: _childKey, space: 4.0, offsets: [
+                  ...region.region
+                      .map((tile) => tile.copy(color: region.color)),
+                  for (var near in nearArea.entries)
+                    ...near.value.map((tile) =>
+                        tile.copy(color: region.color.withOpacity(0.3))),
+                ]);
+              },
+            )),
       ),
     );
   }
