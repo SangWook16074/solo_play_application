@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/style/theme_color.dart';
-import 'package:solo_play_application/src/presentation/course/widget/course_header_widget.dart';
+import 'package:solo_play_application/src/presentation/course/widget/location_label.dart';
 import 'package:solo_play_application/src/presentation/post/widget/place_photo_widget.dart';
 
 class PostingDetailView extends StatelessWidget {
@@ -26,7 +26,7 @@ class PostingDetailView extends StatelessWidget {
   /// 선택된 지역을 표시하는 영역ㄴ
   Widget _selectedLocation() => const Padding(
         padding: EdgeInsets.only(bottom: 12.0),
-        child: CourseHeaderWidget(),
+        child: LocationLabel(),
       );
 
   /// 내 포스팅에 대한 정보를 보여주는 영역
