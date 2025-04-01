@@ -9,9 +9,6 @@ class PostView extends StatefulWidget {
 }
 
 class _PostViewState extends State<PostView> {
-  bool isSelected = false;
-  bool changeStyle = false;
-
   Map<String, List<String>> districts = {
     "도심권": ["은평구", "서대문구", "마포구", "종로구", "중구", "용산구"],
     "강북권": ["강북구", "도봉구", "노원구"],
@@ -29,18 +26,18 @@ class _PostViewState extends State<PostView> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-        child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-          ),
-          child: Stack(
-            alignment: Alignment.centerLeft,
-            children: [
-              /// 주요 지역 선택에 따른 구 선택 영역
-              ListView(
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: [
+          /// district 영역
+          Positioned.fill(
+            left: 135,
+            child: Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(topRight: Radius.circular(10)),
+                color: Color(0xffffffff),
+              ),
+              child: ListView(
                 children: (districts[selectedRegion] ?? []).map((district) {
                   return ListButton(
                     text: district,
@@ -50,44 +47,53 @@ class _PostViewState extends State<PostView> {
                       });
                     },
                     isSelected: selectedDistrict == district,
+                    color: const Color(0xffffffff),
                   );
                 }).toList(),
               ),
-
-              /// 주요 지역 선택 영역
-              Container(
-                width: 135,
-                decoration: BoxDecoration(
-                  color: const Color(0xfff8f8f8),
-                  borderRadius:
-                      const BorderRadius.only(topLeft: Radius.circular(10)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xff000000).withOpacity(0.1),
-                      spreadRadius: 0,
-                      blurRadius: 26,
-                      offset: const Offset(4, 0),
-                    ),
-                  ],
-                ),
-                child: ListView(
-                  children: districts.keys.map((region) {
-                    return ListButton(
-                      text: region,
-                      onTap: () {
-                        setState(() {
-                          selectedRegion = region;
-                          selectedDistrict = "";
-                        });
-                      },
-                      isSelected: selectedRegion == region,
-                    );
-                  }).toList(),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+
+          /// region 선택 영역
+          Positioned(
+            top: 0,
+            left: 0,
+            bottom: 0,
+            child: Container(
+              width: 135,
+              decoration: BoxDecoration(
+                color: const Color(0xfff8f8f8),
+                borderRadius:
+                    const BorderRadius.only(topLeft: Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xff000000).withOpacity(0.1),
+                    spreadRadius: 0,
+                    blurRadius: 26,
+                    offset: const Offset(4, 0),
+                  ),
+                ],
+              ),
+              child: ListView(
+                children: districts.keys.map((region) {
+                  return ListButton(
+                    text: region,
+                    onTap: () {
+                      setState(() {
+                        selectedRegion = region;
+                        selectedDistrict = "";
+                      });
+                    },
+                    isSelected: selectedRegion == region,
+                    color: selectedRegion == region
+                        ? const Color(0xffffffff)
+                        : const Color(0xfff8f8f8),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
