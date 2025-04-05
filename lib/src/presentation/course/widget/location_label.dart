@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/style/theme_color.dart';
 
-class CourseHeaderWidget extends StatelessWidget {
-  const CourseHeaderWidget({super.key});
+class LocationLabel extends StatelessWidget {
+  const LocationLabel({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +12,9 @@ class CourseHeaderWidget extends StatelessWidget {
           height: 40,
           width: double.infinity,
           decoration: BoxDecoration(
+            border: Border.all(width: 2.0),
             borderRadius: BorderRadius.circular(10.0),
-            color: ThemeColor.basicGrey,
+            color: Colors.white,
           ),
           child: const Center(
             child: Text(

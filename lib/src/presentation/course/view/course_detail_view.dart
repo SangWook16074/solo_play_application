@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:solo_play_application/src/presentation/course/widget/course_header_widget.dart';
+import 'package:solo_play_application/src/presentation/course/widget/location_label.dart';
 import 'package:solo_play_application/src/presentation/course/widget/course_map_widget.dart';
 
 class CourseDetailView extends StatelessWidget {
@@ -13,7 +13,7 @@ class CourseDetailView extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           const SliverToBoxAdapter(
-            child: CourseHeaderWidget(),
+            child: LocationLabel(),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 12)),
           SliverList.builder(

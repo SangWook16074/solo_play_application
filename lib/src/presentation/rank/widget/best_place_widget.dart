@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:solo_play_application/src/core/style/theme_color.dart';
 import 'package:solo_play_application/src/presentation/course/widget/course_map_widget.dart';
-import 'package:solo_play_application/src/presentation/post/widget/place_photo_list_widget.dart';
+import 'package:solo_play_application/src/presentation/post/widget/place_photo_widget.dart';
 
 class BestPlaceWidget extends StatefulWidget {
   final int rank;
@@ -53,10 +53,18 @@ class _BestPlaceWidgetState extends State<BestPlaceWidget> {
     );
   }
 
+  /// 랭킹 장소의 사진 list (최소 3장 ~ 최대 5장)
   Widget _placePhotoList() {
-    return const Padding(
-      padding: EdgeInsets.only(bottom: 8.0),
-      child: PlacePhotoListWidget(),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: SizedBox(
+        height: 200,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 5,
+          itemBuilder: (context, index) => const PlacePhotoWidget(),
+        ),
+      ),
     );
   }
 
