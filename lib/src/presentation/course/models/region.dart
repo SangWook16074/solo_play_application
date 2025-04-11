@@ -3,21 +3,20 @@ import 'dart:ui';
 import 'package:solo_play_application/src/presentation/course/widget/hexagon_grid.dart';
 
 enum Region {
-  gangbuk("강북", Color(0xffFFDBDF), Offset(120, 570)),
-  dosim("도심", Color(0xffF791A9), Offset(360, 463)),
-  dongseoul("동서울", Color(0xffFFE797), Offset(330, 720)),
-  seonam("서남", Color(0xffDDDD7B), Offset(500, 190)),
-  namseoul("남서울", Color(0xffC8EDF1), Offset(650, 350)),
-  gangnam("강남", Color(0xffBAD6DA), Offset(550, 620)),
-  dongnam("동남", Color(0xff86C9CA), Offset(550, 850));
+  gangbuk("강북", Offset(120, 570)),
+  dosim("도심", Offset(360, 463)),
+  dongseoul("동서울", Offset(330, 720)),
+  seonam("서남", Offset(500, 190)),
+  namseoul("남서울", Offset(650, 350)),
+  gangnam("강남", Offset(550, 620)),
+  dongnam("동남", Offset(550, 850));
   // init("선택안함");
 
   final String label;
-  final Color color;
+
   final Offset offset;
   const Region(
     this.label,
-    this.color,
     this.offset,
   );
 
