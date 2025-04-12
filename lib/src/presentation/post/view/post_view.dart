@@ -37,19 +37,23 @@ class _PostViewState extends State<PostView> {
                 borderRadius: BorderRadius.only(topRight: Radius.circular(10)),
                 color: Color(0xffffffff),
               ),
-              child: ListView(
-                children: (districts[selectedRegion] ?? []).map((district) {
-                  return ListButton(
-                    text: district,
-                    onTap: () {
-                      setState(() {
-                        selectedDistrict = district;
-                      });
-                    },
-                    isSelected: selectedDistrict == district,
-                    color: const Color(0xffffffff),
-                  );
-                }).toList(),
+              child: ClipRRect(
+                borderRadius:
+                    const BorderRadius.only(topRight: Radius.circular(10)),
+                child: ListView(
+                  children: (districts[selectedRegion] ?? []).map((district) {
+                    return ListButton(
+                      text: district,
+                      onTap: () {
+                        setState(() {
+                          selectedDistrict = district;
+                        });
+                      },
+                      isSelected: selectedDistrict == district,
+                      color: const Color(0xffffffff),
+                    );
+                  }).toList(),
+                ),
               ),
             ),
           ),
@@ -74,22 +78,26 @@ class _PostViewState extends State<PostView> {
                   ),
                 ],
               ),
-              child: ListView(
-                children: districts.keys.map((region) {
-                  return ListButton(
-                    text: region,
-                    onTap: () {
-                      setState(() {
-                        selectedRegion = region;
-                        selectedDistrict = "";
-                      });
-                    },
-                    isSelected: selectedRegion == region,
-                    color: selectedRegion == region
-                        ? const Color(0xffffffff)
-                        : const Color(0xfff8f8f8),
-                  );
-                }).toList(),
+              child: ClipRRect(
+                borderRadius:
+                    const BorderRadius.only(topLeft: Radius.circular(10)),
+                child: ListView(
+                  children: districts.keys.map((region) {
+                    return ListButton(
+                      text: region,
+                      onTap: () {
+                        setState(() {
+                          selectedRegion = region;
+                          selectedDistrict = "";
+                        });
+                      },
+                      isSelected: selectedRegion == region,
+                      color: selectedRegion == region
+                          ? const Color(0xffffffff)
+                          : const Color(0xfff8f8f8),
+                    );
+                  }).toList(),
+                ),
               ),
             ),
           ),
