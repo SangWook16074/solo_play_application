@@ -5,12 +5,12 @@ import 'package:solo_play_application/src/presentation/user/%08widget/my_profile
 void main() {
   late Widget widget;
 
-  group('My Profile View UI Test', () {
+  group('My Profile Edit Button Widget Test', () {
     setUp(() {
       widget = const MaterialApp(home: MyProfileEditBtnWidget());
     });
 
-    testWidgets('Edit Button을 눌렀을 때, 잘 동작한다.', (tester) async {
+    testWidgets("Edit Button을 눌렀을 때, 잘 동작한다.", (tester) async {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 

@@ -52,6 +52,9 @@ class PlacePhotoWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: ThemeColor.basicGrey,
       ),
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.asset('assets/images/cafe.jpeg', fit: BoxFit.cover)),
     );
   }
 }

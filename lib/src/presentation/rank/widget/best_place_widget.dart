@@ -33,19 +33,21 @@ class _BestPlaceWidgetState extends State<BestPlaceWidget> {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
-            child: Column(
-              children: [
-                _header(),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _header(),
 
-                /// 랭킹 장소의 사진들을 볼 수 있는 영역
-                _placePhotoList(),
+                  /// 랭킹 장소의 사진들을 볼 수 있는 영역
+                  _placePhotoList(),
 
-                /// 랭킹별 장소에 대해 터치를 하면
-                /// 장소에 대한 간략 설명과
-                /// 장소가 포함된 인기 코스를 추가로 보여줌
-                /// 다시 터치하면 원래대로 돌아감
-                _afterTouched(),
-              ],
+                  /// 랭킹별 장소에 대해 터치를 하면
+                  /// 장소에 대한 간략 설명과
+                  /// 장소가 포함된 인기 코스를 추가로 보여줌
+                  /// 다시 터치하면 원래대로 돌아감
+                  _afterTouched(),
+                ],
+              ),
             ),
           ),
         ),
@@ -72,10 +74,12 @@ class _BestPlaceWidgetState extends State<BestPlaceWidget> {
   Widget _afterTouched() {
     return _touched
         ? const Column(
+            key: Key("After Touched Best Place Widget"),
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               /// 장소에 대한 간략 설명
               Padding(
+                key: Key("Detail about the place"),
                 padding: EdgeInsets.only(bottom: 20.0),
                 child: Text(
                   '건축가의 탕비실이라는 부제로 정성스러운 커피 한상을 내어드리고 있습니다. 햇살로 가득찬 공간에서 여유로운 일상을 즐기시기 바랍니다.',
@@ -85,6 +89,7 @@ class _BestPlaceWidgetState extends State<BestPlaceWidget> {
 
               /// 랭킹 장소가 포함된 인기 코스에 대한 안내 설명
               Padding(
+                key: Key("Show course related to the place"),
                 padding: EdgeInsets.only(bottom: 8.0),
                 child: Text(
                   '3F LOBBY가 포함된 인기있는 코스에요!',

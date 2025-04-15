@@ -6,11 +6,11 @@ class MyAvatarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(100),
-      child: Container(
-        width: width,
-        decoration: const BoxDecoration(shape: BoxShape.circle),
+    return Container(
+      width: width,
+      decoration: const BoxDecoration(shape: BoxShape.circle),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(100),
         child: Image.asset("assets/images/raccoon.png", fit: BoxFit.cover),
       ),
     );
