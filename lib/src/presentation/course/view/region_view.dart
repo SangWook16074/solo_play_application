@@ -145,7 +145,8 @@ class _RegionViewState extends State<RegionView> {
   List<HexagonPosition> _buildMap(Region region, bool isSelected) {
     return Region.getMap(region)
         .map((it) => it.copy(
-            color: isSelected ? region.color : region.color.withOpacity(0.7)))
+            color:
+                isSelected ? const Color(0xff8DCCFF) : const Color(0xffeeeeee)))
         .toList();
   }
 
@@ -158,7 +159,8 @@ class _RegionViewState extends State<RegionView> {
             top: region.offset.dx,
             left: region.offset.dy,
             child: RegionLabel(
-                label: "${region.label}권", borderColor: region.color))
+                label: "${region.label}권",
+                borderColor: const Color(0xff8DCCFF)))
         : Container();
   }
 }

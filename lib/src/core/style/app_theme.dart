@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 ThemeData get appTheme => ThemeData(
-    scaffoldBackgroundColor: const Color(0xffffffff),
+    useMaterial3: false,
+    scaffoldBackgroundColor: const Color(0xfff9f9f9),
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
+    appBarTheme: const AppBarTheme(
+        foregroundColor: Color(0xff0f0f0f),
+        backgroundColor: Colors.transparent,
+        elevation: 0),
     bottomNavigationBarTheme:
         const BottomNavigationBarThemeData(elevation: 0.0));

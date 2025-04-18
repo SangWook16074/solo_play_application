@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:solo_play_application/src/presentation/course/cubit/level_cubit.dart';
 import 'package:solo_play_application/src/presentation/course/cubit/region_detail_cubit.dart';
 import 'package:solo_play_application/src/presentation/course/cubit/region_detail_view_state.dart';
+import 'package:solo_play_application/src/presentation/course/view/level_select_view.dart';
 import 'package:solo_play_application/src/presentation/course/widget/hexagon_grid.dart';
-import 'package:solo_play_application/src/presentation/course/widget/label_button.dart';
 
 class RegionDetailView extends StatefulWidget {
   const RegionDetailView({
@@ -59,6 +62,7 @@ class _RegionDetailViewState extends State<RegionDetailView> {
         if (path.contains(currOffset)) {
           final dest = entry.key;
           cubit.moveTo(dest);
+          log("이동!");
         }
       }
     }
@@ -102,77 +106,72 @@ class _RegionDetailViewState extends State<RegionDetailView> {
             child: Icon(Icons.search),
           )
         ],
+        bottom: PreferredSize(
+            preferredSize: const Size(double.maxFinite, 58), child: _header()),
       ),
-      body: Column(
-        children: [
-          _header(),
-          _map(),
-        ],
-      ),
+      extendBodyBehindAppBar: true,
+      body: Center(child: _map()),
     );
   }
 
-  Widget _header() => const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
+  Widget _header() => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
               "솔플레벨 선택하기",
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
             ),
-            SizedBox(
-              height: 4,
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.0),
-                  child: LabelButton(label: "혼자는 아직 힘들어요 Lv.1"),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.0),
-                  child: LabelButton(label: "혼자는 아직 힘들어요 Lv.1"),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.0),
-                  child: LabelButton(label: "혼자는 아직 힘들어요 Lv.1"),
-                ),
-              ]),
-            )
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 4,
+          ),
+          BlocBuilder<LevelCubit, int>(
+            builder: (context, state) {
+              return LevelSelectView(
+                  selectIndex: state,
+                  onChanged: context.read<LevelCubit>().changeIndex);
+            },
+          )
+        ],
       );
 
   Widget _map() {
-    return Expanded(
-      child: GestureDetector(
-        onDoubleTapDown: _onDoubleTapDown,
-        child: InteractiveViewer(
-            panEnabled: false,
-            key: _parentsKey,
-            constrained: false,
-            transformationController: _controller,
-            minScale: 1.0,
-            maxScale: 2.0,
-            onInteractionEnd: (details) {
-              _currScale = details.scaleVelocity;
-            },
-            child: BlocBuilder<RegionDetailCubit, RegionDetailViewState>(
-              builder: (context, state) {
-                final region = state.region;
-                final nearArea = region.nearArea;
-                return HexagonGrid(key: _childKey, space: 4.0, offsets: [
-                  ...region.region
-                      .map((tile) => tile.copy(color: region.color)),
-                  for (var near in nearArea.entries)
-                    ...near.value.map((tile) =>
-                        tile.copy(color: region.color.withOpacity(0.3))),
-                ]);
-              },
-            )),
-      ),
-    );
+    return LayoutBuilder(builder: (context, constraints) {
+      return InteractiveViewer(
+        panEnabled: true,
+        key: _parentsKey,
+        constrained: false,
+        transformationController: _controller,
+        minScale: 1.0,
+        maxScale: 2.0,
+        onInteractionEnd: (details) {
+          _currScale = details.scaleVelocity;
+        },
+        child: SizedBox(
+          width: constraints.maxWidth + 100,
+          height: constraints.maxHeight + 100,
+          child: Center(
+            child: GestureDetector(
+              onDoubleTapDown: _onDoubleTapDown,
+              child: BlocBuilder<RegionDetailCubit, RegionDetailViewState>(
+                builder: (context, state) {
+                  final region = state.region;
+                  final nearArea = region.nearArea;
+                  return HexagonGrid(key: _childKey, space: 4.0, offsets: [
+                    ...region.region.map(
+                        (tile) => tile.copy(color: const Color(0xff8DCCFF))),
+                    for (var near in nearArea.entries)
+                      ...near.value.map(
+                          (tile) => tile.copy(color: const Color(0xffeeeeee))),
+                  ]);
+                },
+              ),
+            ),
+          ),
+        ),
+      );
+    });
   }
 }
