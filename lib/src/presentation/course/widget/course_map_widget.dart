@@ -23,7 +23,6 @@ class _CourseMapWidgetState extends State<CourseMapWidget> {
 
   /// 코스 지도 영역
   Widget _map() => Container(
-        key: const Key("Course Map Widget Map"),
         width: double.infinity,
         height: 336,
         decoration: BoxDecoration(
@@ -41,7 +40,6 @@ class _CourseMapWidgetState extends State<CourseMapWidget> {
 
   /// 코스 태그, 위치, 관심을 둔 사람들 프로필을 보여주는 영역
   Widget _description() => Container(
-        key: const Key("Course Map Widget Description"),
         width: double.infinity,
         height: 64,
         decoration: BoxDecoration(
