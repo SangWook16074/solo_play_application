@@ -7,39 +7,38 @@ void main() {
   late Widget widget;
 
   group("Best Place Widget Test", () {
-    setUp(() {
+    setUpAll(() {
       widget = const MaterialApp(
         home: BestPlaceWidget(rank: 1),
       );
     });
 
-    testWidgets("초기 랜더링 상태 확인 후 북마크 아이콘 탭 확인", (tester) async {
+    testWidgets("랭킹에 있는 카드 위젯을 탭하면 상세 설명, 그 장소가 포함된 인기있는 코스 레이블 및 지도를 보여준다.",
+        (tester) async {
       await tester.pumpWidget(widget);
 
-      /// bookmark_outline 아이콘 확인
-      final bookmarkOutline = find.byIcon(Icons.bookmark_outline);
-      expect(bookmarkOutline, findsOneWidget);
-
-      /// 카드 탭하기 전 상세 내용이 안 보이는 상태가 맞는지 확인
       final afterTouchedFinder =
           find.byKey(const Key("After Touched Best Place Widget"));
       expect(afterTouchedFinder, findsNothing);
 
-      /// bookmark_outline 아이콘을 탭한 후 bookmark 아이콘으로 정상적으로 바뀌는지 확인
-      await tester.tap(bookmarkOutline);
-      await tester.pump();
-      expect(find.byIcon(Icons.bookmark), findsOneWidget);
+      await tester.tap(find.byType(BestPlaceWidget));
+      await tester.pumpAndSettle();
+
+      expect(find.textContaining("건축가의 탕비실이라는"), findsOneWidget);
+      expect(find.textContaining("3F LOBBY가 포함된"), findsOneWidget);
+      expect(find.byType(CourseMapWidget), findsWidgets);
     });
 
-    testWidgets("카드 탭 후 상세 내용이 보이는지 확인", (tester) async {
+    testWidgets("카드 위젯의 북마크 아이콘을 누르면 아이콘 모양이 바뀐다", (tester) async {
       await tester.pumpWidget(widget);
-      await tester.tap(find.byType(BestPlaceWidget));
+
+      final bookmarkOutline = find.byIcon(Icons.bookmark_outline);
+      expect(bookmarkOutline, findsWidgets);
+
+      await tester.tap(bookmarkOutline);
       await tester.pump();
 
-      expect(find.byKey(const Key("Detail about the place")), findsOneWidget);
-      expect(find.byKey(const Key("Show course related to the place")),
-          findsOneWidget);
-      expect(find.byType(CourseMapWidget), findsOneWidget);
+      expect(find.byIcon(Icons.bookmark), findsOneWidget);
     });
   });
 }

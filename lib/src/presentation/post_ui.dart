@@ -27,6 +27,8 @@ class PostUI extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10))),
+
+        /// 서울시 내 구 선택에 따라 보여주는 지역 라벨
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(65),
           child: Padding(

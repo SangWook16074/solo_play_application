@@ -47,7 +47,7 @@ class PlacePhotoWidget extends StatelessWidget {
     return Container(
       width: 135,
       height: 200,
-      margin: const EdgeInsets.only(right: 12),
+      // margin: const EdgeInsets.only(right: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: ThemeColor.basicGrey,
