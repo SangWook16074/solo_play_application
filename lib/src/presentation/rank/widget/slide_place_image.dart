@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:solo_play_application/src/presentation/post/widget/place_photo_widget.dart';
+import 'package:solo_play_application/src/presentation/common/widgets/place_photo_widget.dart';
 import 'package:solo_play_application/src/presentation/rank/widget/image_indicator.dart';
 
 class SlidePlaceImage extends StatefulWidget {
@@ -17,41 +16,49 @@ class _SlidePlaceImageState extends State<SlidePlaceImage> {
     'assets/images/cafe3.jpg',
   ];
 
-  final controller = PageController();
+  final controller = PageController(viewportFraction: 1.0);
   int currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SizedBox(
-          width: 358,
-          height: 200,
-          child: PageView.builder(
-            controller: controller,
-            itemCount: imagePaths.length,
-            onPageChanged: (index) {
-              setState(() {
-                currentPage = index;
-              });
-            },
-            itemBuilder: (context, index) => PlacePhotoWidget(
-              width: 358,
-              height: 200,
-              imagePath: imagePaths[currentPage = index],
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: Stack(
+        children: [
+          Container(
+            width: 326,
+            height: 400,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: PageView.builder(
+                physics: const ClampingScrollPhysics(),
+                controller: controller,
+                itemCount: imagePaths.length,
+                onPageChanged: (index) {
+                  setState(() {
+                    currentPage = index;
+                  });
+                },
+                itemBuilder: (context, index) => PlacePhotoWidget(
+                  imagePath: imagePaths[index],
+                ),
+              ),
             ),
           ),
-        ),
-        Positioned(
-          bottom: 8.0,
-          right: 1.0,
-          left: 1.0,
-          child: ImageIndicator(
-            length: imagePaths.length,
-            currentIndex: currentPage,
+          Positioned(
+            bottom: 8.0,
+            right: 0.0,
+            left: 0.0,
+            child: ImageIndicator(
+              length: imagePaths.length,
+              currentIndex: currentPage,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
