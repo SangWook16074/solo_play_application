@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-class MyAvatarWidget extends StatelessWidget {
-  const MyAvatarWidget({super.key, required this.width});
+class ProfileImageWidget extends StatelessWidget {
+  const ProfileImageWidget({super.key, this.width = 72, required this.path});
   final double width;
+  final String path;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class MyAvatarWidget extends StatelessWidget {
       decoration: const BoxDecoration(shape: BoxShape.circle),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
-        child: Image.asset("assets/images/raccoon.png", fit: BoxFit.cover),
+        child: Image.network(path, fit: BoxFit.cover),
       ),
     );
   }

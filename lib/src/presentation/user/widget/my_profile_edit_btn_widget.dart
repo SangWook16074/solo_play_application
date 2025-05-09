@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyProfileEditBtnWidget extends StatelessWidget {
-  const MyProfileEditBtnWidget({super.key});
+  final void Function() onTap;
+  const MyProfileEditBtnWidget({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +10,7 @@ class MyProfileEditBtnWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 38.0),
       child: GestureDetector(
         key: const Key("My Profile Edit Button Widget"),
-        onTap: () {},
+        onTap: onTap,
         child: Container(
           height: 24,
           alignment: Alignment.center,
