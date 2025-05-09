@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solo_play_application/src/core/style/theme_color.dart';
-import 'package:solo_play_application/src/presentation/user/%08widget/my_avatar_widget.dart';
+import 'package:solo_play_application/src/presentation/user/widget/profile_image_widget.dart';
 
 class PlacePhotoWidget extends StatelessWidget {
   const PlacePhotoWidget({super.key});
@@ -28,7 +28,11 @@ class PlacePhotoWidget extends StatelessWidget {
             /// 글쓴이의 프로필 사진
             Padding(
               padding: EdgeInsets.only(right: 2.0),
-              child: MyAvatarWidget(width: 35),
+              child: ProfileImageWidget(
+                width: 35,
+                path:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt3q9O1lr3vhTXJD7Oq7y0EJATknCP3U8f-A&s",
+              ),
             ),
 
             /// 글쓴이의 닉네임

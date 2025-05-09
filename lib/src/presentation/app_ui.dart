@@ -7,7 +7,7 @@ import 'package:solo_play_application/src/presentation/bottom_nav_cubit.dart';
 import 'package:solo_play_application/src/presentation/common/widgets/image_icon.dart';
 import 'package:solo_play_application/src/presentation/home_ui.dart';
 import 'package:solo_play_application/src/presentation/rank_ui.dart';
-import 'package:solo_play_application/src/presentation/user/view/my_profile_view.dart';
+import 'package:solo_play_application/src/presentation/my_profile_ui.dart';
 import 'package:solo_play_application/src/presentation/post_ui.dart';
 
 class AppUI extends StatelessWidget {
