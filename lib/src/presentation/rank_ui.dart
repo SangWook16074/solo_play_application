@@ -11,7 +11,7 @@ class RankUI extends StatelessWidget {
         preferredSize: const Size.fromHeight(65),
         child: AppBar(
           title: const Text(
-            '이번 주 가장 인기있는 장소',
+            '이번 주 핫플레이스',
             style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,

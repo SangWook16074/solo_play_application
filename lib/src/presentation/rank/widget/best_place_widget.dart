@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:solo_play_application/src/core/style/theme_color.dart';
 import 'package:solo_play_application/src/presentation/course/widget/course_map_widget.dart';
 import 'package:solo_play_application/src/presentation/post/widget/place_photo_widget.dart';
+import 'package:solo_play_application/src/presentation/rank/widget/slide_place_image.dart';
 
 class BestPlaceWidget extends StatefulWidget {
   final int rank;
@@ -35,7 +36,8 @@ class _BestPlaceWidgetState extends State<BestPlaceWidget> {
             child: Column(
               children: [
                 const SizedBox(height: 10),
-                _header(),
+                _header(widget.rank),
+                const SizedBox(height: 10),
 
                 /// 랭킹 장소의 사진들을 볼 수 있는 영역
                 _placePhotoList(),
@@ -56,18 +58,7 @@ class _BestPlaceWidgetState extends State<BestPlaceWidget> {
 
   /// 랭킹 장소의 사진 list (최소 3장 ~ 최대 5장)
   Widget _placePhotoList() {
-    return SizedBox(
-      height: 200,
-      child: ListView.separated(
-        separatorBuilder: (context, index) => const SizedBox(
-          width: 8.0,
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        scrollDirection: Axis.horizontal,
-        itemCount: 5,
-        itemBuilder: (context, index) => const PlacePhotoWidget(),
-      ),
-    );
+    return SlidePlaceImage();
   }
 
   /// 터치 후에 추가되는 간략 설명 및 장소가 포함된 인기 코스 영역
@@ -108,57 +99,50 @@ class _BestPlaceWidgetState extends State<BestPlaceWidget> {
   }
 
   /// 랭킹 순위 번호, 랭킹 장소의 이름, 위치, 저장 아이콘 영역
-  Widget _header() {
+  Widget _header(int rank) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Row(
-              children: [
-                /// 랭킹 순위 번호
-                Container(
-                  height: 46,
-                  width: 46,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
+          Row(
+            children: [
+              /// 랭킹 순위 번호
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset('assets/images/rank_icon.png',
+                      fit: BoxFit.cover, width: 46, height: 46),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      '$rank',
+                      style: const TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.w600),
+                    ),
                   ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset('assets/images/rank_icon.png',
-                          fit: BoxFit.cover),
-                      Text(
-                        '${widget.rank}',
-                        style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),
-                ),
+                ],
+              ),
 
-                /// 장소의 이름 및 위치
-                const Padding(
-                  padding: EdgeInsets.only(left: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '3F LOBBY',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
-                      ),
-                      Text(
-                        '서울 용산구',
-                        style: TextStyle(fontSize: 8),
-                      ),
-                    ],
-                  ),
+              /// 장소의 이름 및 위치
+              const Padding(
+                padding: EdgeInsets.only(left: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '3F LOBBY',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      '서울 용산구',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
 
           /// 북마크 아이콘

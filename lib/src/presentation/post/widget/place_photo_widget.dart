@@ -3,7 +3,14 @@ import 'package:solo_play_application/src/core/style/theme_color.dart';
 import 'package:solo_play_application/src/presentation/user/%08widget/my_avatar_widget.dart';
 
 class PlacePhotoWidget extends StatelessWidget {
-  const PlacePhotoWidget({super.key});
+  final double width;
+  final double height;
+  final String imagePath;
+  const PlacePhotoWidget(
+      {super.key,
+      required this.width,
+      required this.height,
+      required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +52,16 @@ class PlacePhotoWidget extends StatelessWidget {
   /// 랭킹에 있는 장소의 사진 영역
   Widget _photo() {
     return Container(
-      width: 135,
-      height: 200,
-      // margin: const EdgeInsets.only(right: 12),
+      width: width,
+      height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: ThemeColor.basicGrey,
       ),
       child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.asset('assets/images/cafe.jpeg', fit: BoxFit.cover)),
+        borderRadius: BorderRadius.circular(10),
+        child: Image.asset(imagePath, fit: BoxFit.cover),
+      ),
     );
   }
 }

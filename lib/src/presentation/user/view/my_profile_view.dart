@@ -27,6 +27,7 @@ class MyProfileView extends StatelessWidget {
           _goPostingDetail(context),
 
           _posting(),
+          SliverToBoxAdapter(child: SizedBox(height: 100)),
         ],
       ),
     );
