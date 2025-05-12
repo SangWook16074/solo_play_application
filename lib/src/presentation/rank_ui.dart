@@ -13,9 +13,10 @@ class RankUI extends StatelessWidget {
           title: const Text(
             '이번 주 핫플레이스',
             style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87),
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
+            ),
           ),
         ),
       ),

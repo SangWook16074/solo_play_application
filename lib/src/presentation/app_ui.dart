@@ -45,7 +45,7 @@ class AppUI extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: SafeArea(
           child: Container(
             decoration: BoxDecoration(

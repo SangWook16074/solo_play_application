@@ -22,17 +22,17 @@ class _SlidePlaceImageState extends State<SlidePlaceImage> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(5),
       child: Stack(
         children: [
           Container(
             width: 326,
             height: 400,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(5),
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(5),
               child: PageView.builder(
                 physics: const ClampingScrollPhysics(),
                 controller: controller,
