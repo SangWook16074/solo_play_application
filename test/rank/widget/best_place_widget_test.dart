@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/presentation/course/widget/course_map_widget.dart';
-import 'package:solo_play_application/src/presentation/rank/widget/best_place_widget.dart';
+import 'package:solo_play_application/src/features/course/presentation/widget/course_map_widget.dart';
+import 'package:solo_play_application/src/core/widget/best_place_widget.dart';
 
 void main() {
   late Widget widget;

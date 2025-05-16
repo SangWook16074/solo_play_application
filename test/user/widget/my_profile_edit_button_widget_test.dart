@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/presentation/user/widget/my_profile_edit_btn_widget.dart';
+import 'package:solo_play_application/src/core/widget/my_profile_edit_btn_widget.dart';
 
 void main() {
   late Widget widget;
