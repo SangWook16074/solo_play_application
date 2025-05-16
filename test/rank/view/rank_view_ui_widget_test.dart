@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/presentation/rank/widget/best_place_widget.dart';
-import 'package:solo_play_application/src/presentation/rank_ui.dart';
+import 'package:solo_play_application/src/core/widget/best_place_widget.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/rank_ui.dart';
 
 void main() {
   late Widget? widget;
