@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/presentation/app_page.dart';
+import 'package:solo_play_application/src/features/app/presentation/pages/app_page.dart';
 
 void main() {
   group("App View Bottom Nav UI Test", () {

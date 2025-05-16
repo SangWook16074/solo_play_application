@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/presentation/course/widget/hexagon_grid.dart';
+import 'package:solo_play_application/src/features/course/presentation/widget/hexagon_grid.dart';
 
 void main() {
   late MaterialApp widget;

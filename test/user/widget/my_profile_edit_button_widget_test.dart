@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/presentation/user/%08widget/my_profile_edit_btn_widget.dart';
+import 'package:solo_play_application/src/core/widget/my_profile_edit_btn_widget.dart';
 
 void main() {
   late Widget widget;
 
   group('My Profile Edit Button Widget Test', () {
     setUp(() {
-      widget = const MaterialApp(home: MyProfileEditBtnWidget());
+      widget = MaterialApp(
+          home: MyProfileEditBtnWidget(
+        onTap: () {},
+      ));
     });
 
     testWidgets("Edit Button을 눌렀을 때, 잘 동작한다.", (tester) async {
