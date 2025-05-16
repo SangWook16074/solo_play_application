@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:solo_play_application/src/presentation/app_ui.dart';
 import 'package:solo_play_application/src/presentation/course/models/region.dart';
 import 'package:solo_play_application/src/presentation/course/page/region_detail_page.dart';
 

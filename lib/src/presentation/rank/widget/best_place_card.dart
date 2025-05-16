@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/style/theme_color.dart';
+import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/presentation/common/widgets/bookmark_icon.dart';
-import 'package:solo_play_application/src/presentation/course/widget/course_map_widget.dart';
 import 'package:solo_play_application/src/presentation/rank/widget/slide_place_image.dart';
 
 class BestPlaceCard extends StatefulWidget {
@@ -17,29 +16,44 @@ class _BestPlaceWidgetState extends State<BestPlaceCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 358,
-      height: 593,
-      decoration: BoxDecoration(
-        color: const Color(0xffffffff),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 10),
-          _header(widget.rank),
-          const SizedBox(height: 10),
+    return GestureDetector(
+      onHorizontalDragEnd: (details) {
+        if (details.primaryVelocity != null && details.primaryVelocity! < 0) {
+          context.push('/detailRankUI');
+        }
+      },
+      child: Container(
+        width: 358,
+        height: 593,
+        decoration: BoxDecoration(
+          color: const Color(0xffffffff),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 10),
 
-          /// 랭킹 장소의 사진들을 볼 수 있는 영역
-          _placePhotoList(),
-          const SizedBox(height: 10),
-          _tag(),
-          const SizedBox(height: 10),
-          _location(),
-          const SizedBox(height: 10),
-          _explain(),
-        ],
+            /// 랭킹 번호, 장소 이름 및 위치, 북마크 아이콘 영역
+            _header(widget.rank),
+            const SizedBox(height: 10),
+
+            /// 랭킹 장소의 사진들을 볼 수 있는 영역
+            _placePhotoList(),
+            const SizedBox(height: 10),
+
+            /// 태그 영역
+            _tag(),
+            const SizedBox(height: 10),
+
+            /// 장소 상세 정보 영역
+            _location(),
+            const SizedBox(height: 10),
+
+            /// 장소 상세 설명 영역
+            _explain(),
+          ],
+        ),
       ),
     );
   }

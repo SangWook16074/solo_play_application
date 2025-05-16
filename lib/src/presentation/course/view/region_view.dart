@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/region_map.dart';
 import 'package:solo_play_application/src/core/route/go_router_builder.dart';
 import 'package:solo_play_application/src/presentation/course/bloc/region_bloc.dart';
 import 'package:solo_play_application/src/presentation/course/bloc/region_view_event.dart';
 import 'package:solo_play_application/src/presentation/course/bloc/region_view_state.dart';
 import 'package:solo_play_application/src/presentation/course/models/region.dart';
-import 'package:solo_play_application/src/presentation/course/page/region_detail_page.dart';
 import 'package:solo_play_application/src/presentation/course/widget/hexagon_grid.dart';
 import 'package:solo_play_application/src/presentation/course/widget/region_label.dart';
 

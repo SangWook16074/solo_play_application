@@ -12,7 +12,30 @@ class MyProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(65),
+        child: AppBar(
+          leading: GestureDetector(
+            onTap: () {},
+            child: const Icon(Icons.arrow_back_ios),
+          ),
+          elevation: 0.0,
+          title: const Text(
+            '내 프로필',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
+            ),
+          ),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: Icon(Icons.more_vert),
+            )
+          ],
+        ),
+      ),
       body: CustomScrollView(
         slivers: [
           _header(),
@@ -27,35 +50,7 @@ class MyProfileView extends StatelessWidget {
           _goPostingDetail(context),
 
           _posting(),
-          SliverToBoxAdapter(child: SizedBox(height: 100)),
-        ],
-      ),
-    );
-  }
-
-  /// appbar 영역
-  PreferredSize _appBar() {
-    return PreferredSize(
-      preferredSize: const Size.fromHeight(65),
-      child: AppBar(
-        leading: GestureDetector(
-          onTap: () {},
-          child: const Icon(Icons.arrow_back_ios),
-        ),
-        elevation: 0.0,
-        title: const Text(
-          '내 프로필',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            color: Colors.black87,
-          ),
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.more_vert),
-          )
+          const SliverToBoxAdapter(child: SizedBox(height: 100)),
         ],
       ),
     );
