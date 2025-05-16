@@ -3,7 +3,7 @@ import 'package:solo_play_application/src/core/route/go_router_builder.dart';
 import 'package:solo_play_application/src/features/app/presentation/pages/app_page.dart';
 import 'package:solo_play_application/src/features/course/presentation/view/course_detail_view.dart';
 import 'package:solo_play_application/src/features/post/presentation/view/posting_detail_view.dart';
-import 'package:solo_play_application/src/presentation/detail_rank_ui.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/detail_rank_ui.dart';
 
 final GoRouter router = GoRouter(
   routes: [
