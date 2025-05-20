@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
 import 'package:solo_play_application/src/core/widget/slide_place_image.dart';
 
 class BestPlaceCard extends StatefulWidget {
   final int rank;
-  const BestPlaceCard({super.key, required this.rank});
+  final bool showHeader;
+  const BestPlaceCard({super.key, required this.rank, this.showHeader = true});
 
   @override
   State<BestPlaceCard> createState() => _BestPlaceWidgetState();
@@ -18,12 +20,13 @@ class _BestPlaceWidgetState extends State<BestPlaceCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onHorizontalDragEnd: (details) {
-        if (details.primaryVelocity != null && details.primaryVelocity! < 0) {
+        if (details.primaryVelocity != null &&
+            details.primaryVelocity! < 0 &&
+            widget.showHeader == true) {
           context.push('/detailRankUI');
         }
       },
       child: Container(
-        width: 358,
         height: 593,
         decoration: BoxDecoration(
           color: const Color(0xffffffff),
@@ -35,7 +38,9 @@ class _BestPlaceWidgetState extends State<BestPlaceCard> {
             const SizedBox(height: 10),
 
             /// 랭킹 번호, 장소 이름 및 위치, 북마크 아이콘 영역
-            _header(widget.rank),
+            /// rank ui에서만 헤더가 보이도록 설정
+            widget.showHeader ? _header(widget.rank) : Container(),
+
             const SizedBox(height: 10),
 
             /// 랭킹 장소의 사진들을 볼 수 있는 영역
@@ -52,6 +57,11 @@ class _BestPlaceWidgetState extends State<BestPlaceCard> {
 
             /// 장소 상세 설명 영역
             _explain(),
+            const SizedBox(height: 10),
+
+            /// 길찾기, 공유하기 버튼 영역
+            /// detail rank ui에서만 보이도록 설정
+            widget.showHeader ? Container() : _actionButton(),
           ],
         ),
       ),
@@ -60,7 +70,12 @@ class _BestPlaceWidgetState extends State<BestPlaceCard> {
 
   /// 랭킹 장소의 사진 list (최소 3장 ~ 최대 5장)
   Widget _placePhotoList() {
-    return const Center(child: SlidePlaceImage());
+    return const Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        child: SlidePlaceImage(),
+      ),
+    );
   }
 
   /// 랭킹 순위 번호, 랭킹 장소의 이름, 위치, 저장 아이콘 영역
@@ -73,20 +88,23 @@ class _BestPlaceWidgetState extends State<BestPlaceCard> {
           Row(
             children: [
               /// 랭킹 순위 번호
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset('assets/images/rank_icon.png',
-                      fit: BoxFit.cover, width: 46, height: 46),
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      '$rank',
-                      style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.w600),
-                    ),
+              Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: const Color(0xffEDF5FF),
+                ),
+                child: Text(
+                  textAlign: TextAlign.center,
+                  '$rank',
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.normal,
+                    color: Color(0xff0072FF),
                   ),
-                ],
+                ),
               ),
 
               /// 장소의 이름 및 위치
@@ -97,12 +115,20 @@ class _BestPlaceWidgetState extends State<BestPlaceCard> {
                   children: [
                     Text(
                       'mwm',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          fontStyle: FontStyle.normal,
+                          color: Colors.black),
                     ),
                     Text(
                       '서울 중구',
-                      style: TextStyle(fontSize: 12),
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        color: Color(0xff8E8E8E),
+                      ),
                     ),
                   ],
                 ),
@@ -150,12 +176,12 @@ class _BestPlaceWidgetState extends State<BestPlaceCard> {
   }
 
   Widget _location() {
-    return const Padding(
-      padding: EdgeInsets.only(left: 16.0),
+    return Padding(
+      padding: const EdgeInsets.only(left: 16.0),
       child: Row(
         children: [
-          Icon(Icons.location_on_rounded, color: Colors.blue, size: 24),
-          Text(
+          SvgPicture.asset('assets/images/location_icon.svg'),
+          const Text(
             '서울 용산구 한강대로 15길 19-19 3층',
             style: TextStyle(
                 fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
@@ -172,6 +198,74 @@ class _BestPlaceWidgetState extends State<BestPlaceCard> {
         'mwm은 카페와 스튜디오를 같이 운영합니다. 커피음료와 간단한 디저트들이 준비되어있고 mwm에서 제작한 그릇들도 구입 가능합니다.',
         style: TextStyle(
             fontSize: 12, color: Colors.black, fontWeight: FontWeight.w400),
+      ),
+    );
+  }
+
+  Widget _actionButton() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          /// 길찾기 버튼
+          Container(
+            width: 160,
+            height: 24,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                color: Colors.grey,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/images/direction_icon.png'),
+                  const SizedBox(width: 4),
+                  const Text(
+                    '길찾기',
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        fontStyle: FontStyle.normal),
+                  )
+                ],
+              ),
+            ),
+          ),
+
+          /// 공유하기 버튼
+          Container(
+            width: 160,
+            height: 24,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                color: Colors.grey,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/images/share_icon.png'),
+                  const SizedBox(width: 4),
+                  const Text(
+                    '공유하기',
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        fontStyle: FontStyle.normal),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

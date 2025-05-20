@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:solo_play_application/src/core/widget/best_place_card.dart';
 
-class RankView extends StatefulWidget {
-  const RankView({super.key});
+class SpotRankView extends StatefulWidget {
+  const SpotRankView({super.key});
 
   @override
-  State<RankView> createState() => _RankViewState();
+  State<SpotRankView> createState() => _SpotRankViewState();
 }
 
-class _RankViewState extends State<RankView> {
+class _SpotRankViewState extends State<SpotRankView> {
   final PageController controller =
       PageController(initialPage: 0, viewportFraction: 1);
   @override
@@ -16,6 +16,17 @@ class _RankViewState extends State<RankView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
+        const Padding(
+          padding: EdgeInsets.only(right: 16.0, top: 4.0, bottom: 4.0),
+          child: Text(
+            "tip. 더 자세한 정보는 카드를 옆으로 넘겨보세요->",
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: Color(0xff666666),
+            ),
+          ),
+        ),
         Expanded(
           child: PageView.builder(
             padEnds: false,

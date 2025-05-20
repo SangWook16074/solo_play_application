@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/style/theme_color.dart';
+import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
 
 class CourseMapWidget extends StatefulWidget {
   const CourseMapWidget({super.key});
@@ -13,84 +13,127 @@ class _CourseMapWidgetState extends State<CourseMapWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _map(),
-        _description(),
-      ],
+    return Container(
+      height: 456,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: const Color(0xffFFFFFF),
+      ),
+      child: Column(
+        children: [
+          /// 코스 상세 영역으로 이동 가능한 아이콘과 설명 레이블 영역
+          const SizedBox(height: 10),
+          _header(),
+          const SizedBox(height: 10),
+
+          _mapArea(),
+        ],
+      ),
     );
   }
 
-  /// 코스 지도 영역
-  Widget _map() => Container(
-        width: double.infinity,
-        height: 336,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(10),
-            bottom: Radius.zero,
+  Widget _header() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            'mwm이 포함된 인기있는 코스에요!',
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                fontStyle: FontStyle.normal,
+                color: Colors.black),
           ),
-          border: Border.all(color: Colors.grey, width: 1),
-          color: ThemeColor.basicGrey,
-        ),
-
-        /// 후에 지도 코스 보여주는 화면 넣을 것.
-        child: Container(),
-      );
-
-  /// 코스 태그, 위치, 관심을 둔 사람들 프로필을 보여주는 영역
-  Widget _description() => Container(
-        width: double.infinity,
-        height: 64,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.zero,
-            bottom: Radius.circular(10),
+          GestureDetector(
+            onTap: () {},
+            child: const Icon(
+              Icons.arrow_forward_ios,
+              size: 18,
+            ),
           ),
-          border: Border.all(color: Colors.grey, width: 1),
-          color: Colors.white,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              /// 태그 및 위치 영역
-              const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '#카페투어',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  Text(
-                    '용산구',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ],
+        ],
+      ),
+    );
+  }
+
+  Widget _mapArea() {
+    return Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Container(
+            height: 400,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                width: 1,
+                color: const Color(0xffCACACA),
+                style: BorderStyle.solid,
               ),
-
-              /// 관심을 둔 사람들 프로필을 보여주는 영역
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _clickedIcon = !_clickedIcon;
-                  });
-                },
-                child: _clickedIcon
-                    ? const Icon(Icons.bookmark)
-                    : const Icon(Icons.bookmark_outline),
-              ),
-            ],
+            ),
           ),
         ),
-      );
+        Positioned(
+          top: 0,
+          right: 0,
+          left: 0,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Container(
+              height: 337,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(5),
+                  topLeft: Radius.circular(5),
+                ),
+                color: Colors.blue,
+              ),
+              child: const Center(
+                child: Text(
+                  "지도 영역",
+                  style: TextStyle(fontSize: 50, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 10,
+          left: 0,
+          right: 0,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 36.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Column(
+                  children: [
+                    Text(
+                      '#느좋카페투어',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    Text(
+                      '용산구',
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+                    ),
+                  ],
+                ),
+                BookmarkIcon(
+                  onTap: () {
+                    setState(() {
+                      _clickedIcon = !_clickedIcon;
+                    });
+                  },
+                  isBookmarked: _clickedIcon,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }

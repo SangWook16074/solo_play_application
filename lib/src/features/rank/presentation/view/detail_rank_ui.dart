@@ -15,48 +15,41 @@ class _DetailRankViewState extends State<DetailRankUI> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onHorizontalDragEnd: (details) {
-        if (details.primaryVelocity != null && details.primaryVelocity! > 0) {
-          context.pop();
-        }
-      },
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(65),
-          child: AppBar(
-            leading: GestureDetector(
-              onTap: () {
-                context.pop();
-              },
-              child: const Icon(Icons.arrow_back_ios),
-            ),
-            elevation: 0.0,
-            title: const Text(
-              'mwm',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: BookmarkIcon(
-                  onTap: () {
-                    setState(() {
-                      _clickedIcon = !_clickedIcon;
-                    });
-                  },
-                  isBookmarked: _clickedIcon,
-                ),
-              )
-            ],
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(65),
+        child: AppBar(
+          leading: GestureDetector(
+            onTap: () {
+              context.pop();
+            },
+            child: const Icon(Icons.arrow_back_ios),
           ),
+          elevation: 0.0,
+          title: const Text(
+            'mwm',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
+            ),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: BookmarkIcon(
+                onTap: () {
+                  setState(() {
+                    _clickedIcon = !_clickedIcon;
+                  });
+                },
+                isBookmarked: _clickedIcon,
+              ),
+            )
+          ],
         ),
-        body: const DetailRankView(),
       ),
+      body: const DetailRankView(),
     );
   }
 }

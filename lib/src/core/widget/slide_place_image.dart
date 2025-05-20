@@ -26,7 +26,6 @@ class _SlidePlaceImageState extends State<SlidePlaceImage> {
       child: Stack(
         children: [
           Container(
-            width: 326,
             height: 400,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solo_play_application/src/core/widget/best_place_card.dart';
+import 'package:solo_play_application/src/features/course/presentation/widget/course_map_widget.dart';
 
 class DetailRankView extends StatefulWidget {
   const DetailRankView({super.key});
@@ -16,7 +17,15 @@ class _DetailRankViewState extends State<DetailRankView> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(child: BestPlaceCard(rank: 1)),
+          Center(
+            child: BestPlaceCard(
+              rank: 1,
+              showHeader: false,
+            ),
+          ),
+          SizedBox(height: 10),
+          CourseMapWidget(),
+          SizedBox(height: 50),
         ],
       ),
     );
