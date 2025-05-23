@@ -8,6 +8,10 @@ class MyProfileImageView extends StatelessWidget {
   Widget build(BuildContext context) {
     const imageUrl =
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt3q9O1lr3vhTXJD7Oq7y0EJATknCP3U8f-A&s";
-    return const ProfileImageWidget(path: imageUrl);
+    return const ProfileImageWidget(
+      path: imageUrl,
+      width: 72,
+      height: 72,
+    );
   }
 }

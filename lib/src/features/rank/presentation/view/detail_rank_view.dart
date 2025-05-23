@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:solo_play_application/src/core/widget/best_place_card.dart';
 import 'package:solo_play_application/src/features/course/presentation/widget/course_map_widget.dart';
+import 'package:solo_play_application/src/features/rank/presentation/widget/visited_review_widget.dart';
 
 class DetailRankView extends StatefulWidget {
   const DetailRankView({super.key});
@@ -25,6 +26,8 @@ class _DetailRankViewState extends State<DetailRankView> {
           ),
           SizedBox(height: 10),
           CourseMapWidget(),
+          SizedBox(height: 10),
+          VisitedReviewWidget(),
           SizedBox(height: 50),
         ],
       ),
