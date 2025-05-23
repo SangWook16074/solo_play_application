@@ -23,7 +23,7 @@ class _BestPlaceWidgetState extends State<BestPlaceCard> {
         if (details.primaryVelocity != null &&
             details.primaryVelocity! < 0 &&
             widget.showHeader == true) {
-          context.push('/detailRankUI');
+          context.push('/rank/detailRankUI');
         }
       },
       child: Container(
