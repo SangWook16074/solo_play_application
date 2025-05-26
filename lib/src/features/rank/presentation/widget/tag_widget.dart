@@ -7,7 +7,7 @@ class TagWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(2),
         color: const Color.fromRGBO(0, 0, 0, 0.05),
         border: Border.all(
           width: 0.5,

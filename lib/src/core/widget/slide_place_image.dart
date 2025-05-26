@@ -11,11 +11,10 @@ class SlidePlaceImage extends StatefulWidget {
 
 class _SlidePlaceImageState extends State<SlidePlaceImage> {
   final List<String> imagePaths = [
-    'assets/images/cafe.jpeg',
-    'assets/images/cafe2.jpg',
     'assets/images/cafe3.jpg',
+    'assets/images/cafe2.jpg',
+    'assets/images/cafe.jpeg',
   ];
-
   final controller = PageController(viewportFraction: 1.0);
   int currentPage = 0;
 

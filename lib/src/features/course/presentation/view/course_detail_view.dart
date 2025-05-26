@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/features/course/presentation/widget/location_label.dart';
-import 'package:solo_play_application/src/features/course/presentation/widget/course_map_widget.dart';
+import 'package:solo_play_application/src/core/widget/course_map_widget.dart';
 
 class CourseDetailView extends StatelessWidget {
   const CourseDetailView({super.key});

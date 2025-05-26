@@ -2,14 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/utils/bottom_nav_icon.dart';
-import 'package:solo_play_application/src/core/widget/best_place_card.dart';
-import 'package:solo_play_application/src/features/course/presentation/view/add_view.dart';
 import 'package:solo_play_application/src/features/app/presentation/cubits/bottom_nav_cubit.dart';
 import 'package:solo_play_application/src/core/widget/image_icon.dart';
-import 'package:solo_play_application/src/features/home/presentation/view/home_ui.dart';
-import 'package:solo_play_application/src/features/rank/presentation/view/rank_ui.dart';
-import 'package:solo_play_application/src/features/user/presentation/view/my_profile_ui.dart';
-import 'package:solo_play_application/src/features/post/presentation/view/post_ui.dart';
 
 class AppUI extends StatelessWidget {
   final Widget child;

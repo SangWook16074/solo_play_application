@@ -198,6 +198,7 @@ class _BestPlaceWidgetState extends State<BestPlaceCard> {
         'mwm은 카페와 스튜디오를 같이 운영합니다. 커피음료와 간단한 디저트들이 준비되어있고 mwm에서 제작한 그릇들도 구입 가능합니다.',
         style: TextStyle(
             fontSize: 12, color: Colors.black, fontWeight: FontWeight.w400),
+        maxLines: 3,
       ),
     );
   }

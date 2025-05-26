@@ -4,7 +4,6 @@ import 'package:solo_play_application/src/features/app/presentation/pages/app_pa
 import 'package:solo_play_application/src/features/course/presentation/view/add_view.dart';
 import 'package:solo_play_application/src/features/home/presentation/view/home_ui.dart';
 import 'package:solo_play_application/src/features/post/presentation/view/post_ui.dart';
-import 'package:solo_play_application/src/features/post/presentation/view/posting_detail_view.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/detail_rank_ui.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/rank_ui.dart';
 import 'package:solo_play_application/src/features/user/presentation/view/my_profile_ui.dart';

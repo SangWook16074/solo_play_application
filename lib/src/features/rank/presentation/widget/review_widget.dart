@@ -64,6 +64,7 @@ class ReviewWidget extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 4),
                   const Text(
                     '햇살이 잘 들어오는 창가 자리에서 커피 한 잔 하니까 마음까지 따뜻해졌어요. 인테리어도 아늑하고 조용해서 혼자 시간 보내기 딱 좋았어요. 라떼랑 당근 케이크 조합도 최고였어요!',
                     style: TextStyle(
@@ -75,6 +76,7 @@ class ReviewWidget extends StatelessWidget {
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
+                  const SizedBox(height: 4),
                   Row(
                     children: List.generate(
                       2,
