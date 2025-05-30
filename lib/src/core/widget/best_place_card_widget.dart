@@ -7,20 +7,25 @@ import 'package:solo_play_application/src/core/widget/slide_place_image_widget.d
 class BestPlaceCardWidget extends StatefulWidget {
   final int rank;
   final bool showHeader;
+  final bool isCourse;
 
   /// 기본 생성자
-  ///
-  ///
-  ///
+  /// detail rank view에서는
+  /// header가 보이지 않아야 한다
   const BestPlaceCardWidget(
-      {super.key, required this.rank, this.showHeader = false});
+      {super.key,
+      required this.rank,
+      this.showHeader = false,
+      this.isCourse = false});
 
   /// 확장 [BestPlaceCardWidget] 생성자
-  ///
-  ///
-  ///
+  /// spot rank view에서는
+  /// header가 보여야 한다
   const BestPlaceCardWidget.expand(
-      {super.key, required this.rank, this.showHeader = true});
+      {super.key,
+      required this.rank,
+      required this.showHeader,
+      required this.isCourse});
 
   @override
   State<BestPlaceCardWidget> createState() => _BestPlaceCardWidgetState();
@@ -35,8 +40,14 @@ class _BestPlaceCardWidgetState extends State<BestPlaceCardWidget> {
       onHorizontalDragEnd: (details) {
         if (details.primaryVelocity != null &&
             details.primaryVelocity! < 0 &&
-            widget.showHeader == true) {
-          context.push('/rank/detail');
+            widget.showHeader == true &&
+            widget.isCourse == false) {
+          context.push('/rank/detailPlace', extra: widget.rank);
+        } else if (details.primaryVelocity != null &&
+            details.primaryVelocity! < 0 &&
+            widget.showHeader == true &&
+            widget.isCourse == true) {
+          context.push('/rank/detailCourse', extra: widget.rank);
         }
       },
       child: Container(
@@ -83,70 +94,92 @@ class _BestPlaceCardWidgetState extends State<BestPlaceCardWidget> {
 
   /// 랭킹 장소의 사진 list (최소 3장 ~ 최대 5장)
   Widget _placePhotoList() {
-    return const Center(
+    return Center(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: SlidePlaceImageWidget(),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: SlidePlaceImageWidget(isCourse: widget.isCourse),
       ),
     );
   }
 
   /// 랭킹 순위 번호, 랭킹 장소의 이름, 위치, 저장 아이콘 영역
+  /// rank ui에서 현재 tab 영역이 장소라면
+  /// 장소를 올린 사람 닉네임과 위치가 나타난다.
+  /// 반대로, tab 영역이 코스라면
+  /// 카페에 대한 글귀가 나타난다.
   Widget _header(int rank) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              /// 랭킹 순위 번호
-              Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: const Color(0xffEDF5FF),
-                ),
-                child: Text(
-                  textAlign: TextAlign.center,
-                  '$rank',
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                    fontStyle: FontStyle.normal,
-                    color: Color(0xff0072FF),
+          Expanded(
+            child: Row(
+              children: [
+                /// 랭킹 순위 번호
+                Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    color: const Color(0xffEDF5FF),
+                  ),
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    '$rank',
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.normal,
+                      color: Color(0xff0072FF),
+                    ),
                   ),
                 ),
-              ),
 
-              /// 장소의 이름 및 위치
-              const Padding(
-                padding: EdgeInsets.only(left: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'mwm',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          fontStyle: FontStyle.normal,
-                          color: Colors.black),
-                    ),
-                    Text(
-                      '서울 중구',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                        color: Color(0xff8E8E8E),
+                /// 장소의 이름 및 위치
+                (widget.isCourse == true)
+                    ? const Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Text(
+                            '혼자 가도 좋은, 조용한 커피 한 잔의 시간',
+                            maxLines: 2,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              fontStyle: FontStyle.normal,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const Padding(
+                        padding: EdgeInsets.only(left: 8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'mwm',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.black),
+                            ),
+                            Text(
+                              '서울 중구',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                color: Color(0xff8E8E8E),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
 
           /// 북마크 아이콘

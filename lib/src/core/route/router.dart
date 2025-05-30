@@ -4,6 +4,7 @@ import 'package:solo_play_application/src/features/app/presentation/pages/app_pa
 import 'package:solo_play_application/src/features/course/presentation/view/add_view.dart';
 import 'package:solo_play_application/src/features/home/presentation/view/home_ui.dart';
 import 'package:solo_play_application/src/features/post/presentation/view/post_ui.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/detail_course_ui.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/detail_rank_ui.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/rank_ui.dart';
 import 'package:solo_play_application/src/features/user/presentation/view/my_profile_ui.dart';
@@ -32,9 +33,31 @@ final GoRouter router = GoRouter(
           builder: (context, state) => const RankUI(),
           routes: [
             GoRoute(
-                path: 'detail',
+                path: 'detailPlace',
                 builder: (context, state) {
-                  return const DetailRankUI();
+                  final rank = state.extra as int;
+                  if (rank is! int) {
+                    return const Scaffold(
+                      body: Center(
+                        child: Text('잘못된 접근입니다.'),
+                      ),
+                    );
+                  }
+                  return DetailRankUI(rank: rank);
+                }),
+            GoRoute(
+                path: 'detailCourse',
+                builder: (context, state) {
+                  final rank = state.extra as int;
+                  if (rank is! int) {
+                    return const Scaffold(
+                      body: Center(
+                        child: Text('잘못된 접근입니다.'),
+                      ),
+                    );
+                  }
+
+                  return DetailCourseUI(rank: rank);
                 }),
           ],
         ),

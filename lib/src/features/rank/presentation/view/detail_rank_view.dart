@@ -5,7 +5,8 @@ import 'package:solo_play_application/src/features/rank/presentation/view/simila
 import 'package:solo_play_application/src/features/rank/presentation/view/place_review_view.dart';
 
 class DetailRankView extends StatefulWidget {
-  const DetailRankView({super.key});
+  final int rank;
+  const DetailRankView({super.key, required this.rank});
 
   @override
   State<DetailRankView> createState() => _DetailRankViewState();
@@ -14,24 +15,23 @@ class DetailRankView extends StatefulWidget {
 class _DetailRankViewState extends State<DetailRankView> {
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
             child: BestPlaceCardWidget(
-              rank: 1,
-              showHeader: false,
+              rank: widget.rank,
             ),
           ),
-          SizedBox(height: 10),
-          CourseMapView(),
-          SizedBox(height: 10),
-          PlaceReviewView(),
-          SizedBox(height: 10),
-          SimilarCafePhotoView(),
-          SizedBox(height: 110),
+          const SizedBox(height: 10),
+          const CourseMapView(),
+          const SizedBox(height: 10),
+          const PlaceReviewView(),
+          const SizedBox(height: 10),
+          const SimilarCafePhotoView(),
+          const SizedBox(height: 110),
         ],
       ),
     );

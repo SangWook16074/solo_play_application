@@ -3,10 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/detail_rank_view.dart';
 
-/// 요소 별 위치 주석 달기
-///
 class DetailRankUI extends StatefulWidget {
-  const DetailRankUI({super.key});
+  final int rank;
+  const DetailRankUI({super.key, required this.rank});
 
   @override
   State<DetailRankUI> createState() => _DetailRankViewState();
@@ -52,7 +51,9 @@ class _DetailRankViewState extends State<DetailRankUI> {
           ],
         ),
       ),
-      body: const DetailRankView(),
+      body: DetailRankView(
+        rank: widget.rank,
+      ),
     );
   }
 }

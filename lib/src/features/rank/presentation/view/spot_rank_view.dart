@@ -9,8 +9,14 @@ class SpotRankView extends StatefulWidget {
 }
 
 class _SpotRankViewState extends State<SpotRankView> {
-  final PageController controller =
-      PageController(initialPage: 0, viewportFraction: 1);
+  late final PageController _controller;
+
+  @override
+  void initState() {
+    _controller = PageController(initialPage: 0, viewportFraction: 1);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,12 +36,16 @@ class _SpotRankViewState extends State<SpotRankView> {
         Expanded(
           child: PageView.builder(
             padEnds: false,
-            controller: controller,
+            controller: _controller,
             itemCount: 10,
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) => Align(
               alignment: Alignment.topCenter,
-              child: BestPlaceCardWidget.expand(rank: index + 1),
+              child: BestPlaceCardWidget.expand(
+                showHeader: true,
+                rank: index + 1,
+                isCourse: false,
+              ),
             ),
           ),
         ),
