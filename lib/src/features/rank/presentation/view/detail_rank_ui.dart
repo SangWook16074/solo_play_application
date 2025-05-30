@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/detail_rank_view.dart';
 
+/// 요소 별 위치 주석 달기
+///
 class DetailRankUI extends StatefulWidget {
   const DetailRankUI({super.key});
 
@@ -11,6 +13,7 @@ class DetailRankUI extends StatefulWidget {
 }
 
 class _DetailRankViewState extends State<DetailRankUI> {
+  // 상태 관리를 쓰셔야죠?
   bool _clickedIcon = false;
 
   @override

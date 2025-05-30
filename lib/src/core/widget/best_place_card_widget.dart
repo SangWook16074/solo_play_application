@@ -2,18 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
-import 'package:solo_play_application/src/core/widget/slide_place_image.dart';
+import 'package:solo_play_application/src/core/widget/slide_place_image_widget.dart';
 
-class BestPlaceCard extends StatefulWidget {
+class BestPlaceCardWidget extends StatefulWidget {
   final int rank;
   final bool showHeader;
-  const BestPlaceCard({super.key, required this.rank, this.showHeader = true});
+
+  /// 기본 생성자
+  ///
+  ///
+  ///
+  const BestPlaceCardWidget(
+      {super.key, required this.rank, this.showHeader = false});
+
+  /// 확장 [BestPlaceCardWidget] 생성자
+  ///
+  ///
+  ///
+  const BestPlaceCardWidget.expand(
+      {super.key, required this.rank, this.showHeader = true});
 
   @override
-  State<BestPlaceCard> createState() => _BestPlaceWidgetState();
+  State<BestPlaceCardWidget> createState() => _BestPlaceCardWidgetState();
 }
 
-class _BestPlaceWidgetState extends State<BestPlaceCard> {
+class _BestPlaceCardWidgetState extends State<BestPlaceCardWidget> {
   bool _clickedIcon = false;
 
   @override
@@ -23,7 +36,7 @@ class _BestPlaceWidgetState extends State<BestPlaceCard> {
         if (details.primaryVelocity != null &&
             details.primaryVelocity! < 0 &&
             widget.showHeader == true) {
-          context.push('/rank/detailRankUI');
+          context.push('/rank/detail');
         }
       },
       child: Container(
@@ -73,7 +86,7 @@ class _BestPlaceWidgetState extends State<BestPlaceCard> {
     return const Center(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: SlidePlaceImage(),
+        child: SlidePlaceImageWidget(),
       ),
     );
   }

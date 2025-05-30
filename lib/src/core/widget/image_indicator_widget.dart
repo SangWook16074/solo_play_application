@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ImageIndicator extends StatelessWidget {
+class ImageIndicatorWidget extends StatelessWidget {
   final int length;
   final int currentIndex;
 
-  const ImageIndicator({
+  const ImageIndicatorWidget({
     super.key,
     required this.length,
     required this.currentIndex,

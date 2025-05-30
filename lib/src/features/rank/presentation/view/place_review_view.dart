@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/review_widget.dart';
 
-class VisitedReviewWidget extends StatelessWidget {
-  const VisitedReviewWidget({super.key});
+class PlaceReviewView extends StatelessWidget {
+  const PlaceReviewView({super.key});
 
   @override
   Widget build(BuildContext context) {

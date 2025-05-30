@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/widget/image_indicator.dart';
+import 'package:solo_play_application/src/core/widget/image_indicator_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/tag_widget.dart';
 
-class SimilarFeelPhotoWidget extends StatefulWidget {
-  const SimilarFeelPhotoWidget({super.key});
+class SimilarPlacePhotoWidget extends StatefulWidget {
+  const SimilarPlacePhotoWidget({super.key});
 
   @override
-  State<SimilarFeelPhotoWidget> createState() => _SimilarFeelPhotoWidgetState();
+  State<SimilarPlacePhotoWidget> createState() =>
+      _SimilarPlacePhotoWidgetState();
 }
 
-class _SimilarFeelPhotoWidgetState extends State<SimilarFeelPhotoWidget> {
+class _SimilarPlacePhotoWidgetState extends State<SimilarPlacePhotoWidget> {
   final List<String> imagePaths = [
     'assets/images/cafe3.jpg',
     'assets/images/cafe2.jpg',
@@ -70,7 +71,7 @@ class _SimilarFeelPhotoWidgetState extends State<SimilarFeelPhotoWidget> {
               bottom: 70.0,
               right: 0.0,
               left: 0.0,
-              child: ImageIndicator(
+              child: ImageIndicatorWidget(
                 length: imagePaths.length,
                 currentIndex: currentPage,
               ),

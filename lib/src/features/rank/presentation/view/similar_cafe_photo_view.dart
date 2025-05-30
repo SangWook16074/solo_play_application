@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/widget/similar_feel_photo_widget.dart';
+import 'package:solo_play_application/src/core/widget/similar_place_photo_widget.dart';
 
-class SimilarCafePhotoWidget extends StatefulWidget {
-  const SimilarCafePhotoWidget({super.key});
+class SimilarCafePhotoView extends StatefulWidget {
+  const SimilarCafePhotoView({super.key});
 
   @override
-  State<SimilarCafePhotoWidget> createState() => _SimilarCafePhotoWidgetState();
+  State<SimilarCafePhotoView> createState() => _SimilarCafePhotoViewState();
 }
 
-class _SimilarCafePhotoWidgetState extends State<SimilarCafePhotoWidget> {
+class _SimilarCafePhotoViewState extends State<SimilarCafePhotoView> {
   final List<String> imagePaths = [
     'assets/images/cafe3.jpg',
     'assets/images/cafe2.jpg',
     'assets/images/cafe.jpeg',
   ];
+
   final controller = PageController(viewportFraction: 1.0);
   int currentPage = 0;
 
@@ -55,7 +56,7 @@ class _SimilarCafePhotoWidgetState extends State<SimilarCafePhotoWidget> {
             spacing: 8,
             children: List.generate(
               2,
-              (index) => const SimilarFeelPhotoWidget(),
+              (index) => const SimilarPlacePhotoWidget(),
             ),
           ),
         ],

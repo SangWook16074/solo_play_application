@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/widget/best_place_card.dart';
-import 'package:solo_play_application/src/core/widget/course_map_widget.dart';
-import 'package:solo_play_application/src/core/widget/similar_feel_photo_widget.dart';
-import 'package:solo_play_application/src/features/rank/presentation/widget/similar_cafe_photo_widget.dart';
-import 'package:solo_play_application/src/features/rank/presentation/widget/visited_review_widget.dart';
+import 'package:solo_play_application/src/core/widget/best_place_card_widget.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/course_map_view.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/similar_cafe_photo_view.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/place_review_view.dart';
 
 class DetailRankView extends StatefulWidget {
   const DetailRankView({super.key});
@@ -21,17 +20,17 @@ class _DetailRankViewState extends State<DetailRankView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: BestPlaceCard(
+            child: BestPlaceCardWidget(
               rank: 1,
               showHeader: false,
             ),
           ),
           SizedBox(height: 10),
-          CourseMapWidget(),
+          CourseMapView(),
           SizedBox(height: 10),
-          VisitedReviewWidget(),
+          PlaceReviewView(),
           SizedBox(height: 10),
-          SimilarCafePhotoWidget(),
+          SimilarCafePhotoView(),
           SizedBox(height: 110),
         ],
       ),

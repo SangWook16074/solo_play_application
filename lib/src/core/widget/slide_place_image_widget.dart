@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/widget/image_indicator.dart';
+import 'package:solo_play_application/src/core/widget/image_indicator_widget.dart';
 import 'package:solo_play_application/src/core/widget/place_photo_widget.dart';
 
-class SlidePlaceImage extends StatefulWidget {
-  const SlidePlaceImage({super.key});
+class SlidePlaceImageWidget extends StatefulWidget {
+  const SlidePlaceImageWidget({super.key});
 
   @override
-  State<SlidePlaceImage> createState() => _SlidePlaceImageState();
+  State<SlidePlaceImageWidget> createState() => _SlidePlaceImageWidgetState();
 }
 
-class _SlidePlaceImageState extends State<SlidePlaceImage> {
+class _SlidePlaceImageWidgetState extends State<SlidePlaceImageWidget> {
   final List<String> imagePaths = [
     'assets/images/cafe3.jpg',
     'assets/images/cafe2.jpg',
@@ -50,7 +50,7 @@ class _SlidePlaceImageState extends State<SlidePlaceImage> {
             bottom: 8.0,
             right: 0.0,
             left: 0.0,
-            child: ImageIndicator(
+            child: ImageIndicatorWidget(
               length: imagePaths.length,
               currentIndex: currentPage,
             ),

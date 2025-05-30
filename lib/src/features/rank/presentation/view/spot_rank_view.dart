@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/widget/best_place_card.dart';
+import 'package:solo_play_application/src/core/widget/best_place_card_widget.dart';
 
 class SpotRankView extends StatefulWidget {
   const SpotRankView({super.key});
@@ -35,7 +35,7 @@ class _SpotRankViewState extends State<SpotRankView> {
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) => Align(
               alignment: Alignment.topCenter,
-              child: BestPlaceCard(rank: index + 1),
+              child: BestPlaceCardWidget.expand(rank: index + 1),
             ),
           ),
         ),

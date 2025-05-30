@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/features/course/presentation/widget/location_label.dart';
-import 'package:solo_play_application/src/core/widget/course_map_widget.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/course_map_view.dart';
 
 class CourseDetailView extends StatelessWidget {
   const CourseDetailView({super.key});
@@ -20,7 +20,7 @@ class CourseDetailView extends StatelessWidget {
             itemCount: 3,
             itemBuilder: (context, index) => const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: CourseMapWidget(),
+              child: CourseMapView(),
             ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 12)),

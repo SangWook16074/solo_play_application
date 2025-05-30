@@ -32,7 +32,7 @@ final GoRouter router = GoRouter(
           builder: (context, state) => const RankUI(),
           routes: [
             GoRoute(
-                path: 'detailRankUI',
+                path: 'detail',
                 builder: (context, state) {
                   return const DetailRankUI();
                 }),
