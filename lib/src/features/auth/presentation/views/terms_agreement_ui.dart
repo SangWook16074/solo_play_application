@@ -7,7 +7,7 @@ import 'package:solo_play_application/src/features/auth/presentation/views/secon
 import 'package:solo_play_application/src/features/auth/presentation/views/third_agreement_row.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/next_button.dart';
 
-import '../terms_agreement_ui.dart';
+import '../terms_agreement.dart';
 
 class TermsAgreementUI extends StatelessWidget {
   const TermsAgreementUI({super.key});

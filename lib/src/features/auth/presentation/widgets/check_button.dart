@@ -8,6 +8,7 @@ class CheckButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: const Key("check-button"),
       width: 28,
       height: 28,
       decoration: BoxDecoration(
@@ -19,6 +20,7 @@ class CheckButton extends StatelessWidget {
           shape: BoxShape.circle),
       alignment: Alignment.center,
       child: Icon(
+        key: const Key("check-button-icon"),
         Icons.check_rounded,
         color: select ? const Color(0xffffffff) : const Color(0xffCACACA),
         size: width - 10,
