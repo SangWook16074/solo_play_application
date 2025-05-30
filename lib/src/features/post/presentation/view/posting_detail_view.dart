@@ -63,7 +63,8 @@ class PostingDetailView extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemCount: 5,
                           itemBuilder: (context, index) {
-                            return const PlacePhotoWidget();
+                            return const PlacePhotoWidget(
+                                imagePath: 'assets/images/cafe.jpeg');
                           },
                         ),
                       ),
