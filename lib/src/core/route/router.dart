@@ -1,6 +1,9 @@
 import 'package:go_router/go_router.dart';
-import 'package:solo_play_application/src/core/route/go_router_builder.dart';
 import 'package:solo_play_application/src/features/app/presentation/pages/app_page.dart';
+import 'package:solo_play_application/src/features/auth/presentation/pages/login_page.dart';
+import 'package:solo_play_application/src/features/auth/presentation/pages/terms_agreement_page.dart';
+import 'package:solo_play_application/src/features/auth/presentation/views/login_ui.dart';
+import 'package:solo_play_application/src/features/auth/presentation/views/terms_agreement_ui.dart';
 import 'package:solo_play_application/src/features/course/presentation/view/course_detail_view.dart';
 import 'package:solo_play_application/src/features/post/presentation/view/posting_detail_view.dart';
 
@@ -9,8 +12,8 @@ final GoRouter router = GoRouter(
     /// 앱 실행 시 첫 화면 : home화면
     GoRoute(
       path: '/',
-      builder: (context, state) => const AppPage(),
-      routes: $appRoutes,
+      builder: (context, state) => const TermsAgreementPage(),
+      // routes: $appRoutes,
     ),
 
     /// 나의 포스팅 화면으로 전환
