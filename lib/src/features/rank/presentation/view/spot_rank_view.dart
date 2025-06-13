@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:solo_play_application/src/core/data/models/course_model.dart';
 import 'package:solo_play_application/src/core/widget/best_place_card_widget.dart';
+import 'package:solo_play_application/src/features/rank/presentation/pages/best_place_card_page.dart';
 
 class SpotRankView extends StatefulWidget {
-  const SpotRankView({super.key});
+  final List<CourseModel> courses;
+  const SpotRankView({super.key, required this.courses});
 
   @override
   State<SpotRankView> createState() => _SpotRankViewState();
@@ -35,19 +38,16 @@ class _SpotRankViewState extends State<SpotRankView> {
         ),
         Expanded(
           child: PageView.builder(
-            padEnds: false,
-            controller: _controller,
-            itemCount: 10,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) => Align(
-              alignment: Alignment.topCenter,
-              child: BestPlaceCardWidget.expand(
-                showHeader: true,
-                rank: index + 1,
-                isCourse: false,
-              ),
-            ),
-          ),
+              padEnds: false,
+              controller: _controller,
+              itemCount: 10,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                final course = widget.courses[index];
+                return Align(
+                    alignment: Alignment.topCenter,
+                    child: BestPlaceCardPage(course: course, rank: index + 1));
+              }),
         ),
       ],
     );

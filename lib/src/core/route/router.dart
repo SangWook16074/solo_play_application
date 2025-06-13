@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:solo_play_application/src/core/data/models/course_model.dart';
 import 'package:solo_play_application/src/features/app/presentation/pages/app_page.dart';
 import 'package:solo_play_application/src/features/course/presentation/view/add_view.dart';
 import 'package:solo_play_application/src/features/home/presentation/view/home_ui.dart';
@@ -35,21 +36,28 @@ final GoRouter router = GoRouter(
             GoRoute(
                 path: 'detailPlace',
                 builder: (context, state) {
-                  final rank = state.extra as int;
-                  if (rank is! int) {
+                  final arguments = state.extra as Map<String, dynamic>;
+                  final rank = arguments['rank'] as int;
+                  final course = arguments['course'] as CourseModel;
+                  if (rank is! int || course is! CourseModel) {
                     return const Scaffold(
                       body: Center(
                         child: Text('잘못된 접근입니다.'),
                       ),
                     );
                   }
-                  return DetailRankUI(rank: rank);
+                  return DetailRankUI(
+                    rank: rank,
+                    course: course,
+                  );
                 }),
             GoRoute(
                 path: 'detailCourse',
                 builder: (context, state) {
-                  final rank = state.extra as int;
-                  if (rank is! int) {
+                  final arguments = state.extra as Map<String, dynamic>;
+                  final rank = arguments['rank'] as int;
+                  final course = arguments['course'] as CourseModel;
+                  if (rank is! int || course is! CourseModel) {
                     return const Scaffold(
                       body: Center(
                         child: Text('잘못된 접근입니다.'),
@@ -57,7 +65,10 @@ final GoRouter router = GoRouter(
                     );
                   }
 
-                  return DetailCourseUI(rank: rank);
+                  return DetailCourseUI(
+                    rank: rank,
+                    course: course,
+                  );
                 }),
           ],
         ),

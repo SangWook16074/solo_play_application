@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:solo_play_application/src/features/rank/presentation/pages/rank_course_page.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/course_rank_view.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/spot_rank_view.dart';
 
@@ -43,9 +44,10 @@ class _RankUIState extends State<RankUI> with TickerProviderStateMixin {
       ),
       body: TabBarView(
         controller: _tabController,
-        children: const [
-          SpotRankView(),
-          CourseRankView(),
+        children: [
+          RankCoursePage(),
+          Container(),
+          // CourseRankView(),
         ],
       ),
     );

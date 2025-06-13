@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:solo_play_application/src/core/data/models/course_model.dart';
 import 'package:solo_play_application/src/core/widget/best_place_card_widget.dart';
 
 class CourseRankView extends StatefulWidget {
-  const CourseRankView({super.key});
+  final CourseModel course;
+  const CourseRankView({super.key, required this.course});
 
   @override
   State<CourseRankView> createState() => _CourseRankViewState();
@@ -45,6 +47,7 @@ class _CourseRankViewState extends State<CourseRankView> {
                 showHeader: true,
                 rank: index + 1,
                 isCourse: true,
+                course: widget.course,
               ),
             ),
           ),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:solo_play_application/src/core/data/models/course_model.dart';
 import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/detail_rank_view.dart';
 
 class DetailRankUI extends StatefulWidget {
   final int rank;
-  const DetailRankUI({super.key, required this.rank});
+  final CourseModel course;
+  const DetailRankUI({super.key, required this.rank, required this.course});
 
   @override
   State<DetailRankUI> createState() => _DetailRankViewState();
@@ -53,6 +55,7 @@ class _DetailRankViewState extends State<DetailRankUI> {
       ),
       body: DetailRankView(
         rank: widget.rank,
+        course: widget.course,
       ),
     );
   }

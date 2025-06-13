@@ -15,7 +15,7 @@ class PlacePhotoWidget extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         /// 랭킹에 있는 장소의 사진 영역
-        Image.asset(
+        Image.network(
           imagePath,
           fit: BoxFit.cover,
           width: double.infinity,

@@ -5,7 +5,9 @@ import 'package:solo_play_application/src/core/widget/place_photo_widget.dart';
 
 class SlidePlaceImageWidget extends StatefulWidget {
   final bool isCourse;
-  const SlidePlaceImageWidget({super.key, required this.isCourse});
+  final List<String> images;
+  const SlidePlaceImageWidget(
+      {super.key, required this.isCourse, required this.images});
 
   @override
   State<SlidePlaceImageWidget> createState() => _SlidePlaceImageWidgetState();
@@ -45,14 +47,14 @@ class _SlidePlaceImageWidgetState extends State<SlidePlaceImageWidget> {
               child: PageView.builder(
                 physics: const ClampingScrollPhysics(),
                 controller: _controller,
-                itemCount: imagePaths.length,
+                itemCount: widget.images.length,
                 onPageChanged: (index) {
                   setState(() {
                     currentPage = index;
                   });
                 },
                 itemBuilder: (context, index) => PlacePhotoWidget(
-                  imagePath: imagePaths[index],
+                  imagePath: widget.images[index],
                 ),
               ),
             ),
@@ -64,7 +66,7 @@ class _SlidePlaceImageWidgetState extends State<SlidePlaceImageWidget> {
             right: 0.0,
             left: 0.0,
             child: ImageIndicatorWidget(
-              length: imagePaths.length,
+              length: widget.images.length,
               currentIndex: currentPage,
             ),
           ),

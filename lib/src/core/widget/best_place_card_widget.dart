@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:solo_play_application/src/core/data/models/course_model.dart';
 import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
 import 'package:solo_play_application/src/core/widget/slide_place_image_widget.dart';
+import 'package:solo_play_application/src/features/rank/presentation/cubits/course_cubit.dart';
 
-class BestPlaceCardWidget extends StatefulWidget {
+class BestPlaceCardWidget extends StatelessWidget {
   final int rank;
   final bool showHeader;
   final bool isCourse;
+  final CourseModel course;
 
   /// 기본 생성자
   /// detail rank view에서는
@@ -16,7 +20,8 @@ class BestPlaceCardWidget extends StatefulWidget {
       {super.key,
       required this.rank,
       this.showHeader = false,
-      this.isCourse = false});
+      this.isCourse = false,
+      required this.course});
 
   /// 확장 [BestPlaceCardWidget] 생성자
   /// spot rank view에서는
@@ -25,14 +30,8 @@ class BestPlaceCardWidget extends StatefulWidget {
       {super.key,
       required this.rank,
       required this.showHeader,
-      required this.isCourse});
-
-  @override
-  State<BestPlaceCardWidget> createState() => _BestPlaceCardWidgetState();
-}
-
-class _BestPlaceCardWidgetState extends State<BestPlaceCardWidget> {
-  bool _clickedIcon = false;
+      required this.isCourse,
+      required this.course});
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +39,20 @@ class _BestPlaceCardWidgetState extends State<BestPlaceCardWidget> {
       onHorizontalDragEnd: (details) {
         if (details.primaryVelocity != null &&
             details.primaryVelocity! < 0 &&
-            widget.showHeader == true &&
-            widget.isCourse == false) {
-          context.push('/rank/detailPlace', extra: widget.rank);
+            showHeader == true &&
+            isCourse == false) {
+          context.push('/rank/detailPlace', extra: {
+            'rank': rank,
+            'course': course,
+          });
         } else if (details.primaryVelocity != null &&
             details.primaryVelocity! < 0 &&
-            widget.showHeader == true &&
-            widget.isCourse == true) {
-          context.push('/rank/detailCourse', extra: widget.rank);
+            showHeader == true &&
+            isCourse == true) {
+          context.push('/rank/detailCourse', extra: {
+            'rank': rank,
+            'course': course,
+          });
         }
       },
       child: Container(
@@ -63,7 +68,94 @@ class _BestPlaceCardWidgetState extends State<BestPlaceCardWidget> {
 
             /// 랭킹 번호, 장소 이름 및 위치, 북마크 아이콘 영역
             /// rank ui에서만 헤더가 보이도록 설정
-            widget.showHeader ? _header(widget.rank) : Container(),
+            showHeader
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              /// 랭킹 순위 번호
+                              Container(
+                                width: 30,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  color: const Color(0xffEDF5FF),
+                                ),
+                                child: Text(
+                                  textAlign: TextAlign.center,
+                                  '$rank',
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w700,
+                                    fontStyle: FontStyle.normal,
+                                    color: Color(0xff0072FF),
+                                  ),
+                                ),
+                              ),
+
+                              /// 장소의 이름 및 위치
+                              (isCourse == true)
+                                  ? const Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 8.0),
+                                        child: Text(
+                                          '혼자 가도 좋은, 조용한 커피 한 잔의 시간',
+                                          maxLines: 2,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w700,
+                                            fontStyle: FontStyle.normal,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : Padding(
+                                      padding: EdgeInsets.only(left: 8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            course.name,
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                                color: Colors.black),
+                                          ),
+                                          Text(
+                                            course.addressSummary,
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              fontStyle: FontStyle.normal,
+                                              color: Color(0xff8E8E8E),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                            ],
+                          ),
+                        ),
+
+                        /// 북마크 아이콘
+                        /// 아이콘을 클릭하면 랭킹에 있는 장소를 저장하여
+                        /// 저장을 모아두는 곳에서 확인 가능
+                        BookmarkIcon(
+                          onTap: context.read<CourseCubit>().toggle,
+                          isBookmarked:
+                              context.watch<CourseCubit>().state.isFavorite,
+                        ),
+                      ],
+                    ),
+                  )
+                : Container(),
 
             const SizedBox(height: 10),
 
@@ -85,7 +177,7 @@ class _BestPlaceCardWidgetState extends State<BestPlaceCardWidget> {
 
             /// 길찾기, 공유하기 버튼 영역
             /// detail rank ui에서만 보이도록 설정
-            widget.showHeader ? Container() : _actionButton(),
+            showHeader ? Container() : _actionButton(),
           ],
         ),
       ),
@@ -97,7 +189,10 @@ class _BestPlaceCardWidgetState extends State<BestPlaceCardWidget> {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: SlidePlaceImageWidget(isCourse: widget.isCourse),
+        child: SlidePlaceImageWidget(
+          isCourse: isCourse,
+          images: course.images,
+        ),
       ),
     );
   }
@@ -107,96 +202,92 @@ class _BestPlaceCardWidgetState extends State<BestPlaceCardWidget> {
   /// 장소를 올린 사람 닉네임과 위치가 나타난다.
   /// 반대로, tab 영역이 코스라면
   /// 카페에 대한 글귀가 나타난다.
-  Widget _header(int rank) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                /// 랭킹 순위 번호
-                Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
-                    color: const Color(0xffEDF5FF),
-                  ),
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    '$rank',
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                      color: Color(0xff0072FF),
-                    ),
-                  ),
-                ),
+  // Widget _header(int rank) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //       children: [
+  //         Expanded(
+  //           child: Row(
+  //             children: [
+  //               /// 랭킹 순위 번호
+  //               Container(
+  //                 width: 30,
+  //                 height: 30,
+  //                 decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.circular(5.0),
+  //                   color: const Color(0xffEDF5FF),
+  //                 ),
+  //                 child: Text(
+  //                   textAlign: TextAlign.center,
+  //                   '$rank',
+  //                   style: const TextStyle(
+  //                     fontSize: 24,
+  //                     fontWeight: FontWeight.w700,
+  //                     fontStyle: FontStyle.normal,
+  //                     color: Color(0xff0072FF),
+  //                   ),
+  //                 ),
+  //               ),
 
-                /// 장소의 이름 및 위치
-                (widget.isCourse == true)
-                    ? const Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            '혼자 가도 좋은, 조용한 커피 한 잔의 시간',
-                            maxLines: 2,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      )
-                    : const Padding(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'mwm',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700,
-                                  fontStyle: FontStyle.normal,
-                                  color: Colors.black),
-                            ),
-                            Text(
-                              '서울 중구',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.normal,
-                                color: Color(0xff8E8E8E),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-              ],
-            ),
-          ),
+  //               /// 장소의 이름 및 위치
+  //               (widget.isCourse == true)
+  //                   ? const Expanded(
+  //                       child: Padding(
+  //                         padding: EdgeInsets.only(left: 8.0),
+  //                         child: Text(
+  //                           '혼자 가도 좋은, 조용한 커피 한 잔의 시간',
+  //                           maxLines: 2,
+  //                           style: TextStyle(
+  //                             fontSize: 20,
+  //                             fontWeight: FontWeight.w700,
+  //                             fontStyle: FontStyle.normal,
+  //                             color: Colors.black,
+  //                           ),
+  //                         ),
+  //                       ),
+  //                     )
+  //                   : Padding(
+  //                       padding: EdgeInsets.only(left: 8.0),
+  //                       child: Column(
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                         children: [
+  //                           Text(
+  //                             widget.course.name,
+  //                             style: TextStyle(
+  //                                 fontSize: 20,
+  //                                 fontWeight: FontWeight.w700,
+  //                                 fontStyle: FontStyle.normal,
+  //                                 color: Colors.black),
+  //                           ),
+  //                           Text(
+  //                             widget.course.addressSummary,
+  //                             style: TextStyle(
+  //                               fontSize: 12,
+  //                               fontWeight: FontWeight.w400,
+  //                               fontStyle: FontStyle.normal,
+  //                               color: Color(0xff8E8E8E),
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ),
+  //             ],
+  //           ),
+  //         ),
 
-          /// 북마크 아이콘
-          /// 아이콘을 클릭하면 랭킹에 있는 장소를 저장하여
-          /// 저장을 모아두는 곳에서 확인 가능
-          BookmarkIcon(
-            onTap: () {
-              setState(() {
-                _clickedIcon = !_clickedIcon;
-              });
-            },
-            isBookmarked: _clickedIcon,
-          ),
-        ],
-      ),
-    );
-  }
+  //         /// 북마크 아이콘
+  //         /// 아이콘을 클릭하면 랭킹에 있는 장소를 저장하여
+  //         /// 저장을 모아두는 곳에서 확인 가능
+  //         BookmarkIcon(
+  //           onTap: context.read<CourseCubit>().toggle,
+  //           isBookmarked: context.watch<CourseCubit>().state.isFavorite,
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _tag() {
     return Padding(
@@ -227,8 +318,8 @@ class _BestPlaceCardWidgetState extends State<BestPlaceCardWidget> {
       child: Row(
         children: [
           SvgPicture.asset('assets/images/location_icon.svg'),
-          const Text(
-            '서울 용산구 한강대로 15길 19-19 3층',
+          Text(
+            course.address,
             style: TextStyle(
                 fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
           )
@@ -238,10 +329,10 @@ class _BestPlaceCardWidgetState extends State<BestPlaceCardWidget> {
   }
 
   Widget _explain() {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.0),
       child: Text(
-        'mwm은 카페와 스튜디오를 같이 운영합니다. 커피음료와 간단한 디저트들이 준비되어있고 mwm에서 제작한 그릇들도 구입 가능합니다.',
+        course.description,
         style: TextStyle(
             fontSize: 12, color: Colors.black, fontWeight: FontWeight.w400),
         maxLines: 3,
