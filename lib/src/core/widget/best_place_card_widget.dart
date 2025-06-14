@@ -66,6 +66,7 @@ class BestPlaceCardWidget extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
 
+            //////////////
             /// 랭킹 번호, 장소 이름 및 위치, 북마크 아이콘 영역
             /// rank ui에서만 헤더가 보이도록 설정
             showHeader
@@ -159,25 +160,149 @@ class BestPlaceCardWidget extends StatelessWidget {
 
             const SizedBox(height: 10),
 
+            ////////////////
             /// 랭킹 장소의 사진들을 볼 수 있는 영역
-            _placePhotoList(),
+            /// 랭킹 장소의 사진 list (최소 3장 ~ 최대 5장)
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: SlidePlaceImageWidget(
+                  isCourse: isCourse,
+                  images: course.images,
+                ),
+              ),
+            ),
             const SizedBox(height: 10),
 
+            ////////////////
             /// 태그 영역
-            _tag(),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.blue,
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 6),
+                  child: Text(
+                    '혼자는 아직 힘들어 LV.1',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xffffffff),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(height: 10),
 
+            ////////////////
             /// 장소 상세 정보 영역
-            _location(),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Row(
+                children: [
+                  SvgPicture.asset('assets/images/location_icon.svg'),
+                  Text(
+                    course.address,
+                    style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700),
+                  )
+                ],
+              ),
+            ),
             const SizedBox(height: 10),
 
+            ////////////////////
             /// 장소 상세 설명 영역
-            _explain(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                course.description,
+                style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400),
+                maxLines: 3,
+              ),
+            ),
             const SizedBox(height: 10),
 
+            ///////////////////////
             /// 길찾기, 공유하기 버튼 영역
             /// detail rank ui에서만 보이도록 설정
-            showHeader ? Container() : _actionButton(),
+            showHeader
+                ? Container()
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        /// 길찾기 버튼
+                        Container(
+                          width: 160,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/images/direction_icon.png'),
+                                const SizedBox(width: 4),
+                                const Text(
+                                  '길찾기',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      fontStyle: FontStyle.normal),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        ////////////////////////
+                        /// 공유하기 버튼
+                        Container(
+                          width: 160,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/images/share_icon.png'),
+                                const SizedBox(width: 4),
+                                const Text(
+                                  '공유하기',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      fontStyle: FontStyle.normal),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
           ],
         ),
       ),
@@ -185,226 +310,134 @@ class BestPlaceCardWidget extends StatelessWidget {
   }
 
   /// 랭킹 장소의 사진 list (최소 3장 ~ 최대 5장)
-  Widget _placePhotoList() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: SlidePlaceImageWidget(
-          isCourse: isCourse,
-          images: course.images,
-        ),
-      ),
-    );
-  }
+  // Widget _placePhotoList() {
+  //   return Center(
+  //     child: Padding(
+  //       padding: const EdgeInsets.symmetric(horizontal: 16.0),
+  //       child: SlidePlaceImageWidget(
+  //         isCourse: isCourse,
+  //         images: course.images,
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  /// 랭킹 순위 번호, 랭킹 장소의 이름, 위치, 저장 아이콘 영역
-  /// rank ui에서 현재 tab 영역이 장소라면
-  /// 장소를 올린 사람 닉네임과 위치가 나타난다.
-  /// 반대로, tab 영역이 코스라면
-  /// 카페에 대한 글귀가 나타난다.
-  // Widget _header(int rank) {
+  // Widget _tag() {
   //   return Padding(
-  //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //       children: [
-  //         Expanded(
-  //           child: Row(
-  //             children: [
-  //               /// 랭킹 순위 번호
-  //               Container(
-  //                 width: 30,
-  //                 height: 30,
-  //                 decoration: BoxDecoration(
-  //                   borderRadius: BorderRadius.circular(5.0),
-  //                   color: const Color(0xffEDF5FF),
-  //                 ),
-  //                 child: Text(
-  //                   textAlign: TextAlign.center,
-  //                   '$rank',
-  //                   style: const TextStyle(
-  //                     fontSize: 24,
-  //                     fontWeight: FontWeight.w700,
-  //                     fontStyle: FontStyle.normal,
-  //                     color: Color(0xff0072FF),
-  //                   ),
-  //                 ),
-  //               ),
-
-  //               /// 장소의 이름 및 위치
-  //               (widget.isCourse == true)
-  //                   ? const Expanded(
-  //                       child: Padding(
-  //                         padding: EdgeInsets.only(left: 8.0),
-  //                         child: Text(
-  //                           '혼자 가도 좋은, 조용한 커피 한 잔의 시간',
-  //                           maxLines: 2,
-  //                           style: TextStyle(
-  //                             fontSize: 20,
-  //                             fontWeight: FontWeight.w700,
-  //                             fontStyle: FontStyle.normal,
-  //                             color: Colors.black,
-  //                           ),
-  //                         ),
-  //                       ),
-  //                     )
-  //                   : Padding(
-  //                       padding: EdgeInsets.only(left: 8.0),
-  //                       child: Column(
-  //                         crossAxisAlignment: CrossAxisAlignment.start,
-  //                         children: [
-  //                           Text(
-  //                             widget.course.name,
-  //                             style: TextStyle(
-  //                                 fontSize: 20,
-  //                                 fontWeight: FontWeight.w700,
-  //                                 fontStyle: FontStyle.normal,
-  //                                 color: Colors.black),
-  //                           ),
-  //                           Text(
-  //                             widget.course.addressSummary,
-  //                             style: TextStyle(
-  //                               fontSize: 12,
-  //                               fontWeight: FontWeight.w400,
-  //                               fontStyle: FontStyle.normal,
-  //                               color: Color(0xff8E8E8E),
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ),
-  //             ],
+  //     padding: const EdgeInsets.only(left: 16.0),
+  //     child: Container(
+  //       decoration: BoxDecoration(
+  //         borderRadius: BorderRadius.circular(5),
+  //         color: Colors.blue,
+  //       ),
+  //       child: const Padding(
+  //         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 6),
+  //         child: Text(
+  //           '혼자는 아직 힘들어 LV.1',
+  //           style: TextStyle(
+  //             fontSize: 10,
+  //             fontWeight: FontWeight.w700,
+  //             color: Color(0xffffffff),
   //           ),
   //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  //         /// 북마크 아이콘
-  //         /// 아이콘을 클릭하면 랭킹에 있는 장소를 저장하여
-  //         /// 저장을 모아두는 곳에서 확인 가능
-  //         BookmarkIcon(
-  //           onTap: context.read<CourseCubit>().toggle,
-  //           isBookmarked: context.watch<CourseCubit>().state.isFavorite,
-  //         ),
+  // Widget _location() {
+  //   return Padding(
+  //     padding: const EdgeInsets.only(left: 16.0),
+  //     child: Row(
+  //       children: [
+  //         SvgPicture.asset('assets/images/location_icon.svg'),
+  //         Text(
+  //           course.address,
+  //           style: TextStyle(
+  //               fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
+  //         )
   //       ],
   //     ),
   //   );
   // }
 
-  Widget _tag() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16.0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: Colors.blue,
-        ),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 6),
-          child: Text(
-            '혼자는 아직 힘들어 LV.1',
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w700,
-              color: Color(0xffffffff),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _explain() {
+  //   return Padding(
+  //     padding: EdgeInsets.symmetric(horizontal: 16.0),
+  //     child: Text(
+  //       course.description,
+  //       style: TextStyle(
+  //           fontSize: 12, color: Colors.black, fontWeight: FontWeight.w400),
+  //       maxLines: 3,
+  //     ),
+  //   );
+  // }
 
-  Widget _location() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16.0),
-      child: Row(
-        children: [
-          SvgPicture.asset('assets/images/location_icon.svg'),
-          Text(
-            course.address,
-            style: TextStyle(
-                fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
-          )
-        ],
-      ),
-    );
-  }
+  // Widget _actionButton() {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //       children: [
+  //         /// 길찾기 버튼
+  //         Container(
+  //           width: 160,
+  //           height: 24,
+  //           decoration: BoxDecoration(
+  //             borderRadius: BorderRadius.circular(5),
+  //             border: Border.all(
+  //               color: Colors.grey,
+  //             ),
+  //           ),
+  //           child: Padding(
+  //             padding: const EdgeInsets.all(4.0),
+  //             child: Row(
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: [
+  //                 Image.asset('assets/images/direction_icon.png'),
+  //                 const SizedBox(width: 4),
+  //                 const Text(
+  //                   '길찾기',
+  //                   style: TextStyle(
+  //                       fontSize: 14,
+  //                       fontWeight: FontWeight.w700,
+  //                       fontStyle: FontStyle.normal),
+  //                 )
+  //               ],
+  //             ),
+  //           ),
+  //         ),
 
-  Widget _explain() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: Text(
-        course.description,
-        style: TextStyle(
-            fontSize: 12, color: Colors.black, fontWeight: FontWeight.w400),
-        maxLines: 3,
-      ),
-    );
-  }
-
-  Widget _actionButton() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          /// 길찾기 버튼
-          Container(
-            width: 160,
-            height: 24,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(
-                color: Colors.grey,
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('assets/images/direction_icon.png'),
-                  const SizedBox(width: 4),
-                  const Text(
-                    '길찾기',
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        fontStyle: FontStyle.normal),
-                  )
-                ],
-              ),
-            ),
-          ),
-
-          /// 공유하기 버튼
-          Container(
-            width: 160,
-            height: 24,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(
-                color: Colors.grey,
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('assets/images/share_icon.png'),
-                  const SizedBox(width: 4),
-                  const Text(
-                    '공유하기',
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        fontStyle: FontStyle.normal),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  //         /// 공유하기 버튼
+  //         Container(
+  //           width: 160,
+  //           height: 24,
+  //           decoration: BoxDecoration(
+  //             borderRadius: BorderRadius.circular(5),
+  //             border: Border.all(
+  //               color: Colors.grey,
+  //             ),
+  //           ),
+  //           child: Padding(
+  //             padding: const EdgeInsets.all(4.0),
+  //             child: Row(
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: [
+  //                 Image.asset('assets/images/share_icon.png'),
+  //                 const SizedBox(width: 4),
+  //                 const Text(
+  //                   '공유하기',
+  //                   style: TextStyle(
+  //                       fontSize: 14,
+  //                       fontWeight: FontWeight.w700,
+  //                       fontStyle: FontStyle.normal),
+  //                 )
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
