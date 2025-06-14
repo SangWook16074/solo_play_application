@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:solo_play_application/src/features/course/presentation/view/recommend_view.dart';
-import 'package:solo_play_application/src/features/course/presentation/view/region_view.dart';
 import 'package:solo_play_application/src/features/course/presentation/widget/search_text_field.dart';
 
 class HomeUI extends StatelessWidget {
@@ -16,10 +15,6 @@ class HomeUI extends StatelessWidget {
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
-            // 전체 지역 뷰
-            RegionView(
-              key: Key("main-view-map-view"),
-            ),
             // 검색 필드 뷰
             SafeArea(
               child: Padding(
