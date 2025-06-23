@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/data/models/course_model.dart';
+import 'package:solo_play_application/src/core/widget/best_place_card_widget.dart';
 import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
-import 'package:solo_play_application/src/features/rank/presentation/view/detail_rank_view.dart';
+import 'package:solo_play_application/src/features/rank/presentation/cubits/course_cubit.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/course_map_view.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/place_review_view.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/similar_cafe_photo_view.dart';
 
-class DetailRankUI extends StatefulWidget {
+class DetailRankUI extends StatelessWidget {
   final int rank;
   final CourseModel course;
   const DetailRankUI({super.key, required this.rank, required this.course});
-
-  @override
-  State<DetailRankUI> createState() => _DetailRankViewState();
-}
-
-class _DetailRankViewState extends State<DetailRankUI> {
-  // 상태 관리를 쓰셔야죠?
-  bool _clickedIcon = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,20 +39,33 @@ class _DetailRankViewState extends State<DetailRankUI> {
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: BookmarkIcon(
-                onTap: () {
-                  setState(() {
-                    _clickedIcon = !_clickedIcon;
-                  });
-                },
-                isBookmarked: _clickedIcon,
+                onTap: context.read<CourseCubit>().toggle,
+                isBookmarked: context.watch<CourseCubit>().state.isFavorite,
               ),
             )
           ],
         ),
       ),
-      body: DetailRankView(
-        rank: widget.rank,
-        course: widget.course,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: BestPlaceCardWidget(
+                rank: rank,
+                course: course,
+              ),
+            ),
+            const SizedBox(height: 10),
+            const CourseMapView(),
+            const SizedBox(height: 10),
+            const PlaceReviewView(),
+            const SizedBox(height: 10),
+            const SimilarCafePhotoView(),
+            const SizedBox(height: 110),
+          ],
+        ),
       ),
     );
   }

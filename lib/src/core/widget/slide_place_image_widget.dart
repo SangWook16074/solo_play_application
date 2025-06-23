@@ -1,37 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:solo_play_application/src/core/widget/image_indicator_widget.dart';
 import 'package:solo_play_application/src/core/widget/place_photo_widget.dart';
 
-class SlidePlaceImageWidget extends StatefulWidget {
+class SlidePlaceImageWidget extends HookWidget {
   final bool isCourse;
   final List<String> images;
   const SlidePlaceImageWidget(
       {super.key, required this.isCourse, required this.images});
 
-  @override
-  State<SlidePlaceImageWidget> createState() => _SlidePlaceImageWidgetState();
-}
-
-class _SlidePlaceImageWidgetState extends State<SlidePlaceImageWidget> {
-  final List<String> imagePaths = [
-    'assets/images/cafe3.jpg',
-    'assets/images/cafe2.jpg',
-    'assets/images/cafe.jpeg',
-  ];
-
-  late final PageController _controller;
-
-  int currentPage = 0;
-
-  @override
-  void initState() {
-    _controller = PageController(initialPage: 0, viewportFraction: 1.0);
-    super.initState();
-  }
-
+  // @override
   @override
   Widget build(BuildContext context) {
+    final currentPage = useState(0);
+    final controller = usePageController();
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(5),
       child: Stack(
@@ -46,15 +30,13 @@ class _SlidePlaceImageWidgetState extends State<SlidePlaceImageWidget> {
               borderRadius: BorderRadius.circular(5),
               child: PageView.builder(
                 physics: const ClampingScrollPhysics(),
-                controller: _controller,
-                itemCount: widget.images.length,
+                controller: controller,
+                itemCount: images.length,
                 onPageChanged: (index) {
-                  setState(() {
-                    currentPage = index;
-                  });
+                  currentPage.value = index;
                 },
                 itemBuilder: (context, index) => PlacePhotoWidget(
-                  imagePath: widget.images[index],
+                  imagePath: images[index],
                 ),
               ),
             ),
@@ -66,13 +48,15 @@ class _SlidePlaceImageWidgetState extends State<SlidePlaceImageWidget> {
             right: 0.0,
             left: 0.0,
             child: ImageIndicatorWidget(
-              length: widget.images.length,
-              currentIndex: currentPage,
+              length: images.length,
+              currentIndex: currentPage.value,
             ),
           ),
 
           /// 장소의 이름과 위치 영역
-          if (widget.isCourse)
+          /// 만약 tabbar에서 장소가 아닌 코스 tab이라면
+          /// 장소의 이름과 위치가 사진 위에 뜨도록 한다.
+          if (isCourse)
             Positioned(
               bottom: 20.0,
               left: 10.0,

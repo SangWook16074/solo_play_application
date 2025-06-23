@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:solo_play_application/src/core/data/models/course_model.dart';
 import 'package:solo_play_application/src/core/widget/best_place_card_widget.dart';
 
-class CourseRankView extends StatefulWidget {
+class CourseRankView extends HookWidget {
   final CourseModel course;
   const CourseRankView({super.key, required this.course});
 
   @override
-  State<CourseRankView> createState() => _CourseRankViewState();
-}
-
-class _CourseRankViewState extends State<CourseRankView> {
-  late final PageController _controller;
-
-  @override
-  void initState() {
-    _controller = PageController(initialPage: 0, viewportFraction: 1);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final controller = usePageController();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -38,7 +28,7 @@ class _CourseRankViewState extends State<CourseRankView> {
         Expanded(
           child: PageView.builder(
             padEnds: false,
-            controller: _controller,
+            controller: controller,
             itemCount: 10,
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) => Align(
@@ -47,7 +37,7 @@ class _CourseRankViewState extends State<CourseRankView> {
                 showHeader: true,
                 rank: index + 1,
                 isCourse: true,
-                course: widget.course,
+                course: course,
               ),
             ),
           ),

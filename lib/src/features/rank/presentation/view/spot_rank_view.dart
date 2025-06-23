@@ -1,27 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:solo_play_application/src/core/data/models/course_model.dart';
-import 'package:solo_play_application/src/core/widget/best_place_card_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/pages/best_place_card_page.dart';
 
-class SpotRankView extends StatefulWidget {
+class SpotRankView extends HookWidget {
   final List<CourseModel> courses;
   const SpotRankView({super.key, required this.courses});
 
   @override
-  State<SpotRankView> createState() => _SpotRankViewState();
-}
-
-class _SpotRankViewState extends State<SpotRankView> {
-  late final PageController _controller;
-
-  @override
-  void initState() {
-    _controller = PageController(initialPage: 0, viewportFraction: 1);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final controller = usePageController();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -38,16 +27,18 @@ class _SpotRankViewState extends State<SpotRankView> {
         ),
         Expanded(
           child: PageView.builder(
-              padEnds: false,
-              controller: _controller,
-              itemCount: 10,
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                final course = widget.courses[index];
-                return Align(
-                    alignment: Alignment.topCenter,
-                    child: BestPlaceCardPage(course: course, rank: index + 1));
-              }),
+            padEnds: false,
+            controller: controller,
+            itemCount: 10,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              final course = courses[index];
+              return Align(
+                alignment: Alignment.topCenter,
+                child: BestPlaceCardPage(course: course, rank: index + 1),
+              );
+            },
+          ),
         ),
       ],
     );

@@ -5,6 +5,7 @@ import 'package:solo_play_application/src/features/app/presentation/pages/app_pa
 import 'package:solo_play_application/src/features/course/presentation/view/add_view.dart';
 import 'package:solo_play_application/src/features/home/presentation/view/home_ui.dart';
 import 'package:solo_play_application/src/features/post/presentation/view/post_ui.dart';
+import 'package:solo_play_application/src/features/rank/presentation/pages/detail_rank_ui_page.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/detail_course_ui.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/detail_rank_ui.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/rank_ui.dart';
@@ -31,7 +32,17 @@ final GoRouter router = GoRouter(
         GoRoute(
           parentNavigatorKey: _shellRouteKey,
           path: '/rank',
-          builder: (context, state) => const RankUI(),
+          builder: (context, state) {
+            final extra = state.extra as CourseModel?;
+            if (extra == null) {
+              return const Scaffold(
+                body: Center(
+                  child: Text('course 정보가 없습니다.'),
+                ),
+              );
+            }
+            return RankUI(extra);
+          },
           routes: [
             GoRoute(
                 path: 'detailPlace',
@@ -46,7 +57,7 @@ final GoRouter router = GoRouter(
                       ),
                     );
                   }
-                  return DetailRankUI(
+                  return DetailRankUiPage(
                     rank: rank,
                     course: course,
                   );
@@ -89,15 +100,5 @@ final GoRouter router = GoRouter(
         ),
       ],
     ),
-
-    /// 나의 포스팅 화면으로 전환
-
-    /// 나의 코스 화면으로 전환
-    // GoRoute(
-    //   path: '/courseDetailView',
-    //   builder: (context, state) => const CourseDetailView(),
-    // ),
-
-    /// rank ui에서 카드를 오른쪽으로 swipe하여 detail 화면으로 전환
   ],
 );
