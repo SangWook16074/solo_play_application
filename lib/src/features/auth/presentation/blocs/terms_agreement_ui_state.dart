@@ -6,19 +6,22 @@ part 'terms_agreement_ui_state.freezed.dart';
 @freezed
 abstract class TermsAgreementUiState with _$TermsAgreementUiState {
   const factory TermsAgreementUiState({
-    @Default(false) bool isFirstAgree,
-    @Default(false) bool isSecondAgree,
-    @Default(false) bool isThirdAgree,
-    @Default(false) bool isFourthAgree,
+    @Default(false) bool isOver14,
+    @Default(false) bool isAgreedToTerms,
+    @Default(false) bool isAgreedToMarketing,
+    @Default(false) bool isConsentedToAds,
   }) = _TermsAgreementUiState;
 
   const TermsAgreementUiState._();
 
   bool get isAllAgreement {
-    return isFirstAgree && isSecondAgree && isThirdAgree && isFourthAgree;
+    return isOver14 &&
+        isAgreedToTerms &&
+        isAgreedToMarketing &&
+        isConsentedToAds;
   }
 
   bool get isAgree {
-    return isFirstAgree && isSecondAgree;
+    return isOver14 && isAgreedToTerms;
   }
 }
