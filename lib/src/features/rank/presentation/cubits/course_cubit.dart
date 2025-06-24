@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/core/data/models/course_model.dart';
+import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
 
 class CourseCubit extends Cubit<CourseModel> {
   CourseCubit(super.initialState);

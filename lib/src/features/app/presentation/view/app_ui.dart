@@ -16,32 +16,6 @@ class AppUI extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       body: child,
-
-      // IndexedStack(
-      //   index: state.index,
-      //   children: [
-      //     Navigator(
-      //       key: viewModel.key,
-      //       onGenerateRoute: (settings) => MaterialPageRoute(
-      //         builder: (context) => const HomeUI(
-      //           key: Key("app-view-home-page"),
-      //         ),
-      //       ),
-      //     ),
-      //     const RankUI(
-      //       key: Key("app-view-rank-page"),
-      //     ),
-      //     const AddView(
-      //       key: Key("app-view-add-page"),
-      //     ),
-      //     const PostUI(
-      //       key: Key("app-view-post-page"),
-      //     ),
-      //     const MyProfileUI(
-      //       key: Key("app-view-my-page"),
-      //     ),
-      //   ],
-      // ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         selectedItemColor: Colors.black,

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:solo_play_application/src/core/data/models/course_model.dart';
-import 'package:solo_play_application/src/features/rank/presentation/pages/rank_course_page.dart';
-import 'package:solo_play_application/src/features/rank/presentation/view/course_rank_view.dart';
+import 'package:solo_play_application/src/features/rank/presentation/pages/course_ranking_page.dart';
+import 'package:solo_play_application/src/features/rank/presentation/pages/place_ranking_page.dart';
 
 class RankUI extends HookWidget {
-  final CourseModel course;
-  const RankUI(this.course, {super.key});
+  const RankUI({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +48,8 @@ class RankUI extends HookWidget {
       body: TabBarView(
         controller: controller,
         children: [
-          RankCoursePage(),
-          CourseRankView(
-            course: course,
-          ),
+          PlaceRankingPage(),
+          CourseRankingPage(),
         ],
       ),
     );

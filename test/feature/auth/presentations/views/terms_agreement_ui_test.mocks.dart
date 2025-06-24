@@ -3,15 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
-import 'package:flutter/foundation.dart' as _i3;
-import 'package:flutter_bloc/flutter_bloc.dart' as _i6;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_bloc.dart'
-    as _i4;
+    as _i3;
 import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_event.dart'
-    as _i7;
+    as _i6;
 import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_state.dart'
     as _i2;
 
@@ -38,17 +37,13 @@ class _FakeTermsAgreementUiState_0 extends _i1.SmartFake
           parent,
           parentInvocation,
         );
-
-  @override
-  String toString({_i3.DiagnosticLevel? minLevel = _i3.DiagnosticLevel.info}) =>
-      super.toString();
 }
 
 /// A class which mocks [TermsAgreementUiBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTermsAgreementUiBloc extends _i1.Mock
-    implements _i4.TermsAgreementUiBloc {
+    implements _i3.TermsAgreementUiBloc {
   @override
   _i2.TermsAgreementUiState get state => (super.noSuchMethod(
         Invocation.getter(#state),
@@ -63,12 +58,12 @@ class MockTermsAgreementUiBloc extends _i1.Mock
       ) as _i2.TermsAgreementUiState);
 
   @override
-  _i5.Stream<_i2.TermsAgreementUiState> get stream => (super.noSuchMethod(
+  _i4.Stream<_i2.TermsAgreementUiState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i5.Stream<_i2.TermsAgreementUiState>.empty(),
+        returnValue: _i4.Stream<_i2.TermsAgreementUiState>.empty(),
         returnValueForMissingStub:
-            _i5.Stream<_i2.TermsAgreementUiState>.empty(),
-      ) as _i5.Stream<_i2.TermsAgreementUiState>);
+            _i4.Stream<_i2.TermsAgreementUiState>.empty(),
+      ) as _i4.Stream<_i2.TermsAgreementUiState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -78,7 +73,7 @@ class MockTermsAgreementUiBloc extends _i1.Mock
       ) as bool);
 
   @override
-  void onChange(_i6.Change<_i2.TermsAgreementUiState>? change) =>
+  void onChange(_i5.Change<_i2.TermsAgreementUiState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -88,7 +83,7 @@ class MockTermsAgreementUiBloc extends _i1.Mock
       );
 
   @override
-  void add(_i7.TermsAgreementUiEvent? event) => super.noSuchMethod(
+  void add(_i6.TermsAgreementUiEvent? event) => super.noSuchMethod(
         Invocation.method(
           #add,
           [event],
@@ -97,7 +92,7 @@ class MockTermsAgreementUiBloc extends _i1.Mock
       );
 
   @override
-  void onEvent(_i7.TermsAgreementUiEvent? event) => super.noSuchMethod(
+  void onEvent(_i6.TermsAgreementUiEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onEvent,
           [event],
@@ -115,9 +110,9 @@ class MockTermsAgreementUiBloc extends _i1.Mock
       );
 
   @override
-  void on<E extends _i7.TermsAgreementUiEvent>(
-    _i6.EventHandler<E, _i2.TermsAgreementUiState>? handler, {
-    _i6.EventTransformer<E>? transformer,
+  void on<E extends _i6.TermsAgreementUiEvent>(
+    _i5.EventHandler<E, _i2.TermsAgreementUiState>? handler, {
+    _i5.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -130,7 +125,7 @@ class MockTermsAgreementUiBloc extends _i1.Mock
 
   @override
   void onTransition(
-          _i6.Transition<_i7.TermsAgreementUiEvent, _i2.TermsAgreementUiState>?
+          _i5.Transition<_i6.TermsAgreementUiEvent, _i2.TermsAgreementUiState>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -141,14 +136,14 @@ class MockTermsAgreementUiBloc extends _i1.Mock
       );
 
   @override
-  _i5.Future<void> close() => (super.noSuchMethod(
+  _i4.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
   void addError(

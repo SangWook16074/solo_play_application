@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/features/rank/presentation/blocs/rank_courses_bloc.dart';
-import 'package:solo_play_application/src/features/rank/presentation/blocs/rank_courses_state.dart';
-import 'package:solo_play_application/src/features/rank/presentation/view/spot_rank_view.dart';
+import 'package:solo_play_application/src/features/rank/presentation/blocs/course_ranking_ui_bloc.dart';
+import 'package:solo_play_application/src/features/rank/presentation/blocs/courses_ranking_ui_state.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/place_rank_view.dart';
 
 class RankCourseView extends StatelessWidget {
   const RankCourseView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<RankCoursesBloc>().state;
+    final state = context.watch<CourseRankingUiBloc>().state;
     return switch (state) {
       InitState() => Scaffold(
           body: Center(
@@ -19,9 +19,7 @@ class RankCourseView extends StatelessWidget {
       LoadingState() => Scaffold(
           body: Center(child: CircularProgressIndicator()),
         ),
-      LoadedState() => SpotRankView(
-          courses: state.courses,
-        ),
+      LoadedState() => PlaceRankView(),
       ErrorState() => Scaffold(
           body: Center(
             child: Text("에러 상태"),
