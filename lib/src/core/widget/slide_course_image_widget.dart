@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:solo_play_application/src/core/widget/image_indicator_widget.dart';
 import 'package:solo_play_application/src/core/widget/place_photo_widget.dart';
 
-class SlidePlaceImageWidget extends HookWidget {
+class SlideCourseImageWidget extends HookWidget {
   final List<String> images;
-  const SlidePlaceImageWidget({super.key, required this.images});
+  const SlideCourseImageWidget({super.key, required this.images});
 
-  // @override
   @override
   Widget build(BuildContext context) {
     final currentPage = useState(0);
@@ -47,6 +47,42 @@ class SlidePlaceImageWidget extends HookWidget {
             child: ImageIndicatorWidget(
               length: images.length,
               currentIndex: currentPage.value,
+            ),
+          ),
+
+          /// 장소의 이름과 위치 영역
+          Positioned(
+            bottom: 20.0,
+            left: 10.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '3F LOBBY',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.normal,
+                    color: Color(0xffFFFFFF),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    SvgPicture.asset('assets/images/location_icon.svg'),
+                    const SizedBox(width: 2),
+                    const Text(
+                      '서울 용산구 한강대로 15길 19-19 3층',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        fontStyle: FontStyle.normal,
+                        color: Color(0xffFFFFFF),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],

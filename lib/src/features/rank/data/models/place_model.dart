@@ -32,4 +32,11 @@ abstract class PlaceModel with _$PlaceModel {
         description: description,
         isFavorite: isFavorite);
   }
+
+  String get addressSummary {
+    final address = this.address.split(" ").toList();
+    final city = address.first;
+    final province = address[1];
+    return "$city $province";
+  }
 }

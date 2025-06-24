@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:solo_play_application/src/core/widget/best_place_card_widget.dart';
 import 'package:solo_play_application/src/features/rank/data/models/place_model.dart';
 import 'package:solo_play_application/src/features/rank/presentation/blocs/place_ranking_bloc.dart';
+import 'package:solo_play_application/src/features/rank/presentation/pages/best_place_card_widget_page.dart';
 
-class PlaceRankView extends HookWidget {
-  const PlaceRankView({
+class PlaceRankingView extends HookWidget {
+  const PlaceRankingView({
     super.key,
   });
 
@@ -42,7 +42,11 @@ class PlaceRankView extends HookWidget {
                 final place = places[index];
                 return Align(
                   alignment: Alignment.topCenter,
-                  // child: BestPlaceCardWidget(rank: index + 1, course: place),
+                  child: BestPlaceCardWidgetPage(
+                    place: place,
+                    rank: index + 1,
+                    showHeader: true,
+                  ),
                 );
               },
             ),

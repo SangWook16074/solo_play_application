@@ -5,7 +5,7 @@ import 'package:solo_play_application/src/core/providers/rank/place_repository_p
 import 'package:solo_play_application/src/features/rank/domain/repositories/place_repository.dart';
 import 'package:solo_play_application/src/features/rank/presentation/blocs/place_ranking_bloc.dart';
 import 'package:solo_play_application/src/features/rank/presentation/blocs/place_ranking_event.dart';
-import 'package:solo_play_application/src/features/rank/presentation/view/place_rank_view.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/place_ranking_view.dart';
 
 class PlaceRankingPage extends StatelessWidget {
   const PlaceRankingPage({super.key});
@@ -21,7 +21,7 @@ class PlaceRankingPage extends StatelessWidget {
                 placeRepository: context.read<PlaceRepository>())
               ..add(FetchData())),
       ],
-      child: PlaceRankView(),
+      child: PlaceRankingView(),
     );
   }
 }

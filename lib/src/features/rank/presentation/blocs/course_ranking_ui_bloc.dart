@@ -7,9 +7,9 @@ import 'package:solo_play_application/src/features/rank/domain/repositories/cour
 import 'package:solo_play_application/src/features/rank/presentation/blocs/courses_ranking_ui_event.dart';
 import 'package:solo_play_application/src/features/rank/presentation/blocs/courses_ranking_ui_state.dart';
 
-class RankCoursesUiBloc
+class CourseRankingUiBloc
     extends Bloc<CoursesRankingUiEvent, CoursesRankingUiState> {
-  RankCoursesUiBloc({
+  CourseRankingUiBloc({
     required this.courseRepository,
   }) : super(InitState()) {
     on<FetchInitialDatas>(_fetchInitialDatas);

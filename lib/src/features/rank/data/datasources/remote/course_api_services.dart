@@ -1,5 +1,5 @@
-import 'package:solo_play_application/src/core/data/dtos/course_response_dto.dart';
-import 'package:solo_play_application/src/core/domain/entities/course_entity.dart';
+import 'package:solo_play_application/src/features/rank/data/dtos/course_response_dto.dart';
+import 'package:solo_play_application/src/features/rank/domain/entities/course_entity.dart';
 
 final class CourseApiServicesImpl implements CourseApiServices {
   @override

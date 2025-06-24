@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:solo_play_application/src/core/widget/best_course_card_widget.dart';
 import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
 import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
-import 'package:solo_play_application/src/features/rank/presentation/view/detail_course_view.dart';
 
 class DetailCourseUI extends StatefulWidget {
   final int rank;
@@ -72,10 +72,28 @@ class _DetailCourseUIState extends State<DetailCourseUI> {
         ),
       ),
       body: SingleChildScrollView(
-          child: DetailCourseView(
-        rank: widget.rank,
-        course: widget.course,
-      )),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            BestCourseCardWidget(
+                rank: widget.rank, showHeader: false, course: widget.course),
+            const SizedBox(height: 12),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                height: 50,
+                width: 356,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: const Color(0xff0070f0),
+                ),
+              ),
+            ),
+            const SizedBox(height: 120),
+          ],
+        ),
+      ),
     );
   }
 }

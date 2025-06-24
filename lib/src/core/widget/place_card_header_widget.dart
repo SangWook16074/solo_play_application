@@ -37,7 +37,7 @@ class PlaceCardHeaderWidget extends StatelessWidget {
                             color: Colors.black),
                       ),
                       Text(
-                        place.address,
+                        place.addressSummary,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,

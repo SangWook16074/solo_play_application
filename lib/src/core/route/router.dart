@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:solo_play_application/src/core/data/models/course_model.dart';
-import 'package:solo_play_application/src/features/app/presentation/cubits/bottom_nav_cubit.dart';
+import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
 import 'package:solo_play_application/src/features/app/presentation/pages/app_page.dart';
-import 'package:solo_play_application/src/features/app/presentation/view/app_ui.dart';
-
 import 'package:solo_play_application/src/features/post/presentation/view/post_ui.dart';
-import 'package:solo_play_application/src/features/rank/presentation/pages/detail_rank_ui_page.dart';
+import 'package:solo_play_application/src/features/rank/data/models/place_model.dart';
+import 'package:solo_play_application/src/features/rank/presentation/pages/detail_place_ui_page.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/detail_course_ui.dart';
-import 'package:solo_play_application/src/features/rank/presentation/view/detail_rank_ui.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/rank_ui.dart';
 import 'package:solo_play_application/src/features/user/presentation/view/my_profile_ui.dart';
 
@@ -62,17 +58,17 @@ final GoRouter router = GoRouter(
                 builder: (context, state) {
                   final arguments = state.extra as Map<String, dynamic>;
                   final rank = arguments['rank'] as int;
-                  final course = arguments['course'] as CourseModel;
-                  if (rank is! int || course is! CourseModel) {
+                  final place = arguments['place'] as PlaceModel;
+                  if (rank is! int || place is! PlaceModel) {
                     return const Scaffold(
                       body: Center(
                         child: Text('잘못된 접근입니다.'),
                       ),
                     );
                   }
-                  return DetailRankUiPage(
+                  return DetailPlaceUiPage(
                     rank: rank,
-                    course: course,
+                    place: place,
                   );
                 }),
             GoRoute(

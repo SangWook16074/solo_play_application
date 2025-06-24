@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/features/course/presentation/widget/list_button.dart';
+import 'package:solo_play_application/src/core/widget/list_button.dart';
 
 class PostView extends StatefulWidget {
   const PostView({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:solo_play_application/src/core/widget/best_place_card_widget.dart';
+import 'package:solo_play_application/src/core/widget/best_course_card_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/blocs/course_ranking_ui_bloc.dart';
 import 'package:solo_play_application/src/features/rank/presentation/blocs/courses_ranking_ui_state.dart';
 
@@ -15,8 +15,13 @@ class CourseRankingView extends HookWidget {
     final controller = usePageController();
     final state = context.watch<CourseRankingUiBloc>().state;
     return switch (state) {
+      /// 초기 상태
       InitState() => Container(),
+
+      /// 로딩 상태
       LoadingState() => Container(),
+
+      /// 로딩 완료 상태
       LoadedState() => Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -39,10 +44,9 @@ class CourseRankingView extends HookWidget {
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) => Align(
                   alignment: Alignment.topCenter,
-                  child: BestPlaceCardWidget.expand(
-                    showHeader: true,
+                  child: BestCourseCardWidget(
                     rank: index + 1,
-                    isCourse: true,
+                    showHeader: true,
                     course: state.courses[index],
                   ),
                 ),
@@ -50,7 +54,8 @@ class CourseRankingView extends HookWidget {
             ),
           ],
         ),
-      // TODO: Handle contthis case.
+
+      /// 에러 상태
       ErrorState() => Container(),
     };
   }
