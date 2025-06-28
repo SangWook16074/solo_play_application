@@ -20,18 +20,21 @@ mixin _$PlaceRankingEvent {
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
     required TResult Function() fetchData,
+    required TResult Function(PlaceModel place) userBookmarkToggle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
     TResult? Function()? fetchData,
+    TResult? Function(PlaceModel place)? userBookmarkToggle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
     TResult Function()? fetchData,
+    TResult Function(PlaceModel place)? userBookmarkToggle,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$PlaceRankingEvent {
   TResult map<TResult extends Object?>(
     TResult Function(_PlaceRankingEvent value) $default, {
     required TResult Function(FetchData value) fetchData,
+    required TResult Function(UserBookmarkToggle value) userBookmarkToggle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
     TResult? Function(_PlaceRankingEvent value)? $default, {
     TResult? Function(FetchData value)? fetchData,
+    TResult? Function(UserBookmarkToggle value)? userBookmarkToggle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_PlaceRankingEvent value)? $default, {
     TResult Function(FetchData value)? fetchData,
+    TResult Function(UserBookmarkToggle value)? userBookmarkToggle,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +126,7 @@ class _$FetchDataImpl implements FetchData {
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
     required TResult Function() fetchData,
+    required TResult Function(PlaceModel place) userBookmarkToggle,
   }) {
     return fetchData();
   }
@@ -129,6 +136,7 @@ class _$FetchDataImpl implements FetchData {
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
     TResult? Function()? fetchData,
+    TResult? Function(PlaceModel place)? userBookmarkToggle,
   }) {
     return fetchData?.call();
   }
@@ -138,6 +146,7 @@ class _$FetchDataImpl implements FetchData {
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
     TResult Function()? fetchData,
+    TResult Function(PlaceModel place)? userBookmarkToggle,
     required TResult orElse(),
   }) {
     if (fetchData != null) {
@@ -151,6 +160,7 @@ class _$FetchDataImpl implements FetchData {
   TResult map<TResult extends Object?>(
     TResult Function(_PlaceRankingEvent value) $default, {
     required TResult Function(FetchData value) fetchData,
+    required TResult Function(UserBookmarkToggle value) userBookmarkToggle,
   }) {
     return fetchData(this);
   }
@@ -160,6 +170,7 @@ class _$FetchDataImpl implements FetchData {
   TResult? mapOrNull<TResult extends Object?>(
     TResult? Function(_PlaceRankingEvent value)? $default, {
     TResult? Function(FetchData value)? fetchData,
+    TResult? Function(UserBookmarkToggle value)? userBookmarkToggle,
   }) {
     return fetchData?.call(this);
   }
@@ -169,6 +180,7 @@ class _$FetchDataImpl implements FetchData {
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_PlaceRankingEvent value)? $default, {
     TResult Function(FetchData value)? fetchData,
+    TResult Function(UserBookmarkToggle value)? userBookmarkToggle,
     required TResult orElse(),
   }) {
     if (fetchData != null) {
@@ -180,6 +192,166 @@ class _$FetchDataImpl implements FetchData {
 
 abstract class FetchData implements PlaceRankingEvent {
   const factory FetchData() = _$FetchDataImpl;
+}
+
+/// @nodoc
+abstract class _$$UserBookmarkToggleImplCopyWith<$Res> {
+  factory _$$UserBookmarkToggleImplCopyWith(_$UserBookmarkToggleImpl value,
+          $Res Function(_$UserBookmarkToggleImpl) then) =
+      __$$UserBookmarkToggleImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PlaceModel place});
+
+  $PlaceModelCopyWith<$Res> get place;
+}
+
+/// @nodoc
+class __$$UserBookmarkToggleImplCopyWithImpl<$Res>
+    extends _$PlaceRankingEventCopyWithImpl<$Res, _$UserBookmarkToggleImpl>
+    implements _$$UserBookmarkToggleImplCopyWith<$Res> {
+  __$$UserBookmarkToggleImplCopyWithImpl(_$UserBookmarkToggleImpl _value,
+      $Res Function(_$UserBookmarkToggleImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PlaceRankingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? place = null,
+  }) {
+    return _then(_$UserBookmarkToggleImpl(
+      place: null == place
+          ? _value.place
+          : place // ignore: cast_nullable_to_non_nullable
+              as PlaceModel,
+    ));
+  }
+
+  /// Create a copy of PlaceRankingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PlaceModelCopyWith<$Res> get place {
+    return $PlaceModelCopyWith<$Res>(_value.place, (value) {
+      return _then(_value.copyWith(place: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$UserBookmarkToggleImpl implements UserBookmarkToggle {
+  const _$UserBookmarkToggleImpl({required this.place});
+
+  @override
+  final PlaceModel place;
+
+  @override
+  String toString() {
+    return 'PlaceRankingEvent.userBookmarkToggle(place: $place)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UserBookmarkToggleImpl &&
+            (identical(other.place, place) || other.place == place));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, place);
+
+  /// Create a copy of PlaceRankingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UserBookmarkToggleImplCopyWith<_$UserBookmarkToggleImpl> get copyWith =>
+      __$$UserBookmarkToggleImplCopyWithImpl<_$UserBookmarkToggleImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function() $default, {
+    required TResult Function() fetchData,
+    required TResult Function(PlaceModel place) userBookmarkToggle,
+  }) {
+    return userBookmarkToggle(place);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function()? $default, {
+    TResult? Function()? fetchData,
+    TResult? Function(PlaceModel place)? userBookmarkToggle,
+  }) {
+    return userBookmarkToggle?.call(place);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function()? $default, {
+    TResult Function()? fetchData,
+    TResult Function(PlaceModel place)? userBookmarkToggle,
+    required TResult orElse(),
+  }) {
+    if (userBookmarkToggle != null) {
+      return userBookmarkToggle(place);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_PlaceRankingEvent value) $default, {
+    required TResult Function(FetchData value) fetchData,
+    required TResult Function(UserBookmarkToggle value) userBookmarkToggle,
+  }) {
+    return userBookmarkToggle(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_PlaceRankingEvent value)? $default, {
+    TResult? Function(FetchData value)? fetchData,
+    TResult? Function(UserBookmarkToggle value)? userBookmarkToggle,
+  }) {
+    return userBookmarkToggle?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_PlaceRankingEvent value)? $default, {
+    TResult Function(FetchData value)? fetchData,
+    TResult Function(UserBookmarkToggle value)? userBookmarkToggle,
+    required TResult orElse(),
+  }) {
+    if (userBookmarkToggle != null) {
+      return userBookmarkToggle(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UserBookmarkToggle implements PlaceRankingEvent {
+  const factory UserBookmarkToggle({required final PlaceModel place}) =
+      _$UserBookmarkToggleImpl;
+
+  PlaceModel get place;
+
+  /// Create a copy of PlaceRankingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UserBookmarkToggleImplCopyWith<_$UserBookmarkToggleImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -225,6 +397,7 @@ class _$PlaceRankingEventImpl implements _PlaceRankingEvent {
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
     required TResult Function() fetchData,
+    required TResult Function(PlaceModel place) userBookmarkToggle,
   }) {
     return $default();
   }
@@ -234,6 +407,7 @@ class _$PlaceRankingEventImpl implements _PlaceRankingEvent {
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
     TResult? Function()? fetchData,
+    TResult? Function(PlaceModel place)? userBookmarkToggle,
   }) {
     return $default?.call();
   }
@@ -243,6 +417,7 @@ class _$PlaceRankingEventImpl implements _PlaceRankingEvent {
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
     TResult Function()? fetchData,
+    TResult Function(PlaceModel place)? userBookmarkToggle,
     required TResult orElse(),
   }) {
     if ($default != null) {
@@ -256,6 +431,7 @@ class _$PlaceRankingEventImpl implements _PlaceRankingEvent {
   TResult map<TResult extends Object?>(
     TResult Function(_PlaceRankingEvent value) $default, {
     required TResult Function(FetchData value) fetchData,
+    required TResult Function(UserBookmarkToggle value) userBookmarkToggle,
   }) {
     return $default(this);
   }
@@ -265,6 +441,7 @@ class _$PlaceRankingEventImpl implements _PlaceRankingEvent {
   TResult? mapOrNull<TResult extends Object?>(
     TResult? Function(_PlaceRankingEvent value)? $default, {
     TResult? Function(FetchData value)? fetchData,
+    TResult? Function(UserBookmarkToggle value)? userBookmarkToggle,
   }) {
     return $default?.call(this);
   }
@@ -274,6 +451,7 @@ class _$PlaceRankingEventImpl implements _PlaceRankingEvent {
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_PlaceRankingEvent value)? $default, {
     TResult Function(FetchData value)? fetchData,
+    TResult Function(UserBookmarkToggle value)? userBookmarkToggle,
     required TResult orElse(),
   }) {
     if ($default != null) {

@@ -1,22 +1,27 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:solo_play_application/src/core/widget/place_card_header_widget.dart';
+import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
 import 'package:solo_play_application/src/core/widget/action_button_widget.dart';
 import 'package:solo_play_application/src/features/rank/data/models/place_model.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/level_tag_widget.dart';
 import 'package:solo_play_application/src/core/widget/slide_place_image_widget.dart';
+import 'package:solo_play_application/src/features/rank/presentation/widget/rank_number_widget.dart';
 
 class BestPlaceCardWidget extends StatelessWidget {
   final int rank;
   final bool showHeader;
   final PlaceModel place;
+  final void Function()? onBookmarkButtonTap;
 
   const BestPlaceCardWidget({
     super.key,
     required this.rank,
     this.showHeader = true,
     required this.place,
+    this.onBookmarkButtonTap,
   });
 
   @override
@@ -33,6 +38,10 @@ class BestPlaceCardWidget extends StatelessWidget {
           });
         }
       },
+      onTap: () {
+        log("button tap");
+        onBookmarkButtonTap;
+      },
       child: Container(
         height: 593,
         decoration: BoxDecoration(
@@ -48,7 +57,17 @@ class BestPlaceCardWidget extends StatelessWidget {
             /// 랭킹 번호, 장소 이름 및 위치, 북마크 아이콘 영역
             /// rank ui에서만 헤더가 보이도록 설정
             showHeader
-                ? PlaceCardHeaderWidget(rank: rank, place: place)
+                ? PlaceCardHeaderWidget(
+                    rank: rank,
+                    place: place,
+                    isBookmarked: place.isFavorite,
+                    onTap: () {
+                      log("button tap");
+                      if (onBookmarkButtonTap == null) return;
+
+                      onBookmarkButtonTap!();
+                    },
+                  )
                 : Container(),
             const SizedBox(height: 10),
 
@@ -132,6 +151,73 @@ class BestPlaceCardWidget extends StatelessWidget {
                   ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class PlaceCardHeaderWidget extends StatelessWidget {
+  final int rank;
+  final PlaceModel place;
+  final void Function()? onTap;
+  final bool isBookmarked;
+  const PlaceCardHeaderWidget({
+    super.key,
+    required this.rank,
+    required this.place,
+    this.onTap,
+    required this.isBookmarked,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                /// 랭킹 순위 번호
+                RankNumberWidget(rank: rank),
+                Padding(
+                  padding: EdgeInsets.only(left: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        place.name,
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.normal,
+                            color: Colors.black),
+                      ),
+                      Text(
+                        place.addressSummary,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                          color: Color(0xff8E8E8E),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          /// 북마크 아이콘
+          /// 아이콘을 클릭하면 랭킹에 있는 장소를 저장하여
+          /// 저장을 모아두는 곳에서 확인 가능
+          BookmarkIcon(
+            onTap: onTap,
+            isBookmarked: isBookmarked,
+          ),
+        ],
       ),
     );
   }

@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:solo_play_application/src/core/widget/best_course_card_widget.dart';
+import 'package:solo_play_application/src/core/widget/best_place_card_widget.dart';
 import 'package:solo_play_application/src/features/rank/data/models/place_model.dart';
 import 'package:solo_play_application/src/features/rank/presentation/blocs/place_ranking_bloc.dart';
+import 'package:solo_play_application/src/features/rank/presentation/blocs/place_ranking_event.dart';
 import 'package:solo_play_application/src/features/rank/presentation/pages/best_place_card_widget_page.dart';
 
 class PlaceRankingView extends HookWidget {
@@ -13,6 +18,7 @@ class PlaceRankingView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = usePageController();
+    final bloc = context.read<PlaceRankingBloc>();
     final state = context.watch<PlaceRankingBloc>().state;
 
     return state.when(loading: () {
@@ -21,6 +27,7 @@ class PlaceRankingView extends HookWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+          /// 장소에서 tip을 보여주는 고정 위젯
           const Padding(
             padding: EdgeInsets.only(right: 16.0, top: 4.0, bottom: 4.0),
             child: Text(
@@ -36,16 +43,22 @@ class PlaceRankingView extends HookWidget {
             child: PageView.builder(
               padEnds: false,
               controller: controller,
-              itemCount: 10,
+              itemCount: places.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 final place = places[index];
                 return Align(
                   alignment: Alignment.topCenter,
-                  child: BestPlaceCardWidgetPage(
+                  child: BestPlaceCardWidget(
                     place: place,
                     rank: index + 1,
                     showHeader: true,
+                    onBookmarkButtonTap: () {
+                      bloc.add(UserBookmarkToggle(
+                          place:
+                              place.copyWith(isFavorite: !place.isFavorite)));
+                      log("북마크 변경");
+                    },
                   ),
                 );
               },
