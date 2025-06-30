@@ -20,9 +20,6 @@ class TermsAgreementUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-      ),
       backgroundColor: const Color(0xffffffff),
       body: Center(
         child: Column(
@@ -129,7 +126,7 @@ class TermsAgreementUI extends StatelessWidget {
                               isAgreedToTerms: state.isAgreedToTerms,
                               isConsentedToAds: state.isConsentedToAds));
                           log("move to resister email ui");
-                          context.push("/signup/email");
+                          context.push("/auth/signup/email");
                         }
                       },
                       enabled: !isAgree);

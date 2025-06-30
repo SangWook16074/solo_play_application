@@ -56,7 +56,7 @@ class LoginUI extends StatelessWidget {
                         height: 8.0,
                       ),
                       ResisterButton(
-                          onTap: () => context.push("/signup/terms")),
+                          onTap: () => context.push("/auth/signup/terms")),
                       const SizedBox(
                         height: 8.0,
                       ),

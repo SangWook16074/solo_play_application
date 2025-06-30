@@ -2,15 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/features/auth/presentation/blocs/password_resister_ui_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_state.dart';
 import 'package:solo_play_application/src/features/auth/presentation/blocs/password_resister_ui_state.dart';
 import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_event.dart';
 import 'package:solo_play_application/src/features/auth/presentation/views/password_resister_textfield_view.dart';
-import 'package:solo_play_application/src/features/auth/presentation/views/resister_email_textfield_view.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/next_button.dart';
 
 class PasswordResisterUI extends StatelessWidget {
@@ -22,9 +18,6 @@ class PasswordResisterUI extends StatelessWidget {
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
         backgroundColor: const Color(0xffffffff),
-        appBar: AppBar(
-          elevation: 0.0,
-        ),
         body: Center(
           child: Padding(
             padding:
@@ -46,8 +39,16 @@ class PasswordResisterUI extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 26, fontWeight: FontWeight.w700),
                               ),
-                              Text(
-                                "비밀번호를 입력해주세요.",
+                              Text.rich(
+                                TextSpan(children: [
+                                  TextSpan(
+                                      text: "비밀번호",
+                                      style:
+                                          TextStyle(color: Color(0xff266FF7))),
+                                  TextSpan(
+                                    text: "를 입력해주세요.",
+                                  ),
+                                ]),
                                 style: TextStyle(
                                     fontSize: 26, fontWeight: FontWeight.w700),
                               ),

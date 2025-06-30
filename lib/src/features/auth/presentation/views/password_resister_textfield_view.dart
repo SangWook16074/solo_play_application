@@ -25,17 +25,29 @@ class PasswordResisterTextFieldView extends StatelessWidget {
         const SizedBox(
           height: 4.0,
         ),
-        CustomTextField(
-          hintText: "8자 이상의 비밀번호",
-          onChanged: (password) {
-            bloc.add(UserPasswordChanged(password: password));
+        BlocSelector<PasswordResisterUiBloc, PasswordResisterUiState, bool>(
+          selector: (state) {
+            return state.obscurePassword;
           },
-          obscureText: true,
-          //// 아직 비밀번호 숨김 해제 UI 미완성
-          ///
-          ///
-          ///
-          suffixIcon: ImageIconWidget(path: ImageIconPath.eyeOff),
+          builder: (context, obscurePassword) {
+            return CustomTextField(
+              hintText: "8자 이상의 비밀번호",
+              onChanged: (password) {
+                bloc.add(UserPasswordChanged(password: password));
+              },
+              obscureText: obscurePassword,
+              //// 아직 비밀번호 숨김 해제 UI 미완성
+              ///
+              ///
+              ///
+              suffixIcon: GestureDetector(
+                  onTap: () {
+                    bloc.add(const PasswordResisterUiEvent
+                        .userPasswordObscureToggle());
+                  },
+                  child: ImageIconWidget(path: ImageIconPath.eyeOff)),
+            );
+          },
         ),
         const SizedBox(
           height: 4.0,
@@ -74,13 +86,26 @@ class PasswordResisterTextFieldView extends StatelessWidget {
         ///
         ///
         ///
-        CustomTextField(
-          hintText: "8자 이상의 비밀번호",
-          onChanged: (passwordCheck) {
-            bloc.add(UserPasswordCheckChanged(passwordCheck: passwordCheck));
+        BlocSelector<PasswordResisterUiBloc, PasswordResisterUiState, bool>(
+          selector: (state) {
+            return state.obscurePasswordCheck;
           },
-          obscureText: true,
-          suffixIcon: ImageIconWidget(path: ImageIconPath.eyeOff),
+          builder: (context, obscurePasswordCheck) {
+            return CustomTextField(
+              hintText: "8자 이상의 비밀번호",
+              onChanged: (passwordCheck) {
+                bloc.add(
+                    UserPasswordCheckChanged(passwordCheck: passwordCheck));
+              },
+              obscureText: obscurePasswordCheck,
+              suffixIcon: GestureDetector(
+                  onTap: () {
+                    bloc.add(const PasswordResisterUiEvent
+                        .userPasswordCheckObscureToggle());
+                  },
+                  child: ImageIconWidget(path: ImageIconPath.eyeOff)),
+            );
+          },
         ),
         const SizedBox(
           height: 4.0,

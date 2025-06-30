@@ -19,9 +19,6 @@ class EmailResisterUI extends StatelessWidget {
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
         backgroundColor: const Color(0xffffffff),
-        appBar: AppBar(
-          elevation: 0.0,
-        ),
         body: Center(
           child: Padding(
             padding:
@@ -43,8 +40,16 @@ class EmailResisterUI extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 26, fontWeight: FontWeight.w700),
                               ),
-                              Text(
-                                "아이디를 입력해주세요.",
+                              Text.rich(
+                                TextSpan(children: [
+                                  TextSpan(
+                                      text: "아이디",
+                                      style:
+                                          TextStyle(color: Color(0xff266FF7))),
+                                  TextSpan(
+                                    text: "를 입력해주세요.",
+                                  ),
+                                ]),
                                 style: TextStyle(
                                     fontSize: 26, fontWeight: FontWeight.w700),
                               ),
@@ -79,7 +84,7 @@ class EmailResisterUI extends StatelessWidget {
                                   context.read<ResisterUiBloc>();
                               resisterUiBloc
                                   .add(UserEmailChanged(email: state.email));
-                              context.push("/signup/password");
+                              context.push("/auth/signup/password");
                             }
                           },
                           enabled: !isEmailValidate);
