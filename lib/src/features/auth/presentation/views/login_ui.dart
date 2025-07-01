@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/features/auth/presentation/views/login_text_field_view.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/login_button.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/resister_button.dart';
@@ -54,7 +55,8 @@ class LoginUI extends StatelessWidget {
                       const SizedBox(
                         height: 8.0,
                       ),
-                      ResisterButton(onTap: () {}),
+                      ResisterButton(
+                          onTap: () => context.push("/auth/signup/terms")),
                       const SizedBox(
                         height: 8.0,
                       ),

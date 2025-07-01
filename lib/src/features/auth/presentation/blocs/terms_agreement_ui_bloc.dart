@@ -21,60 +21,60 @@ class TermsAgreementUiBloc
 
   void _onFirstAgreeButtonTap(
       FirstAgreeButtonTap event, Emitter<TermsAgreementUiState> emit) {
-    emit(state.copyWith(isFirstAgree: true));
+    emit(state.copyWith(isOver14: true));
   }
 
   void _onFristDisagreeButtonTap(
       FirstDisagreeButtonTap event, Emitter<TermsAgreementUiState> emit) {
-    emit(state.copyWith(isFirstAgree: false));
+    emit(state.copyWith(isOver14: false));
   }
 
   void _onSecondAgreeButtonTap(
       SecondAgreeButtonTap event, Emitter<TermsAgreementUiState> emit) {
-    emit(state.copyWith(isSecondAgree: true));
+    emit(state.copyWith(isAgreedToTerms: true));
   }
 
   void _onSecondDisagreeButtonTap(
       SecondDisagreeButtonTap event, Emitter<TermsAgreementUiState> emit) {
-    emit(state.copyWith(isSecondAgree: false));
+    emit(state.copyWith(isAgreedToTerms: false));
   }
 
   void _onThirdAgreeButonTap(
       ThirdAgreeButtonTap event, Emitter<TermsAgreementUiState> emit) {
-    emit(state.copyWith(isThirdAgree: true));
+    emit(state.copyWith(isAgreedToMarketing: true));
   }
 
   void _onThirdDisagreeButtonTap(
       ThirdDisagreeButtonTap event, Emitter<TermsAgreementUiState> emit) {
-    emit(state.copyWith(isThirdAgree: false));
+    emit(state.copyWith(isAgreedToMarketing: false));
   }
 
   void _onFourthAgreeButtonTap(
       FourthAgreeButtonTap event, Emitter<TermsAgreementUiState> emit) {
-    emit(state.copyWith(isFourthAgree: true));
+    emit(state.copyWith(isConsentedToAds: true));
   }
 
   void _onFourthDisagreeButtonTap(
       FourthDisagreeButtonTap event, Emitter<TermsAgreementUiState> emit) {
-    emit(state.copyWith(isFourthAgree: false));
+    emit(state.copyWith(isConsentedToAds: false));
   }
 
   void _onAllAgreeButtonTap(
       AllAgreeButtonTap event, Emitter<TermsAgreementUiState> emit) {
     emit(state.copyWith(
-        isFirstAgree: true,
-        isSecondAgree: true,
-        isThirdAgree: true,
-        isFourthAgree: true));
+        isOver14: true,
+        isAgreedToTerms: true,
+        isAgreedToMarketing: true,
+        isConsentedToAds: true));
   }
 
   void _onAllDisagreeButtonTap(
       AllDisagreeButtonTap event, Emitter<TermsAgreementUiState> emit) {
     emit(state.copyWith(
-        isFirstAgree: false,
-        isSecondAgree: false,
-        isThirdAgree: false,
-        isFourthAgree: false));
+        isOver14: false,
+        isAgreedToTerms: false,
+        isAgreedToMarketing: false,
+        isConsentedToAds: false));
   }
 
   @override

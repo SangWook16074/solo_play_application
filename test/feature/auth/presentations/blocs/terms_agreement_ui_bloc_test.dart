@@ -1,4 +1,4 @@
-import 'package:solo_play_application/src/features/auth/presentation/terms_agreement.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement.dart';
 import 'package:test/test.dart';
 import 'package:bloc_test/bloc_test.dart';
 
@@ -15,10 +15,10 @@ void main() {
     test("초기에 사용자는 모든 항목에 대해서 false이다.", () {
       expect(state.isAgree, false);
       expect(state.isAllAgreement, false);
-      expect(state.isFirstAgree, false);
-      expect(state.isSecondAgree, false);
-      expect(state.isThirdAgree, false);
-      expect(state.isFourthAgree, false);
+      expect(state.isOver14, false);
+      expect(state.isAgreedToTerms, false);
+      expect(state.isAgreedToMarketing, false);
+      expect(state.isConsentedToAds, false);
     });
 
     blocTest(
@@ -27,10 +27,10 @@ void main() {
       act: (bloc) => bloc.add(AllAgreeButtonTap()),
       expect: () => [
         state.copyWith(
-            isFirstAgree: true,
-            isSecondAgree: true,
-            isThirdAgree: true,
-            isFourthAgree: true)
+            isOver14: true,
+            isAgreedToTerms: true,
+            isAgreedToMarketing: true,
+            isConsentedToAds: true)
       ],
     );
 
@@ -45,56 +45,56 @@ void main() {
       "사용자가 [FirstAgreementTap]이 add되면 isFirstAgree만 true이다.",
       build: () => bloc,
       act: (bloc) => bloc.add(FirstAgreeButtonTap()),
-      expect: () => [state.copyWith(isFirstAgree: true)],
+      expect: () => [state.copyWith(isOver14: true)],
     );
 
     blocTest(
       '사용자가 [SecondAgreementTap]이 add되면 isSecondAgree만 true이다.',
       build: () => bloc,
       act: (bloc) => bloc.add(SecondAgreeButtonTap()),
-      expect: () => [state.copyWith(isSecondAgree: true)],
+      expect: () => [state.copyWith(isAgreedToTerms: true)],
     );
 
     blocTest(
       '사용자가 [ThirdAgreementTap]이 add되면 isThirdAgree만 true이다.',
       build: () => bloc,
       act: (bloc) => bloc.add(ThirdAgreeButtonTap()),
-      expect: () => [state.copyWith(isThirdAgree: true)],
+      expect: () => [state.copyWith(isAgreedToMarketing: true)],
     );
 
     blocTest(
       '사용자가 [FourthAgreementTap]이 add되면 isFourthAgree만 true이다.',
       build: () => bloc,
       act: (bloc) => bloc.add(FourthAgreeButtonTap()),
-      expect: () => [state.copyWith(isFourthAgree: true)],
+      expect: () => [state.copyWith(isConsentedToAds: true)],
     );
 
     blocTest(
       "사용자가 [FirstDisagreementTap]이 add되면 isFirstAgree만 false이다.",
       build: () => bloc,
       act: (bloc) => bloc.add(FirstDisagreeButtonTap()),
-      expect: () => [state.copyWith(isFirstAgree: false)],
+      expect: () => [state.copyWith(isOver14: false)],
     );
 
     blocTest(
       '사용자가 [SecondDisagreementTap]이 add되면 isSecondAgree만 false이다.',
       build: () => bloc,
       act: (bloc) => bloc.add(SecondDisagreeButtonTap()),
-      expect: () => [state.copyWith(isSecondAgree: false)],
+      expect: () => [state.copyWith(isAgreedToTerms: false)],
     );
 
     blocTest(
       '사용자가 [ThirdDisagreementTap]이 add되면 isThirdAgree만 false이다.',
       build: () => bloc,
       act: (bloc) => bloc.add(ThirdDisagreeButtonTap()),
-      expect: () => [state.copyWith(isThirdAgree: false)],
+      expect: () => [state.copyWith(isAgreedToMarketing: false)],
     );
 
     blocTest(
       '사용자가 [FourthDisagreementTap]이 add되면 isFourthAgree만 false이다.',
       build: () => bloc,
       act: (bloc) => bloc.add(FourthDisagreeButtonTap()),
-      expect: () => [state.copyWith(isFourthAgree: false)],
+      expect: () => [state.copyWith(isConsentedToAds: false)],
     );
   });
 }
