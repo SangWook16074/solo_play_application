@@ -7,8 +7,8 @@ abstract class PasswordResisterUiState with _$PasswordResisterUiState {
   const factory PasswordResisterUiState({
     @Default("") String password,
     @Default("") String passwordCheck,
-    @Default(false) bool obscurePassword,
-    @Default(false) bool obscurePasswordCheck,
+    @Default(true) bool obscurePassword,
+    @Default(true) bool obscurePasswordCheck,
   }) = _PasswordResisterUiState;
 
   const PasswordResisterUiState._();

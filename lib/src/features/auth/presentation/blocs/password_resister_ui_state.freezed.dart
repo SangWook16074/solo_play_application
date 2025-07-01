@@ -111,8 +111,8 @@ class _PasswordResisterUiState extends PasswordResisterUiState {
   const _PasswordResisterUiState(
       {this.password = "",
       this.passwordCheck = "",
-      this.obscurePassword = false,
-      this.obscurePasswordCheck = false})
+      this.obscurePassword = true,
+      this.obscurePasswordCheck = true})
       : super._();
 
   @override
