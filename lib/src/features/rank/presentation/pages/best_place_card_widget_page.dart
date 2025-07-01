@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/core/widget/best_place_card_widget.dart';
+import 'package:solo_play_application/src/features/rank/presentation/widget/best_place_card_widget.dart';
 import 'package:solo_play_application/src/features/rank/data/models/place_model.dart';
 import 'package:solo_play_application/src/features/rank/presentation/cubits/place_cubit.dart';
 

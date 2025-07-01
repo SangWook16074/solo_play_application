@@ -7,9 +7,8 @@ import 'package:solo_play_application/src/features/rank/domain/repositories/cour
 import 'package:solo_play_application/src/features/rank/presentation/blocs/courses_ranking_ui_event.dart';
 import 'package:solo_play_application/src/features/rank/presentation/blocs/courses_ranking_ui_state.dart';
 
-class CourseRankingUiBloc
-    extends Bloc<CoursesRankingUiEvent, CoursesRankingUiState> {
-  CourseRankingUiBloc({
+class CourseRankingBloc extends Bloc<CoursesRankingEvent, CoursesRankingState> {
+  CourseRankingBloc({
     required this.courseRepository,
   }) : super(InitState()) {
     on<FetchInitialDatas>(_fetchInitialDatas);
@@ -19,7 +18,7 @@ class CourseRankingUiBloc
   final CourseRepository courseRepository;
 
   FutureOr<void> _fetchInitialDatas(
-      FetchInitialDatas event, Emitter<CoursesRankingUiState> emit) async {
+      FetchInitialDatas event, Emitter<CoursesRankingState> emit) async {
     emit(LoadedState(
         courses: await courseRepository.getHotPlaces().then(
             (entities) => entities
@@ -31,7 +30,7 @@ class CourseRankingUiBloc
   }
 
   FutureOr<void> _updateCourseData(
-      UserCourseFavoriteChanged event, Emitter<CoursesRankingUiState> emit) {
+      UserCourseFavoriteChanged event, Emitter<CoursesRankingState> emit) {
     final newCourse = event.course;
     final prev = (state as LoadedState).courses;
     // 패치 Api 수행

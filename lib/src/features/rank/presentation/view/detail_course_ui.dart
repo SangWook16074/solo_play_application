@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/widget/best_course_card_widget.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/place_review_view.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/similar_cafe_photo_view.dart';
+import 'package:solo_play_application/src/features/rank/presentation/widget/best_course_card_widget.dart';
 import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
 import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
+import 'package:solo_play_application/src/features/rank/presentation/widget/start_course_button_widget.dart';
 
 class DetailCourseUI extends StatefulWidget {
   final int rank;
@@ -79,17 +83,11 @@ class _DetailCourseUIState extends State<DetailCourseUI> {
             BestCourseCardWidget(
                 rank: widget.rank, showHeader: false, course: widget.course),
             const SizedBox(height: 12),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                height: 50,
-                width: 356,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: const Color(0xff0070f0),
-                ),
-              ),
-            ),
+            StartCourseButtonWidget(),
+            const SizedBox(height: 12),
+            PlaceReviewView(),
+            const SizedBox(height: 12),
+            SimilarCafePhotoView(),
             const SizedBox(height: 120),
           ],
         ),

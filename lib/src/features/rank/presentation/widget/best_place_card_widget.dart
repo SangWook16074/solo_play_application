@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -156,6 +155,7 @@ class BestPlaceCardWidget extends StatelessWidget {
   }
 }
 
+/// 카드의 헤더 부분
 class PlaceCardHeaderWidget extends StatelessWidget {
   final int rank;
   final PlaceModel place;

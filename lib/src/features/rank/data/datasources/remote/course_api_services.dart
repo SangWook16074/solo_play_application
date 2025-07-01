@@ -1,7 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:solo_play_application/src/features/rank/data/dtos/course_response_dto.dart';
-import 'package:solo_play_application/src/features/rank/domain/entities/course_entity.dart';
 
 final class CourseApiServicesImpl implements CourseApiServices {
+  final Dio dio;
+
+  CourseApiServicesImpl({required this.dio});
+
   @override
   Future<List<CourseResponseDto>> getHotPlaces() async {
     await Future.delayed(Duration(seconds: 1));
