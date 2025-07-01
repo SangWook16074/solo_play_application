@@ -8,7 +8,9 @@ import 'package:solo_play_application/src/features/rank/presentation/blocs/place
 import 'package:solo_play_application/src/features/rank/presentation/view/place_ranking_view.dart';
 
 class PlaceRankingPage extends StatelessWidget {
-  const PlaceRankingPage({super.key});
+  const PlaceRankingPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

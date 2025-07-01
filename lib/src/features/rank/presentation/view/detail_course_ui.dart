@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/place_review_view.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/similar_cafe_photo_view.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/best_course_card_widget.dart';

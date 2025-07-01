@@ -30,6 +30,7 @@ class PlaceRankingBloc extends Bloc<PlaceRankingEvent, PlaceRankingState> {
 
   FutureOr<void> _userBookmarkToggleHandler(
       UserBookmarkToggle event, Emitter<PlaceRankingState> emit) {
+    log("user bookmark toggle");
     // 서버 통신 후
 
     // 성공하면 데이터 교체
@@ -44,7 +45,7 @@ class PlaceRankingBloc extends Bloc<PlaceRankingEvent, PlaceRankingState> {
         places: prevPlaces.map((place) {
       // 장소 중 target과 같은것만 업데이트
       if (place == target) {
-        return target;
+        return target.copyWith(isFavorite: !target.isFavorite);
       } else {
         // 다른 장소는 그대로 갱신
         return place;

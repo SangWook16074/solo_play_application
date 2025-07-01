@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -37,10 +36,6 @@ class BestPlaceCardWidget extends StatelessWidget {
           });
         }
       },
-      onTap: () {
-        log("button tap");
-        onBookmarkButtonTap;
-      },
       child: Container(
         height: 593,
         decoration: BoxDecoration(
@@ -61,9 +56,7 @@ class BestPlaceCardWidget extends StatelessWidget {
                     place: place,
                     isBookmarked: place.isFavorite,
                     onTap: () {
-                      log("button tap");
                       if (onBookmarkButtonTap == null) return;
-
                       onBookmarkButtonTap!();
                     },
                   )

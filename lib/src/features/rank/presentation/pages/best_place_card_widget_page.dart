@@ -8,11 +8,13 @@ class BestPlaceCardWidgetPage extends StatelessWidget {
   final PlaceModel place;
   final int rank;
   final bool showHeader;
+  final void Function()? onBookmarkButtonTap;
   const BestPlaceCardWidgetPage(
       {super.key,
       required this.place,
       required this.rank,
-      required this.showHeader});
+      required this.showHeader,
+      this.onBookmarkButtonTap});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class BestPlaceCardWidgetPage extends StatelessWidget {
         rank: rank,
         place: place,
         showHeader: showHeader,
+        onBookmarkButtonTap: onBookmarkButtonTap,
       ),
     );
   }

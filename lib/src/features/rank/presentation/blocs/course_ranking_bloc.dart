@@ -4,8 +4,8 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
 import 'package:solo_play_application/src/features/rank/domain/repositories/course_repository.dart';
-import 'package:solo_play_application/src/features/rank/presentation/blocs/courses_ranking_ui_event.dart';
-import 'package:solo_play_application/src/features/rank/presentation/blocs/courses_ranking_ui_state.dart';
+import 'package:solo_play_application/src/features/rank/presentation/blocs/courses_ranking_event.dart';
+import 'package:solo_play_application/src/features/rank/presentation/blocs/courses_ranking_state.dart';
 
 class CourseRankingBloc extends Bloc<CoursesRankingEvent, CoursesRankingState> {
   CourseRankingBloc({
@@ -13,6 +13,7 @@ class CourseRankingBloc extends Bloc<CoursesRankingEvent, CoursesRankingState> {
   }) : super(InitState()) {
     on<FetchInitialDatas>(_fetchInitialDatas);
     on<UserCourseFavoriteChanged>(_updateCourseData);
+    on<CourseBookmarkToggle>(_courseBookmarkToggleHandler);
   }
 
   final CourseRepository courseRepository;
@@ -42,5 +43,29 @@ class CourseRankingBloc extends Bloc<CoursesRankingEvent, CoursesRankingState> {
       }
       return course;
     }).toList()));
+  }
+
+  FutureOr<void> _courseBookmarkToggleHandler(
+      CourseBookmarkToggle event, Emitter<CoursesRankingState> emit) {
+    log('course bookmark toggle');
+
+    final target = event.course;
+    final prevState = (state as LoadedState);
+    final prevCourses = prevState.courses;
+
+    emit(prevState.copyWith(
+        courses: prevCourses.map((course) {
+      if (course == target) {
+        return target.copyWith(isFavorite: !target.isFavorite);
+      } else {
+        return course;
+      }
+    }).toList()));
+  }
+
+  @override
+  void onChange(Change<CoursesRankingState> change) {
+    log("prev state : ${change.currentState} next state : ${change.nextState}");
+    super.onChange(change);
   }
 }

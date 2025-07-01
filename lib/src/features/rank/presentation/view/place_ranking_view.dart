@@ -46,7 +46,6 @@ class PlaceRankingView extends HookWidget {
                     showHeader: true,
                     onBookmarkButtonTap: () {
                       bloc.add(UserBookmarkToggle(place: place));
-                      log("북마크 변경");
                     },
                   ),
                 );

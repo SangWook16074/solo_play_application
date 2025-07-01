@@ -4,7 +4,7 @@ import 'package:solo_play_application/src/core/providers/rank/course_api_service
 import 'package:solo_play_application/src/core/providers/rank/course_repository_provider.dart';
 import 'package:solo_play_application/src/features/rank/domain/repositories/course_repository.dart';
 import 'package:solo_play_application/src/features/rank/presentation/blocs/course_ranking_bloc.dart';
-import 'package:solo_play_application/src/features/rank/presentation/blocs/courses_ranking_ui_event.dart';
+import 'package:solo_play_application/src/features/rank/presentation/blocs/courses_ranking_event.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/course_ranking_view.dart';
 
 class CourseRankingPage extends StatelessWidget {

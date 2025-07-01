@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
 import 'package:solo_play_application/src/features/rank/data/models/place_model.dart';
 import 'package:solo_play_application/src/features/rank/presentation/cubits/place_cubit.dart';
-import 'package:solo_play_application/src/features/rank/presentation/pages/best_place_card_widget_page.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/course_map_view.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/place_review_view.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/similar_cafe_photo_view.dart';
+import 'package:solo_play_application/src/features/rank/presentation/widget/best_place_card_widget.dart';
 
 class DetailPlaceUI extends StatelessWidget {
   final int rank;
@@ -52,7 +52,7 @@ class DetailPlaceUI extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
-              child: BestPlaceCardWidgetPage(
+              child: BestPlaceCardWidget(
                 rank: rank,
                 place: place,
                 showHeader: false,
