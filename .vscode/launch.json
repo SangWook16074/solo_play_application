@@ -20,6 +20,12 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
+        },
+        {
+            "name": "Flutter (lib/src/features/rank/presentation/view/detail_place_ui.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/src/features/rank/presentation/view/detail_place_ui.dart"
         }
     ]
 }

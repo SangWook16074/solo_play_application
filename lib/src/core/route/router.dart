@@ -3,22 +3,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/features/auth/presentation/blocs/auth_bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/blocs/auth_state.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/pages/email_resister_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/pages/login_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/pages/password_resister_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/pages/terms_agreement_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/views/resister_flow_view.dart';
-import 'package:solo_play_application/src/features/course/presentation/view/course_detail_view.dart';
-import 'package:solo_play_application/src/features/post/presentation/view/posting_detail_view.dart';
-import 'package:solo_play_application/src/features/rank/presentation/view/detail_rank_ui.dart';
+import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
+import 'package:solo_play_application/src/features/app/presentation/pages/app_page.dart';
+import 'package:solo_play_application/src/features/post/presentation/view/post_ui.dart';
+import 'package:solo_play_application/src/features/rank/data/models/place_model.dart';
+import 'package:solo_play_application/src/features/rank/presentation/pages/detail_place_ui_page.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/detail_course_ui.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/rank_ui.dart';
+import 'package:solo_play_application/src/features/user/presentation/view/my_profile_ui.dart';
+
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final _shellRouteKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
+  navigatorKey: _rootNavigatorKey,
   initialLocation: "/",
   routes: [
-    /// 앱 실행 시 첫 화면 : home화면
-    ///
-    ///
     GoRoute(
       path: '/',
       redirect: (context, state) {
@@ -33,10 +38,7 @@ final GoRouter router = GoRouter(
         }
       },
     ),
-    GoRoute(
-      path: "/home",
-      builder: (context, state) => Container(),
-    ),
+
     GoRoute(
         path: '/auth',
         builder: (context, state) => const LoginPage(),
@@ -62,23 +64,133 @@ final GoRouter router = GoRouter(
           ),
         ]),
 
-    /// 나의 포스팅 화면으로 전환
-    GoRoute(
-      path: '/postingDetailView',
-      builder: (context, state) => const PostingDetailView(),
-    ),
+    /// 앱 실행 시 첫 화면 : home화면
+    ShellRoute(
+      navigatorKey: _shellRouteKey,
+      builder: (context, state, child) => AppPage(child: child),
+      routes: [
+        GoRoute(
+          parentNavigatorKey: _shellRouteKey,
+          path: '/home',
+          pageBuilder: (context, state) => CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: Container(),
+            transitionDuration: Duration.zero,
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
+                child: child,
+              );
+            },
+          ),
+        ),
+        GoRoute(
+          parentNavigatorKey: _shellRouteKey,
+          path: '/rank',
+          pageBuilder: (context, state) => CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: const RankUI(),
+            transitionDuration: Duration.zero,
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
+                child: child,
+              );
+            },
+          ),
+          routes: [
+            GoRoute(
+                path: 'detailPlace',
+                builder: (context, state) {
+                  final arguments = state.extra as Map<String, dynamic>;
+                  final rank = arguments['rank'] as int;
+                  final place = arguments['place'] as PlaceModel;
+                  if (rank is! int || place is! PlaceModel) {
+                    return const Scaffold(
+                      body: Center(
+                        child: Text('잘못된 접근입니다.'),
+                      ),
+                    );
+                  }
+                  return DetailPlaceUiPage(
+                    rank: rank,
+                    place: place,
+                  );
+                }),
+            GoRoute(
+                path: 'detailCourse',
+                builder: (context, state) {
+                  final arguments = state.extra as Map<String, dynamic>;
+                  final rank = arguments['rank'] as int;
+                  final course = arguments['course'] as CourseModel;
+                  if (rank is! int || course is! CourseModel) {
+                    return const Scaffold(
+                      body: Center(
+                        child: Text('잘못된 접근입니다.'),
+                      ),
+                    );
+                  }
 
-    /// 나의 코스 화면으로 전환
-    GoRoute(
-      path: '/courseDetailView',
-      builder: (context, state) => const CourseDetailView(),
+                  return DetailCourseUI(
+                    rank: rank,
+                    course: course,
+                  );
+                }),
+          ],
+        ),
+        GoRoute(
+          parentNavigatorKey: _shellRouteKey,
+          path: '/add',
+          pageBuilder: (context, state) => CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: Container(),
+            transitionDuration: Duration.zero,
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
+                child: child,
+              );
+            },
+          ),
+        ),
+        GoRoute(
+          parentNavigatorKey: _shellRouteKey,
+          path: '/posts',
+          pageBuilder: (context, state) => CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: const PostUI(),
+            transitionDuration: Duration.zero,
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
+                child: child,
+              );
+            },
+          ),
+          // builder: (context, state) => const PostUI(),
+        ),
+        GoRoute(
+          parentNavigatorKey: _shellRouteKey,
+          path: '/myprofiles',
+          pageBuilder: (context, state) => CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: const MyProfileUI(),
+            transitionDuration: Duration.zero,
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
+                child: child,
+              );
+            },
+          ),
+          // builder: (context, state) => const MyProfileUI(),
+        ),
+      ],
     ),
-
-    /// rank ui에서 카드를 오른쪽으로 swipe하여 detail 화면으로 전환
-    GoRoute(
-        path: '/detailRankUI',
-        builder: (context, state) {
-          return const DetailRankUI();
-        }),
   ],
 );

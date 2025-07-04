@@ -17,6 +17,4 @@ sealed class PasswordResisterUiEvent with _$PasswordResisterUiEvent {
 
   const factory PasswordResisterUiEvent.userPasswordCheckObscureToggle() =
       UserPasswordCheckObscureToggle;
-
-  const factory PasswordResisterUiEvent._() = _PasswordResisterUiEvent;
 }

@@ -209,24 +209,4 @@ class UserPasswordCheckObscureToggle implements PasswordResisterUiEvent {
   }
 }
 
-/// @nodoc
-
-class _PasswordResisterUiEvent implements PasswordResisterUiEvent {
-  const _PasswordResisterUiEvent();
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _PasswordResisterUiEvent);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  String toString() {
-    return 'PasswordResisterUiEvent._()';
-  }
-}
-
 // dart format on

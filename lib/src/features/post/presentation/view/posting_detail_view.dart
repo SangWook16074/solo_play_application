@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/style/theme_color.dart';
-import 'package:solo_play_application/src/features/course/presentation/widget/location_label.dart';
+import 'package:solo_play_application/src/core/widget/location_label.dart';
 import 'package:solo_play_application/src/core/widget/place_photo_widget.dart';
 
 class PostingDetailView extends StatelessWidget {

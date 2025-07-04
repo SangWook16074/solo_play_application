@@ -4,13 +4,16 @@ import 'package:solo_play_application/src/core/providers/app/app_bloc_providers.
 import 'package:solo_play_application/src/features/app/presentation/view/app_ui.dart';
 
 class AppPage extends StatelessWidget {
-  const AppPage({super.key});
+  final Widget child;
+  const AppPage({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: appBlocProvider,
-      child: const AppUI(),
+      child: AppUI(
+        child: child,
+      ),
     );
   }
 }

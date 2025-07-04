@@ -1,55 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/utils/bottom_nav_icon.dart';
-import 'package:solo_play_application/src/features/course/presentation/view/add_view.dart';
 import 'package:solo_play_application/src/features/app/presentation/cubits/bottom_nav_cubit.dart';
 import 'package:solo_play_application/src/core/widget/image_icon.dart';
-import 'package:solo_play_application/src/features/home/presentation/view/home_ui.dart';
-import 'package:solo_play_application/src/features/rank/presentation/view/rank_ui.dart';
-import 'package:solo_play_application/src/features/user/presentation/view/my_profile_ui.dart';
-import 'package:solo_play_application/src/features/post/presentation/view/post_ui.dart';
 
 class AppUI extends StatelessWidget {
-  const AppUI({super.key});
+  final Widget child;
+  const AppUI({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<BottomNavCubit>();
-    final state = viewModel.state;
+    final currentIndex = viewModel.state.index;
     return Scaffold(
       extendBody: true,
-      body: IndexedStack(
-        index: state.index,
-        children: [
-          Navigator(
-            key: viewModel.key,
-            onGenerateRoute: (settings) => MaterialPageRoute(
-              builder: (context) => const HomeUI(
-                key: Key("app-view-home-page"),
-              ),
-            ),
-          ),
-          const RankUI(
-            key: Key("app-view-rank-page"),
-          ),
-          const AddView(
-            key: Key("app-view-add-page"),
-          ),
-          const PostUI(
-            key: Key("app-view-post-page"),
-          ),
-          const MyProfileUI(
-            key: Key("app-view-my-page"),
-          ),
-        ],
-      ),
+      body: child,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
-        onTap: viewModel.changeIndex,
-        currentIndex: state.index,
+        onTap: (index) {
+          viewModel.changeIndex(index);
+          switch (index) {
+            case 0:
+              context.go('/');
+            case 1:
+              context.go('/rank');
+            case 2:
+              context.go('/add');
+            case 3:
+              context.go('/posts');
+            case 4:
+              context.go('/myprofiles');
+              break;
+          }
+        },
+        currentIndex: currentIndex,
         iconSize: 24,
         showSelectedLabels: false,
         showUnselectedLabels: false,
