@@ -11,7 +11,11 @@ class CustomTextField extends TextField {
       super.onChanged})
       : super(
             decoration: InputDecoration(
-                suffixIcon: suffixIcon,
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: suffixIcon,
+                ),
+                suffixIconConstraints: const BoxConstraints(maxHeight: 20.0),
                 suffixIconColor: const Color(0xff838383),
                 hintText: hintText,
                 hintStyle: const TextStyle(

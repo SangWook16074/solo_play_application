@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,101 +10,59 @@ part of 'course_response_dto.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-CourseResponseDto _$CourseResponseDtoFromJson(Map<String, dynamic> json) {
-  return _CourseResponseDto.fromJson(json);
-}
 
 /// @nodoc
 mixin _$CourseResponseDto {
-  String get name => throw _privateConstructorUsedError;
-  String get address => throw _privateConstructorUsedError;
-  List<String> get images => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  String get name;
+  String get address;
+  List<String> get images;
+  String get description;
   @JsonKey(name: "is_favorite")
-  bool get isFavorite => throw _privateConstructorUsedError;
-
-  /// Serializes this CourseResponseDto to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  bool get isFavorite;
 
   /// Create a copy of CourseResponseDto
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $CourseResponseDtoCopyWith<CourseResponseDto> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CourseResponseDtoCopyWith<$Res> {
-  factory $CourseResponseDtoCopyWith(
-          CourseResponseDto value, $Res Function(CourseResponseDto) then) =
-      _$CourseResponseDtoCopyWithImpl<$Res, CourseResponseDto>;
-  @useResult
-  $Res call(
-      {String name,
-      String address,
-      List<String> images,
-      String description,
-      @JsonKey(name: "is_favorite") bool isFavorite});
-}
-
-/// @nodoc
-class _$CourseResponseDtoCopyWithImpl<$Res, $Val extends CourseResponseDto>
-    implements $CourseResponseDtoCopyWith<$Res> {
-  _$CourseResponseDtoCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of CourseResponseDto
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $CourseResponseDtoCopyWith<CourseResponseDto> get copyWith =>
+      _$CourseResponseDtoCopyWithImpl<CourseResponseDto>(
+          this as CourseResponseDto, _$identity);
+
+  /// Serializes this CourseResponseDto to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? name = null,
-    Object? address = null,
-    Object? images = null,
-    Object? description = null,
-    Object? isFavorite = null,
-  }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      images: null == images
-          ? _value.images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      isFavorite: null == isFavorite
-          ? _value.isFavorite
-          : isFavorite // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CourseResponseDto &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.address, address) || other.address == address) &&
+            const DeepCollectionEquality().equals(other.images, images) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.isFavorite, isFavorite) ||
+                other.isFavorite == isFavorite));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, name, address,
+      const DeepCollectionEquality().hash(images), description, isFavorite);
+
+  @override
+  String toString() {
+    return 'CourseResponseDto(name: $name, address: $address, images: $images, description: $description, isFavorite: $isFavorite)';
   }
 }
 
 /// @nodoc
-abstract class _$$CourseResponseDtoImplCopyWith<$Res>
-    implements $CourseResponseDtoCopyWith<$Res> {
-  factory _$$CourseResponseDtoImplCopyWith(_$CourseResponseDtoImpl value,
-          $Res Function(_$CourseResponseDtoImpl) then) =
-      __$$CourseResponseDtoImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $CourseResponseDtoCopyWith<$Res> {
+  factory $CourseResponseDtoCopyWith(
+          CourseResponseDto value, $Res Function(CourseResponseDto) _then) =
+      _$CourseResponseDtoCopyWithImpl;
   @useResult
   $Res call(
       {String name,
@@ -114,12 +73,12 @@ abstract class _$$CourseResponseDtoImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$CourseResponseDtoImplCopyWithImpl<$Res>
-    extends _$CourseResponseDtoCopyWithImpl<$Res, _$CourseResponseDtoImpl>
-    implements _$$CourseResponseDtoImplCopyWith<$Res> {
-  __$$CourseResponseDtoImplCopyWithImpl(_$CourseResponseDtoImpl _value,
-      $Res Function(_$CourseResponseDtoImpl) _then)
-      : super(_value, _then);
+class _$CourseResponseDtoCopyWithImpl<$Res>
+    implements $CourseResponseDtoCopyWith<$Res> {
+  _$CourseResponseDtoCopyWithImpl(this._self, this._then);
+
+  final CourseResponseDto _self;
+  final $Res Function(CourseResponseDto) _then;
 
   /// Create a copy of CourseResponseDto
   /// with the given fields replaced by the non-null parameter values.
@@ -132,25 +91,25 @@ class __$$CourseResponseDtoImplCopyWithImpl<$Res>
     Object? description = null,
     Object? isFavorite = null,
   }) {
-    return _then(_$CourseResponseDtoImpl(
+    return _then(_self.copyWith(
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       address: null == address
-          ? _value.address
+          ? _self.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
       images: null == images
-          ? _value._images
+          ? _self.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>,
       description: null == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
       isFavorite: null == isFavorite
-          ? _value.isFavorite
+          ? _self.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
@@ -159,17 +118,16 @@ class __$$CourseResponseDtoImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CourseResponseDtoImpl implements _CourseResponseDto {
-  const _$CourseResponseDtoImpl(
+class _CourseResponseDto implements CourseResponseDto {
+  const _CourseResponseDto(
       {required this.name,
       required this.address,
       required final List<String> images,
       required this.description,
       @JsonKey(name: "is_favorite") required this.isFavorite})
       : _images = images;
-
-  factory _$CourseResponseDtoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CourseResponseDtoImplFromJson(json);
+  factory _CourseResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$CourseResponseDtoFromJson(json);
 
   @override
   final String name;
@@ -189,16 +147,26 @@ class _$CourseResponseDtoImpl implements _CourseResponseDto {
   @JsonKey(name: "is_favorite")
   final bool isFavorite;
 
+  /// Create a copy of CourseResponseDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'CourseResponseDto(name: $name, address: $address, images: $images, description: $description, isFavorite: $isFavorite)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CourseResponseDtoCopyWith<_CourseResponseDto> get copyWith =>
+      __$CourseResponseDtoCopyWithImpl<_CourseResponseDto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$CourseResponseDtoToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CourseResponseDtoImpl &&
+            other is _CourseResponseDto &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
@@ -213,51 +181,70 @@ class _$CourseResponseDtoImpl implements _CourseResponseDto {
   int get hashCode => Object.hash(runtimeType, name, address,
       const DeepCollectionEquality().hash(_images), description, isFavorite);
 
-  /// Create a copy of CourseResponseDto
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$CourseResponseDtoImplCopyWith<_$CourseResponseDtoImpl> get copyWith =>
-      __$$CourseResponseDtoImplCopyWithImpl<_$CourseResponseDtoImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CourseResponseDtoImplToJson(
-      this,
-    );
+  String toString() {
+    return 'CourseResponseDto(name: $name, address: $address, images: $images, description: $description, isFavorite: $isFavorite)';
   }
 }
 
-abstract class _CourseResponseDto implements CourseResponseDto {
-  const factory _CourseResponseDto(
-          {required final String name,
-          required final String address,
-          required final List<String> images,
-          required final String description,
-          @JsonKey(name: "is_favorite") required final bool isFavorite}) =
-      _$CourseResponseDtoImpl;
+/// @nodoc
+abstract mixin class _$CourseResponseDtoCopyWith<$Res>
+    implements $CourseResponseDtoCopyWith<$Res> {
+  factory _$CourseResponseDtoCopyWith(
+          _CourseResponseDto value, $Res Function(_CourseResponseDto) _then) =
+      __$CourseResponseDtoCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String name,
+      String address,
+      List<String> images,
+      String description,
+      @JsonKey(name: "is_favorite") bool isFavorite});
+}
 
-  factory _CourseResponseDto.fromJson(Map<String, dynamic> json) =
-      _$CourseResponseDtoImpl.fromJson;
+/// @nodoc
+class __$CourseResponseDtoCopyWithImpl<$Res>
+    implements _$CourseResponseDtoCopyWith<$Res> {
+  __$CourseResponseDtoCopyWithImpl(this._self, this._then);
 
-  @override
-  String get name;
-  @override
-  String get address;
-  @override
-  List<String> get images;
-  @override
-  String get description;
-  @override
-  @JsonKey(name: "is_favorite")
-  bool get isFavorite;
+  final _CourseResponseDto _self;
+  final $Res Function(_CourseResponseDto) _then;
 
   /// Create a copy of CourseResponseDto
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CourseResponseDtoImplCopyWith<_$CourseResponseDtoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? name = null,
+    Object? address = null,
+    Object? images = null,
+    Object? description = null,
+    Object? isFavorite = null,
+  }) {
+    return _then(_CourseResponseDto(
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      address: null == address
+          ? _self.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      images: null == images
+          ? _self._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      description: null == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      isFavorite: null == isFavorite
+          ? _self.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
+
+// dart format on

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,94 +10,54 @@ part of 'place_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PlaceEntity {
-  String get name => throw _privateConstructorUsedError;
-  String get address => throw _privateConstructorUsedError;
-  List<String> get images => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  String get name;
+  String get address;
+  List<String> get images;
+  String get description;
   @JsonKey(name: "is_favorite")
-  bool get isFavorite => throw _privateConstructorUsedError;
+  bool get isFavorite;
 
   /// Create a copy of PlaceEntity
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PlaceEntityCopyWith<PlaceEntity> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PlaceEntityCopyWith<$Res> {
-  factory $PlaceEntityCopyWith(
-          PlaceEntity value, $Res Function(PlaceEntity) then) =
-      _$PlaceEntityCopyWithImpl<$Res, PlaceEntity>;
-  @useResult
-  $Res call(
-      {String name,
-      String address,
-      List<String> images,
-      String description,
-      @JsonKey(name: "is_favorite") bool isFavorite});
-}
-
-/// @nodoc
-class _$PlaceEntityCopyWithImpl<$Res, $Val extends PlaceEntity>
-    implements $PlaceEntityCopyWith<$Res> {
-  _$PlaceEntityCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of PlaceEntity
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $PlaceEntityCopyWith<PlaceEntity> get copyWith =>
+      _$PlaceEntityCopyWithImpl<PlaceEntity>(this as PlaceEntity, _$identity);
+
   @override
-  $Res call({
-    Object? name = null,
-    Object? address = null,
-    Object? images = null,
-    Object? description = null,
-    Object? isFavorite = null,
-  }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      images: null == images
-          ? _value.images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      isFavorite: null == isFavorite
-          ? _value.isFavorite
-          : isFavorite // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PlaceEntity &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.address, address) || other.address == address) &&
+            const DeepCollectionEquality().equals(other.images, images) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.isFavorite, isFavorite) ||
+                other.isFavorite == isFavorite));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, name, address,
+      const DeepCollectionEquality().hash(images), description, isFavorite);
+
+  @override
+  String toString() {
+    return 'PlaceEntity(name: $name, address: $address, images: $images, description: $description, isFavorite: $isFavorite)';
   }
 }
 
 /// @nodoc
-abstract class _$$PlaceEntityImplCopyWith<$Res>
-    implements $PlaceEntityCopyWith<$Res> {
-  factory _$$PlaceEntityImplCopyWith(
-          _$PlaceEntityImpl value, $Res Function(_$PlaceEntityImpl) then) =
-      __$$PlaceEntityImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PlaceEntityCopyWith<$Res> {
+  factory $PlaceEntityCopyWith(
+          PlaceEntity value, $Res Function(PlaceEntity) _then) =
+      _$PlaceEntityCopyWithImpl;
   @useResult
   $Res call(
       {String name,
@@ -107,12 +68,11 @@ abstract class _$$PlaceEntityImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$PlaceEntityImplCopyWithImpl<$Res>
-    extends _$PlaceEntityCopyWithImpl<$Res, _$PlaceEntityImpl>
-    implements _$$PlaceEntityImplCopyWith<$Res> {
-  __$$PlaceEntityImplCopyWithImpl(
-      _$PlaceEntityImpl _value, $Res Function(_$PlaceEntityImpl) _then)
-      : super(_value, _then);
+class _$PlaceEntityCopyWithImpl<$Res> implements $PlaceEntityCopyWith<$Res> {
+  _$PlaceEntityCopyWithImpl(this._self, this._then);
+
+  final PlaceEntity _self;
+  final $Res Function(PlaceEntity) _then;
 
   /// Create a copy of PlaceEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -125,25 +85,25 @@ class __$$PlaceEntityImplCopyWithImpl<$Res>
     Object? description = null,
     Object? isFavorite = null,
   }) {
-    return _then(_$PlaceEntityImpl(
+    return _then(_self.copyWith(
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       address: null == address
-          ? _value.address
+          ? _self.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
       images: null == images
-          ? _value._images
+          ? _self.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>,
       description: null == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
       isFavorite: null == isFavorite
-          ? _value.isFavorite
+          ? _self.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
@@ -152,8 +112,8 @@ class __$$PlaceEntityImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PlaceEntityImpl extends _PlaceEntity {
-  const _$PlaceEntityImpl(
+class _PlaceEntity extends PlaceEntity {
+  const _PlaceEntity(
       {required this.name,
       required this.address,
       required final List<String> images,
@@ -180,16 +140,19 @@ class _$PlaceEntityImpl extends _PlaceEntity {
   @JsonKey(name: "is_favorite")
   final bool isFavorite;
 
+  /// Create a copy of PlaceEntity
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PlaceEntity(name: $name, address: $address, images: $images, description: $description, isFavorite: $isFavorite)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PlaceEntityCopyWith<_PlaceEntity> get copyWith =>
+      __$PlaceEntityCopyWithImpl<_PlaceEntity>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PlaceEntityImpl &&
+            other is _PlaceEntity &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
@@ -203,41 +166,69 @@ class _$PlaceEntityImpl extends _PlaceEntity {
   int get hashCode => Object.hash(runtimeType, name, address,
       const DeepCollectionEquality().hash(_images), description, isFavorite);
 
+  @override
+  String toString() {
+    return 'PlaceEntity(name: $name, address: $address, images: $images, description: $description, isFavorite: $isFavorite)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$PlaceEntityCopyWith<$Res>
+    implements $PlaceEntityCopyWith<$Res> {
+  factory _$PlaceEntityCopyWith(
+          _PlaceEntity value, $Res Function(_PlaceEntity) _then) =
+      __$PlaceEntityCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String name,
+      String address,
+      List<String> images,
+      String description,
+      @JsonKey(name: "is_favorite") bool isFavorite});
+}
+
+/// @nodoc
+class __$PlaceEntityCopyWithImpl<$Res> implements _$PlaceEntityCopyWith<$Res> {
+  __$PlaceEntityCopyWithImpl(this._self, this._then);
+
+  final _PlaceEntity _self;
+  final $Res Function(_PlaceEntity) _then;
+
   /// Create a copy of PlaceEntity
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$PlaceEntityImplCopyWith<_$PlaceEntityImpl> get copyWith =>
-      __$$PlaceEntityImplCopyWithImpl<_$PlaceEntityImpl>(this, _$identity);
+  $Res call({
+    Object? name = null,
+    Object? address = null,
+    Object? images = null,
+    Object? description = null,
+    Object? isFavorite = null,
+  }) {
+    return _then(_PlaceEntity(
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      address: null == address
+          ? _self.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      images: null == images
+          ? _self._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      description: null == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      isFavorite: null == isFavorite
+          ? _self.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
-abstract class _PlaceEntity extends PlaceEntity {
-  const factory _PlaceEntity(
-          {required final String name,
-          required final String address,
-          required final List<String> images,
-          required final String description,
-          @JsonKey(name: "is_favorite") required final bool isFavorite}) =
-      _$PlaceEntityImpl;
-  const _PlaceEntity._() : super._();
-
-  @override
-  String get name;
-  @override
-  String get address;
-  @override
-  List<String> get images;
-  @override
-  String get description;
-  @override
-  @JsonKey(name: "is_favorite")
-  bool get isFavorite;
-
-  /// Create a copy of PlaceEntity
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PlaceEntityImplCopyWith<_$PlaceEntityImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

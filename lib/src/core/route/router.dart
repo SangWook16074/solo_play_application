@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/auth_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/auth_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/pages/email_resister_page.dart';
+import 'package:solo_play_application/src/features/auth/presentation/pages/login_page.dart';
+import 'package:solo_play_application/src/features/auth/presentation/pages/password_resister_page.dart';
+import 'package:solo_play_application/src/features/auth/presentation/pages/terms_agreement_page.dart';
+import 'package:solo_play_application/src/features/auth/presentation/views/resister_flow_view.dart';
 import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
 import 'package:solo_play_application/src/features/app/presentation/pages/app_page.dart';
 import 'package:solo_play_application/src/features/post/presentation/view/post_ui.dart';
@@ -16,6 +24,46 @@ final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: "/",
   routes: [
+    GoRoute(
+      path: '/',
+      redirect: (context, state) {
+        final state = context.watch<AuthBloc>().state;
+        switch (state) {
+          case Authenticate():
+            return "/home";
+          case UnAuthenticate():
+            return "/auth";
+          case Loading():
+            return "/loading";
+        }
+      },
+    ),
+
+    GoRoute(
+        path: '/auth',
+        builder: (context, state) => const LoginPage(),
+        routes: [
+          ShellRoute(
+            builder: (context, state, child) {
+              return ResisterFlowView(child: child);
+            },
+            routes: [
+              GoRoute(
+                path: '/signup/terms',
+                builder: (context, state) => const TermsAgreementPage(),
+              ),
+              GoRoute(
+                path: '/signup/email',
+                builder: (context, state) => const EmailResisterPage(),
+              ),
+              GoRoute(
+                path: '/signup/password',
+                builder: (context, state) => const PasswordResisterPage(),
+              ),
+            ],
+          ),
+        ]),
+
     /// 앱 실행 시 첫 화면 : home화면
     ShellRoute(
       navigatorKey: _shellRouteKey,
@@ -23,7 +71,7 @@ final GoRouter router = GoRouter(
       routes: [
         GoRoute(
           parentNavigatorKey: _shellRouteKey,
-          path: '/',
+          path: '/home',
           pageBuilder: (context, state) => CustomTransitionPage<void>(
             key: state.pageKey,
             child: Container(),

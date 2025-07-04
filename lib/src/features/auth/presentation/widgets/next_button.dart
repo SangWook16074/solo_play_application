@@ -10,7 +10,7 @@ class NextButton extends StatelessWidget {
     return GestureDetector(
         onTap: () {
           if (enabled) return;
-          onTap;
+          onTap();
         },
         child: Container(
           alignment: Alignment.center,

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,87 +10,59 @@ part of 'login_ui_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LoginUiState {
-  String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
-  bool get obscureText => throw _privateConstructorUsedError;
+  String get email;
+  String get password;
+  bool get obscureText;
 
   /// Create a copy of LoginUiState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $LoginUiStateCopyWith<LoginUiState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $LoginUiStateCopyWith<$Res> {
-  factory $LoginUiStateCopyWith(
-          LoginUiState value, $Res Function(LoginUiState) then) =
-      _$LoginUiStateCopyWithImpl<$Res, LoginUiState>;
-  @useResult
-  $Res call({String email, String password, bool obscureText});
-}
-
-/// @nodoc
-class _$LoginUiStateCopyWithImpl<$Res, $Val extends LoginUiState>
-    implements $LoginUiStateCopyWith<$Res> {
-  _$LoginUiStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of LoginUiState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $LoginUiStateCopyWith<LoginUiState> get copyWith =>
+      _$LoginUiStateCopyWithImpl<LoginUiState>(
+          this as LoginUiState, _$identity);
+
   @override
-  $Res call({
-    Object? email = null,
-    Object? password = null,
-    Object? obscureText = null,
-  }) {
-    return _then(_value.copyWith(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      obscureText: null == obscureText
-          ? _value.obscureText
-          : obscureText // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is LoginUiState &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.obscureText, obscureText) ||
+                other.obscureText == obscureText));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email, password, obscureText);
+
+  @override
+  String toString() {
+    return 'LoginUiState(email: $email, password: $password, obscureText: $obscureText)';
   }
 }
 
 /// @nodoc
-abstract class _$$LoginUiStateImplCopyWith<$Res>
-    implements $LoginUiStateCopyWith<$Res> {
-  factory _$$LoginUiStateImplCopyWith(
-          _$LoginUiStateImpl value, $Res Function(_$LoginUiStateImpl) then) =
-      __$$LoginUiStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $LoginUiStateCopyWith<$Res> {
+  factory $LoginUiStateCopyWith(
+          LoginUiState value, $Res Function(LoginUiState) _then) =
+      _$LoginUiStateCopyWithImpl;
   @useResult
   $Res call({String email, String password, bool obscureText});
 }
 
 /// @nodoc
-class __$$LoginUiStateImplCopyWithImpl<$Res>
-    extends _$LoginUiStateCopyWithImpl<$Res, _$LoginUiStateImpl>
-    implements _$$LoginUiStateImplCopyWith<$Res> {
-  __$$LoginUiStateImplCopyWithImpl(
-      _$LoginUiStateImpl _value, $Res Function(_$LoginUiStateImpl) _then)
-      : super(_value, _then);
+class _$LoginUiStateCopyWithImpl<$Res> implements $LoginUiStateCopyWith<$Res> {
+  _$LoginUiStateCopyWithImpl(this._self, this._then);
+
+  final LoginUiState _self;
+  final $Res Function(LoginUiState) _then;
 
   /// Create a copy of LoginUiState
   /// with the given fields replaced by the non-null parameter values.
@@ -100,17 +73,17 @@ class __$$LoginUiStateImplCopyWithImpl<$Res>
     Object? password = null,
     Object? obscureText = null,
   }) {
-    return _then(_$LoginUiStateImpl(
+    return _then(_self.copyWith(
       email: null == email
-          ? _value.email
+          ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
       password: null == password
-          ? _value.password
+          ? _self.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
       obscureText: null == obscureText
-          ? _value.obscureText
+          ? _self.obscureText
           : obscureText // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
@@ -119,8 +92,8 @@ class __$$LoginUiStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoginUiStateImpl implements _LoginUiState {
-  const _$LoginUiStateImpl(
+class _LoginUiState implements LoginUiState {
+  const _LoginUiState(
       {this.email = "", this.password = "", this.obscureText = true});
 
   @override
@@ -133,16 +106,19 @@ class _$LoginUiStateImpl implements _LoginUiState {
   @JsonKey()
   final bool obscureText;
 
+  /// Create a copy of LoginUiState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'LoginUiState(email: $email, password: $password, obscureText: $obscureText)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$LoginUiStateCopyWith<_LoginUiState> get copyWith =>
+      __$LoginUiStateCopyWithImpl<_LoginUiState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoginUiStateImpl &&
+            other is _LoginUiState &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password) &&
@@ -153,32 +129,55 @@ class _$LoginUiStateImpl implements _LoginUiState {
   @override
   int get hashCode => Object.hash(runtimeType, email, password, obscureText);
 
+  @override
+  String toString() {
+    return 'LoginUiState(email: $email, password: $password, obscureText: $obscureText)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$LoginUiStateCopyWith<$Res>
+    implements $LoginUiStateCopyWith<$Res> {
+  factory _$LoginUiStateCopyWith(
+          _LoginUiState value, $Res Function(_LoginUiState) _then) =
+      __$LoginUiStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String email, String password, bool obscureText});
+}
+
+/// @nodoc
+class __$LoginUiStateCopyWithImpl<$Res>
+    implements _$LoginUiStateCopyWith<$Res> {
+  __$LoginUiStateCopyWithImpl(this._self, this._then);
+
+  final _LoginUiState _self;
+  final $Res Function(_LoginUiState) _then;
+
   /// Create a copy of LoginUiState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoginUiStateImplCopyWith<_$LoginUiStateImpl> get copyWith =>
-      __$$LoginUiStateImplCopyWithImpl<_$LoginUiStateImpl>(this, _$identity);
+  $Res call({
+    Object? email = null,
+    Object? password = null,
+    Object? obscureText = null,
+  }) {
+    return _then(_LoginUiState(
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _self.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      obscureText: null == obscureText
+          ? _self.obscureText
+          : obscureText // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
-abstract class _LoginUiState implements LoginUiState {
-  const factory _LoginUiState(
-      {final String email,
-      final String password,
-      final bool obscureText}) = _$LoginUiStateImpl;
-
-  @override
-  String get email;
-  @override
-  String get password;
-  @override
-  bool get obscureText;
-
-  /// Create a copy of LoginUiState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoginUiStateImplCopyWith<_$LoginUiStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

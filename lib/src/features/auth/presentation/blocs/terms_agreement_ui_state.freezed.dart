@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,131 +10,106 @@ part of 'terms_agreement_ui_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
-mixin _$TermsAgreementUiState {
-  bool get isFirstAgree => throw _privateConstructorUsedError;
-  bool get isSecondAgree => throw _privateConstructorUsedError;
-  bool get isThirdAgree => throw _privateConstructorUsedError;
-  bool get isFourthAgree => throw _privateConstructorUsedError;
+mixin _$TermsAgreementUiState implements DiagnosticableTreeMixin {
+  bool get isOver14;
+  bool get isAgreedToTerms;
+  bool get isAgreedToMarketing;
+  bool get isConsentedToAds;
 
   /// Create a copy of TermsAgreementUiState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $TermsAgreementUiStateCopyWith<TermsAgreementUiState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TermsAgreementUiStateCopyWith<$Res> {
-  factory $TermsAgreementUiStateCopyWith(TermsAgreementUiState value,
-          $Res Function(TermsAgreementUiState) then) =
-      _$TermsAgreementUiStateCopyWithImpl<$Res, TermsAgreementUiState>;
-  @useResult
-  $Res call(
-      {bool isFirstAgree,
-      bool isSecondAgree,
-      bool isThirdAgree,
-      bool isFourthAgree});
-}
-
-/// @nodoc
-class _$TermsAgreementUiStateCopyWithImpl<$Res,
-        $Val extends TermsAgreementUiState>
-    implements $TermsAgreementUiStateCopyWith<$Res> {
-  _$TermsAgreementUiStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of TermsAgreementUiState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $TermsAgreementUiStateCopyWith<TermsAgreementUiState> get copyWith =>
+      _$TermsAgreementUiStateCopyWithImpl<TermsAgreementUiState>(
+          this as TermsAgreementUiState, _$identity);
+
   @override
-  $Res call({
-    Object? isFirstAgree = null,
-    Object? isSecondAgree = null,
-    Object? isThirdAgree = null,
-    Object? isFourthAgree = null,
-  }) {
-    return _then(_value.copyWith(
-      isFirstAgree: null == isFirstAgree
-          ? _value.isFirstAgree
-          : isFirstAgree // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSecondAgree: null == isSecondAgree
-          ? _value.isSecondAgree
-          : isSecondAgree // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isThirdAgree: null == isThirdAgree
-          ? _value.isThirdAgree
-          : isThirdAgree // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFourthAgree: null == isFourthAgree
-          ? _value.isFourthAgree
-          : isFourthAgree // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'TermsAgreementUiState'))
+      ..add(DiagnosticsProperty('isOver14', isOver14))
+      ..add(DiagnosticsProperty('isAgreedToTerms', isAgreedToTerms))
+      ..add(DiagnosticsProperty('isAgreedToMarketing', isAgreedToMarketing))
+      ..add(DiagnosticsProperty('isConsentedToAds', isConsentedToAds));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TermsAgreementUiState &&
+            (identical(other.isOver14, isOver14) ||
+                other.isOver14 == isOver14) &&
+            (identical(other.isAgreedToTerms, isAgreedToTerms) ||
+                other.isAgreedToTerms == isAgreedToTerms) &&
+            (identical(other.isAgreedToMarketing, isAgreedToMarketing) ||
+                other.isAgreedToMarketing == isAgreedToMarketing) &&
+            (identical(other.isConsentedToAds, isConsentedToAds) ||
+                other.isConsentedToAds == isConsentedToAds));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isOver14, isAgreedToTerms,
+      isAgreedToMarketing, isConsentedToAds);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TermsAgreementUiState(isOver14: $isOver14, isAgreedToTerms: $isAgreedToTerms, isAgreedToMarketing: $isAgreedToMarketing, isConsentedToAds: $isConsentedToAds)';
   }
 }
 
 /// @nodoc
-abstract class _$$TermsAgreementUiStateImplCopyWith<$Res>
-    implements $TermsAgreementUiStateCopyWith<$Res> {
-  factory _$$TermsAgreementUiStateImplCopyWith(
-          _$TermsAgreementUiStateImpl value,
-          $Res Function(_$TermsAgreementUiStateImpl) then) =
-      __$$TermsAgreementUiStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $TermsAgreementUiStateCopyWith<$Res> {
+  factory $TermsAgreementUiStateCopyWith(TermsAgreementUiState value,
+          $Res Function(TermsAgreementUiState) _then) =
+      _$TermsAgreementUiStateCopyWithImpl;
   @useResult
   $Res call(
-      {bool isFirstAgree,
-      bool isSecondAgree,
-      bool isThirdAgree,
-      bool isFourthAgree});
+      {bool isOver14,
+      bool isAgreedToTerms,
+      bool isAgreedToMarketing,
+      bool isConsentedToAds});
 }
 
 /// @nodoc
-class __$$TermsAgreementUiStateImplCopyWithImpl<$Res>
-    extends _$TermsAgreementUiStateCopyWithImpl<$Res,
-        _$TermsAgreementUiStateImpl>
-    implements _$$TermsAgreementUiStateImplCopyWith<$Res> {
-  __$$TermsAgreementUiStateImplCopyWithImpl(_$TermsAgreementUiStateImpl _value,
-      $Res Function(_$TermsAgreementUiStateImpl) _then)
-      : super(_value, _then);
+class _$TermsAgreementUiStateCopyWithImpl<$Res>
+    implements $TermsAgreementUiStateCopyWith<$Res> {
+  _$TermsAgreementUiStateCopyWithImpl(this._self, this._then);
+
+  final TermsAgreementUiState _self;
+  final $Res Function(TermsAgreementUiState) _then;
 
   /// Create a copy of TermsAgreementUiState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isFirstAgree = null,
-    Object? isSecondAgree = null,
-    Object? isThirdAgree = null,
-    Object? isFourthAgree = null,
+    Object? isOver14 = null,
+    Object? isAgreedToTerms = null,
+    Object? isAgreedToMarketing = null,
+    Object? isConsentedToAds = null,
   }) {
-    return _then(_$TermsAgreementUiStateImpl(
-      isFirstAgree: null == isFirstAgree
-          ? _value.isFirstAgree
-          : isFirstAgree // ignore: cast_nullable_to_non_nullable
+    return _then(_self.copyWith(
+      isOver14: null == isOver14
+          ? _self.isOver14
+          : isOver14 // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSecondAgree: null == isSecondAgree
-          ? _value.isSecondAgree
-          : isSecondAgree // ignore: cast_nullable_to_non_nullable
+      isAgreedToTerms: null == isAgreedToTerms
+          ? _self.isAgreedToTerms
+          : isAgreedToTerms // ignore: cast_nullable_to_non_nullable
               as bool,
-      isThirdAgree: null == isThirdAgree
-          ? _value.isThirdAgree
-          : isThirdAgree // ignore: cast_nullable_to_non_nullable
+      isAgreedToMarketing: null == isAgreedToMarketing
+          ? _self.isAgreedToMarketing
+          : isAgreedToMarketing // ignore: cast_nullable_to_non_nullable
               as bool,
-      isFourthAgree: null == isFourthAgree
-          ? _value.isFourthAgree
-          : isFourthAgree // ignore: cast_nullable_to_non_nullable
+      isConsentedToAds: null == isConsentedToAds
+          ? _self.isConsentedToAds
+          : isConsentedToAds // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -141,94 +117,124 @@ class __$$TermsAgreementUiStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TermsAgreementUiStateImpl extends _TermsAgreementUiState
+class _TermsAgreementUiState extends TermsAgreementUiState
     with DiagnosticableTreeMixin {
-  const _$TermsAgreementUiStateImpl(
-      {this.isFirstAgree = false,
-      this.isSecondAgree = false,
-      this.isThirdAgree = false,
-      this.isFourthAgree = false})
+  const _TermsAgreementUiState(
+      {this.isOver14 = false,
+      this.isAgreedToTerms = false,
+      this.isAgreedToMarketing = false,
+      this.isConsentedToAds = false})
       : super._();
 
   @override
   @JsonKey()
-  final bool isFirstAgree;
+  final bool isOver14;
   @override
   @JsonKey()
-  final bool isSecondAgree;
+  final bool isAgreedToTerms;
   @override
   @JsonKey()
-  final bool isThirdAgree;
+  final bool isAgreedToMarketing;
   @override
   @JsonKey()
-  final bool isFourthAgree;
+  final bool isConsentedToAds;
 
+  /// Create a copy of TermsAgreementUiState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TermsAgreementUiState(isFirstAgree: $isFirstAgree, isSecondAgree: $isSecondAgree, isThirdAgree: $isThirdAgree, isFourthAgree: $isFourthAgree)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TermsAgreementUiStateCopyWith<_TermsAgreementUiState> get copyWith =>
+      __$TermsAgreementUiStateCopyWithImpl<_TermsAgreementUiState>(
+          this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TermsAgreementUiState'))
-      ..add(DiagnosticsProperty('isFirstAgree', isFirstAgree))
-      ..add(DiagnosticsProperty('isSecondAgree', isSecondAgree))
-      ..add(DiagnosticsProperty('isThirdAgree', isThirdAgree))
-      ..add(DiagnosticsProperty('isFourthAgree', isFourthAgree));
+      ..add(DiagnosticsProperty('isOver14', isOver14))
+      ..add(DiagnosticsProperty('isAgreedToTerms', isAgreedToTerms))
+      ..add(DiagnosticsProperty('isAgreedToMarketing', isAgreedToMarketing))
+      ..add(DiagnosticsProperty('isConsentedToAds', isConsentedToAds));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TermsAgreementUiStateImpl &&
-            (identical(other.isFirstAgree, isFirstAgree) ||
-                other.isFirstAgree == isFirstAgree) &&
-            (identical(other.isSecondAgree, isSecondAgree) ||
-                other.isSecondAgree == isSecondAgree) &&
-            (identical(other.isThirdAgree, isThirdAgree) ||
-                other.isThirdAgree == isThirdAgree) &&
-            (identical(other.isFourthAgree, isFourthAgree) ||
-                other.isFourthAgree == isFourthAgree));
+            other is _TermsAgreementUiState &&
+            (identical(other.isOver14, isOver14) ||
+                other.isOver14 == isOver14) &&
+            (identical(other.isAgreedToTerms, isAgreedToTerms) ||
+                other.isAgreedToTerms == isAgreedToTerms) &&
+            (identical(other.isAgreedToMarketing, isAgreedToMarketing) ||
+                other.isAgreedToMarketing == isAgreedToMarketing) &&
+            (identical(other.isConsentedToAds, isConsentedToAds) ||
+                other.isConsentedToAds == isConsentedToAds));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isFirstAgree, isSecondAgree, isThirdAgree, isFourthAgree);
+  int get hashCode => Object.hash(runtimeType, isOver14, isAgreedToTerms,
+      isAgreedToMarketing, isConsentedToAds);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TermsAgreementUiState(isOver14: $isOver14, isAgreedToTerms: $isAgreedToTerms, isAgreedToMarketing: $isAgreedToMarketing, isConsentedToAds: $isConsentedToAds)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$TermsAgreementUiStateCopyWith<$Res>
+    implements $TermsAgreementUiStateCopyWith<$Res> {
+  factory _$TermsAgreementUiStateCopyWith(_TermsAgreementUiState value,
+          $Res Function(_TermsAgreementUiState) _then) =
+      __$TermsAgreementUiStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {bool isOver14,
+      bool isAgreedToTerms,
+      bool isAgreedToMarketing,
+      bool isConsentedToAds});
+}
+
+/// @nodoc
+class __$TermsAgreementUiStateCopyWithImpl<$Res>
+    implements _$TermsAgreementUiStateCopyWith<$Res> {
+  __$TermsAgreementUiStateCopyWithImpl(this._self, this._then);
+
+  final _TermsAgreementUiState _self;
+  final $Res Function(_TermsAgreementUiState) _then;
 
   /// Create a copy of TermsAgreementUiState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$TermsAgreementUiStateImplCopyWith<_$TermsAgreementUiStateImpl>
-      get copyWith => __$$TermsAgreementUiStateImplCopyWithImpl<
-          _$TermsAgreementUiStateImpl>(this, _$identity);
+  $Res call({
+    Object? isOver14 = null,
+    Object? isAgreedToTerms = null,
+    Object? isAgreedToMarketing = null,
+    Object? isConsentedToAds = null,
+  }) {
+    return _then(_TermsAgreementUiState(
+      isOver14: null == isOver14
+          ? _self.isOver14
+          : isOver14 // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAgreedToTerms: null == isAgreedToTerms
+          ? _self.isAgreedToTerms
+          : isAgreedToTerms // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAgreedToMarketing: null == isAgreedToMarketing
+          ? _self.isAgreedToMarketing
+          : isAgreedToMarketing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isConsentedToAds: null == isConsentedToAds
+          ? _self.isConsentedToAds
+          : isConsentedToAds // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
-abstract class _TermsAgreementUiState extends TermsAgreementUiState {
-  const factory _TermsAgreementUiState(
-      {final bool isFirstAgree,
-      final bool isSecondAgree,
-      final bool isThirdAgree,
-      final bool isFourthAgree}) = _$TermsAgreementUiStateImpl;
-  const _TermsAgreementUiState._() : super._();
-
-  @override
-  bool get isFirstAgree;
-  @override
-  bool get isSecondAgree;
-  @override
-  bool get isThirdAgree;
-  @override
-  bool get isFourthAgree;
-
-  /// Create a copy of TermsAgreementUiState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TermsAgreementUiStateImplCopyWith<_$TermsAgreementUiStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

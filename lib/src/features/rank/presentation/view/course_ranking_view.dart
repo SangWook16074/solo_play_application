@@ -27,6 +27,7 @@ class CourseRankingView extends HookWidget {
       /// 로딩 완료 상태
       case LoadedState(courses: final courses):
         final bloc = context.read<CourseRankingBloc>();
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -64,6 +65,5 @@ class CourseRankingView extends HookWidget {
       case ErrorState():
         return Container();
     }
-    ;
   }
 }

@@ -6,9 +6,8 @@ part of 'place_response_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PlaceResponseDtoImpl _$$PlaceResponseDtoImplFromJson(
-        Map<String, dynamic> json) =>
-    _$PlaceResponseDtoImpl(
+_PlaceResponseDto _$PlaceResponseDtoFromJson(Map<String, dynamic> json) =>
+    _PlaceResponseDto(
       name: json['name'] as String,
       address: json['address'] as String,
       images:
@@ -17,8 +16,7 @@ _$PlaceResponseDtoImpl _$$PlaceResponseDtoImplFromJson(
       isFavorite: json['is_favorite'] as bool,
     );
 
-Map<String, dynamic> _$$PlaceResponseDtoImplToJson(
-        _$PlaceResponseDtoImpl instance) =>
+Map<String, dynamic> _$PlaceResponseDtoToJson(_PlaceResponseDto instance) =>
     <String, dynamic>{
       'name': instance.name,
       'address': instance.address,

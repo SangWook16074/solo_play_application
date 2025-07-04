@@ -6,9 +6,8 @@ part of 'course_response_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CourseResponseDtoImpl _$$CourseResponseDtoImplFromJson(
-        Map<String, dynamic> json) =>
-    _$CourseResponseDtoImpl(
+_CourseResponseDto _$CourseResponseDtoFromJson(Map<String, dynamic> json) =>
+    _CourseResponseDto(
       name: json['name'] as String,
       address: json['address'] as String,
       images:
@@ -17,8 +16,7 @@ _$CourseResponseDtoImpl _$$CourseResponseDtoImplFromJson(
       isFavorite: json['is_favorite'] as bool,
     );
 
-Map<String, dynamic> _$$CourseResponseDtoImplToJson(
-        _$CourseResponseDtoImpl instance) =>
+Map<String, dynamic> _$CourseResponseDtoToJson(_CourseResponseDto instance) =>
     <String, dynamic>{
       'name': instance.name,
       'address': instance.address,
