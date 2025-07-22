@@ -5,7 +5,7 @@ import 'package:solo_play_application/src/features/rank/presentation/blocs/place
 import 'package:solo_play_application/src/features/rank/presentation/widget/best_place_card_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/blocs/place_ranking_bloc.dart';
 import 'package:solo_play_application/src/features/rank/presentation/blocs/place_ranking_event.dart';
-import 'package:solo_play_application/src/features/rank/presentation/widget/show_tip_widget.dart';
+import 'package:solo_play_application/src/features/rank/presentation/widget/show_tip_place_widget.dart';
 
 class PlaceRankingView extends HookWidget {
   const PlaceRankingView({super.key});
@@ -25,7 +25,7 @@ class PlaceRankingView extends HookWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             /// 장소에서 tip을 보여주는 고정 위젯
-            const ShowTipWidget(),
+            const ShowTipPlaceWidget(),
 
             /// place에서의 핫플 place card widget을 보여줌.
             /// 순위 갯수만큼 보여줌(최대 10개).

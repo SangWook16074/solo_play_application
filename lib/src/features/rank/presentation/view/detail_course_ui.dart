@@ -4,6 +4,7 @@ import 'package:solo_play_application/src/features/rank/presentation/view/simila
 import 'package:solo_play_application/src/features/rank/presentation/widget/best_course_card_widget.dart';
 import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
 import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
+import 'package:solo_play_application/src/features/rank/presentation/widget/routine_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/start_course_button_widget.dart';
 
 class DetailCourseUI extends StatefulWidget {
@@ -79,6 +80,9 @@ class _DetailCourseUIState extends State<DetailCourseUI> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const SizedBox(height: 12),
+            RoutineWidget(),
+            const SizedBox(height: 12),
             BestCourseCardWidget(
                 rank: widget.rank, showHeader: false, course: widget.course),
             const SizedBox(height: 12),

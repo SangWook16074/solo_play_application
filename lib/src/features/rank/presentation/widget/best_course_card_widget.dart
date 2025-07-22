@@ -4,7 +4,7 @@ import 'package:solo_play_application/src/core/widget/action_button_widget.dart'
 import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
 import 'package:solo_play_application/src/core/widget/slide_course_image_widget.dart';
 import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
-import 'package:solo_play_application/src/features/rank/presentation/widget/level_tag_widget.dart';
+import 'package:solo_play_application/src/core/widget/level_tag_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/rank_number_widget.dart';
 
 class BestCourseCardWidget extends StatelessWidget {
@@ -24,20 +24,29 @@ class BestCourseCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     /// 화면을 오른쪽에서 왼쪽으로 당겨 detail coure view로 이동할 수 있다.
     return GestureDetector(
-      onHorizontalDragEnd: (details) {
-        if (details.primaryVelocity != null &&
-            details.primaryVelocity! < 0 &&
-            showHeader == true) {
-          context.push('/rank/detailCourse', extra: {
+      // onHorizontalDragEnd: (details) {
+      //   if (details.primaryVelocity != null &&
+      //       details.primaryVelocity! < 0 &&
+      //       showHeader == true) {
+      //     context.push('/rank/detailCourse', extra: {
+      //       'rank': rank,
+      //       'course': course,
+      //     });
+      //   }
+      // },
+      onTap: () {
+        context.push(
+          '/rank/detailCourse',
+          extra: {
             'rank': rank,
             'course': course,
-          });
-        }
+          },
+        );
       },
       child: Container(
         decoration: BoxDecoration(
           color: const Color(0xffffffff),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

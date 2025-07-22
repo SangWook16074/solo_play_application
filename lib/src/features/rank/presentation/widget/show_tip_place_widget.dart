@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ShowTipWidget extends StatelessWidget {
-  const ShowTipWidget({super.key});
+class ShowTipPlaceWidget extends StatelessWidget {
+  const ShowTipPlaceWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
