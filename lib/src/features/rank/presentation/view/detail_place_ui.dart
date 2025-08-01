@@ -42,7 +42,7 @@ class DetailPlaceUI extends StatelessWidget {
                 onTap: context.read<PlaceCubit>().toggle,
                 isBookmarked: context.watch<PlaceCubit>().state.isFavorite,
               ),
-            )
+            ),
           ],
         ),
       ),

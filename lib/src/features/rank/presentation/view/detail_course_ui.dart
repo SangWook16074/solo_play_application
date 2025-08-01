@@ -4,6 +4,7 @@ import 'package:solo_play_application/src/features/rank/presentation/view/simila
 import 'package:solo_play_application/src/features/rank/presentation/widget/best_course_card_widget.dart';
 import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
 import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
+import 'package:solo_play_application/src/features/rank/presentation/widget/rank_number_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/routine_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/start_course_button_widget.dart';
 
@@ -27,24 +28,7 @@ class _DetailCourseUIState extends State<DetailCourseUI> {
         title: Row(
           children: [
             /// 랭킹 순위 번호
-            Container(
-              width: 30,
-              height: 30,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: const Color(0xffEDF5FF),
-              ),
-              child: Text(
-                textAlign: TextAlign.center,
-                '${widget.rank}',
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  fontStyle: FontStyle.normal,
-                  color: Color(0xff0072FF),
-                ),
-              ),
-            ),
+            RankNumberWidget(rank: widget.rank),
 
             /// 장소의 이름 및 위치
 

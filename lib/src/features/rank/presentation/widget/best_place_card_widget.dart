@@ -174,6 +174,8 @@ class PlaceCardHeaderWidget extends StatelessWidget {
               children: [
                 /// 랭킹 순위 번호
                 RankNumberWidget(rank: rank),
+
+                /// 장소 이름과 주소
                 Padding(
                   padding: EdgeInsets.only(left: 8.0),
                   child: Column(

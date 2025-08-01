@@ -20,7 +20,7 @@ class _CourseMapWidgetState extends State<CourseMapWidget> {
           child: Container(
             height: 400,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(10),
               border: Border.all(
                 width: 1,
                 color: const Color(0xffCACACA),
@@ -39,8 +39,8 @@ class _CourseMapWidgetState extends State<CourseMapWidget> {
               height: 337,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(5),
-                  topLeft: Radius.circular(5),
+                  topRight: Radius.circular(10),
+                  topLeft: Radius.circular(10),
                 ),
                 color: Colors.blue,
               ),

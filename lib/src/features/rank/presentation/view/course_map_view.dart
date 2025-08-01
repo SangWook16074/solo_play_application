@@ -9,7 +9,7 @@ class CourseMapView extends StatelessWidget {
     return Container(
       height: 456,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(10),
         color: const Color(0xffFFFFFF),
       ),
       child: Column(

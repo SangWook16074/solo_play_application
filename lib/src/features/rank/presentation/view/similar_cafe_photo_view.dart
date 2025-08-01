@@ -23,7 +23,7 @@ class _SimilarCafePhotoViewState extends State<SimilarCafePhotoView> {
     return Container(
       height: 295,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(10),
         color: const Color(0xFFFFFFFF),
       ),
       child: Column(

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:solo_play_application/src/core/widget/profile_image_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/tag_widget.dart';
 
-class ReviewWidget extends StatelessWidget {
-  const ReviewWidget({super.key});
+class ReviewCardWidget extends StatelessWidget {
+  const ReviewCardWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +20,14 @@ class ReviewWidget extends StatelessWidget {
             width: 227,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(5),
-                topRight: Radius.circular(5),
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
               ),
             ),
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(5),
-                topRight: Radius.circular(5),
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
               ),
               child: Image.network(
                 'https://cdn.bhdw.net/im/cafe-of-the-woods-wallpaper-41165_w635.webp',

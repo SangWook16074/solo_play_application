@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:solo_play_application/src/features/rank/presentation/widget/review_widget.dart';
+import 'package:go_router/go_router.dart';
+import 'package:solo_play_application/src/features/rank/presentation/widget/review_card_widget.dart';
 
 class PlaceReviewView extends StatelessWidget {
   const PlaceReviewView({super.key});
@@ -10,7 +11,7 @@ class PlaceReviewView extends StatelessWidget {
     return Container(
       height: 331,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(10),
         color: const Color(0xFFFFFFFF),
       ),
       child: Column(
@@ -30,7 +31,9 @@ class PlaceReviewView extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    context.push('/rank/detailPlace/detailReview');
+                  },
                   child: const Icon(Icons.arrow_forward_ios, size: 18),
                 ),
               ],
@@ -80,7 +83,7 @@ class PlaceReviewView extends StatelessWidget {
               itemCount: 3,
               itemBuilder: (context, index) => const Padding(
                 padding: EdgeInsets.only(right: 12.0),
-                child: ReviewWidget(),
+                child: ReviewCardWidget(),
               ),
             ),
           ),

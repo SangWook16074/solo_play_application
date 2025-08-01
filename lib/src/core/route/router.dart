@@ -14,6 +14,7 @@ import 'package:solo_play_application/src/features/post/presentation/view/post_u
 import 'package:solo_play_application/src/features/rank/data/models/place_model.dart';
 import 'package:solo_play_application/src/features/rank/presentation/pages/detail_place_ui_page.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/detail_course_ui.dart';
+import 'package:solo_play_application/src/features/rank/presentation/view/detail_place_review_ui.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/rank_ui.dart';
 import 'package:solo_play_application/src/features/user/presentation/view/my_profile_ui.dart';
 
@@ -28,6 +29,7 @@ final GoRouter router = GoRouter(
       path: '/',
       redirect: (context, state) {
         final state = context.watch<AuthBloc>().state;
+
         switch (state) {
           case Authenticate():
             return "/home";
@@ -102,23 +104,30 @@ final GoRouter router = GoRouter(
           ),
           routes: [
             GoRoute(
-                path: 'detailPlace',
-                builder: (context, state) {
-                  final arguments = state.extra as Map<String, dynamic>;
-                  final rank = arguments['rank'] as int;
-                  final place = arguments['place'] as PlaceModel;
-                  if (rank is! int || place is! PlaceModel) {
-                    return const Scaffold(
-                      body: Center(
-                        child: Text('잘못된 접근입니다.'),
-                      ),
-                    );
-                  }
-                  return DetailPlaceUiPage(
-                    rank: rank,
-                    place: place,
+              path: 'detailPlace',
+              builder: (context, state) {
+                final arguments = state.extra as Map<String, dynamic>;
+                final rank = arguments['rank'] as int;
+                final place = arguments['place'] as PlaceModel;
+                if (rank is! int || place is! PlaceModel) {
+                  return const Scaffold(
+                    body: Center(
+                      child: Text('잘못된 접근입니다.'),
+                    ),
                   );
-                }),
+                }
+                return DetailPlaceUiPage(
+                  rank: rank,
+                  place: place,
+                );
+              },
+              routes: [
+                GoRoute(
+                  path: 'detailReview',
+                  builder: (context, state) => DetailPlaceReviewUI(),
+                ),
+              ],
+            ),
             GoRoute(
                 path: 'detailCourse',
                 builder: (context, state) {
