@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_event.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/terms/terms_agreement_ui_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/terms/terms_agreement_ui_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/terms/terms_agreement_ui_state.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/agreement_list_tile.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/check_button.dart';
 

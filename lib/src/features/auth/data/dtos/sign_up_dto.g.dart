@@ -24,3 +24,13 @@ Map<String, dynamic> _$SignUpDtoToJson(_SignUpDto instance) =>
       'isAgreedToMarketing': instance.isAgreedToMarketing,
       'isConsentedToAds': instance.isConsentedToAds,
     };
+
+_SignUpResponseDto _$SignUpResponseDtoFromJson(Map<String, dynamic> json) =>
+    _SignUpResponseDto(
+      message: json['message'] as String,
+    );
+
+Map<String, dynamic> _$SignUpResponseDtoToJson(_SignUpResponseDto instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+    };

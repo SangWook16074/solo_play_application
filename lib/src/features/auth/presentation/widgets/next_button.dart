@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class NextButton extends StatelessWidget {
   final Function() onTap;
   final bool enabled;
-  const NextButton({super.key, required this.onTap, required this.enabled});
+  final String label;
+  const NextButton(
+      {super.key,
+      required this.onTap,
+      required this.enabled,
+      required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,7 @@ class NextButton extends StatelessWidget {
             color: enabled ? const Color(0xffF8F8F8) : const Color(0xff266FF7),
           ),
           child: Text(
-            "다음",
+            label,
             style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 16,

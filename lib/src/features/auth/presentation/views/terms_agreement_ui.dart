@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/resister/resister_ui_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/resister/resister_ui_event.dart';
 import 'package:solo_play_application/src/features/auth/presentation/views/all_agreement_row.dart';
 import 'package:solo_play_application/src/features/auth/presentation/views/first_agreement_row.dart';
 import 'package:solo_play_application/src/features/auth/presentation/views/fourth_agreement_row.dart';
@@ -12,7 +12,7 @@ import 'package:solo_play_application/src/features/auth/presentation/views/secon
 import 'package:solo_play_application/src/features/auth/presentation/views/third_agreement_row.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/next_button.dart';
 
-import '../blocs/terms_agreement.dart';
+import '../blocs/terms/terms_agreement.dart';
 
 class TermsAgreementUI extends StatelessWidget {
   const TermsAgreementUI({super.key});
@@ -47,9 +47,10 @@ class TermsAgreementUI extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 37,
-            ),
+            Spacer(),
+            // const SizedBox(
+            //   height: 37,
+            // ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: AllAgreementRow(),
@@ -115,21 +116,24 @@ class TermsAgreementUI extends StatelessWidget {
                 },
                 builder: (context, isAgree) {
                   return NextButton(
-                      onTap: () {
-                        if (isAgree) {
-                          final state =
-                              context.read<TermsAgreementUiBloc>().state;
-                          final resisterUiBloc = context.read<ResisterUiBloc>();
-                          resisterUiBloc.add(UserTermsChanged(
-                              isOver14: state.isOver14,
-                              isAgreedToMarketing: state.isAgreedToMarketing,
-                              isAgreedToTerms: state.isAgreedToTerms,
-                              isConsentedToAds: state.isConsentedToAds));
-                          log("move to resister email ui");
-                          context.push("/auth/signup/email");
-                        }
-                      },
-                      enabled: !isAgree);
+                    onTap: () {
+                      if (isAgree) {
+                        final state =
+                            context.read<TermsAgreementUiBloc>().state;
+                        final resisterUiBloc = context.read<ResisterUiBloc>();
+                        resisterUiBloc.add(UserTermsChanged(
+                            isOver14: state.isOver14,
+                            isAgreedToMarketing: state.isAgreedToMarketing,
+                            isAgreedToTerms: state.isAgreedToTerms,
+                            isConsentedToAds: state.isConsentedToAds));
+                        log("move to resister email ui");
+                        resisterUiBloc.add(UserMoveToEmailResisterUI());
+                        // context.push("/auth/");
+                      }
+                    },
+                    label: "다음",
+                    enabled: !isAgree,
+                  );
                 },
               ),
             )

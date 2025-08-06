@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/agreement_list_tile.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/check_button.dart';
 
-import '../blocs/terms_agreement.dart';
+import '../blocs/terms/terms_agreement.dart';
 
 class FirstAgreementRow extends StatelessWidget {
   const FirstAgreementRow({super.key});

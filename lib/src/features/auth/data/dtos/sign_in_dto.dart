@@ -13,3 +13,14 @@ abstract class SignInDto with _$SignInDto {
   factory SignInDto.fromJson(Map<String, dynamic> json) =>
       _$SignInDtoFromJson(json);
 }
+
+@freezed
+abstract class SignInResponseDto with _$SignInResponseDto {
+  const factory SignInResponseDto({
+    required String accessToken,
+    required String refreshToken,
+  }) = _SignInResponseDto;
+
+  factory SignInResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$SignInResponseDtoFromJson(json);
+}

@@ -2,10 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/password_resister_ui_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/password_resister_ui_state.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_event.dart';
+import 'package:go_router/go_router.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/password/password_resister_ui_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/password/password_resister_ui_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/resister/resister_ui_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/resister/resister_ui_event.dart';
 import 'package:solo_play_application/src/features/auth/presentation/views/password_resister_textfield_view.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/next_button.dart';
 
@@ -74,21 +75,21 @@ class PasswordResisterUI extends StatelessWidget {
                     },
                     builder: (context, isPasswordChecked) {
                       return NextButton(
-                          onTap: () {
-                            if (!isPasswordChecked) {
-                              return;
-                            }
+                        onTap: () {
+                          if (!isPasswordChecked) {
+                            return;
+                          }
 
-                            log("move to authenticate ui");
-                            final state =
-                                context.read<PasswordResisterUiBloc>().state;
-                            final resisterUiBloc =
-                                context.read<ResisterUiBloc>();
-                            resisterUiBloc.add(
-                                UserPasswordChanged(password: state.password));
-                            // context.go("/signup/password");
-                          },
-                          enabled: !isPasswordChecked);
+                          final state =
+                              context.read<PasswordResisterUiBloc>().state;
+                          final resisterUiBloc = context.read<ResisterUiBloc>();
+                          resisterUiBloc.add(
+                              UserPasswordChanged(password: state.password));
+                          resisterUiBloc.add(UserMoveToVerificationUI());
+                        },
+                        label: "다음",
+                        enabled: !isPasswordChecked,
+                      );
                     },
                   ),
                 )

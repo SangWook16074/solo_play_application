@@ -16,3 +16,15 @@ Map<String, dynamic> _$SignInDtoToJson(_SignInDto instance) =>
       'email': instance.email,
       'password': instance.password,
     };
+
+_SignInResponseDto _$SignInResponseDtoFromJson(Map<String, dynamic> json) =>
+    _SignInResponseDto(
+      accessToken: json['accessToken'] as String,
+      refreshToken: json['refreshToken'] as String,
+    );
+
+Map<String, dynamic> _$SignInResponseDtoToJson(_SignInResponseDto instance) =>
+    <String, dynamic>{
+      'accessToken': instance.accessToken,
+      'refreshToken': instance.refreshToken,
+    };
