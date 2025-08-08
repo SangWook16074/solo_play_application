@@ -81,6 +81,7 @@ class DetailPlaceReviewUI extends StatelessWidget {
             WritePlaceReviewView(),
             SizedBox(height: 10),
             ShowReviewView(),
+            SizedBox(height: 10),
           ],
         ),
       ),
