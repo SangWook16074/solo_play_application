@@ -8,11 +8,11 @@ import 'dart:async' as _i5;
 import 'package:flutter/foundation.dart' as _i3;
 import 'package:flutter_bloc/flutter_bloc.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_bloc.dart'
+import 'package:solo_play_application/src/features/auth/presentation/blocs/terms/terms_agreement_ui_bloc.dart'
     as _i4;
-import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_event.dart'
+import 'package:solo_play_application/src/features/auth/presentation/blocs/terms/terms_agreement_ui_event.dart'
     as _i7;
-import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_state.dart'
+import 'package:solo_play_application/src/features/auth/presentation/blocs/terms/terms_agreement_ui_state.dart'
     as _i2;
 
 // ignore_for_file: type=lint
