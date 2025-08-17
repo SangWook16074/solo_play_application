@@ -3,7 +3,7 @@ import 'package:solo_play_application/src/features/place/data/models/place_model
     show PlaceModel;
 
 void main() {
-  group('PlaceModel', () {
+  group(PlaceModel, () {
     test('should create a valid PlaceModel when using constructor', () {
       // when
       final place = PlaceModel(
