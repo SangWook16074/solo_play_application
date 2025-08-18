@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'email_resister_ui_state.freezed.dart';
 
-enum EmailValidateState { emtpy, validate, invalidate, conflict }
+enum EmailValidState { empty, validate, invalidate, conflict }
 
 @freezed
 abstract class EmailResisterUiState with _$EmailResisterUiState {
@@ -14,20 +14,20 @@ abstract class EmailResisterUiState with _$EmailResisterUiState {
 
   const EmailResisterUiState._();
 
-  bool get isEmailValidate {
+  bool get isEmailValid {
     final emailRegex = RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
     return emailRegex.hasMatch(email);
   }
 
-  EmailValidateState get emailValidateState {
-    if (email.isEmpty) return EmailValidateState.emtpy;
+  EmailValidState get emailValidateState {
+    if (email.isEmpty) return EmailValidState.empty;
 
-    if (errorMsg.isNotEmpty) return EmailValidateState.conflict;
+    if (errorMsg.isNotEmpty) return EmailValidState.conflict;
 
-    if (isEmailValidate) {
-      return EmailValidateState.validate;
+    if (isEmailValid) {
+      return EmailValidState.validate;
     } else {
-      return EmailValidateState.invalidate;
+      return EmailValidState.invalidate;
     }
   }
 }

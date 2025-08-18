@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:solo_play_application/src/core/widget/image_indicator_widget.dart';
-import 'package:solo_play_application/src/core/widget/place_photo_widget.dart';
+import 'package:solo_play_application/src/core/widgets/image_indicator_widget.dart';
+import 'package:solo_play_application/src/core/widgets/place_photo_widget.dart';
 
 class SlideCourseImageWidget extends HookWidget {
   final List<String> images;

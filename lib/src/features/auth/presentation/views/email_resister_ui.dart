@@ -79,7 +79,7 @@ class EmailResisterUI extends StatelessWidget {
                     child: BlocSelector<EmailResisterUiBloc,
                         EmailResisterUiState, bool>(
                       selector: (state) {
-                        return state.isEmailValidate;
+                        return state.isEmailValid;
                       },
                       builder: (context, isEmailValidate) {
                         return NextButton(

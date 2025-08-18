@@ -3,7 +3,7 @@ import 'package:solo_play_application/src/features/rank/presentation/view/place_
 import 'package:solo_play_application/src/features/rank/presentation/view/similar_cafe_photo_view.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/best_course_card_widget.dart';
 import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
-import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
+import 'package:solo_play_application/src/core/widgets/bookmark_icon.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/start_course_button_widget.dart';
 
 class DetailCourseUI extends StatefulWidget {

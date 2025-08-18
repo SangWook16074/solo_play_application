@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solo_play_application/src/core/style/theme_color.dart';
-import 'package:solo_play_application/src/core/widget/location_label.dart';
+import 'package:solo_play_application/src/core/widgets/location_label.dart';
 import 'package:solo_play_application/src/features/post/presentation/view/post_view.dart';
 
 class PostUI extends StatelessWidget {

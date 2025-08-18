@@ -44,7 +44,5 @@ void main() {
         )
       ],
     );
-
-    // blocTest("", build: () => bloc, act: (bloc) => ,)
   });
 }

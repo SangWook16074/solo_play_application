@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/widget/image_indicator_widget.dart';
+import 'package:solo_play_application/src/core/widgets/image_indicator_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/tag_widget.dart';
 
 class SimilarPlacePhotoWidget extends StatefulWidget {

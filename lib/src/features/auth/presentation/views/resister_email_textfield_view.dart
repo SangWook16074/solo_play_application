@@ -31,20 +31,18 @@ class ResisterEmailTextFieldView extends StatelessWidget {
             bloc.add(UserEmailInput(email: email));
           },
           suffixIcon: BlocSelector<EmailResisterUiBloc, EmailResisterUiState,
-              EmailValidateState>(
+              EmailValidState>(
             selector: (state) {
               return state.emailValidateState;
             },
             builder: (context, emailValidateState) {
-              if (emailValidateState == EmailValidateState.emtpy) {
+              if (emailValidateState == EmailValidState.empty) {
                 return Container(
                   width: 20,
                 );
               }
               final isValidate =
-                  emailValidateState == EmailValidateState.validate
-                      ? true
-                      : false;
+                  emailValidateState == EmailValidState.validate ? true : false;
               return ValidationIcon(isValidate: isValidate);
             },
           ),
@@ -53,12 +51,12 @@ class ResisterEmailTextFieldView extends StatelessWidget {
           height: 4,
         ),
         BlocSelector<EmailResisterUiBloc, EmailResisterUiState,
-            EmailValidateState>(
+            EmailValidState>(
           selector: (state) {
             return state.emailValidateState;
           },
           builder: (context, emailValidateState) {
-            return emailValidateState == EmailValidateState.invalidate
+            return emailValidateState == EmailValidState.invalidate
                 ? const Text(
                     "올바른 형식으로 입력해 주세요.",
                     style: TextStyle(

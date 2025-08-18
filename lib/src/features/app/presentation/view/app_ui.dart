@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/utils/bottom_nav_icon.dart';
 import 'package:solo_play_application/src/features/app/presentation/cubits/bottom_nav_cubit.dart';
-import 'package:solo_play_application/src/core/widget/image_icon.dart';
+import 'package:solo_play_application/src/core/widgets/image_icon.dart';
 
 class AppUI extends StatelessWidget {
   final Widget child;
