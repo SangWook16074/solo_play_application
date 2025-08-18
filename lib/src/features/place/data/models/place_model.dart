@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:solo_play_application/src/core/typedefs/json_map.dart';
+import 'package:solo_play_application/src/core/utils/json_map.dart';
 
 part 'place_model.freezed.dart';
 part 'place_model.g.dart';

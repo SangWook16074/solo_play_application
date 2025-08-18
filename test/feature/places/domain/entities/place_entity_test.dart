@@ -17,8 +17,8 @@ void main() {
       final level = Level.ONE;
       final tags = ['tag1', 'tag2'];
       final urls = ['https://example.com/img1', 'https://example.com/img2'];
-      final parentCategory = ParentCategory.cultureArt;
-      final category = PlaceCategory.cafe;
+      final parentCategory = ParentCategory.CULTURE_ART;
+      final category = PlaceCategory.CAFE;
       final likes = 10;
       final createdAt = DateTime.now();
 
@@ -56,8 +56,8 @@ void main() {
       final level = "ONE";
       final tags = ['tag1', 'tag2'];
       final urls = ['https://example.com/img1', 'https://example.com/img2'];
-      final parentCategory = "cultureArt";
-      final category = "cafe";
+      final parentCategory = "CULTURE_ART";
+      final category = "CAFE";
       final likes = 10;
       final createdAt = DateTime.now();
 
@@ -83,8 +83,8 @@ void main() {
       expect(place.level, Level.ONE);
       expect(place.tags, tags);
       expect(place.urls, urls);
-      expect(place.parentCategory, ParentCategory.cultureArt);
-      expect(place.category, PlaceCategory.cafe);
+      expect(place.parentCategory, ParentCategory.CULTURE_ART);
+      expect(place.category, PlaceCategory.CAFE);
       expect(place.likes, likes);
       expect(place.createdAt, createdAt);
     });
@@ -97,8 +97,8 @@ void main() {
       final level = Level.ONE;
       final tags = ['tag1', 'tag2'];
       final urls = ['https://example.com/img1', 'https://example.com/img2'];
-      final parentCategory = ParentCategory.cultureArt;
-      final category = PlaceCategory.cafe;
+      final parentCategory = ParentCategory.CULTURE_ART;
+      final category = PlaceCategory.CAFE;
       final likes = 10;
       final createdAt = DateTime.now();
 
