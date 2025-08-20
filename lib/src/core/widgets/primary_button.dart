@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
 
-class NextStepButton extends StatelessWidget {
+class PrimaryButton extends StatelessWidget {
   final Widget? activeChild;
   final Widget? child;
   final void Function()? onTap;
-  const NextStepButton({super.key, this.activeChild, this.child, this.onTap});
+  const PrimaryButton({super.key, this.activeChild, this.child, this.onTap});
 
   @override
   Widget build(BuildContext context) {

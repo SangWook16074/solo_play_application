@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/core/widgets/next_step_button.dart';
+import 'package:solo_play_application/src/core/widgets/primary_button.dart';
 
 void main() {
   final Text child = Text("label");
@@ -8,14 +8,14 @@ void main() {
   List arr = [];
   void Function()? onTap;
 
-  group(NextStepButton, () {
+  group(PrimaryButton, () {
     late Widget widget;
 
     group("NextStepButton Inactive", () {
       setUp(() {
         widget = MaterialApp(
           home: Scaffold(
-            body: NextStepButton(
+            body: PrimaryButton(
               onTap: onTap,
               activeChild: activeChild,
               child: child,
@@ -42,7 +42,7 @@ void main() {
             BorderRadius.circular(10));
         expect((target.decoration as BoxDecoration).color, Color(0xffEEEEEE));
 
-        expectLater(find.byType(NextStepButton),
+        expectLater(find.byType(PrimaryButton),
             matchesGoldenFile("goldens/next_step_button_default.png"));
       });
     });
@@ -51,7 +51,7 @@ void main() {
       setUp(() {
         widget = MaterialApp(
           home: Scaffold(
-            body: NextStepButton(
+            body: PrimaryButton(
               onTap: () {
                 arr.add(0);
               },
@@ -82,13 +82,13 @@ void main() {
             BorderRadius.circular(10));
         expect((target.decoration as BoxDecoration).color, Color(0xff266FF7));
 
-        expectLater(find.byType(NextStepButton),
+        expectLater(find.byType(PrimaryButton),
             matchesGoldenFile("goldens/next_step_button_active.png"));
       });
 
       testWidgets('should call onTap when user tap widget', (tester) async {
         await tester.pumpWidget(widget);
-        await tester.tap(find.byType(NextStepButton));
+        await tester.tap(find.byType(PrimaryButton));
 
         expect(arr.length, 1);
         expect(arr.first, 0);

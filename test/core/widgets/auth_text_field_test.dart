@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/features/auth/presentation/widgets/auth_text_field.dart';
+import 'package:solo_play_application/src/core/widgets/primary_text_field.dart';
 
 void main() {
-  final label = "test label";
   final hintLabel = "hintLabel";
 
-  group(AuthTextField, () {
+  group(PrimaryTextField, () {
     late Widget widget;
     setUp(() {
       widget = MaterialApp(
         home: Scaffold(
-          body: AuthTextField(
-            label: label,
+          body: PrimaryTextField(
             hintText: hintLabel,
           ),
         ),
@@ -21,8 +19,8 @@ void main() {
 
     testWidgets('should render correctly when unfocus', (tester) async {
       await tester.pumpWidget(widget);
-      final widgetFinder = find.byType(TextField);
-      final target = tester.widget<TextField>(widgetFinder);
+      final widgetFinder = find.byType(PrimaryTextField);
+      final target = tester.widget<PrimaryTextField>(widgetFinder);
 
       expect(
           target.decoration?.enabledBorder,
@@ -32,13 +30,13 @@ void main() {
           ));
       expect(target.decoration?.hintText, hintLabel);
 
-      await expectLater(find.byType(AuthTextField),
+      await expectLater(find.byType(PrimaryTextField),
           matchesGoldenFile("goldens/auth_text_field_default.png"));
     });
 
     testWidgets('should redner correctly when focus', (tester) async {
       await tester.pumpWidget(widget);
-      final widgetFinder = find.byType(TextField);
+      final widgetFinder = find.byType(PrimaryTextField);
 
       await tester.tap(widgetFinder);
       await tester.pumpAndSettle();
@@ -53,7 +51,7 @@ void main() {
           ));
       expect(target.decoration?.hintText, hintLabel);
 
-      await expectLater(find.byType(AuthTextField),
+      await expectLater(find.byType(PrimaryTextField),
           matchesGoldenFile("goldens/auth_text_field_focus.png"));
     });
   });
