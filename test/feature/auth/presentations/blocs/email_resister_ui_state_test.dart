@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/email/email_resister_ui_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_state.dart';
 
 void main() {
   group(EmailResisterUiState, () {

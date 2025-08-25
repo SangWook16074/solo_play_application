@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/core/widgets/primary_button.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/email/email_resister_ui_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/email/email_resister_ui_event.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/email/email_resister_ui_state.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/resister/resister_ui_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/resister/resister_ui_event.dart';
-import 'package:solo_play_application/src/features/auth/presentation/widgets/email_resister/email_resister_ui_header.dart';
-import 'package:solo_play_application/src/features/auth/presentation/widgets/email_resister/email_resister_ui_text_field_section.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/widgets/email_resister_ui_header.dart';
+import 'package:solo_play_application/src/features/auth/presentation/widgets/email_resister_ui_text_field_section.dart';
 
 class EmailResisterUI extends StatelessWidget {
   const EmailResisterUI({super.key});

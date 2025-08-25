@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/auth/auth_event.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/auth/auth_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/auth_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(const UnAuthenticate()) {

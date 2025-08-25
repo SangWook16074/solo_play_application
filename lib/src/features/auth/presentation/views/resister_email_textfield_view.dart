@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/email/email_resister_ui_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/email/email_resister_ui_event.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/email/email_resister_ui_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_state.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/custom_text_field.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/validation_icon.dart';
 

@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/resister/resister_ui_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/resister/resister_ui_event.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/resister/resister_ui_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_state.dart';
 import 'package:test/test.dart';
 
 void main() {

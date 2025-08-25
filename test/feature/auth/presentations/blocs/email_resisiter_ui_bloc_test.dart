@@ -1,9 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:solo_play_application/src/features/auth/domain/usecases/check_email_duplicate_usecase.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/email/email_resister_ui_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/email/email_resister_ui_event.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/email/email_resister_ui_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_state.dart';
 import 'package:test/test.dart';
 
 import 'email_resisiter_ui_bloc_test.mocks.dart';

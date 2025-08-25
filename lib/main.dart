@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/core/providers/global_providers.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/auth/auth_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/auth_bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/pages/email_verification_page.dart';
 
 void main() {

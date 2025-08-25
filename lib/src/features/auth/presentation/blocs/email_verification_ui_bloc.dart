@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/verification/email_verification_ui_event.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/verification/email_verification_ui_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/email_verification_ui_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/email_verification_ui_state.dart';
 
 class EmailVerificationUiBloc
     extends Bloc<EmailVerificationUiEvent, EmailVerificationUiState> {

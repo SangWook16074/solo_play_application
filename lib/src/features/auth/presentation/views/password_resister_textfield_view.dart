@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/core/widgets/image_icon.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/password/password_resister_ui_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/password/password_resister_ui_event.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/password/password_resister_ui_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/password_resister_ui_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/password_resister_ui_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/password_resister_ui_state.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/custom_text_field.dart';
 
 class PasswordResisterTextFieldView extends StatelessWidget {

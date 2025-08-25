@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/terms/terms_agreement_ui_event.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/terms/terms_agreement_ui_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_state.dart';
 
 class TermsAgreementUiBloc
     extends Bloc<TermsAgreementUiEvent, TermsAgreementUiState> {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/features/auth/presentation/views/login_text_field_view.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/login_button.dart';
+import 'package:solo_play_application/src/features/auth/presentation/widgets/login_text_fields_section.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/resister_button.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/label_button.dart';
 
@@ -43,7 +44,7 @@ class LoginUI extends StatelessWidget {
                 const SizedBox(
                   height: 48,
                 ),
-                const LoginTextFieldView(),
+                LoginTextFieldsSection(),
                 const SizedBox(
                   height: 73,
                 ),

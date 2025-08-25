@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 class PrimaryTextField extends TextField {
   final String? hintText;
-  PrimaryTextField({super.key, this.hintText})
+  final TextStyle? hintStyle;
+
+  PrimaryTextField({super.key, this.hintText, this.hintStyle, super.onChanged})
       : super(
             decoration: InputDecoration(
                 hintText: hintText,
+                hintStyle: hintStyle,
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide:

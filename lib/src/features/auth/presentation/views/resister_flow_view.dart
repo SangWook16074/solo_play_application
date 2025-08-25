@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:solo_play_application/src/features/auth/presentation/blocs/resister/resister_ui_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/resister/resister_ui_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_state.dart';
 
 /// 사용자의 회원가입 Flow
 ///

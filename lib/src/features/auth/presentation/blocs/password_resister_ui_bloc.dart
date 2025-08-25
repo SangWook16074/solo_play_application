@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/password/password_resister_ui_event.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/password/password_resister_ui_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/password_resister_ui_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/password_resister_ui_state.dart';
 
 class PasswordResisterUiBloc
     extends Bloc<PasswordResisterUiEvent, PasswordResisterUiState> {

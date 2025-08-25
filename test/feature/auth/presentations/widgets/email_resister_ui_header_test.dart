@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/features/auth/presentation/widgets/email_resister/email_resister_ui_header.dart';
+import 'package:solo_play_application/src/features/auth/presentation/widgets/email_resister_ui_header.dart';
 
 void main() {
   late Widget widget;

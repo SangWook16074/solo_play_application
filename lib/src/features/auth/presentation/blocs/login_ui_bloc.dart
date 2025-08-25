@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/login/login_ui_event.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/login/login_ui_state.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/login_ui_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/login_ui_state.dart';
 
 class LoginUiBloc extends Bloc<LoginUiEvent, LoginUiState> {
   LoginUiBloc() : super(const LoginUiState()) {

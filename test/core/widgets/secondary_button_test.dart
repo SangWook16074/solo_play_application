@@ -8,6 +8,7 @@ void main() {
   group(SecondaryButton, () {
     final backgroundColor = Color(0xffEEEEEE);
     final child = Text('child');
+    final arr = [];
     setUp(() {
       widget = MaterialApp(
         home: Scaffold(
@@ -15,10 +16,17 @@ void main() {
           body: Center(
             child: SecondaryButton(
               child: child,
+              onTap: () {
+                arr.add(0);
+              },
             ),
           ),
         ),
       );
+    });
+
+    tearDown(() {
+      arr.clear();
     });
 
     testWidgets('should return Color(0xffEEEEEE) on background',
@@ -65,6 +73,14 @@ void main() {
       final size = tester.getSize(find.byType(SecondaryButton));
 
       expect(size.height, 57);
+    });
+
+    testWidgets('should onTap call work correctly', (tester) async {
+      await tester.pumpWidget(widget);
+      await tester.tap(find.byType(SecondaryButton));
+
+      expect(arr.length, 1);
+      expect(arr.first, 0);
     });
 
     testWidgets('should render correctly when build', (tester) async {
