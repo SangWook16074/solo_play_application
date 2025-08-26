@@ -17,8 +17,16 @@ class PrimaryButton extends StatelessWidget {
             color: onTap != null ? Color(0xff266FF7) : Color(0xffEEEEEE),
             borderRadius: BorderRadius.circular(10)),
         alignment: Alignment.center,
-        child: onTap != null ? activeChild : child,
+        child: onTap != null ? _renderActiveChild() : child,
       ),
     );
+  }
+
+  Widget? _renderActiveChild() {
+    if (child != null && activeChild == null) {
+      return child;
+    } else {
+      return activeChild;
+    }
   }
 }

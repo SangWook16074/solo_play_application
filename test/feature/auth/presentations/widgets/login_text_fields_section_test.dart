@@ -4,6 +4,7 @@ import 'package:solo_play_application/src/core/widgets/primary_text_field.dart';
 import 'package:solo_play_application/src/features/auth/presentation/widgets/login_text_fields_section.dart';
 
 void main() {
+  bool isObscureOn = true;
   group(LoginTextFieldsSection, () {
     late Widget widget;
     String email = "";
@@ -15,6 +16,7 @@ void main() {
             child: LoginTextFieldsSection(
               onEmailChanged: (value) => email = value,
               onPasswordChanged: (value) => password = value,
+              isObscureOn: isObscureOn,
             ),
           ),
         ),
@@ -24,6 +26,7 @@ void main() {
     tearDown(() {
       email = "";
       password = "";
+      isObscureOn = true;
     });
 
     testWidgets('should render email text fields label = "이메일(아이디)" correctly',
@@ -81,6 +84,7 @@ void main() {
       expect(target.hintStyle?.color, Color(0xffC3C3C3));
       expect(target.hintStyle?.fontSize, 16);
       expect(target.hintStyle?.fontWeight, FontWeight.w400);
+      expect(target.obscureText, true);
     });
 
     testWidgets('should render password text fields height 50', (tester) async {
@@ -133,6 +137,12 @@ void main() {
       final emailField = find.byKey(Key("password-fields"));
       await tester.enterText(emailField, "test-password");
       expect(password, "test-password");
+    });
+
+    testWidgets("should render obscureIcon correctly", (tester) async {
+      await tester.pumpWidget(widget);
+
+      expect(find.byIcon(Icons.remove_red_eye_outlined), findsOneWidget);
     });
 
     testWidgets('should render correctly', (tester) async {

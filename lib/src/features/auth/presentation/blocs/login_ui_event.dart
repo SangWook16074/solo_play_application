@@ -1,31 +1,18 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-sealed class LoginUiEvent extends Equatable {}
+part 'login_ui_event.freezed.dart';
 
-final class ChangeInputEmail extends LoginUiEvent {
-  final String email;
+@freezed
+sealed class LoginUiEvent with _$LoginUiEvent {
+  const factory LoginUiEvent.emailChanged({required String email}) =
+      LoginUiEmailChanged;
 
-  ChangeInputEmail({required this.email});
+  const factory LoginUiEvent.passwordChanged({required String password}) =
+      LoginUiPasswordChanged;
 
-  @override
-  List<Object?> get props => [email];
-}
+  const factory LoginUiEvent.obscureTextToggle() = LoginUiObscureTextToggled;
 
-final class ChangeInputPassword extends LoginUiEvent {
-  final String password;
+  const factory LoginUiEvent.loginButtonTap() = LoginUiLoginButtonTap;
 
-  ChangeInputPassword({required this.password});
-
-  @override
-  List<Object?> get props => [password];
-}
-
-final class ObscureTextOff extends LoginUiEvent {
-  @override
-  List<Object?> get props => [];
-}
-
-final class ObscureTextOn extends LoginUiEvent {
-  @override
-  List<Object?> get props => [];
+  const factory LoginUiEvent.signUpButtonTap() = LoginUiSignUpButtonTap;
 }
