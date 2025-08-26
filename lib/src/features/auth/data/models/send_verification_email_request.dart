@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:solo_play_application/src/core/typedefs/json_map.dart';
+import 'package:solo_play_application/src/core/utils/typedefs/json_map.dart';
 
 part 'send_verification_email_request.freezed.dart';
 part 'send_verification_email_request.g.dart';
