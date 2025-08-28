@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/widget/my_profile_edit_btn_widget.dart';
+import 'package:solo_play_application/src/core/widgets/my_profile_edit_btn_widget.dart';
 
 class UserProfileEditButtonView extends StatelessWidget {
   const UserProfileEditButtonView({super.key});

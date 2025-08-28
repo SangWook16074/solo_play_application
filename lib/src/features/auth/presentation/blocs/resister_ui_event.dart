@@ -21,4 +21,11 @@ sealed class ResisterUiEvent with _$ResisterUiEvent {
   const factory ResisterUiEvent.userPasswordChanged({
     required String password,
   }) = UserPasswordChanged;
+
+  const factory ResisterUiEvent.userMoveToEmailResisterUi() =
+      UserMoveToEmailResisterUI;
+  const factory ResisterUiEvent.userMoveToPasswordResisterUi() =
+      UserMoveToPasswordResisterUI;
+  const factory ResisterUiEvent.userMoveToVerificationUi() =
+      UserMoveToVerificationUI;
 }

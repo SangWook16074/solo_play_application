@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
-import 'package:solo_play_application/src/core/widget/action_button_widget.dart';
+import 'package:solo_play_application/src/core/widgets/bookmark_icon.dart';
+import 'package:solo_play_application/src/core/widgets/action_button_widget.dart';
 import 'package:solo_play_application/src/features/rank/data/models/place_model.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/level_tag_widget.dart';
-import 'package:solo_play_application/src/core/widget/slide_place_image_widget.dart';
+import 'package:solo_play_application/src/core/widgets/slide_place_image_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/rank_number_widget.dart';
 
 class BestPlaceCardWidget extends StatelessWidget {

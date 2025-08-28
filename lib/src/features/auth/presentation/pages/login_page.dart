@@ -10,7 +10,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginUiBloc(),
-      child: const LoginUI(),
+      child: LoginUI(),
     );
   }
 }

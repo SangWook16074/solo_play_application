@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/widget/profile_image_widget.dart';
+import 'package:solo_play_application/src/core/widgets/profile_image_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/tag_widget.dart';
 
 class ReviewWidget extends StatelessWidget {

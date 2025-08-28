@@ -38,8 +38,8 @@ class $EmailResisterUiEventCopyWith<$Res> {
 
 /// @nodoc
 
-class UserEmailChanged implements EmailResisterUiEvent {
-  const UserEmailChanged({required this.email});
+class UserEmailInput implements EmailResisterUiEvent {
+  const UserEmailInput({required this.email});
 
   final String email;
 
@@ -47,14 +47,14 @@ class UserEmailChanged implements EmailResisterUiEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $UserEmailChangedCopyWith<UserEmailChanged> get copyWith =>
-      _$UserEmailChangedCopyWithImpl<UserEmailChanged>(this, _$identity);
+  $UserEmailInputCopyWith<UserEmailInput> get copyWith =>
+      _$UserEmailInputCopyWithImpl<UserEmailInput>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is UserEmailChanged &&
+            other is UserEmailInput &&
             (identical(other.email, email) || other.email == email));
   }
 
@@ -63,27 +63,27 @@ class UserEmailChanged implements EmailResisterUiEvent {
 
   @override
   String toString() {
-    return 'EmailResisterUiEvent.userEmailChanged(email: $email)';
+    return 'EmailResisterUiEvent.userEmailInput(email: $email)';
   }
 }
 
 /// @nodoc
-abstract mixin class $UserEmailChangedCopyWith<$Res>
+abstract mixin class $UserEmailInputCopyWith<$Res>
     implements $EmailResisterUiEventCopyWith<$Res> {
-  factory $UserEmailChangedCopyWith(
-          UserEmailChanged value, $Res Function(UserEmailChanged) _then) =
-      _$UserEmailChangedCopyWithImpl;
+  factory $UserEmailInputCopyWith(
+          UserEmailInput value, $Res Function(UserEmailInput) _then) =
+      _$UserEmailInputCopyWithImpl;
   @useResult
   $Res call({String email});
 }
 
 /// @nodoc
-class _$UserEmailChangedCopyWithImpl<$Res>
-    implements $UserEmailChangedCopyWith<$Res> {
-  _$UserEmailChangedCopyWithImpl(this._self, this._then);
+class _$UserEmailInputCopyWithImpl<$Res>
+    implements $UserEmailInputCopyWith<$Res> {
+  _$UserEmailInputCopyWithImpl(this._self, this._then);
 
-  final UserEmailChanged _self;
-  final $Res Function(UserEmailChanged) _then;
+  final UserEmailInput _self;
+  final $Res Function(UserEmailInput) _then;
 
   /// Create a copy of EmailResisterUiEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -91,7 +91,72 @@ class _$UserEmailChangedCopyWithImpl<$Res>
   $Res call({
     Object? email = null,
   }) {
-    return _then(UserEmailChanged(
+    return _then(UserEmailInput(
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class UserCheckEmailDuplicate implements EmailResisterUiEvent {
+  const UserCheckEmailDuplicate({required this.email});
+
+  final String email;
+
+  /// Create a copy of EmailResisterUiEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $UserCheckEmailDuplicateCopyWith<UserCheckEmailDuplicate> get copyWith =>
+      _$UserCheckEmailDuplicateCopyWithImpl<UserCheckEmailDuplicate>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is UserCheckEmailDuplicate &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email);
+
+  @override
+  String toString() {
+    return 'EmailResisterUiEvent.userCheckEmailDuplicate(email: $email)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $UserCheckEmailDuplicateCopyWith<$Res>
+    implements $EmailResisterUiEventCopyWith<$Res> {
+  factory $UserCheckEmailDuplicateCopyWith(UserCheckEmailDuplicate value,
+          $Res Function(UserCheckEmailDuplicate) _then) =
+      _$UserCheckEmailDuplicateCopyWithImpl;
+  @useResult
+  $Res call({String email});
+}
+
+/// @nodoc
+class _$UserCheckEmailDuplicateCopyWithImpl<$Res>
+    implements $UserCheckEmailDuplicateCopyWith<$Res> {
+  _$UserCheckEmailDuplicateCopyWithImpl(this._self, this._then);
+
+  final UserCheckEmailDuplicate _self;
+  final $Res Function(UserCheckEmailDuplicate) _then;
+
+  /// Create a copy of EmailResisterUiEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(UserCheckEmailDuplicate(
       email: null == email
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable

@@ -16,6 +16,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$EmailResisterUiState {
   String get email;
+  bool get isAvail;
+  String get errorMsg;
 
   /// Create a copy of EmailResisterUiState
   /// with the given fields replaced by the non-null parameter values.
@@ -30,15 +32,18 @@ mixin _$EmailResisterUiState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is EmailResisterUiState &&
-            (identical(other.email, email) || other.email == email));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.isAvail, isAvail) || other.isAvail == isAvail) &&
+            (identical(other.errorMsg, errorMsg) ||
+                other.errorMsg == errorMsg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email);
+  int get hashCode => Object.hash(runtimeType, email, isAvail, errorMsg);
 
   @override
   String toString() {
-    return 'EmailResisterUiState(email: $email)';
+    return 'EmailResisterUiState(email: $email, isAvail: $isAvail, errorMsg: $errorMsg)';
   }
 }
 
@@ -48,7 +53,7 @@ abstract mixin class $EmailResisterUiStateCopyWith<$Res> {
           $Res Function(EmailResisterUiState) _then) =
       _$EmailResisterUiStateCopyWithImpl;
   @useResult
-  $Res call({String email});
+  $Res call({String email, bool isAvail, String errorMsg});
 }
 
 /// @nodoc
@@ -65,11 +70,21 @@ class _$EmailResisterUiStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? email = null,
+    Object? isAvail = null,
+    Object? errorMsg = null,
   }) {
     return _then(_self.copyWith(
       email: null == email
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAvail: null == isAvail
+          ? _self.isAvail
+          : isAvail // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorMsg: null == errorMsg
+          ? _self.errorMsg
+          : errorMsg // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -78,11 +93,19 @@ class _$EmailResisterUiStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _EmailResisterUiState extends EmailResisterUiState {
-  const _EmailResisterUiState({this.email = ""}) : super._();
+  const _EmailResisterUiState(
+      {this.email = "", this.isAvail = false, this.errorMsg = ""})
+      : super._();
 
   @override
   @JsonKey()
   final String email;
+  @override
+  @JsonKey()
+  final bool isAvail;
+  @override
+  @JsonKey()
+  final String errorMsg;
 
   /// Create a copy of EmailResisterUiState
   /// with the given fields replaced by the non-null parameter values.
@@ -98,15 +121,18 @@ class _EmailResisterUiState extends EmailResisterUiState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _EmailResisterUiState &&
-            (identical(other.email, email) || other.email == email));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.isAvail, isAvail) || other.isAvail == isAvail) &&
+            (identical(other.errorMsg, errorMsg) ||
+                other.errorMsg == errorMsg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email);
+  int get hashCode => Object.hash(runtimeType, email, isAvail, errorMsg);
 
   @override
   String toString() {
-    return 'EmailResisterUiState(email: $email)';
+    return 'EmailResisterUiState(email: $email, isAvail: $isAvail, errorMsg: $errorMsg)';
   }
 }
 
@@ -118,7 +144,7 @@ abstract mixin class _$EmailResisterUiStateCopyWith<$Res>
       __$EmailResisterUiStateCopyWithImpl;
   @override
   @useResult
-  $Res call({String email});
+  $Res call({String email, bool isAvail, String errorMsg});
 }
 
 /// @nodoc
@@ -135,11 +161,21 @@ class __$EmailResisterUiStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? email = null,
+    Object? isAvail = null,
+    Object? errorMsg = null,
   }) {
     return _then(_EmailResisterUiState(
       email: null == email
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAvail: null == isAvail
+          ? _self.isAvail
+          : isAvail // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorMsg: null == errorMsg
+          ? _self.errorMsg
+          : errorMsg // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }

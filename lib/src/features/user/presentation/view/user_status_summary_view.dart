@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/widget/label_with_count_widget.dart';
+import 'package:solo_play_application/src/core/widgets/label_with_count_widget.dart';
 
 class UserStatusSummaryView extends StatelessWidget {
   const UserStatusSummaryView({super.key});

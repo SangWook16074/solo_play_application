@@ -1,21 +1,35 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:solo_play_application/src/features/auth/domain/usecases/check_email_duplicate_usecase.dart';
 import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_event.dart';
 import 'package:solo_play_application/src/features/auth/presentation/blocs/email_resister_ui_state.dart';
-import 'package:solo_play_application/src/features/auth/presentation/blocs/resister_ui_event.dart'
-    hide UserEmailChanged;
 
 class EmailResisterUiBloc
     extends Bloc<EmailResisterUiEvent, EmailResisterUiState> {
-  EmailResisterUiBloc() : super(const EmailResisterUiState()) {
-    on<UserEmailChanged>(_onUserEmailChanged);
+  final CheckEmailDuplicateUsecase checkEmailDuplicateUsecase;
+  EmailResisterUiBloc({required this.checkEmailDuplicateUsecase})
+      : super(const EmailResisterUiState()) {
+    on<UserEmailInput>(_onUserEmailChanged);
+    on<UserCheckEmailDuplicate>(_onUserCheckEmailDuplicat);
   }
 
   void _onUserEmailChanged(
-      UserEmailChanged event, Emitter<EmailResisterUiState> emit) {
+      UserEmailInput event, Emitter<EmailResisterUiState> emit) {
     log("user resister email changed");
     emit(state.copyWith(email: event.email));
+  }
+
+  void _onUserCheckEmailDuplicat(
+      UserCheckEmailDuplicate event, Emitter<EmailResisterUiState> emit) async {
+    final email = event.email;
+    log("user check email duplicate by $email");
+    final result = await checkEmailDuplicateUsecase.call(email);
+    if (!result.isAvail) {
+      emit(state.copyWith(errorMsg: result.result));
+    } else {
+      emit(state.copyWith(isAvail: true));
+    }
   }
 
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/widget/similar_place_photo_widget.dart';
+import 'package:solo_play_application/src/core/widgets/similar_place_photo_widget.dart';
 
 class SimilarCafePhotoView extends StatefulWidget {
   const SimilarCafePhotoView({super.key});

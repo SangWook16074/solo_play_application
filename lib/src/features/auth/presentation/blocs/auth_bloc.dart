@@ -6,7 +6,7 @@ import 'package:solo_play_application/src/features/auth/presentation/blocs/auth_
 import 'package:solo_play_application/src/features/auth/presentation/blocs/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc() : super(const Authenticate()) {
+  AuthBloc() : super(const UnAuthenticate()) {
     on<SignIn>(onSignIn);
     on<SignOut>(onSignOut);
     on<SignUp>(onSignUp);

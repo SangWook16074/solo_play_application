@@ -8,11 +8,14 @@ class CustomTextField extends TextField {
       this.hintText,
       super.obscureText,
       this.suffixIcon,
+      super.keyboardType,
+      super.keyboardAppearance,
       super.onChanged})
       : super(
             decoration: InputDecoration(
                 suffixIcon: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 14.0),
                   child: suffixIcon,
                 ),
                 suffixIconConstraints: const BoxConstraints(maxHeight: 20.0),

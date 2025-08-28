@@ -321,4 +321,93 @@ class _$UserPasswordChangedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
+
+class UserMoveToEmailResisterUI
+    with DiagnosticableTreeMixin
+    implements ResisterUiEvent {
+  const UserMoveToEmailResisterUI();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'ResisterUiEvent.userMoveToEmailResisterUi'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is UserMoveToEmailResisterUI);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ResisterUiEvent.userMoveToEmailResisterUi()';
+  }
+}
+
+/// @nodoc
+
+class UserMoveToPasswordResisterUI
+    with DiagnosticableTreeMixin
+    implements ResisterUiEvent {
+  const UserMoveToPasswordResisterUI();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'ResisterUiEvent.userMoveToPasswordResisterUi'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is UserMoveToPasswordResisterUI);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ResisterUiEvent.userMoveToPasswordResisterUi()';
+  }
+}
+
+/// @nodoc
+
+class UserMoveToVerificationUI
+    with DiagnosticableTreeMixin
+    implements ResisterUiEvent {
+  const UserMoveToVerificationUI();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'ResisterUiEvent.userMoveToVerificationUi'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is UserMoveToVerificationUI);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ResisterUiEvent.userMoveToVerificationUi()';
+  }
+}
+
 // dart format on

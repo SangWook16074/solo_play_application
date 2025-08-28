@@ -1,4 +1,6 @@
-import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_event.dart';
+import 'package:solo_play_application/src/features/auth/presentation/blocs/terms_agreement_ui_state.dart';
 import 'package:test/test.dart';
 import 'package:bloc_test/bloc_test.dart';
 
