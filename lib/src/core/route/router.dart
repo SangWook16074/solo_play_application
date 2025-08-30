@@ -8,13 +8,13 @@ import 'package:solo_play_application/src/features/auth/presentation/pages/login
 import 'package:solo_play_application/src/features/auth/presentation/pages/password_resister_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/pages/terms_agreement_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/views/resister_flow_view.dart';
-import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
+import 'package:solo_play_application/src/features/course/data/models/course_model.dart';
+import 'package:solo_play_application/src/features/place/data/models/place_model.dart';
 import 'package:solo_play_application/src/features/app/presentation/pages/app_page.dart';
 import 'package:solo_play_application/src/features/post/presentation/view/post_ui.dart';
-import 'package:solo_play_application/src/features/rank/data/models/place_model.dart';
-import 'package:solo_play_application/src/features/rank/presentation/pages/detail_place_ui_page.dart';
-import 'package:solo_play_application/src/features/rank/presentation/view/detail_course_ui.dart';
-import 'package:solo_play_application/src/features/rank/presentation/view/detail_place_review_ui.dart';
+import 'package:solo_play_application/src/features/place/pages/detail_place_ui_page.dart';
+import 'package:solo_play_application/src/features/course/views/detail_course_ui.dart';
+import 'package:solo_play_application/src/features/place/view/detail_place_review_ui.dart';
 import 'package:solo_play_application/src/features/rank/presentation/view/rank_ui.dart';
 import 'package:solo_play_application/src/features/user/presentation/view/my_profile_ui.dart';
 
