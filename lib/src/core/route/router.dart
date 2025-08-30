@@ -5,7 +5,7 @@ import 'package:solo_play_application/src/core/route/go_router_refresh_stream.da
 import 'package:solo_play_application/src/features/auth/presentation/blocs/auth_bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/blocs/auth_state.dart';
 import 'package:solo_play_application/src/features/auth/presentation/pages/email_resister_page.dart';
-import 'package:solo_play_application/src/features/auth/presentation/pages/login_page.dart';
+import 'package:solo_play_application/src/features/auth/presentation/login/page/login_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/pages/password_resister_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/pages/terms_agreement_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/views/identity_verification_ui.dart';
