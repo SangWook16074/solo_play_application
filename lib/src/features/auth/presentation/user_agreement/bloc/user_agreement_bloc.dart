@@ -48,12 +48,13 @@ class UserAgreementBloc extends Bloc<UserAgreementEvent, UserAgreementState> {
   FutureOr<void> _onAllAgree(
       UserAgreementAllAgree event, Emitter<UserAgreementState> emit) {
     final agreement = state.agreement;
+    final allAgree = agreement.isAllAgree;
     emit(state.copyWith(
         agreement: agreement.copyWith(
-            isOver14: true,
-            isAgreedToTerms: true,
-            isAgreedToMarketing: true,
-            isConsentedToAds: true)));
+            isOver14: !allAgree,
+            isAgreedToTerms: !allAgree,
+            isAgreedToMarketing: !allAgree,
+            isConsentedToAds: !allAgree)));
   }
 
   FutureOr<void> _onAllDisagree(

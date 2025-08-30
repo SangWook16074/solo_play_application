@@ -13,7 +13,6 @@ class UserAgreementUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<UserAgreementBloc>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -29,6 +28,7 @@ class UserAgreementUI extends StatelessWidget {
             //
             BlocBuilder<UserAgreementBloc, UserAgreementState>(
               builder: (context, state) {
+                final bloc = context.read<UserAgreementBloc>();
                 final agreement = state.agreement;
                 return UserAgreementUiTermsSection(
                   isAllAgree: agreement.isAllAgree,

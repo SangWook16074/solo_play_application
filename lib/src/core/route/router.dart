@@ -7,7 +7,7 @@ import 'package:solo_play_application/src/features/auth/presentation/blocs/auth_
 import 'package:solo_play_application/src/features/auth/presentation/pages/email_resister_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/login/page/login_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/pages/password_resister_page.dart';
-import 'package:solo_play_application/src/features/auth/presentation/pages/terms_agreement_page.dart';
+import 'package:solo_play_application/src/features/auth/presentation/user_agreement/page/user_agreement_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/views/identity_verification_ui.dart';
 import 'package:solo_play_application/src/features/auth/presentation/views/resister_flow_view.dart';
 import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
@@ -54,7 +54,7 @@ GoRouter createRouter(AuthBloc authBloc) {
               routes: [
                 GoRoute(
                   path: 'signup/terms',
-                  builder: (context, state) => const TermsAgreementPage(),
+                  builder: (context, state) => const UserAgreementPage(),
                 ),
                 GoRoute(
                   path: 'signup/email',

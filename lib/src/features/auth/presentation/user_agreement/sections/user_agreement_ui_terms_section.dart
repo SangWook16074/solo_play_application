@@ -80,10 +80,10 @@ class UserAgreementUiTermsSection extends StatelessWidget {
           height: 12,
         ),
         AgreementListTile(
-          key: Key('is-concented-to-ads-row'),
+          key: Key('is-consented-to-ads-row'),
           prefix: CheckButton(
               onTap: onisConsentedToAdsTap,
-              key: Key('is-concented-to-ads-check-button'),
+              key: Key('is-consented-to-ads-check-button'),
               select: isConsentedToAds),
           title: "[선택] 광고성 정보 수신 동의",
           isOptional: true,

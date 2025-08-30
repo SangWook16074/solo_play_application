@@ -88,10 +88,10 @@ void main() {
           findsOneWidget);
     });
 
-    testWidgets("should render is concented to ads list tile correctly",
+    testWidgets("should render is consented to ads list tile correctly",
         (tester) async {
       await tester.pumpWidget(widget);
-      final tileFinder = find.byKey(Key('is-concented-to-ads-row'));
+      final tileFinder = find.byKey(Key('is-consented-to-ads-row'));
       expect(tileFinder, findsOneWidget);
 
       final tile = tester.widget<AgreementListTile>(tileFinder);
@@ -100,7 +100,7 @@ void main() {
       expect(tile.isOptional, true);
 
       expect(
-          find.byKey(Key("is-concented-to-ads-check-button")), findsOneWidget);
+          find.byKey(Key("is-consented-to-ads-check-button")), findsOneWidget);
     });
 
     testWidgets("should render correctly", (tester) async {
