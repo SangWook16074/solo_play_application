@@ -1,0 +1,35 @@
+import 'package:flutter/material.dart';
+
+class CheckButton extends StatelessWidget {
+  final double width;
+  final bool select;
+  final void Function()? onTap;
+  const CheckButton(
+      {super.key, this.width = 28, required this.select, this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        key: const Key("check-button"),
+        width: 28,
+        height: 28,
+        decoration: BoxDecoration(
+            border: Border.all(
+                width: 2.0,
+                color:
+                    select ? const Color(0xff266FF7) : const Color(0xffCACACA)),
+            color: select ? const Color(0xff266FF7) : const Color(0xffffffff),
+            shape: BoxShape.circle),
+        alignment: Alignment.center,
+        child: Icon(
+          key: const Key("check-button-icon"),
+          Icons.check_rounded,
+          color: select ? const Color(0xffffffff) : const Color(0xffCACACA),
+          size: width - 10,
+        ),
+      ),
+    );
+  }
+}

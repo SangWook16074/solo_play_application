@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class AgreementListTile extends StatelessWidget {
-  final Widget? prefix;
-  final String? title;
+  final Widget prefix;
+  final String title;
   final String? description;
   final Widget? suffix;
   final bool isOptional;
@@ -10,8 +10,8 @@ class AgreementListTile extends StatelessWidget {
 
   const AgreementListTile({
     super.key,
-    this.prefix,
-    this.title,
+    required this.prefix,
+    required this.title,
     this.description,
     this.suffix,
     this.isOptional = false,
@@ -25,22 +25,17 @@ class AgreementListTile extends StatelessWidget {
           ? CrossAxisAlignment.start
           : CrossAxisAlignment.center,
       children: [
-        if (prefix != null) prefix!,
+        prefix,
         const SizedBox(width: 8),
         Expanded(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (title != null)
-                Text(title!,
-                    key: Key('agreement-title'),
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w600)),
+              Text(title,
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w600)),
               if (description != null)
-                Text(
-                    key: Key('agreement-description'),
-                    description!,
+                Text(description!,
                     style: const TextStyle(
                         fontSize: 14, color: Color(0xff8e8e8e))),
             ],
@@ -51,7 +46,6 @@ class AgreementListTile extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.only(left: 4),
             child: Text(
-              key: Key("agreement-details"),
               "자세히",
               style: TextStyle(
                   fontSize: 14,
