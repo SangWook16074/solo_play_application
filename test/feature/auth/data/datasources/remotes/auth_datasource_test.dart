@@ -38,14 +38,33 @@ void main() {
       expect((result as Success).value, "사용 가능한 이메일입니다.");
     });
 
-    test('should return failure with message when statusCode != 200', () async {
+    test('should return failure with message when statusCode == 409', () async {
       when(() => mockDio.post(AuthApiPath.checkEmailDuplicate))
           .thenAnswer((_) async => Response(
                 requestOptions: RequestOptions(path: ""),
                 data: {
                   "status": "ERROR",
-                  "message": "이미 있는 아이디에요.",
-                  "data": null,
+                  "message": "이미 사용 중인 이메일입니다.",
+                },
+                statusCode: 409,
+              ));
+
+      final request = CheckEmailDuplicate(email: "test@test.com");
+      final result = await authDatasourceImpl.checkEmailDuplicate(request);
+
+      verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate)).called(1);
+
+      expect(result is Failure, true);
+      expect((result as Failure).message, "이미 사용 중인 이메일입니다.");
+    });
+
+    test('should return failure with message when statusCode != 200 && 409',
+        () async {
+      when(() => mockDio.post(AuthApiPath.checkEmailDuplicate))
+          .thenAnswer((_) async => Response(
+                requestOptions: RequestOptions(path: ""),
+                data: {
+                  "status": "ERROR",
                 },
                 statusCode: 400,
               ));
@@ -56,7 +75,7 @@ void main() {
       verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate)).called(1);
 
       expect(result is Failure, true);
-      expect((result as Failure).message, "이미 있는 아이디에요.");
+      expect((result as Failure).message, "서버와의 연결이 원할하지 않습니다");
     });
   });
 }

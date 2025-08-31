@@ -16,8 +16,10 @@ class AuthDatasourceImpl extends AuthDatasource {
     return _dio.post(AuthApiPath.checkEmailDuplicate).then((response) {
       if (response.statusCode == 200) {
         return Success(response.data["data"] as String);
-      } else {
+      } else if (response.statusCode == 409) {
         return Failure(response.data["message"] as String);
+      } else {
+        return Failure("서버와의 연결이 원할하지 않습니다");
       }
     });
   }
