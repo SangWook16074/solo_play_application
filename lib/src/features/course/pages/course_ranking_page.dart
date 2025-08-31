@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/core/providers/rank/course_api_services_provider.dart';
-import 'package:solo_play_application/src/core/providers/rank/course_repository_provider.dart';
+import 'package:solo_play_application/src/features/course/core/course_api_services_provider.dart';
+import 'package:solo_play_application/src/features/course/core/course_repository_provider.dart';
 import 'package:solo_play_application/src/features/course/domain/repositories/course_repository.dart';
 import 'package:solo_play_application/src/features/course/blocs/course_ranking_bloc.dart';
 import 'package:solo_play_application/src/features/course/blocs/courses_ranking_event.dart';

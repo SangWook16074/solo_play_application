@@ -83,7 +83,7 @@ class ReviewCardWidget extends StatelessWidget {
                       (index) {
                         return const Padding(
                           padding: EdgeInsets.only(right: 4.0),
-                          child: TagWidget(),
+                          child: TagWidget(text: '#커피향 가득'),
                         );
                       },
                     ),
