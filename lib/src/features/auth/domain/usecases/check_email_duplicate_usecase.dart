@@ -8,7 +8,7 @@ final class CheckEmailDuplicateUsecaseImpl
   const CheckEmailDuplicateUsecaseImpl(this._authRepository);
   @override
   Future<EmailDuplicateStatus> call(String email) async {
-    return await _authRepository.checkEmailDuplicate(email);
+    return _authRepository.checkEmailDuplicate(email).then((response) {});
   }
 }
 
