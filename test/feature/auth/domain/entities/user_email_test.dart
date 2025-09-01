@@ -7,8 +7,6 @@ void main() {
       final userEmail = UserEmail();
 
       expect(userEmail.email.isEmpty, true);
-      expect(userEmail.resultMessage.isEmpty, true);
-      expect(userEmail.isAvail, false);
     });
 
     test("should return true when isValid correctly", () {

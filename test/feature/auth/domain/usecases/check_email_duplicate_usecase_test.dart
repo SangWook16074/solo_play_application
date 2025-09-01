@@ -17,7 +17,7 @@ void main() {
           CheckEmailDuplicateUsecaseImpl(authRepository: mockAuthRepository);
     });
 
-    test('should return correctly when success', () async {
+    test('should return message when checkDuplicate success', () async {
       final email = "test@test.com";
       when(
         () => mockAuthRepository.checkEmailDuplicate(email),
@@ -33,7 +33,9 @@ void main() {
       expect((result as Success).value, "사용 가능한 이메일입니다!");
     });
 
-    test('should return correctly when failure', () async {
+    test(
+        'should return error with message correctly when checkDuplicate failure',
+        () async {
       final email = "test@test.com";
       when(
         () => mockAuthRepository.checkEmailDuplicate(email),
@@ -47,6 +49,19 @@ void main() {
 
       expect(result, isA<Failure>());
       expect((result as Failure).message, "이미 있는 아이디에요.");
+    });
+
+    test('should return error with message correctly when email is not valid',
+        () async {
+      final email = "invalid-email-text";
+      final result = await checkEmailDuplicateUsecase.call(email);
+
+      verifyNever(
+        () => mockAuthRepository.checkEmailDuplicate(email),
+      );
+
+      expect(result, isA<Failure>());
+      expect((result as Failure).message, "올바른 형식으로 입력해 주세요.");
     });
   });
 }
