@@ -15,7 +15,6 @@ class EmailResisterUiHeader extends StatelessWidget {
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
             ),
             Text.rich(
-              key: Key("rich-text"),
               TextSpan(children: [
                 TextSpan(
                     text: "아이디", style: TextStyle(color: Color(0xff266FF7))),

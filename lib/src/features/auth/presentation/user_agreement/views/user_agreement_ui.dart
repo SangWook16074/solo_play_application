@@ -15,10 +15,10 @@ class UserAgreementUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 62.0, horizontal: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // 상단 타이틀 섹션영역
             UserAgreementUiTitleSection(),
@@ -51,19 +51,21 @@ class UserAgreementUI extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(
-              height: 90,
-            ),
-            UserAgreementUiDescriptionSection(),
-            SizedBox(
-              height: 10,
-            ),
-            BlocBuilder<UserAgreementBloc, UserAgreementState>(
-              builder: (context, state) {
-                return UserAgreementUiButtonSection(
-                  onTap: state.agreement.isUserAgree ? () {} : null,
-                );
-              },
+
+            Column(
+              children: [
+                UserAgreementUiDescriptionSection(),
+                SizedBox(
+                  height: 10,
+                ),
+                BlocBuilder<UserAgreementBloc, UserAgreementState>(
+                  builder: (context, state) {
+                    return UserAgreementUiButtonSection(
+                      onTap: state.agreement.isUserAgree ? () {} : null,
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),
