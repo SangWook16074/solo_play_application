@@ -9,3 +9,4 @@ class ResisterPasswordPage extends StatelessWidget {
     return ResisterPasswordUI();
   }
 }
+

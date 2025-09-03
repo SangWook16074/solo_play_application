@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">13</td>
-            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntry">14</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-03 15:11:19</td>
+            <td class="headerValue">2025-09-03 23:15:39</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -64,38 +64,47 @@
 <span id="L2"><span class="lineNum">       2</span>              : </span>
 <span id="L3"><span class="lineNum">       3</span>              : import 'package:flutter_bloc/flutter_bloc.dart';</span>
 <span id="L4"><span class="lineNum">       4</span>              : import 'package:solo_play_application/src/core/utils/networks/result.dart';</span>
-<span id="L5"><span class="lineNum">       5</span>              : import 'package:solo_play_application/src/features/auth/domain/entities/user_email.dart';</span>
+<span id="L5"><span class="lineNum">       5</span>              : import 'package:solo_play_application/src/core/utils/validators/email_validator.dart';</span>
 <span id="L6"><span class="lineNum">       6</span>              : import 'package:solo_play_application/src/features/auth/domain/usecases/check_email_duplicate_usecase.dart';</span>
 <span id="L7"><span class="lineNum">       7</span>              : import 'package:solo_play_application/src/features/auth/presentation/user_email/blocs/user_email_event.dart';</span>
 <span id="L8"><span class="lineNum">       8</span>              : import 'package:solo_play_application/src/features/auth/presentation/user_email/blocs/user_email_state.dart';</span>
 <span id="L9"><span class="lineNum">       9</span>              : </span>
-<span id="L10"><span class="lineNum">      10</span>              : class UserEmailBloc extends Bloc&lt;UserEmailEvent, UserEmailState&gt; {</span>
-<span id="L11"><span class="lineNum">      11</span>              :   final CheckEmailDuplicateUsecase _checkEmailDuplicateUsecase;</span>
-<span id="L12"><span class="lineNum">      12</span>              : </span>
-<span id="L13"><span class="lineNum">      13</span> <span class="tlaGNC">           1 :   UserEmailBloc({</span></span>
-<span id="L14"><span class="lineNum">      14</span>              :     required CheckEmailDuplicateUsecase checkEmailDuplicateUsecase,</span>
-<span id="L15"><span class="lineNum">      15</span>              :   })  : _checkEmailDuplicateUsecase = checkEmailDuplicateUsecase,</span>
-<span id="L16"><span class="lineNum">      16</span> <span class="tlaGNC">           2 :         super(UserEmailState()) {</span></span>
-<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC">           2 :     on&lt;UserEmailChanged&gt;(_onChaned);</span></span>
-<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">           2 :     on&lt;UserEmailCheckDuplicate&gt;(_onCheckDuplicate);</span></span>
-<span id="L19"><span class="lineNum">      19</span>              :   }</span>
-<span id="L20"><span class="lineNum">      20</span>              : </span>
-<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">           1 :   FutureOr&lt;void&gt; _onChaned(</span></span>
-<span id="L22"><span class="lineNum">      22</span>              :       UserEmailChanged event, Emitter&lt;UserEmailState&gt; emit) {</span>
-<span id="L23"><span class="lineNum">      23</span> <span class="tlaGNC">           2 :     final email = UserEmail(email: event.email);</span></span>
-<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC">           5 :     emit(state.copyWith(email: event.email, isValid: email.isValid));</span></span>
-<span id="L25"><span class="lineNum">      25</span>              :   }</span>
-<span id="L26"><span class="lineNum">      26</span>              : </span>
-<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           1 :   FutureOr&lt;void&gt; _onCheckDuplicate(</span></span>
-<span id="L28"><span class="lineNum">      28</span>              :       UserEmailCheckDuplicate event, Emitter&lt;UserEmailState&gt; emit) async {</span>
-<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           3 :     final result = await _checkEmailDuplicateUsecase.call(event.email);</span></span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           1 :     emit(switch (result) {</span></span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           3 :       Success() =&gt; state.copyWith(isAvail: true),</span></span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           2 :       Failure(:final message) =&gt;</span></span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           2 :         state.copyWith(errorMessage: message, isAvail: false),</span></span>
-<span id="L34"><span class="lineNum">      34</span>              :     });</span>
-<span id="L35"><span class="lineNum">      35</span>              :   }</span>
-<span id="L36"><span class="lineNum">      36</span>              : }</span>
+<span id="L10"><span class="lineNum">      10</span>              : /// 사용자 이메일 관련 [UserEmailBloc]</span>
+<span id="L11"><span class="lineNum">      11</span>              : ///</span>
+<span id="L12"><span class="lineNum">      12</span>              : /// 이 클래스는 사용자의 이메일 변경 또는 입력에 관한 모든 비즈니스 로직을 담당합니다.</span>
+<span id="L13"><span class="lineNum">      13</span>              : class UserEmailBloc extends Bloc&lt;UserEmailEvent, UserEmailState&gt; {</span>
+<span id="L14"><span class="lineNum">      14</span>              :   /// [CheckEmailDuplicateUsecase]로 사용자 이메일이 중복되었는지 검증할 수 있습니다.</span>
+<span id="L15"><span class="lineNum">      15</span>              :   final CheckEmailDuplicateUsecase _checkEmailDuplicateUsecase;</span>
+<span id="L16"><span class="lineNum">      16</span>              : </span>
+<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC">           1 :   UserEmailBloc({</span></span>
+<span id="L18"><span class="lineNum">      18</span>              :     required CheckEmailDuplicateUsecase checkEmailDuplicateUsecase,</span>
+<span id="L19"><span class="lineNum">      19</span>              :   })  : _checkEmailDuplicateUsecase = checkEmailDuplicateUsecase,</span>
+<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">           2 :         super(UserEmailState()) {</span></span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">           2 :     on&lt;UserEmailChanged&gt;(_onChaned);</span></span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">           2 :     on&lt;UserEmailCheckDuplicate&gt;(_onCheckDuplicate);</span></span>
+<span id="L23"><span class="lineNum">      23</span>              :   }</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              :   /// 사용자가 이메일을 변경하게 되면</span>
+<span id="L26"><span class="lineNum">      26</span>              :   /// 이메일이 올바른 형식인지 검증하여 상태를 갱신합니다.</span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           1 :   FutureOr&lt;void&gt; _onChaned(</span></span>
+<span id="L28"><span class="lineNum">      28</span>              :       UserEmailChanged event, Emitter&lt;UserEmailState&gt; emit) {</span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           1 :     final email = event.email;</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           1 :     final isValid = EmailValidator.isValid(email);</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           3 :     emit(state.copyWith(email: email, isValid: isValid));</span></span>
+<span id="L32"><span class="lineNum">      32</span>              :   }</span>
+<span id="L33"><span class="lineNum">      33</span>              : </span>
+<span id="L34"><span class="lineNum">      34</span>              :   /// 사용자가 이메일 중복 검증을 요청하면 [CheckEmailDuplicateUsecase]를 통해서 검증합니다.</span>
+<span id="L35"><span class="lineNum">      35</span>              :   /// 이후 반환값으로 사용가능한지 [isAvail]을 갱신합니다.</span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           1 :   FutureOr&lt;void&gt; _onCheckDuplicate(</span></span>
+<span id="L37"><span class="lineNum">      37</span>              :       UserEmailCheckDuplicate event, Emitter&lt;UserEmailState&gt; emit) async {</span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">           3 :     final result = await _checkEmailDuplicateUsecase.call(event.email);</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           1 :     emit(switch (result) {</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           3 :       Success() =&gt; state.copyWith(isAvail: true),</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           2 :       Failure(:final message) =&gt;</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           2 :         state.copyWith(errorMessage: message, isAvail: false),</span></span>
+<span id="L43"><span class="lineNum">      43</span>              :     });</span>
+<span id="L44"><span class="lineNum">      44</span>              :   }</span>
+<span id="L45"><span class="lineNum">      45</span>              : }</span>
         </pre>
               </td>
             </tr>

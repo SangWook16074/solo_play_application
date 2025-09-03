@@ -3,7 +3,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:solo_play_application/src/core/utils/networks/result.dart';
 import 'package:solo_play_application/src/features/auth/data/api_path.dart';
 import 'package:solo_play_application/src/features/auth/data/datasources/remotes/auth_datasource_impl.dart';
-import 'package:solo_play_application/src/features/auth/data/dtos/check_email_duplicate.dart';
+import 'package:solo_play_application/src/features/auth/data/models/check_email_duplicate.dart';
 import 'package:test/test.dart';
 
 class MockDio extends Mock implements Dio {}
@@ -30,7 +30,7 @@ void main() {
                 statusCode: 200,
               ));
 
-      final request = CheckEmailDuplicate(email: "test@test.com");
+      final request = CheckEmailDuplicateRequest(email: "test@test.com");
       final result = await authDatasourceImpl.checkEmailDuplicate(request);
       verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate)).called(1);
 
@@ -49,7 +49,7 @@ void main() {
                 statusCode: 409,
               ));
 
-      final request = CheckEmailDuplicate(email: "test@test.com");
+      final request = CheckEmailDuplicateRequest(email: "test@test.com");
       final result = await authDatasourceImpl.checkEmailDuplicate(request);
 
       verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate)).called(1);
@@ -69,7 +69,7 @@ void main() {
                 statusCode: 400,
               ));
 
-      final request = CheckEmailDuplicate(email: "test@test.com");
+      final request = CheckEmailDuplicateRequest(email: "test@test.com");
       final result = await authDatasourceImpl.checkEmailDuplicate(request);
 
       verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate)).called(1);

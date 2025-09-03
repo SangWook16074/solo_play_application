@@ -1,18 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/features/auth/domain/entities/user_email.dart';
+import 'package:solo_play_application/src/core/utils/validators/email_validator.dart';
 
 void main() {
-  group(UserEmail, () {
-    test('should constructor work correctly', () {
-      final userEmail = UserEmail();
-
-      expect(userEmail.email.isEmpty, true);
-    });
-
+  group(EmailValidator, () {
     test("should return true when isValid correctly", () {
-      final userEmail = UserEmail(email: "test@test.com");
+      final email = "test@test.com";
 
-      expect(userEmail.isValid, true);
+      expect(EmailValidator.isValid(email), true);
     });
 
     test('should return false when isValid called on invalid email', () {
@@ -30,8 +24,7 @@ void main() {
       ];
 
       for (String email in invalidEmails) {
-        final userEmail = UserEmail(email: email);
-        expect(userEmail.isValid, false);
+        expect(EmailValidator.isValid(email), false);
       }
     });
   });
