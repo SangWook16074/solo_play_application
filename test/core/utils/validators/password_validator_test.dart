@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/core/utils/password_validator.dart';
+import 'package:solo_play_application/src/core/utils/validators/password_validator.dart';
 
 void main() {
   group('PasswordValidator', () {

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:solo_play_application/src/core/utils/password_validator.dart';
+import 'package:solo_play_application/src/core/utils/validators/password_validator.dart';
 
 part 'resister_password_state.freezed.dart';
 
