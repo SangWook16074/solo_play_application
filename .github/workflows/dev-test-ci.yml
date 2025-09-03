@@ -1,0 +1,30 @@
+name: Flutter Test
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 저장소 체크아웃
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Flutter 설치
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.3' # 원하는 Flutter 버전 지정 (예: stable 최신)
+
+      # 3. 패키지 의존성 설치
+      - name: Install dependencies
+        run: flutter pub get
+
+      # 4. 단위 테스트 실행
+      - name: Run tests
+        run: flutter test
