@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:solo_play_application/src/core/widgets/primary_button.dart';
 import 'package:solo_play_application/src/core/widgets/secondary_button.dart';
-import 'package:solo_play_application/src/features/auth/presentation/widgets/login_ui_button_section.dart';
+import 'package:solo_play_application/src/features/auth/presentation/login/sections/sections.dart';
 
 void main() {
   group(LoginUiButtonSection, () {

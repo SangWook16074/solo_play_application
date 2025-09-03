@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:solo_play_application/src/features/auth/presentation/user_agreement/sections/user_agreement_ui_terms_section.dart';
-import 'package:solo_play_application/src/features/auth/presentation/widgets/agreement_list_tile.dart';
+import 'package:solo_play_application/src/features/auth/presentation/user_agreement/widgets/agreement_list_tile.dart';
 
 void main() {
   group(UserAgreementUiTermsSection, () {

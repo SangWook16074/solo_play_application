@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/features/auth/presentation/widgets/login_ui_title_section.dart';
+import 'package:solo_play_application/src/features/auth/presentation/login/sections/sections.dart';
 
 void main() {
   group(LoginUiTitleSection, () {
