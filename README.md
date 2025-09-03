@@ -26,3 +26,18 @@ Spring / Spring boot / Spring Webflux / R2DBC / MySQL / AWS
 ## ERD
 
 <img width="870" alt="스크린샷 2025-02-02 오전 11 30 09" src="https://github.com/user-attachments/assets/2a845484-238e-4c0e-baab-62be6a52e3c6" />
+
+## PR Convention
+
+```
+## 작업내용
+
+본인이 작업한 내용 작성
+
+어떠한 것을 수행했고, 어떠한 결과물이 발생했는지 작성
+
+## 테스트
+
+[필수]테스트 결과 스크린샷 첨부
+[선택]테스트 커버리지 스크린샷 첨부
+```
