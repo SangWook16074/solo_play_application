@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-08-30 16:10:17</td>
+            <td class="headerValue">2025-09-02 13:13:49</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -60,23 +60,30 @@
               <td>
 <pre class="sourceHeading">            Line data    Source code</pre>
 <pre class="source">
-<span id="L1"><span class="lineNum">       1</span>              : import 'package:solo_play_application/src/features/auth/domain/entities/email_duplicate_status.dart';</span>
-<span id="L2"><span class="lineNum">       2</span>              : import 'package:solo_play_application/src/features/auth/domain/repositories/auth_repository.dart';</span>
-<span id="L3"><span class="lineNum">       3</span>              : </span>
-<span id="L4"><span class="lineNum">       4</span>              : final class CheckEmailDuplicateUsecaseImpl</span>
-<span id="L5"><span class="lineNum">       5</span>              :     implements CheckEmailDuplicateUsecase {</span>
-<span id="L6"><span class="lineNum">       6</span>              :   final AuthRepository _authRepository;</span>
-<span id="L7"><span class="lineNum">       7</span>              : </span>
-<span id="L8"><span class="lineNum">       8</span> <span class="tlaUNC">           0 :   const CheckEmailDuplicateUsecaseImpl(this._authRepository);</span></span>
-<span id="L9"><span class="lineNum">       9</span> <span class="tlaUNC">           0 :   @override</span></span>
-<span id="L10"><span class="lineNum">      10</span>              :   Future&lt;EmailDuplicateStatus&gt; call(String email) async {</span>
-<span id="L11"><span class="lineNum">      11</span> <span class="tlaUNC">           0 :     return await _authRepository.checkEmailDuplicate(email);</span></span>
-<span id="L12"><span class="lineNum">      12</span>              :   }</span>
-<span id="L13"><span class="lineNum">      13</span>              : }</span>
-<span id="L14"><span class="lineNum">      14</span>              : </span>
-<span id="L15"><span class="lineNum">      15</span>              : abstract class CheckEmailDuplicateUsecase {</span>
-<span id="L16"><span class="lineNum">      16</span>              :   Future&lt;EmailDuplicateStatus&gt; call(String email);</span>
-<span id="L17"><span class="lineNum">      17</span>              : }</span>
+<span id="L1"><span class="lineNum">       1</span>              : import 'package:solo_play_application/src/core/utils/networks/result.dart';</span>
+<span id="L2"><span class="lineNum">       2</span>              : import 'package:solo_play_application/src/features/auth/domain/entities/user_email.dart';</span>
+<span id="L3"><span class="lineNum">       3</span>              : import 'package:solo_play_application/src/features/auth/domain/repositories/auth_repository.dart';</span>
+<span id="L4"><span class="lineNum">       4</span>              : </span>
+<span id="L5"><span class="lineNum">       5</span>              : final class CheckEmailDuplicateUsecaseImpl</span>
+<span id="L6"><span class="lineNum">       6</span>              :     implements CheckEmailDuplicateUsecase {</span>
+<span id="L7"><span class="lineNum">       7</span>              :   final AuthRepository _authRepository;</span>
+<span id="L8"><span class="lineNum">       8</span>              : </span>
+<span id="L9"><span class="lineNum">       9</span> <span class="tlaGNC">           1 :   const CheckEmailDuplicateUsecaseImpl({</span></span>
+<span id="L10"><span class="lineNum">      10</span>              :     required AuthRepository authRepository,</span>
+<span id="L11"><span class="lineNum">      11</span>              :   }) : _authRepository = authRepository;</span>
+<span id="L12"><span class="lineNum">      12</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L13"><span class="lineNum">      13</span>              :   Future&lt;Result&lt;String&gt;&gt; call(String email) async {</span>
+<span id="L14"><span class="lineNum">      14</span> <span class="tlaGNC">           1 :     final userEmail = UserEmail(email: email);</span></span>
+<span id="L15"><span class="lineNum">      15</span> <span class="tlaGNC">           1 :     if (!userEmail.isValid) {</span></span>
+<span id="L16"><span class="lineNum">      16</span> <span class="tlaGNC">           1 :       return Failure(&quot;올바른 형식으로 입력해 주세요.&quot;);</span></span>
+<span id="L17"><span class="lineNum">      17</span>              :     }</span>
+<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">           2 :     return _authRepository.checkEmailDuplicate(email);</span></span>
+<span id="L19"><span class="lineNum">      19</span>              :   }</span>
+<span id="L20"><span class="lineNum">      20</span>              : }</span>
+<span id="L21"><span class="lineNum">      21</span>              : </span>
+<span id="L22"><span class="lineNum">      22</span>              : abstract class CheckEmailDuplicateUsecase {</span>
+<span id="L23"><span class="lineNum">      23</span>              :   Future&lt;Result&lt;String&gt;&gt; call(String email);</span>
+<span id="L24"><span class="lineNum">      24</span>              : }</span>
         </pre>
               </td>
             </tr>
