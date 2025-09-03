@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">7</td>
-            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">8</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-08-30 16:10:17</td>
+            <td class="headerValue">2025-09-03 15:11:19</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -66,28 +66,35 @@
 <span id="L4"><span class="lineNum">       4</span>              :   final String? hintText;</span>
 <span id="L5"><span class="lineNum">       5</span>              :   final TextStyle? hintStyle;</span>
 <span id="L6"><span class="lineNum">       6</span>              :   final Widget? suffixIcon;</span>
-<span id="L7"><span class="lineNum">       7</span> <span class="tlaGNC">           5 :   PrimaryTextField({</span></span>
-<span id="L8"><span class="lineNum">       8</span>              :     super.key,</span>
-<span id="L9"><span class="lineNum">       9</span>              :     this.hintText,</span>
-<span id="L10"><span class="lineNum">      10</span>              :     this.hintStyle,</span>
-<span id="L11"><span class="lineNum">      11</span>              :     super.onChanged,</span>
-<span id="L12"><span class="lineNum">      12</span>              :     super.obscureText,</span>
-<span id="L13"><span class="lineNum">      13</span>              :     this.suffixIcon,</span>
-<span id="L14"><span class="lineNum">      14</span> <span class="tlaGNC">           5 :   }) : super(</span></span>
-<span id="L15"><span class="lineNum">      15</span> <span class="tlaGNC">           5 :             decoration: InputDecoration(</span></span>
-<span id="L16"><span class="lineNum">      16</span>              :                 hintText: hintText,</span>
-<span id="L17"><span class="lineNum">      17</span>              :                 hintStyle: hintStyle,</span>
-<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">           5 :                 focusedBorder: OutlineInputBorder(</span></span>
-<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">           5 :                   borderRadius: BorderRadius.circular(10.0),</span></span>
-<span id="L20"><span class="lineNum">      20</span>              :                   borderSide:</span>
-<span id="L21"><span class="lineNum">      21</span>              :                       const BorderSide(width: 1.0, color: Color(0xff000000)),</span>
-<span id="L22"><span class="lineNum">      22</span>              :                 ),</span>
-<span id="L23"><span class="lineNum">      23</span> <span class="tlaGNC">           5 :                 enabledBorder: OutlineInputBorder(</span></span>
-<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC">           5 :                     borderRadius: BorderRadius.circular(10.0),</span></span>
-<span id="L25"><span class="lineNum">      25</span>              :                     borderSide:</span>
-<span id="L26"><span class="lineNum">      26</span>              :                         const BorderSide(width: 1.0, color: Color(0xffcacaca))),</span>
-<span id="L27"><span class="lineNum">      27</span>              :                 suffixIcon: suffixIcon));</span>
-<span id="L28"><span class="lineNum">      28</span>              : }</span>
+<span id="L7"><span class="lineNum">       7</span>              :   final Widget? suffix;</span>
+<span id="L8"><span class="lineNum">       8</span> <span class="tlaGNC">           8 :   PrimaryTextField({</span></span>
+<span id="L9"><span class="lineNum">       9</span>              :     super.key,</span>
+<span id="L10"><span class="lineNum">      10</span>              :     this.hintText,</span>
+<span id="L11"><span class="lineNum">      11</span>              :     this.hintStyle,</span>
+<span id="L12"><span class="lineNum">      12</span>              :     super.onChanged,</span>
+<span id="L13"><span class="lineNum">      13</span>              :     super.obscureText,</span>
+<span id="L14"><span class="lineNum">      14</span>              :     this.suffixIcon,</span>
+<span id="L15"><span class="lineNum">      15</span>              :     this.suffix,</span>
+<span id="L16"><span class="lineNum">      16</span> <span class="tlaGNC">           8 :   }) : super(</span></span>
+<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC">           8 :             decoration: InputDecoration(</span></span>
+<span id="L18"><span class="lineNum">      18</span>              :                 hintText: hintText,</span>
+<span id="L19"><span class="lineNum">      19</span>              :                 hintStyle: hintStyle,</span>
+<span id="L20"><span class="lineNum">      20</span>              :                 contentPadding:</span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">           8 :                     EdgeInsets.symmetric(vertical: 14, horizontal: 16),</span></span>
+<span id="L22"><span class="lineNum">      22</span>              :                 isDense: true,</span>
+<span id="L23"><span class="lineNum">      23</span>              :                 isCollapsed: true,</span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC">           8 :                 focusedBorder: OutlineInputBorder(</span></span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">           8 :                   borderRadius: BorderRadius.circular(10.0),</span></span>
+<span id="L26"><span class="lineNum">      26</span>              :                   borderSide:</span>
+<span id="L27"><span class="lineNum">      27</span>              :                       const BorderSide(width: 1.0, color: Color(0xff000000)),</span>
+<span id="L28"><span class="lineNum">      28</span>              :                 ),</span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           8 :                 enabledBorder: OutlineInputBorder(</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           8 :                     borderRadius: BorderRadius.circular(10.0),</span></span>
+<span id="L31"><span class="lineNum">      31</span>              :                     borderSide:</span>
+<span id="L32"><span class="lineNum">      32</span>              :                         const BorderSide(width: 1.0, color: Color(0xffcacaca))),</span>
+<span id="L33"><span class="lineNum">      33</span>              :                 suffixIcon: suffixIcon,</span>
+<span id="L34"><span class="lineNum">      34</span>              :                 suffix: suffix));</span>
+<span id="L35"><span class="lineNum">      35</span>              : }</span>
         </pre>
               </td>
             </tr>

@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">6</td>
-            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">8</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-08-30 16:10:17</td>
+            <td class="headerValue">2025-09-03 15:11:19</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -78,12 +78,14 @@
 <span id="L16"><span class="lineNum">      16</span> <span class="tlaGNC">           4 :     return _dio.post(AuthApiPath.checkEmailDuplicate).then((response) {</span></span>
 <span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC">           2 :       if (response.statusCode == 200) {</span></span>
 <span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">           3 :         return Success(response.data[&quot;data&quot;] as String);</span></span>
-<span id="L19"><span class="lineNum">      19</span>              :       } else {</span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">           2 :       } else if (response.statusCode == 409) {</span></span>
 <span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">           3 :         return Failure(response.data[&quot;message&quot;] as String);</span></span>
-<span id="L21"><span class="lineNum">      21</span>              :       }</span>
-<span id="L22"><span class="lineNum">      22</span>              :     });</span>
-<span id="L23"><span class="lineNum">      23</span>              :   }</span>
-<span id="L24"><span class="lineNum">      24</span>              : }</span>
+<span id="L21"><span class="lineNum">      21</span>              :       } else {</span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">           1 :         return Failure(&quot;서버와의 연결이 원할하지 않습니다&quot;);</span></span>
+<span id="L23"><span class="lineNum">      23</span>              :       }</span>
+<span id="L24"><span class="lineNum">      24</span>              :     });</span>
+<span id="L25"><span class="lineNum">      25</span>              :   }</span>
+<span id="L26"><span class="lineNum">      26</span>              : }</span>
         </pre>
               </td>
             </tr>

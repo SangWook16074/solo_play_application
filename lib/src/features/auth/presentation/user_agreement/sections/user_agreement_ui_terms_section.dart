@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:solo_play_application/src/features/auth/presentation/user_agreement/widgets/agreement_list_tile.dart';
 import 'package:solo_play_application/src/features/auth/presentation/user_agreement/widgets/check_button.dart';
-import 'package:solo_play_application/src/features/auth/presentation/widgets/agreement_list_tile.dart';
 
 class UserAgreementUiTermsSection extends StatelessWidget {
   final bool isAllAgree;

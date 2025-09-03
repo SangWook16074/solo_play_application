@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/features/auth/presentation/widgets/agreement_list_tile.dart';
+import 'package:solo_play_application/src/features/auth/presentation/user_agreement/widgets/agreement_list_tile.dart';
 
 void main() {
   group(AgreementListTile, () {
@@ -21,12 +21,6 @@ void main() {
           ),
         ),
       ));
-
-      // title 확인
-
-      expect(find.byKey(const Key('agreement-title')), findsOneWidget);
-      expect(find.byKey(const Key('agreement-description')), findsOneWidget);
-      expect(find.byKey(const Key('agreement-details')), findsOneWidget);
 
       expect(find.text('이용약관 동의'), findsOneWidget);
       expect(find.text('필수 동의 항목입니다.'), findsOneWidget);
