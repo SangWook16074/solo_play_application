@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:solo_play_application/src/core/utils/networks/result.dart';
+import 'package:solo_play_application/src/core/utils/typedefs/json_map.dart';
 import 'package:solo_play_application/src/features/auth/data/api_path.dart';
 import 'package:solo_play_application/src/features/auth/data/datasources/remotes/auth_datasource.dart';
 import 'package:solo_play_application/src/features/auth/data/models/check_email_duplicate.dart';
+import 'package:solo_play_application/src/features/auth/data/models/login.dart';
 
 /// [AuthDatasource]의 구현체
 ///
@@ -54,6 +56,37 @@ class AuthDatasourceImpl extends AuthDatasource {
       } else {
         // 정의되지 않은 상태 코드 → 일반적인 서버 연결 실패로 간주
         return Failure("서버와의 연결이 원할하지 않습니다");
+      }
+    });
+  }
+
+  /// 로그인 요청 API 호출
+  ///
+  /// [CheckEmailDuplicate] DTO를 요청 본문으로 서버에 전달하여,
+  /// 입력된 이메일이 사용 가능한지 여부를 검사합니다.
+  ///
+  /// - 요청 경로: [AuthApiPath.login]
+  /// - 요청 방식: `POST`
+  ///
+  /// ### 반환
+  /// - [Success]<Json> : 서버가 200 OK 응답을 반환한 경우
+  ///   → `response.data["data"]` 필드에 담긴 토큰 정보를 반환
+  ///
+  /// - [Failure]<String> : 서버가 401 Unauthorized 응답을 반환한 경우
+  ///   → `response.data["message"]` 필드의 에러 메시지를 반환
+  ///
+  /// - [Failure]<String> : 기타 상태 코드이거나 예외 발생 시
+  ///   → 기본 메시지 `"서버와의 연결이 원할하지 않습니다"` 반환
+  ///
+  @override
+  Future<Result<JsonMap>> login(LoginRequest request) {
+    return _dio.post(AuthApiPath.login).then((response) {
+      if (response.statusCode == 200) {
+        return Success(response.data['data'] as JsonMap);
+      } else if (response.statusCode == 401) {
+        return Failure(response.data['message'] as String);
+      } else {
+        return Failure(response.data['message'] as String);
       }
     });
   }
