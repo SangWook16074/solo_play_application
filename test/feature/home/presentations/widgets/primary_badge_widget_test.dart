@@ -62,5 +62,11 @@ void main() {
       expect(padding.top, vertical);
       expect(padding.bottom, vertical);
     });
+
+    testWidgets('matches golden file', (tester) async {
+      await tester.pumpWidget(widget);
+      expect(find.byType(PrimaryBadgeWidget),
+          matchesGoldenFile("goldens/primary-badge-widget-defalut.png"));
+    });
   });
 }
