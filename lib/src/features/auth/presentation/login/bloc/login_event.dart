@@ -9,4 +9,6 @@ sealed class LoginEvent with _$LoginEvent {
 
   const factory LoginEvent.passwordChanged({required String password}) =
       LoginPasswordChanged;
+
+  const factory LoginEvent.login() = LoginButtonTap;
 }

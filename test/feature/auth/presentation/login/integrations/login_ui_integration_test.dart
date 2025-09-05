@@ -5,12 +5,15 @@ import 'package:solo_play_application/src/features/auth/presentation/login/bloc/
 import 'package:solo_play_application/src/features/auth/presentation/login/cubits/password_visibility_cubit.dart';
 import 'package:solo_play_application/src/features/auth/presentation/login/views/login_ui.dart';
 
+import '../mocks/mock_user_login_usecase.dart';
+
 void main() {
   group("LoginUI integration test", () {
     testWidgets('User can input email/password and toggle obscure text',
         (tester) async {
       // 실제 BLoC 생성
-      final loginBloc = LoginBloc();
+      final mockUserLoginUsecase = MockUserLoginUsecase();
+      final loginBloc = LoginBloc(userLoginUsecase: mockUserLoginUsecase);
       final passwordVisibilityCubit = PasswordVisibilityCubit();
 
       // LoginUI를 MaterialApp + BlocProvider로 감싸기

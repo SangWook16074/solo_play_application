@@ -17,6 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$LoginState {
   String get email;
   String get password;
+  String get errorMessage;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,15 +33,17 @@ mixin _$LoginState {
             other is LoginState &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password);
+  int get hashCode => Object.hash(runtimeType, email, password, errorMessage);
 
   @override
   String toString() {
-    return 'LoginState(email: $email, password: $password)';
+    return 'LoginState(email: $email, password: $password, errorMessage: $errorMessage)';
   }
 }
 
@@ -50,7 +53,7 @@ abstract mixin class $LoginStateCopyWith<$Res> {
           LoginState value, $Res Function(LoginState) _then) =
       _$LoginStateCopyWithImpl;
   @useResult
-  $Res call({String email, String password});
+  $Res call({String email, String password, String errorMessage});
 }
 
 /// @nodoc
@@ -67,6 +70,7 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
   $Res call({
     Object? email = null,
     Object? password = null,
+    Object? errorMessage = null,
   }) {
     return _then(_self.copyWith(
       email: null == email
@@ -77,6 +81,10 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
           ? _self.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      errorMessage: null == errorMessage
+          ? _self.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -84,7 +92,8 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
 /// @nodoc
 
 class _LoginState implements LoginState {
-  const _LoginState({this.email = "", this.password = ""});
+  const _LoginState(
+      {this.email = "", this.password = "", this.errorMessage = ""});
 
   @override
   @JsonKey()
@@ -92,6 +101,9 @@ class _LoginState implements LoginState {
   @override
   @JsonKey()
   final String password;
+  @override
+  @JsonKey()
+  final String errorMessage;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -108,15 +120,17 @@ class _LoginState implements LoginState {
             other is _LoginState &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password);
+  int get hashCode => Object.hash(runtimeType, email, password, errorMessage);
 
   @override
   String toString() {
-    return 'LoginState(email: $email, password: $password)';
+    return 'LoginState(email: $email, password: $password, errorMessage: $errorMessage)';
   }
 }
 
@@ -128,7 +142,7 @@ abstract mixin class _$LoginStateCopyWith<$Res>
       __$LoginStateCopyWithImpl;
   @override
   @useResult
-  $Res call({String email, String password});
+  $Res call({String email, String password, String errorMessage});
 }
 
 /// @nodoc
@@ -145,6 +159,7 @@ class __$LoginStateCopyWithImpl<$Res> implements _$LoginStateCopyWith<$Res> {
   $Res call({
     Object? email = null,
     Object? password = null,
+    Object? errorMessage = null,
   }) {
     return _then(_LoginState(
       email: null == email
@@ -154,6 +169,10 @@ class __$LoginStateCopyWithImpl<$Res> implements _$LoginStateCopyWith<$Res> {
       password: null == password
           ? _self.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      errorMessage: null == errorMessage
+          ? _self.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
