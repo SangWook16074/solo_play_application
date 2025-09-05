@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TagWidget extends StatelessWidget {
-  final String text;
-  const TagWidget({super.key, required this.text});
+  final String? text;
+  const TagWidget({super.key, this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class TagWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
         child: Center(
           child: Text(
-            text,
+            text ?? "",
             style: TextStyle(
               fontSize: 12,
               fontStyle: FontStyle.normal,

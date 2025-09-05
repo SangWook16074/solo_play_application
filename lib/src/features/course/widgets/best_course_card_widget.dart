@@ -4,7 +4,7 @@ import 'package:solo_play_application/src/core/widgets/action_button_widget.dart
 import 'package:solo_play_application/src/core/widgets/bookmark_icon.dart';
 import 'package:solo_play_application/src/core/widgets/slide_course_image_widget.dart';
 import 'package:solo_play_application/src/features/course/data/models/course_model.dart';
-import 'package:solo_play_application/src/core/widgets/level_tag_widget.dart';
+import 'package:solo_play_application/src/core/widgets/primary_badge_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/rank_number_widget.dart';
 
 class BestCourseCardWidget extends StatelessWidget {
@@ -91,7 +91,7 @@ class BestCourseCardWidget extends StatelessWidget {
             /// 태그 영역
             showHeader
                 ? Container()
-                : LevelTagWidget(
+                : PrimaryBadgeWidget(
                     text: '혼자는 아직 힘들어 LV.1',
                   ),
 
