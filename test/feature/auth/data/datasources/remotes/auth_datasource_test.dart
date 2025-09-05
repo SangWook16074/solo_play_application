@@ -4,6 +4,7 @@ import 'package:solo_play_application/src/core/utils/networks/result.dart';
 import 'package:solo_play_application/src/features/auth/data/api_path.dart';
 import 'package:solo_play_application/src/features/auth/data/datasources/remotes/auth_datasource_impl.dart';
 import 'package:solo_play_application/src/features/auth/data/models/check_email_duplicate.dart';
+import 'package:solo_play_application/src/features/auth/data/models/jwt.dart';
 import 'package:solo_play_application/src/features/auth/data/models/login.dart';
 import 'package:test/test.dart';
 
@@ -111,9 +112,9 @@ void main() {
         verify(() => mockDio.post(AuthApiPath.login)).called(1);
 
         expect(result is Success, true);
-        expect((result as Success<Map<String, dynamic>>).value['accessToken'],
-            "test-access-key");
-        expect((result).value['refreshToken'], "test-refresh-key");
+        final success = result as Success<Jwt>;
+        expect(success.value.accessToken, "test-access-key");
+        expect(success.value.refreshToken, "test-refresh-key");
       });
 
       test('should returns failure with message when statusCode == 401',

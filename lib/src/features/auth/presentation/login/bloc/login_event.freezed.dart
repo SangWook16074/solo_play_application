@@ -165,4 +165,24 @@ class _$LoginPasswordChangedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
+
+class LoginButtonTap implements LoginEvent {
+  const LoginButtonTap();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is LoginButtonTap);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'LoginEvent.login()';
+  }
+}
+
 // dart format on

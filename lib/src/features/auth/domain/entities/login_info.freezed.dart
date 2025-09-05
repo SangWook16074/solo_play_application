@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'login_state.dart';
+part of 'login_info.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,63 +14,58 @@ part of 'login_state.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$LoginState {
+mixin _$LoginInfo {
   String get email;
   String get password;
-  String get errorMessage;
 
-  /// Create a copy of LoginState
+  /// Create a copy of LoginInfo
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $LoginStateCopyWith<LoginState> get copyWith =>
-      _$LoginStateCopyWithImpl<LoginState>(this as LoginState, _$identity);
+  $LoginInfoCopyWith<LoginInfo> get copyWith =>
+      _$LoginInfoCopyWithImpl<LoginInfo>(this as LoginInfo, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is LoginState &&
+            other is LoginInfo &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password, errorMessage);
+  int get hashCode => Object.hash(runtimeType, email, password);
 
   @override
   String toString() {
-    return 'LoginState(email: $email, password: $password, errorMessage: $errorMessage)';
+    return 'LoginInfo(email: $email, password: $password)';
   }
 }
 
 /// @nodoc
-abstract mixin class $LoginStateCopyWith<$Res> {
-  factory $LoginStateCopyWith(
-          LoginState value, $Res Function(LoginState) _then) =
-      _$LoginStateCopyWithImpl;
+abstract mixin class $LoginInfoCopyWith<$Res> {
+  factory $LoginInfoCopyWith(LoginInfo value, $Res Function(LoginInfo) _then) =
+      _$LoginInfoCopyWithImpl;
   @useResult
-  $Res call({String email, String password, String errorMessage});
+  $Res call({String email, String password});
 }
 
 /// @nodoc
-class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
-  _$LoginStateCopyWithImpl(this._self, this._then);
+class _$LoginInfoCopyWithImpl<$Res> implements $LoginInfoCopyWith<$Res> {
+  _$LoginInfoCopyWithImpl(this._self, this._then);
 
-  final LoginState _self;
-  final $Res Function(LoginState) _then;
+  final LoginInfo _self;
+  final $Res Function(LoginInfo) _then;
 
-  /// Create a copy of LoginState
+  /// Create a copy of LoginInfo
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? email = null,
     Object? password = null,
-    Object? errorMessage = null,
   }) {
     return _then(_self.copyWith(
       email: null == email
@@ -81,87 +76,74 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
           ? _self.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      errorMessage: null == errorMessage
-          ? _self.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _LoginState implements LoginState {
-  const _LoginState(
-      {this.email = "", this.password = "", this.errorMessage = ""});
+class _LoginInfo extends LoginInfo {
+  const _LoginInfo({required this.email, required this.password}) : super._();
 
   @override
-  @JsonKey()
   final String email;
   @override
-  @JsonKey()
   final String password;
-  @override
-  @JsonKey()
-  final String errorMessage;
 
-  /// Create a copy of LoginState
+  /// Create a copy of LoginInfo
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$LoginStateCopyWith<_LoginState> get copyWith =>
-      __$LoginStateCopyWithImpl<_LoginState>(this, _$identity);
+  _$LoginInfoCopyWith<_LoginInfo> get copyWith =>
+      __$LoginInfoCopyWithImpl<_LoginInfo>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _LoginState &&
+            other is _LoginInfo &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password, errorMessage);
+  int get hashCode => Object.hash(runtimeType, email, password);
 
   @override
   String toString() {
-    return 'LoginState(email: $email, password: $password, errorMessage: $errorMessage)';
+    return 'LoginInfo(email: $email, password: $password)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$LoginStateCopyWith<$Res>
-    implements $LoginStateCopyWith<$Res> {
-  factory _$LoginStateCopyWith(
-          _LoginState value, $Res Function(_LoginState) _then) =
-      __$LoginStateCopyWithImpl;
+abstract mixin class _$LoginInfoCopyWith<$Res>
+    implements $LoginInfoCopyWith<$Res> {
+  factory _$LoginInfoCopyWith(
+          _LoginInfo value, $Res Function(_LoginInfo) _then) =
+      __$LoginInfoCopyWithImpl;
   @override
   @useResult
-  $Res call({String email, String password, String errorMessage});
+  $Res call({String email, String password});
 }
 
 /// @nodoc
-class __$LoginStateCopyWithImpl<$Res> implements _$LoginStateCopyWith<$Res> {
-  __$LoginStateCopyWithImpl(this._self, this._then);
+class __$LoginInfoCopyWithImpl<$Res> implements _$LoginInfoCopyWith<$Res> {
+  __$LoginInfoCopyWithImpl(this._self, this._then);
 
-  final _LoginState _self;
-  final $Res Function(_LoginState) _then;
+  final _LoginInfo _self;
+  final $Res Function(_LoginInfo) _then;
 
-  /// Create a copy of LoginState
+  /// Create a copy of LoginInfo
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $Res call({
     Object? email = null,
     Object? password = null,
-    Object? errorMessage = null,
   }) {
-    return _then(_LoginState(
+    return _then(_LoginInfo(
       email: null == email
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -169,10 +151,6 @@ class __$LoginStateCopyWithImpl<$Res> implements _$LoginStateCopyWith<$Res> {
       password: null == password
           ? _self.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      errorMessage: null == errorMessage
-          ? _self.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }

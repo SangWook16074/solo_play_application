@@ -1,14 +1,20 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:solo_play_application/src/core/utils/networks/result.dart';
 import 'package:solo_play_application/src/features/auth/presentation/login/bloc/bloc.dart';
 
 import 'package:test/test.dart';
 
+import '../mocks/mock_user_login_usecase.dart';
+
 void main() {
   group(LoginBloc, () {
+    late MockUserLoginUsecase userloginUsecase;
     late LoginBloc loginBloc;
 
     setUp(() {
-      loginBloc = LoginBloc();
+      userloginUsecase = MockUserLoginUsecase();
+      loginBloc = LoginBloc(userLoginUsecase: userloginUsecase);
     });
 
     test(
@@ -38,6 +44,22 @@ void main() {
       build: () => loginBloc,
       act: (bloc) => bloc.add(LoginPasswordChanged(password: 'password')),
       expect: () => [LoginState(password: "password")],
+    );
+
+    blocTest(
+      'should call userLoginUsecase when LoginUiPasswordChanged is added',
+      build: () => loginBloc,
+      act: (bloc) {
+        // given
+        when(() => userloginUsecase.call(any(), any()))
+            .thenAnswer((_) async => const Success(null));
+
+        // when
+        loginBloc.add(LoginButtonTap());
+      },
+      verify: (_) {
+        verify(() => userloginUsecase.call(any(), any())).called(1);
+      },
     );
   });
 }

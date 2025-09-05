@@ -48,6 +48,7 @@ dependencies:
   dio: ^5.8.0+1
   freezed: ^3.0.6
   mocktail: ^1.0.4
+  flutter_secure_storage: ^4.2.1
 
 dev_dependencies:
   flutter_test:
