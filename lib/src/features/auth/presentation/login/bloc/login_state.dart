@@ -7,5 +7,6 @@ sealed class LoginState with _$LoginState {
   const factory LoginState({
     @Default("") String email,
     @Default("") String password,
+    @Default("") String errorMessage,
   }) = _LoginState;
 }

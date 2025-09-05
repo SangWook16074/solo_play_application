@@ -1,6 +1,6 @@
 class PasswordValidator {
   static bool isValidPassword(String password) {
-    if (password.length < 8) return false;
+    if (password.length < 8 || password.length > 20) return false;
 
     bool hasLetter = password.contains(RegExp(r'[a-zA-Z]'));
     bool hasNumber = password.contains(RegExp(r'[0-9]'));

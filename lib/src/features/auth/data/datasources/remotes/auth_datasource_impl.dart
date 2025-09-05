@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:solo_play_application/src/core/utils/networks/result.dart';
 import 'package:solo_play_application/src/core/utils/typedefs/json_map.dart';
-import 'package:solo_play_application/src/features/auth/data/api_path.dart';
+import 'package:solo_play_application/src/features/auth/data/models/jwt.dart';
+import 'package:solo_play_application/src/features/auth/data/utils/api_path.dart';
 import 'package:solo_play_application/src/features/auth/data/datasources/remotes/auth_datasource.dart';
 import 'package:solo_play_application/src/features/auth/data/models/check_email_duplicate.dart';
 import 'package:solo_play_application/src/features/auth/data/models/login.dart';
@@ -79,10 +80,10 @@ class AuthDatasourceImpl extends AuthDatasource {
   ///   → 기본 메시지 `"서버와의 연결이 원할하지 않습니다"` 반환
   ///
   @override
-  Future<Result<JsonMap>> login(LoginRequest request) {
+  Future<Result<Jwt>> login(LoginRequest request) {
     return _dio.post(AuthApiPath.login).then((response) {
       if (response.statusCode == 200) {
-        return Success(response.data['data'] as JsonMap);
+        return Success(Jwt.fromJson(response.data['data'] as JsonMap));
       } else if (response.statusCode == 401) {
         return Failure(response.data['message'] as String);
       } else {
