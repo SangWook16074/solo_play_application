@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:solo_play_application/src/core/widgets/primary_badge_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/tag_widget.dart';
 
 class PlaceCard extends StatelessWidget {
@@ -55,23 +56,7 @@ class PlaceCard extends StatelessWidget {
               /// card의 label text 영역(위치 구, # 태그)
               Row(
                 children: [
-                  Container(
-                    height: 20,
-                    width: 42,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color(0xff0070F0),
-                    ),
-                    child: Text(
-                      '용산구',
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xffFFFFFF),
-                      ),
-                    ),
-                  ),
+                  PrimaryBadgeWidget(text: "용산구", horizontal: 8, vertical: 3),
                   SizedBox(width: 4),
                   TagWidget(text: '#커피향 가득'),
                   SizedBox(width: 4),
