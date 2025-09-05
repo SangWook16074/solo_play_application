@@ -1,8 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:solo_play_application/src/core/widget/thum_nail_image.dart';
+import 'package:solo_play_application/src/core/widgets/thum_nail_image.dart';
 
 void main() {
   group(ThumbnailImage, () {

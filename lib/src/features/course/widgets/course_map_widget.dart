@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
+import 'package:solo_play_application/src/core/widgets/bookmark_icon.dart';
 
 class CourseMapWidget extends StatefulWidget {
   const CourseMapWidget({super.key});

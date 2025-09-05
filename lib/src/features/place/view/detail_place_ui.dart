@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
+import 'package:solo_play_application/src/core/widgets/bookmark_icon.dart';
 import 'package:solo_play_application/src/features/place/data/models/place_model.dart';
 import 'package:solo_play_application/src/features/place/cubit/place_cubit.dart';
 import 'package:solo_play_application/src/features/course/views/course_map_view.dart';
