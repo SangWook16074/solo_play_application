@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-<<<<<<< HEAD:lib/src/features/course/widgets/best_course_card_widget.dart
-import 'package:solo_play_application/src/core/widget/action_button_widget.dart';
-import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
-import 'package:solo_play_application/src/core/widget/slide_course_image_widget.dart';
-import 'package:solo_play_application/src/features/course/data/models/course_model.dart';
-import 'package:solo_play_application/src/core/widget/level_tag_widget.dart';
-=======
 import 'package:solo_play_application/src/core/widgets/action_button_widget.dart';
 import 'package:solo_play_application/src/core/widgets/bookmark_icon.dart';
 import 'package:solo_play_application/src/core/widgets/slide_course_image_widget.dart';
-import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
-import 'package:solo_play_application/src/features/rank/presentation/widget/level_tag_widget.dart';
->>>>>>> develop:lib/src/features/rank/presentation/widget/best_course_card_widget.dart
+import 'package:solo_play_application/src/features/course/data/models/course_model.dart';
+import 'package:solo_play_application/src/core/widgets/level_tag_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/rank_number_widget.dart';
 
 class BestCourseCardWidget extends StatelessWidget {

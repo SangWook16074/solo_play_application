@@ -1,21 +1,12 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD:lib/src/features/course/views/detail_course_ui.dart
 import 'package:solo_play_application/src/features/course/data/models/course_model.dart';
 import 'package:solo_play_application/src/features/place/view/place_visit_review_view.dart';
 import 'package:solo_play_application/src/features/place/view/similar_cafe_photo_view.dart';
 import 'package:solo_play_application/src/features/course/widgets/best_course_card_widget.dart';
-import 'package:solo_play_application/src/core/widget/bookmark_icon.dart';
+import 'package:solo_play_application/src/core/widgets/bookmark_icon.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/rank_number_widget.dart';
 import 'package:solo_play_application/src/features/rank/presentation/widget/routine_widget.dart';
 import 'package:solo_play_application/src/features/course/widgets/start_course_button_widget.dart';
-=======
-import 'package:solo_play_application/src/features/rank/presentation/view/place_review_view.dart';
-import 'package:solo_play_application/src/features/rank/presentation/view/similar_cafe_photo_view.dart';
-import 'package:solo_play_application/src/features/rank/presentation/widget/best_course_card_widget.dart';
-import 'package:solo_play_application/src/features/rank/data/models/course_model.dart';
-import 'package:solo_play_application/src/core/widgets/bookmark_icon.dart';
-import 'package:solo_play_application/src/features/rank/presentation/widget/start_course_button_widget.dart';
->>>>>>> develop:lib/src/features/rank/presentation/view/detail_course_ui.dart
 
 class DetailCourseUI extends StatefulWidget {
   final int rank;
