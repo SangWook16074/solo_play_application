@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:solo_play_application/src/core/widgets/image_indicator_widget.dart';
-import 'package:solo_play_application/src/features/rank/presentation/widget/tag_widget.dart';
 
 class SimilarPlacePhotoWidget extends StatefulWidget {
   const SimilarPlacePhotoWidget({super.key});
@@ -25,7 +25,7 @@ class _SimilarPlacePhotoWidgetState extends State<SimilarPlacePhotoWidget> {
       height: 229,
       width: 175,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5.0),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(
           width: 1,
           color: const Color(0xffCACACA),
@@ -33,7 +33,7 @@ class _SimilarPlacePhotoWidgetState extends State<SimilarPlacePhotoWidget> {
         ),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(5.0),
+        borderRadius: BorderRadius.circular(10),
         child: Stack(
           children: [
             /// 카페 사진 영역
@@ -45,8 +45,8 @@ class _SimilarPlacePhotoWidgetState extends State<SimilarPlacePhotoWidget> {
                 height: 164,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5),
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
                   ),
                 ),
                 child: PageView.builder(
@@ -97,13 +97,18 @@ class _SimilarPlacePhotoWidgetState extends State<SimilarPlacePhotoWidget> {
                     ),
                     const SizedBox(height: 4),
                     Row(
-                      children: List.generate(
-                        2,
-                        (index) => const Padding(
-                          padding: EdgeInsets.only(right: 4.0),
-                          child: TagWidget(),
-                        ),
-                      ),
+                      children: [
+                        SvgPicture.asset('assets/images/location_icon.svg'),
+                        Text(
+                          '서울 용산구',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            fontFamily: 'Pretendard',
+                          ),
+                        )
+                      ],
                     ),
                   ],
                 ),

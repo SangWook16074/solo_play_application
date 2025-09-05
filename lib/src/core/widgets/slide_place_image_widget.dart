@@ -14,17 +14,17 @@ class SlidePlaceImageWidget extends HookWidget {
     final controller = usePageController();
 
     return ClipRRect(
-      borderRadius: BorderRadius.circular(5),
+      borderRadius: BorderRadius.circular(10),
       child: Stack(
         children: [
           /// 사진 영역
           Container(
             height: 400,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(10),
               child: PageView.builder(
                 physics: const ClampingScrollPhysics(),
                 controller: controller,
