@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:solo_play_application/src/core/utils/networks/result.dart';
 import 'package:solo_play_application/src/core/utils/typedefs/json_map.dart';
-import 'package:solo_play_application/src/features/auth/data/api_path.dart';
+import 'package:solo_play_application/src/features/auth/data/utils/api_path.dart';
 import 'package:solo_play_application/src/features/auth/data/datasources/remotes/auth_datasource.dart';
 import 'package:solo_play_application/src/features/auth/data/models/check_email_duplicate.dart';
 import 'package:solo_play_application/src/features/auth/data/models/login.dart';
