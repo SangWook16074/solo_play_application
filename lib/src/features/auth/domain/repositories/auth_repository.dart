@@ -5,4 +5,6 @@ abstract class AuthRepository {
   Future<Result<String>> checkEmailDuplicate(String email);
 
   Future<Result<void>> login(LoginInfo login);
+
+  Future<String?> getAccessToken();
 }
