@@ -115,5 +115,37 @@ void main() {
         verify(() => mockAuthDatasource.login(request)).called(1);
       });
     });
+
+    group('when called getAccessToken', () {
+      test('should return access token user logined', () async {
+        when(
+          () => mockJwtStorage.readAccessToken(),
+        ).thenAnswer((_) async => "access-token");
+
+        final accessToken = await authRepository.getAccessToken();
+
+        verify(
+          () => mockJwtStorage.readAccessToken(),
+        ).called(1);
+
+        expect(accessToken, "access-token");
+      });
+
+      test('should return null user not logined', () async {
+        when(
+          () => mockJwtStorage.readAccessToken(),
+        ).thenAnswer((_) async {
+          return null;
+        });
+
+        final accessToken = await authRepository.getAccessToken();
+
+        verify(
+          () => mockJwtStorage.readAccessToken(),
+        ).called(1);
+
+        expect(accessToken, isNull);
+      });
+    });
   });
 }

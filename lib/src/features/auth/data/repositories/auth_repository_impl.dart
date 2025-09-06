@@ -17,12 +17,18 @@ class AuthRepositoryImpl extends AuthRepository {
   })  : _authDatasource = authDatasource,
         _jwtStorage = jwtStorage;
 
+  /// 이메일 중복 검증
+  ///
+  ///
   @override
   Future<Result<String>> checkEmailDuplicate(String email) {
     return _authDatasource
         .checkEmailDuplicate(CheckEmailDuplicateRequest(email: email));
   }
 
+  /// 로그인
+  ///
+  ///
   @override
   Future<Result<void>> login(LoginInfo login) async {
     final result = await _authDatasource
@@ -38,5 +44,13 @@ class AuthRepositoryImpl extends AuthRepository {
     } else {
       return Failure((result as Failure).message);
     }
+  }
+
+  /// 저장된 토큰 정보 불러오기
+  ///
+  ///
+  @override
+  Future<String?> getAccessToken() {
+    return _jwtStorage.readAccessToken();
   }
 }
