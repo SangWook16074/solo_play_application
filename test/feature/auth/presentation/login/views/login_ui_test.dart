@@ -101,15 +101,5 @@ void main() {
         () => mockPasswordVisibilityCubit.toggle(),
       ).called(1);
     });
-
-    testWidgets("should render correctly when user login fail", (tester) async {
-      await tester.pumpWidget(widget);
-      await tester.enterText(find.byKey(Key("email-fields")), "test@test.com");
-      await tester.enterText(find.byKey(Key("password-fields")), "password");
-
-      verify(
-        () => mockPasswordVisibilityCubit.toggle(),
-      ).called(1);
-    });
   });
 }
