@@ -1,27 +1,33 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/features/auth/domain/usecases/get_user_access_token_usecase.dart';
+import 'package:solo_play_application/src/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:solo_play_application/src/features/auth/domain/usecases/watch_user_access_token_usecase.dart';
 import 'package:solo_play_application/src/features/auth/presentation/bloc/auth_event.dart';
 import 'package:solo_play_application/src/features/auth/presentation/bloc/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final GetUserAccessTokenUsecase _getUserAccessTokenUsecase;
+  final WatchUserAccessTokenUseCase _watchUserAccessTokenUseCase;
 
   AuthBloc({
-    required GetUserAccessTokenUsecase getUserAccessTokenUsecase,
-  })  : _getUserAccessTokenUsecase = getUserAccessTokenUsecase,
-        super(AuthState()) {
-    on<AuthCheck>(_onCheck);
+    required WatchUserAccessTokenUseCase watchUserAccessTokenUseCase,
+  })  : _watchUserAccessTokenUseCase = watchUserAccessTokenUseCase,
+        super(Unknown()) {
+    on<AuthSubscriptionRequested>(_onSubscriptionReqeusted);
   }
 
-  FutureOr<void> _onCheck(AuthCheck event, Emitter<AuthState> emit) async {
-    final accessToken = await _getUserAccessTokenUsecase.call();
-    if (accessToken != null) {
-      emit(AuthState(status: AuthenticateStatus.authenticated));
-    } else {
-      emit(AuthState(status: AuthenticateStatus.unauthenticated));
-    }
+  FutureOr<void> _onSubscriptionReqeusted(
+      AuthSubscriptionRequested event, Emitter<AuthState> emit) {
+    return emit.onEach(_watchUserAccessTokenUseCase.call(),
+        onData: (status) async {
+      switch (status) {
+        case AuthenticateStatus.unknown:
+          emit(Unknown());
+        case AuthenticateStatus.authenticated:
+          emit(Authenticated());
+        case AuthenticateStatus.unauthenticated:
+          emit(Unauthenticated());
+      }
+    });
   }
 }

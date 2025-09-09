@@ -37,13 +37,14 @@ class $AuthEventCopyWith<$Res> {
 
 /// @nodoc
 
-class AuthCheck implements AuthEvent {
-  const AuthCheck();
+class AuthSubscriptionRequested implements AuthEvent {
+  const AuthSubscriptionRequested();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is AuthCheck);
+        (other.runtimeType == runtimeType &&
+            other is AuthSubscriptionRequested);
   }
 
   @override
@@ -51,7 +52,27 @@ class AuthCheck implements AuthEvent {
 
   @override
   String toString() {
-    return 'AuthEvent.checkAuthenticated()';
+    return 'AuthEvent.subscriptionRequested()';
+  }
+}
+
+/// @nodoc
+
+class LogoutTapped implements AuthEvent {
+  const LogoutTapped();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is LogoutTapped);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'AuthEvent.onLogoutTapped()';
   }
 }
 

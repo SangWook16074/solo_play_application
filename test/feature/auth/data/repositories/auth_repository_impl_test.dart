@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:mocktail/mocktail.dart';
 import 'package:solo_play_application/src/core/utils/networks/result.dart';
 import 'package:solo_play_application/src/features/auth/data/datasources/locals/jwt_storage.dart';
@@ -19,12 +21,65 @@ void main() {
     late MockAuthDatasource mockAuthDatasource;
     late MockJwtStorage mockJwtStorage;
     late AuthRepository authRepository;
+    late StreamController<String?> tokenController;
 
     setUp(() {
       mockAuthDatasource = MockAuthDatasource();
       mockJwtStorage = MockJwtStorage();
+      tokenController = StreamController<String?>.broadcast();
+
+      // Mock the tokenStream getter
+      when(() => mockJwtStorage.tokenStream)
+          .thenAnswer((_) => tokenController.stream);
+
       authRepository = AuthRepositoryImpl(
           authDatasource: mockAuthDatasource, jwtStorage: mockJwtStorage);
+    });
+
+    tearDown(() {
+      tokenController.close();
+    });
+
+    group('authStatusStream', () {
+      test('emits authenticated when token is not null', () {
+        final stream = authRepository.authStatusStream;
+
+        expect(
+          stream,
+          emitsInOrder([
+            AuthenticateStatus.unauthenticated, // Initial state from null
+            AuthenticateStatus.authenticated,
+          ]),
+        );
+
+        tokenController.add(null); // Initial state
+        tokenController.add('some_token'); // Authenticated
+      });
+
+      test('emits unauthenticated when token is null', () {
+        final stream = authRepository.authStatusStream;
+
+        expect(
+          stream,
+          emitsInOrder([
+            AuthenticateStatus.authenticated, // Initial state
+            AuthenticateStatus.unauthenticated,
+          ]),
+        );
+
+        tokenController.add('some_token'); // Initial state
+        tokenController.add(null); // Unauthenticated
+      });
+    });
+
+    group('dispose', () {
+      test('calls dispose on jwtStorage', () {
+        when(() => mockJwtStorage.dispose()).thenAnswer((_) {});
+
+        authRepository.dispose();
+
+        verify(() => mockJwtStorage.dispose()).called(1);
+      });
     });
 
     group('when called checkEmailDuplicate', () {
