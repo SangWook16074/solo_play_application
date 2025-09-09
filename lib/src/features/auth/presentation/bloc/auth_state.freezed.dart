@@ -74,8 +74,8 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
 
 /// @nodoc
 
-class _AuthState implements AuthState {
-  const _AuthState({this.status = AuthenticateStatus.unknown});
+class Unknown implements AuthState {
+  const Unknown({this.status = AuthenticateStatus.unknown});
 
   @override
   @JsonKey()
@@ -86,14 +86,14 @@ class _AuthState implements AuthState {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$AuthStateCopyWith<_AuthState> get copyWith =>
-      __$AuthStateCopyWithImpl<_AuthState>(this, _$identity);
+  $UnknownCopyWith<Unknown> get copyWith =>
+      _$UnknownCopyWithImpl<Unknown>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AuthState &&
+            other is Unknown &&
             (identical(other.status, status) || other.status == status));
   }
 
@@ -102,27 +102,26 @@ class _AuthState implements AuthState {
 
   @override
   String toString() {
-    return 'AuthState(status: $status)';
+    return 'AuthState.unknown(status: $status)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$AuthStateCopyWith<$Res>
+abstract mixin class $UnknownCopyWith<$Res>
     implements $AuthStateCopyWith<$Res> {
-  factory _$AuthStateCopyWith(
-          _AuthState value, $Res Function(_AuthState) _then) =
-      __$AuthStateCopyWithImpl;
+  factory $UnknownCopyWith(Unknown value, $Res Function(Unknown) _then) =
+      _$UnknownCopyWithImpl;
   @override
   @useResult
   $Res call({AuthenticateStatus status});
 }
 
 /// @nodoc
-class __$AuthStateCopyWithImpl<$Res> implements _$AuthStateCopyWith<$Res> {
-  __$AuthStateCopyWithImpl(this._self, this._then);
+class _$UnknownCopyWithImpl<$Res> implements $UnknownCopyWith<$Res> {
+  _$UnknownCopyWithImpl(this._self, this._then);
 
-  final _AuthState _self;
-  final $Res Function(_AuthState) _then;
+  final Unknown _self;
+  final $Res Function(Unknown) _then;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -131,7 +130,145 @@ class __$AuthStateCopyWithImpl<$Res> implements _$AuthStateCopyWith<$Res> {
   $Res call({
     Object? status = null,
   }) {
-    return _then(_AuthState(
+    return _then(Unknown(
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as AuthenticateStatus,
+    ));
+  }
+}
+
+/// @nodoc
+
+class Authenticated implements AuthState {
+  const Authenticated({this.status = AuthenticateStatus.authenticated});
+
+  @override
+  @JsonKey()
+  final AuthenticateStatus status;
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $AuthenticatedCopyWith<Authenticated> get copyWith =>
+      _$AuthenticatedCopyWithImpl<Authenticated>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Authenticated &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, status);
+
+  @override
+  String toString() {
+    return 'AuthState.authenticated(status: $status)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $AuthenticatedCopyWith<$Res>
+    implements $AuthStateCopyWith<$Res> {
+  factory $AuthenticatedCopyWith(
+          Authenticated value, $Res Function(Authenticated) _then) =
+      _$AuthenticatedCopyWithImpl;
+  @override
+  @useResult
+  $Res call({AuthenticateStatus status});
+}
+
+/// @nodoc
+class _$AuthenticatedCopyWithImpl<$Res>
+    implements $AuthenticatedCopyWith<$Res> {
+  _$AuthenticatedCopyWithImpl(this._self, this._then);
+
+  final Authenticated _self;
+  final $Res Function(Authenticated) _then;
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? status = null,
+  }) {
+    return _then(Authenticated(
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as AuthenticateStatus,
+    ));
+  }
+}
+
+/// @nodoc
+
+class Unauthenticated implements AuthState {
+  const Unauthenticated({this.status = AuthenticateStatus.unauthenticated});
+
+  @override
+  @JsonKey()
+  final AuthenticateStatus status;
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $UnauthenticatedCopyWith<Unauthenticated> get copyWith =>
+      _$UnauthenticatedCopyWithImpl<Unauthenticated>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Unauthenticated &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, status);
+
+  @override
+  String toString() {
+    return 'AuthState.unauthenticated(status: $status)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $UnauthenticatedCopyWith<$Res>
+    implements $AuthStateCopyWith<$Res> {
+  factory $UnauthenticatedCopyWith(
+          Unauthenticated value, $Res Function(Unauthenticated) _then) =
+      _$UnauthenticatedCopyWithImpl;
+  @override
+  @useResult
+  $Res call({AuthenticateStatus status});
+}
+
+/// @nodoc
+class _$UnauthenticatedCopyWithImpl<$Res>
+    implements $UnauthenticatedCopyWith<$Res> {
+  _$UnauthenticatedCopyWithImpl(this._self, this._then);
+
+  final Unauthenticated _self;
+  final $Res Function(Unauthenticated) _then;
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? status = null,
+  }) {
+    return _then(Unauthenticated(
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable

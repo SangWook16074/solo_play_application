@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/router/go_router_refresh_stream.dart';
 import 'package:solo_play_application/src/core/router/router_path.dart';
+import 'package:solo_play_application/src/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:solo_play_application/src/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/bloc/auth_state.dart';
 import 'package:solo_play_application/src/features/auth/presentation/login/page/login_page.dart';
 
 GoRouter router(AuthBloc authBloc) => GoRouter(

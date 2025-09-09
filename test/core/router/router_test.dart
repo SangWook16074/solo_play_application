@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:solo_play_application/src/core/router/router.dart';
+import 'package:solo_play_application/src/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:solo_play_application/src/features/auth/domain/repositories/auth_repository.dart';
 import 'package:solo_play_application/src/features/auth/domain/usecases/user_login_usecase.dart';
 import 'package:solo_play_application/src/features/auth/presentation/bloc/auth_bloc.dart';
@@ -63,7 +64,7 @@ void main() {
         (tester) async {
       // arrange
       when(() => mockAuthBloc.state)
-          .thenReturn(AuthState(status: AuthenticateStatus.authenticated));
+          .thenReturn(Authenticated(status: AuthenticateStatus.authenticated));
       // act
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
@@ -74,8 +75,8 @@ void main() {
 
     testWidgets('when state is unautenticated → should redirect to login',
         (tester) async {
-      when(() => mockAuthBloc.state)
-          .thenReturn(AuthState(status: AuthenticateStatus.unauthenticated));
+      when(() => mockAuthBloc.state).thenReturn(
+          Unauthenticated(status: AuthenticateStatus.unauthenticated));
       when(
         () => mockLoginBloc.state,
       ).thenReturn(LoginState());
@@ -90,7 +91,7 @@ void main() {
     testWidgets('when state is unknown → should redirect to splash',
         (tester) async {
       when(() => mockAuthBloc.state)
-          .thenReturn(AuthState(status: AuthenticateStatus.unknown));
+          .thenReturn(Unknown(status: AuthenticateStatus.unknown));
 
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();

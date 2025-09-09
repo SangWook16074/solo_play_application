@@ -10,7 +10,7 @@ import 'package:solo_play_application/src/features/auth/data/datasources/remotes
 import 'package:solo_play_application/src/features/auth/data/datasources/remotes/auth_datasource_impl.dart';
 import 'package:solo_play_application/src/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:solo_play_application/src/features/auth/domain/repositories/auth_repository.dart';
-import 'package:solo_play_application/src/features/auth/domain/usecases/get_user_access_token_usecase.dart';
+import 'package:solo_play_application/src/features/auth/domain/usecases/watch_user_access_token_usecase.dart';
 import 'package:solo_play_application/src/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/bloc/auth_event.dart';
 
@@ -39,14 +39,17 @@ class MyApp extends StatelessWidget {
               create: (context) => AuthRepositoryImpl(
                   authDatasource: context.read<AuthDatasource>(),
                   jwtStorage: context.read<JwtStorage>())),
-          RepositoryProvider<GetUserAccessTokenUsecase>(
-              create: (context) => GetUserAccessTokenUsecaseImpl(
-                  authRepository: context.read<AuthRepository>())),
+          RepositoryProvider<WatchUserAccessTokenUseCase>(
+            create: (context) => WatchUserAccessTokenUseCaseImpl(
+              authRepository: context.read<AuthRepository>(),
+            ),
+            dispose: (usecase) => usecase.close(),
+          ),
           BlocProvider<AuthBloc>(
               create: (context) => AuthBloc(
-                  getUserAccessTokenUsecase:
-                      context.read<GetUserAccessTokenUsecase>())
-                ..add(AuthCheck()))
+                  watchUserAccessTokenUseCase:
+                      context.read<WatchUserAccessTokenUseCase>())
+                ..add(AuthSubscriptionRequested()))
         ],
         child: Builder(builder: (context) {
           return MaterialApp.router(
