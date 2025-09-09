@@ -22,6 +22,7 @@ class LoginUI extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   LoginUiTitleSection(),
                   const SizedBox(
