@@ -41,8 +41,8 @@ void main() {
 
       setUp(() {
         mockUserEmailBloc = MockUserEmailBloc();
-        when(() => mockUserEmailBloc.state)
-            .thenReturn(UserEmailState(email: 'test@test.com', isValid: true));
+        when(() => mockUserEmailBloc.state).thenReturn(UserEmailState(
+            email: 'test@test.com', status: UserEmailStatus.valid));
         widget = MaterialApp(
           home: BlocProvider<UserEmailBloc>.value(
             value: mockUserEmailBloc,
@@ -68,8 +68,8 @@ void main() {
 
       setUp(() {
         mockUserEmailBloc = MockUserEmailBloc();
-        when(() => mockUserEmailBloc.state)
-            .thenReturn(UserEmailState(email: "test@", isValid: false));
+        when(() => mockUserEmailBloc.state).thenReturn(
+            UserEmailState(email: "test@", status: UserEmailStatus.invalid));
         widget = MaterialApp(
           home: BlocProvider<UserEmailBloc>.value(
             value: mockUserEmailBloc,

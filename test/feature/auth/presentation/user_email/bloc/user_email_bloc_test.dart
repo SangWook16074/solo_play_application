@@ -11,6 +11,7 @@ class MockCheckEmailDuplicateUsecase extends Mock
 void main() {
   group(UserEmailBloc, () {
     final email = "test@test.com";
+    final invalidEmail = "testcom";
 
     late MockCheckEmailDuplicateUsecase checkEmailDuplicateUsecase;
 
@@ -25,12 +26,23 @@ void main() {
       expect(userEmailBloc.state.email.isEmpty, true);
       expect(userEmailBloc.state.errorMessage.isEmpty, true);
       expect(userEmailBloc.state.isAvail, false);
+      expect(userEmailBloc.state.status, UserEmailStatus.empty);
     });
 
-    blocTest('emits with new email when UserEmailChanged added',
+    blocTest(
+        'emits with new email and valid status when UserEmailChanged added',
         build: () => userEmailBloc,
         act: (bloc) => bloc.add(UserEmailChanged(email: email)),
-        expect: () => [UserEmailState(email: email)]);
+        expect: () =>
+            [UserEmailState(email: email, status: UserEmailStatus.valid)]);
+
+    blocTest('emits with new email and invalid when UserEmailChanged added',
+        build: () => userEmailBloc,
+        act: (bloc) => bloc.add(UserEmailChanged(email: invalidEmail)),
+        expect: () => [
+              UserEmailState(
+                  email: invalidEmail, status: UserEmailStatus.invalid)
+            ]);
 
     blocTest(
         'emits state with email and success message when UserEmailCheckDuplicate is added and usecase succeeds',

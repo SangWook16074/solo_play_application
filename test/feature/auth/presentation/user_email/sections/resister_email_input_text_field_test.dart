@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:solo_play_application/src/core/widgets/primary_text_field.dart';
 import 'package:solo_play_application/src/features/auth/presentation/user_email/blocs/bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/user_email/blocs/user_email_state.dart';
 import 'package:solo_play_application/src/features/auth/presentation/user_email/sections/resister_email_input_text_field.dart';
 import 'package:solo_play_application/src/features/auth/presentation/user_email/sections/resister_email_validate_icon_view.dart';
 

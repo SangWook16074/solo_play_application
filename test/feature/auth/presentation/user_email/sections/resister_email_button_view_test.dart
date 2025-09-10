@@ -38,8 +38,8 @@ void main() {
     testWidgets('should render next step button correctly when email valid',
         (tester) async {
       mockUserEmailBloc = MockUserEmailBloc();
-      when(() => mockUserEmailBloc.state)
-          .thenReturn(UserEmailState(email: 'test@test.com', isValid: true));
+      when(() => mockUserEmailBloc.state).thenReturn(UserEmailState(
+          email: 'test@test.com', status: UserEmailStatus.valid));
       widget = MaterialApp(
         home: BlocProvider<UserEmailBloc>.value(
           value: mockUserEmailBloc,

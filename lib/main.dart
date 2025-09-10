@@ -53,6 +53,13 @@ class MyApp extends StatelessWidget {
         ],
         child: Builder(builder: (context) {
           return MaterialApp.router(
+            theme: ThemeData(
+                useMaterial3: false,
+                scaffoldBackgroundColor: Color(0xffffffff),
+                appBarTheme: AppBarTheme(
+                    foregroundColor: Color(0xff000000),
+                    backgroundColor: Color(0xffffffff),
+                    elevation: 0.0)),
             routerConfig: router(context.read<AuthBloc>()),
           );
         }));

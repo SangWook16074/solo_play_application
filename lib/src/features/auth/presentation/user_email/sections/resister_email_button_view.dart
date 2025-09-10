@@ -10,7 +10,7 @@ class ResisterEmailButtonView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocSelector<UserEmailBloc, UserEmailState, bool>(
       selector: (state) {
-        return state.isValid;
+        return state.isAvail;
       },
       builder: (context, isValid) {
         return NextStepButton(

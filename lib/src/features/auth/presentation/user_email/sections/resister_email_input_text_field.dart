@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/core/widgets/primary_text_field.dart';
+import 'package:solo_play_application/src/features/auth/presentation/user_email/blocs/bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/user_email/sections/resister_email_validate_icon_view.dart';
-import 'package:solo_play_application/src/features/auth/presentation/user_email/widgets/validation_icon.dart';
 
 class ResisterEmailInputTextField extends StatelessWidget {
   const ResisterEmailInputTextField({super.key});
@@ -28,6 +29,8 @@ class ResisterEmailInputTextField extends StatelessWidget {
               fontSize: 16,
               fontWeight: FontWeight.w400,
               color: Color(0xffc3c3c3)),
+          onChanged: (email) =>
+              context.read<UserEmailBloc>().add(UserEmailChanged(email: email)),
           suffixIcon: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ResisterEmailValidateIconView(),

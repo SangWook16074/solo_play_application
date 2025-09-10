@@ -8,19 +8,19 @@ class ResisterEmailValidateIconView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserEmailBloc, UserEmailState>(
-      buildWhen: (previous, current) =>
-          previous.email != current.email ||
-          previous.isValid != current.isValid,
-      builder: (context, state) {
+    return BlocSelector<UserEmailBloc, UserEmailState, UserEmailStatus>(
+      selector: (state) {
+        return state.status;
+      },
+      builder: (context, status) {
         // 이메일이 비어있으면 아무것도 안 보여줌
-        if (state.email.isEmpty) {
+        if (status == UserEmailStatus.empty) {
           return const SizedBox.shrink();
         }
 
         // 이메일이 입력되어 있으면 ValidationIcon 보여줌
         return ValidationIcon(
-          isValid: state.isValid,
+          isValid: status == UserEmailStatus.valid ? true : false,
         );
       },
     );

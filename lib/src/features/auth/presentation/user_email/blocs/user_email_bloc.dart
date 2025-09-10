@@ -27,8 +27,13 @@ class UserEmailBloc extends Bloc<UserEmailEvent, UserEmailState> {
   FutureOr<void> _onChaned(
       UserEmailChanged event, Emitter<UserEmailState> emit) {
     final email = event.email;
+    if (email.isEmpty) {
+      emit(state.copyWith(email: email, status: UserEmailStatus.empty));
+    }
     final isValid = EmailValidator.isValid(email);
-    emit(state.copyWith(email: email, isValid: isValid));
+    emit(state.copyWith(
+        email: email,
+        status: isValid ? UserEmailStatus.valid : UserEmailStatus.invalid));
   }
 
   /// 사용자가 이메일 중복 검증을 요청하면 [CheckEmailDuplicateUsecase]를 통해서 검증합니다.
