@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:solo_play_application/src/core/router/router_path.dart';
 import 'package:solo_play_application/src/core/widgets/primary_button.dart';
 import 'package:solo_play_application/src/core/widgets/secondary_button.dart';
 
@@ -27,7 +29,9 @@ class LoginUiButtonSection extends StatelessWidget {
           height: 8.0,
         ),
         SecondaryButton(
-          onTap: onSignupButtonTap,
+          onTap: () {
+            context.push(RouterPath.registerTerms);
+          },
           child: Text(
             "이메일로 회원가입",
             style: TextStyle(
