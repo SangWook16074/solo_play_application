@@ -8,8 +8,30 @@ class RegisterPasswordBloc
     extends Bloc<RegisterPasswordEvent, RegisterPasswordState> {
   RegisterPasswordBloc() : super(RegisterPasswordState()) {
     on<RegisterPasswordChanged>(_onPasswordChanged);
+    on<RegisterPasswordCheckChanged>(_onPasswordCheckChanged);
+    on<ObscurePasswordToggled>(_onObscurePasswordToggled);
+    on<ObscurePasswordCheckToggled>(_onObscurePasswordCheckToggled);
   }
 
   FutureOr<void> _onPasswordChanged(
-      RegisterPasswordChanged event, Emitter<RegisterPasswordState> emit) {}
+      RegisterPasswordChanged event, Emitter<RegisterPasswordState> emit) {
+    emit(state.copyWith(password: event.password));
+  }
+
+  FutureOr<void> _onPasswordCheckChanged(
+      RegisterPasswordCheckChanged event, Emitter<RegisterPasswordState> emit) {
+    emit(state.copyWith(passwordCheck: event.password));
+  }
+
+  FutureOr<void> _onObscurePasswordToggled(
+      ObscurePasswordToggled event, Emitter<RegisterPasswordState> emit) {
+    final prevObscure = state.obscurePassword;
+    emit(state.copyWith(obscurePassword: !prevObscure));
+  }
+
+  FutureOr<void> _onObscurePasswordCheckToggled(
+      ObscurePasswordCheckToggled event, Emitter<RegisterPasswordState> emit) {
+    final prevObscure = state.obscurePasswordCheck;
+    emit(state.copyWith(obscurePasswordCheck: !prevObscure));
+  }
 }

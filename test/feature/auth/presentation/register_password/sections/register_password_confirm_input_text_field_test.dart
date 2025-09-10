@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:solo_play_application/src/core/widgets/primary_text_field.dart';
+import 'package:solo_play_application/src/features/auth/presentation/register_password/blocs/bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register_password/sections/sections.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register_password/widgets/password_validate_text.dart';
 
+import '../mocks/mock_register_password_bloc.dart';
+
 void main() {
-  group('RegisterPasswordInputTextField', () {
+  group(RegisterPasswordInputTextField, () {
+    late MockRegisterPasswordBloc mockRegisterPasswordBloc;
     late Widget widget;
 
     setUp(() {
+      mockRegisterPasswordBloc = MockRegisterPasswordBloc();
       widget = MaterialApp(
-        home: Scaffold(
-          body: Center(child: RegisterPasswordInputTextField()),
+        home: BlocProvider<RegisterPasswordBloc>.value(
+          value: mockRegisterPasswordBloc,
+          child: Scaffold(
+            body: Center(child: RegisterPasswordInputTextField()),
+          ),
         ),
       );
     });
@@ -20,6 +30,9 @@ void main() {
         'renders two PrimaryTextField and two PasswordValidateText widgets',
         (tester) async {
       // when
+      when(
+        () => mockRegisterPasswordBloc.state,
+      ).thenReturn(RegisterPasswordState());
       await tester.pumpWidget(widget);
 
       // then
@@ -35,13 +48,10 @@ void main() {
 
     testWidgets('obscure toggle button is tappable', (tester) async {
       // given
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(
-            body: RegisterPasswordInputTextField(),
-          ),
-        ),
-      );
+      when(
+        () => mockRegisterPasswordBloc.state,
+      ).thenReturn(RegisterPasswordState());
+      await tester.pumpWidget(widget);
 
       final toggleButtons = find.byKey(const Key('obscure-toggle'));
 
@@ -61,6 +71,9 @@ void main() {
     testWidgets('should render correctly when user do not input',
         (tester) async {
       // given
+      when(
+        () => mockRegisterPasswordBloc.state,
+      ).thenReturn(RegisterPasswordState());
       await tester.pumpWidget(widget);
 
       expectLater(
@@ -68,7 +81,34 @@ void main() {
           matchesGoldenFile(
               'goldens/register-password-input-text-field-default.png'));
     });
+
+    testWidgets('should render correctly when valid password', (tester) async {
+      // given
+      when(
+        () => mockRegisterPasswordBloc.state,
+      ).thenReturn(RegisterPasswordState(password: "QWERqwer7*"));
+
+      await tester.pumpWidget(widget);
+
+      expectLater(
+          find.byType(RegisterPasswordInputTextField),
+          matchesGoldenFile(
+              'goldens/register-password-input-text-field-valid-password.png'));
+    });
+
+    testWidgets('should render correctly when valid password', (tester) async {
+      // given
+      when(
+        () => mockRegisterPasswordBloc.state,
+      ).thenReturn(RegisterPasswordState(
+          password: "QWERqwer7*", passwordCheck: "QWERqwer7*"));
+
+      await tester.pumpWidget(widget);
+
+      expectLater(
+          find.byType(RegisterPasswordInputTextField),
+          matchesGoldenFile(
+              'goldens/register-password-input-text-field-avail-password.png'));
+    });
   });
 }
-
-
