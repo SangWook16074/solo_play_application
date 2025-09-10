@@ -25,7 +25,6 @@ void main() {
     test('should return initial state correctly', () {
       expect(userEmailBloc.state.email.isEmpty, true);
       expect(userEmailBloc.state.errorMessage.isEmpty, true);
-      expect(userEmailBloc.state.isAvail, false);
       expect(userEmailBloc.state.status, UserEmailStatus.empty);
     });
 
@@ -55,7 +54,7 @@ void main() {
         act: (bloc) {
           bloc.add(UserEmailCheckDuplicate(email: email));
         },
-        expect: () => [UserEmailState(isAvail: true)],
+        expect: () => [UserEmailState(status: UserEmailStatus.avail)],
         verify: (_) {
           verify(
             () => checkEmailDuplicateUsecase.call(email),
@@ -71,8 +70,10 @@ void main() {
         return userEmailBloc;
       },
       act: (bloc) => bloc.add(UserEmailCheckDuplicate(email: email)),
-      expect: () =>
-          [UserEmailState(isAvail: false, errorMessage: "이미 있는 아이디에요.")],
+      expect: () => [
+        UserEmailState(
+            status: UserEmailStatus.conflict, errorMessage: "이미 있는 아이디에요.")
+      ],
       verify: (_) {
         verify(
           () => checkEmailDuplicateUsecase.call(email),

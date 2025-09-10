@@ -23,18 +23,27 @@ class ResisterEmailInputTextField extends StatelessWidget {
         SizedBox(
           height: 6,
         ),
-        PrimaryTextField(
-          hintText: "abc@email.com",
-          hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: Color(0xffc3c3c3)),
-          onChanged: (email) =>
-              context.read<UserEmailBloc>().add(UserEmailChanged(email: email)),
-          suffixIcon: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ResisterEmailValidateIconView(),
-          ),
+        BlocSelector<UserEmailBloc, UserEmailState, bool>(
+          selector: (state) {
+            return state.errorMessage.isNotEmpty;
+          },
+          builder: (context, isError) {
+            return PrimaryTextField(
+              isError: isError,
+              hintText: "abc@email.com",
+              hintStyle: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xffc3c3c3)),
+              onChanged: (email) => context
+                  .read<UserEmailBloc>()
+                  .add(UserEmailChanged(email: email)),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: ResisterEmailValidateIconView(),
+              ),
+            );
+          },
         ),
       ],
     );

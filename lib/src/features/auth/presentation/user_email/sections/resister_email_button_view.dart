@@ -8,13 +8,20 @@ class ResisterEmailButtonView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<UserEmailBloc, UserEmailState, bool>(
-      selector: (state) {
-        return state.isAvail;
-      },
-      builder: (context, isValid) {
+    return BlocBuilder<UserEmailBloc, UserEmailState>(
+      buildWhen: (prev, curr) =>
+          prev.status != curr.status || prev.email != curr.email,
+      builder: (context, state) {
+        final isEmailValid = state.status == UserEmailStatus.valid;
+
         return NextStepButton(
-          onTap: isValid ? () {} : null,
+          onTap: isEmailValid
+              ? () {
+                  context.read<UserEmailBloc>().add(
+                        UserEmailCheckDuplicate(email: state.email),
+                      );
+                }
+              : null,
         );
       },
     );

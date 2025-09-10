@@ -76,5 +76,22 @@ void main() {
           matchesGoldenFile(
               "goldens/resister-email-input-text-field-default.png"));
     });
+
+    testWidgets(
+        'should render email input text field correctly when email conflict',
+        (tester) async {
+      when(
+        () => mockUserEmailBloc.state,
+      ).thenReturn(
+        UserEmailState(
+            errorMessage: "이미 있는 아이디에요.", status: UserEmailStatus.conflict),
+      );
+      await tester.pumpWidget(widget);
+
+      expectLater(
+          find.byType(ResisterEmailInputTextField),
+          matchesGoldenFile(
+              "goldens/resister-email-input-text-field-conflict.png"));
+    });
   });
 }

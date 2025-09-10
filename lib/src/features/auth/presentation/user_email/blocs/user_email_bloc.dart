@@ -28,12 +28,14 @@ class UserEmailBloc extends Bloc<UserEmailEvent, UserEmailState> {
       UserEmailChanged event, Emitter<UserEmailState> emit) {
     final email = event.email;
     if (email.isEmpty) {
-      emit(state.copyWith(email: email, status: UserEmailStatus.empty));
+      emit(state.copyWith(
+          email: email, status: UserEmailStatus.empty, errorMessage: ""));
     }
     final isValid = EmailValidator.isValid(email);
     emit(state.copyWith(
         email: email,
-        status: isValid ? UserEmailStatus.valid : UserEmailStatus.invalid));
+        status: isValid ? UserEmailStatus.valid : UserEmailStatus.invalid,
+        errorMessage: ""));
   }
 
   /// 사용자가 이메일 중복 검증을 요청하면 [CheckEmailDuplicateUsecase]를 통해서 검증합니다.
@@ -42,9 +44,9 @@ class UserEmailBloc extends Bloc<UserEmailEvent, UserEmailState> {
       UserEmailCheckDuplicate event, Emitter<UserEmailState> emit) async {
     final result = await _checkEmailDuplicateUsecase.call(event.email);
     emit(switch (result) {
-      Success() => state.copyWith(isAvail: true),
+      Success() => state.copyWith(status: UserEmailStatus.avail),
       Failure(:final message) =>
-        state.copyWith(errorMessage: message, isAvail: false),
+        state.copyWith(errorMessage: message, status: UserEmailStatus.conflict),
     });
   }
 }

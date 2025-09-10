@@ -1,17 +1,16 @@
 import 'package:equatable/equatable.dart';
 
-enum UserEmailStatus { empty, valid, invalid }
+enum UserEmailStatus { empty, valid, invalid, avail, conflict }
 
 class UserEmailState extends Equatable {
   final String email;
   final String errorMessage;
-  final bool isAvail;
+
   final UserEmailStatus status;
 
   const UserEmailState(
       {this.email = "",
       this.errorMessage = "",
-      this.isAvail = false,
       this.status = UserEmailStatus.empty});
 
   UserEmailState copyWith({
@@ -23,7 +22,6 @@ class UserEmailState extends Equatable {
     return UserEmailState(
         email: email ?? this.email,
         errorMessage: errorMessage ?? this.errorMessage,
-        isAvail: isAvail ?? this.isAvail,
         status: status ?? this.status);
   }
 
@@ -31,6 +29,5 @@ class UserEmailState extends Equatable {
   List<Object?> get props => [
         email,
         errorMessage,
-        isAvail,
       ];
 }
