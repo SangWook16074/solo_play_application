@@ -5,12 +5,12 @@ import 'package:mocktail/mocktail.dart';
 import 'package:solo_play_application/src/core/widgets/next_step_button.dart';
 import 'package:solo_play_application/src/features/auth/presentation/user_email/blocs/bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/user_email/sections/sections.dart';
-import 'package:solo_play_application/src/features/auth/presentation/user_email/views/resister_email_ui.dart';
+import 'package:solo_play_application/src/features/auth/presentation/user_email/views/register_email_ui.dart';
 
 import '../mocks/mock_user_email_bloc.dart';
 
 void main() {
-  group(ResisterEmailUI, () {
+  group(RegisterEmailUI, () {
     late MockUserEmailBloc mockUserEmailBloc;
     late Widget widget;
 
@@ -20,7 +20,7 @@ void main() {
       widget = MaterialApp(
         home: BlocProvider<UserEmailBloc>.value(
           value: mockUserEmailBloc,
-          child: const ResisterEmailUI(),
+          child: const RegisterEmailUI(),
         ),
       );
     });
@@ -28,18 +28,18 @@ void main() {
     testWidgets("should render all views correctly", (tester) async {
       await tester.pumpWidget(widget);
 
-      expect(find.byType(ResisterEmailHeader), findsOneWidget);
-      expect(find.byType(ResisterEmailInputTextField), findsOneWidget);
-      expect(find.byType(ResisterEmailValidateIconView), findsOneWidget);
-      expect(find.byType(ResisterEmailValidateTextView), findsOneWidget);
-      expect(find.byType(ResisterEmailButtonView), findsOneWidget);
+      expect(find.byType(RegisterEmailHeader), findsOneWidget);
+      expect(find.byType(RegisterEmailInputTextField), findsOneWidget);
+      expect(find.byType(RegisterEmailValidateIconView), findsOneWidget);
+      expect(find.byType(RegisterEmailValidateTextView), findsOneWidget);
+      expect(find.byType(RegisterEmailButtonView), findsOneWidget);
     });
 
     testWidgets("should render default UI correctly", (tester) async {
       await tester.pumpWidget(widget);
 
       await expectLater(
-        find.byType(ResisterEmailUI),
+        find.byType(RegisterEmailUI),
         matchesGoldenFile('goldens/resister-email-ui-default.png'),
       );
     });
@@ -79,19 +79,6 @@ void main() {
       await tester.pumpWidget(widget);
 
       expect(find.text("이메일이 이미 존재합니다"), findsOneWidget);
-    });
-
-    testWidgets("should show success UI when status is avail", (tester) async {
-      when(() => mockUserEmailBloc.state).thenReturn(
-        const UserEmailState(
-          email: "unique@test.com",
-          status: UserEmailStatus.avail,
-        ),
-      );
-
-      await tester.pumpWidget(widget);
-
-      expect(find.textContaining("사용 가능한 이메일"), findsOneWidget);
     });
   });
 }

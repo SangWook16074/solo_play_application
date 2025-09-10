@@ -7,9 +7,9 @@ import 'package:solo_play_application/src/features/auth/data/repositories/auth_r
 import 'package:solo_play_application/src/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/login/page/login_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register/views/register_flow.dart';
-import 'package:solo_play_application/src/features/auth/presentation/resister_password/page/resister_password_page.dart';
+import 'package:solo_play_application/src/features/auth/presentation/register_password/page/register_password_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/user_agreement/page/user_agreement_page.dart';
-import 'package:solo_play_application/src/features/auth/presentation/user_email/page/resister_email_page.dart';
+import 'package:solo_play_application/src/features/auth/presentation/user_email/page/register_email_page.dart';
 
 GoRouter router(AuthBloc authBloc) {
   final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -37,6 +37,15 @@ GoRouter router(AuthBloc authBloc) {
     },
     routes: [
       GoRoute(
+        name: RouterPath.splash,
+        path: RouterPath.splash,
+        builder: (context, state) => Scaffold(
+          body: Center(
+            child: Text("splash"),
+          ),
+        ),
+      ),
+      GoRoute(
         name: RouterPath.home,
         path: RouterPath.home,
         builder: (context, state) => Scaffold(
@@ -62,23 +71,14 @@ GoRouter router(AuthBloc authBloc) {
             GoRoute(
               name: RouterPath.registerEmail,
               path: RouterPath.registerEmail,
-              builder: (context, state) => ResisterEmailPage(),
+              builder: (context, state) => RegisterEmailPage(),
             ),
             GoRoute(
               name: RouterPath.registerPassword,
               path: RouterPath.registerPassword,
-              builder: (context, state) => ResisterPasswordPage(),
+              builder: (context, state) => RegisterPasswordPage(),
             ),
           ]),
-      GoRoute(
-        name: RouterPath.splash,
-        path: RouterPath.splash,
-        builder: (context, state) => Scaffold(
-          body: Center(
-            child: Text("splash"),
-          ),
-        ),
-      )
     ],
   );
 }

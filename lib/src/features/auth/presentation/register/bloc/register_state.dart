@@ -9,6 +9,6 @@ enum RegisterStep { terms, email, password }
 abstract class RegisterState with _$RegisterState {
   const factory RegisterState({
     @Default(RegisterStep.terms) RegisterStep step,
-    @Default(Register()) Register resister,
+    @Default(Register()) Register register,
   }) = _RegisterState;
 }

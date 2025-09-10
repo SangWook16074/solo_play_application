@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RegisterState {
   RegisterStep get step;
-  Register get resister;
+  Register get register;
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,16 +32,16 @@ mixin _$RegisterState {
         (other.runtimeType == runtimeType &&
             other is RegisterState &&
             (identical(other.step, step) || other.step == step) &&
-            (identical(other.resister, resister) ||
-                other.resister == resister));
+            (identical(other.register, register) ||
+                other.register == register));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, step, resister);
+  int get hashCode => Object.hash(runtimeType, step, register);
 
   @override
   String toString() {
-    return 'RegisterState(step: $step, resister: $resister)';
+    return 'RegisterState(step: $step, register: $register)';
   }
 }
 
@@ -51,9 +51,9 @@ abstract mixin class $RegisterStateCopyWith<$Res> {
           RegisterState value, $Res Function(RegisterState) _then) =
       _$RegisterStateCopyWithImpl;
   @useResult
-  $Res call({RegisterStep step, Register resister});
+  $Res call({RegisterStep step, Register register});
 
-  $RegisterCopyWith<$Res> get resister;
+  $RegisterCopyWith<$Res> get register;
 }
 
 /// @nodoc
@@ -70,16 +70,16 @@ class _$RegisterStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? step = null,
-    Object? resister = null,
+    Object? register = null,
   }) {
     return _then(_self.copyWith(
       step: null == step
           ? _self.step
           : step // ignore: cast_nullable_to_non_nullable
               as RegisterStep,
-      resister: null == resister
-          ? _self.resister
-          : resister // ignore: cast_nullable_to_non_nullable
+      register: null == register
+          ? _self.register
+          : register // ignore: cast_nullable_to_non_nullable
               as Register,
     ));
   }
@@ -88,9 +88,9 @@ class _$RegisterStateCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $RegisterCopyWith<$Res> get resister {
-    return $RegisterCopyWith<$Res>(_self.resister, (value) {
-      return _then(_self.copyWith(resister: value));
+  $RegisterCopyWith<$Res> get register {
+    return $RegisterCopyWith<$Res>(_self.register, (value) {
+      return _then(_self.copyWith(register: value));
     });
   }
 }
@@ -99,14 +99,14 @@ class _$RegisterStateCopyWithImpl<$Res>
 
 class _RegisterState implements RegisterState {
   const _RegisterState(
-      {this.step = RegisterStep.terms, this.resister = const Register()});
+      {this.step = RegisterStep.terms, this.register = const Register()});
 
   @override
   @JsonKey()
   final RegisterStep step;
   @override
   @JsonKey()
-  final Register resister;
+  final Register register;
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
@@ -122,16 +122,16 @@ class _RegisterState implements RegisterState {
         (other.runtimeType == runtimeType &&
             other is _RegisterState &&
             (identical(other.step, step) || other.step == step) &&
-            (identical(other.resister, resister) ||
-                other.resister == resister));
+            (identical(other.register, register) ||
+                other.register == register));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, step, resister);
+  int get hashCode => Object.hash(runtimeType, step, register);
 
   @override
   String toString() {
-    return 'RegisterState(step: $step, resister: $resister)';
+    return 'RegisterState(step: $step, register: $register)';
   }
 }
 
@@ -143,10 +143,10 @@ abstract mixin class _$RegisterStateCopyWith<$Res>
       __$RegisterStateCopyWithImpl;
   @override
   @useResult
-  $Res call({RegisterStep step, Register resister});
+  $Res call({RegisterStep step, Register register});
 
   @override
-  $RegisterCopyWith<$Res> get resister;
+  $RegisterCopyWith<$Res> get register;
 }
 
 /// @nodoc
@@ -163,16 +163,16 @@ class __$RegisterStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? step = null,
-    Object? resister = null,
+    Object? register = null,
   }) {
     return _then(_RegisterState(
       step: null == step
           ? _self.step
           : step // ignore: cast_nullable_to_non_nullable
               as RegisterStep,
-      resister: null == resister
-          ? _self.resister
-          : resister // ignore: cast_nullable_to_non_nullable
+      register: null == register
+          ? _self.register
+          : register // ignore: cast_nullable_to_non_nullable
               as Register,
     ));
   }
@@ -181,9 +181,9 @@ class __$RegisterStateCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $RegisterCopyWith<$Res> get resister {
-    return $RegisterCopyWith<$Res>(_self.resister, (value) {
-      return _then(_self.copyWith(resister: value));
+  $RegisterCopyWith<$Res> get register {
+    return $RegisterCopyWith<$Res>(_self.register, (value) {
+      return _then(_self.copyWith(register: value));
     });
   }
 }
