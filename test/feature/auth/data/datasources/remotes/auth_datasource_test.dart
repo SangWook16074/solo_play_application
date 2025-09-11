@@ -21,7 +21,10 @@ void main() {
         authDatasourceImpl = AuthDatasourceImpl(dio: mockDio);
       });
       test('should returns success with data when statusCode == 200', () async {
-        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate))
+        final request = CheckEmailDuplicateRequest(email: "test@test.com");
+
+        when(() => mockDio
+                .post(AuthApiPath.checkEmailDuplicate, data: request.toJson()))
             .thenAnswer((_) async => Response(
                   requestOptions: RequestOptions(path: ""),
                   data: {
@@ -32,9 +35,9 @@ void main() {
                   statusCode: 200,
                 ));
 
-        final request = CheckEmailDuplicateRequest(email: "test@test.com");
         final result = await authDatasourceImpl.checkEmailDuplicate(request);
-        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate)).called(1);
+        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+            data: request.toJson())).called(1);
 
         expect(result is Success, true);
         expect((result as Success).value, "사용 가능한 이메일입니다.");
@@ -42,7 +45,10 @@ void main() {
 
       test('should return failure with message when statusCode == 409',
           () async {
-        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate))
+        final request = CheckEmailDuplicateRequest(email: "test@test.com");
+
+        when(() => mockDio
+                .post(AuthApiPath.checkEmailDuplicate, data: request.toJson()))
             .thenAnswer((_) async => Response(
                   requestOptions: RequestOptions(path: ""),
                   data: {
@@ -52,10 +58,10 @@ void main() {
                   statusCode: 409,
                 ));
 
-        final request = CheckEmailDuplicateRequest(email: "test@test.com");
         final result = await authDatasourceImpl.checkEmailDuplicate(request);
 
-        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate)).called(1);
+        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+            data: request.toJson())).called(1);
 
         expect(result is Failure, true);
         expect((result as Failure).message, "이미 사용 중인 이메일입니다.");
@@ -63,7 +69,10 @@ void main() {
 
       test('should return failure with message when statusCode != 200 && 409',
           () async {
-        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate))
+        final request = CheckEmailDuplicateRequest(email: "test@test.com");
+
+        when(() => mockDio
+                .post(AuthApiPath.checkEmailDuplicate, data: request.toJson()))
             .thenAnswer((_) async => Response(
                   requestOptions: RequestOptions(path: ""),
                   data: {
@@ -72,10 +81,10 @@ void main() {
                   statusCode: 400,
                 ));
 
-        final request = CheckEmailDuplicateRequest(email: "test@test.com");
         final result = await authDatasourceImpl.checkEmailDuplicate(request);
 
-        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate)).called(1);
+        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+            data: request.toJson())).called(1);
 
         expect(result is Failure, true);
         expect((result as Failure).message, "서버와의 연결이 원할하지 않습니다");
