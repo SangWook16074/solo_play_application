@@ -101,4 +101,10 @@ class AuthRepositoryImpl extends AuthRepository {
   void dispose() {
     return _jwtStorage.dispose();
   }
+
+  @override
+  Future<void> logout() async {
+    await _jwtStorage.deleteAccessToken();
+    await _jwtStorage.deleteRefreshToken();
+  }
 }

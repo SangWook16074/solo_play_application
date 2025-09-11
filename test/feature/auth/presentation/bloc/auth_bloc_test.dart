@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:solo_play_application/src/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:solo_play_application/src/features/auth/domain/usecases/user_logout_usecase.dart';
 import 'package:solo_play_application/src/features/auth/domain/usecases/watch_user_access_token_usecase.dart';
 import 'package:solo_play_application/src/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/bloc/auth_event.dart';
@@ -13,14 +14,17 @@ import 'package:test/test.dart';
 class MockWatchUserAccessTokenUseCase extends Mock
     implements WatchUserAccessTokenUseCase {}
 
+class MockUserLogoutUsecase extends Mock implements UserLogoutUsecase {}
+
 void main() {
   group(AuthBloc, () {
     late AuthBloc authBloc;
     late MockWatchUserAccessTokenUseCase mockWatchUserAccessTokenUseCase;
+    late MockUserLogoutUsecase mockUserLogoutUsecase;
 
     setUp(() {
       mockWatchUserAccessTokenUseCase = MockWatchUserAccessTokenUseCase();
-
+      mockUserLogoutUsecase = MockUserLogoutUsecase();
       // when(() => mockWatchUserAccessTokenUseCase.call()).thenAnswer(
       //   (_) => Stream.fromIterable([
       //     AuthenticateStatus.unknown,
@@ -30,7 +34,8 @@ void main() {
       // );
 
       authBloc = AuthBloc(
-          watchUserAccessTokenUseCase: mockWatchUserAccessTokenUseCase);
+          watchUserAccessTokenUseCase: mockWatchUserAccessTokenUseCase,
+          userLogoutUsecase: mockUserLogoutUsecase);
     });
 
     tearDown(() {

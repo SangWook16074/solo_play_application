@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solo_play_application/src/core/router/router_path.dart';
 import 'package:solo_play_application/src/core/widgets/primary_button.dart';
 import 'package:solo_play_application/src/core/widgets/secondary_button.dart';
+import 'package:solo_play_application/src/features/auth/presentation/login/bloc/bloc.dart';
 
 class LoginUiButtonSection extends StatelessWidget {
   final void Function()? onLoginButtonTap;
@@ -16,7 +18,9 @@ class LoginUiButtonSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         PrimaryButton(
-          onTap: onLoginButtonTap,
+          onTap: () {
+            context.read<LoginBloc>().add(LoginButtonTap());
+          },
           activeChild: Text(
             "로그인",
             style: TextStyle(
