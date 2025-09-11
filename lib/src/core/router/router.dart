@@ -5,6 +5,7 @@ import 'package:solo_play_application/src/core/router/go_router_refresh_stream.d
 import 'package:solo_play_application/src/core/router/router_path.dart';
 import 'package:solo_play_application/src/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:solo_play_application/src/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/bloc/auth_event.dart';
 import 'package:solo_play_application/src/features/auth/presentation/login/page/login_page.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register/views/register_flow.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register_password/page/register_password_page.dart';
@@ -50,7 +51,11 @@ GoRouter router(AuthBloc authBloc) {
         path: RouterPath.home,
         builder: (context, state) => Scaffold(
           body: Center(
-            child: Text("home"),
+            child: ElevatedButton(
+                onPressed: () {
+                  context.read<AuthBloc>().add(LogoutTapped());
+                },
+                child: Text("로그아웃")),
           ),
         ),
       ),
