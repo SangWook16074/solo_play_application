@@ -15,6 +15,7 @@ class PrimaryTextField extends TextField {
     this.suffixIcon,
     this.suffix,
     this.isError = false,
+    super.keyboardType, // Added keyboardType
   }) : super(
             decoration: InputDecoration(
                 hintText: hintText,
