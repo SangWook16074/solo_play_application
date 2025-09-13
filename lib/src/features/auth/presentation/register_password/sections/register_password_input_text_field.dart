@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:solo_play_application/src/core/widgets/image_icon.dart';
 import 'package:solo_play_application/src/core/widgets/primary_text_field.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register_password/blocs/bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register_password/widgets/password_validate_text.dart';
@@ -33,7 +34,9 @@ class RegisterPasswordInputTextField extends StatelessWidget {
                   registerPasswordBloc.add(ObscurePasswordToggled());
                 },
                 key: Key('obscure-toggle'),
-                child: Icon(Icons.remove_red_eye_outlined),
+                child: obscurePassword
+                    ? ImageIconWidget(path: ImageIconPath.eyeOff)
+                    : ImageIconWidget(path: ImageIconPath.eyeOn),
               ),
             );
           },
@@ -68,7 +71,9 @@ class RegisterPasswordInputTextField extends StatelessWidget {
                   registerPasswordBloc.add(ObscurePasswordCheckToggled());
                 },
                 key: Key('obscure-toggle'),
-                child: Icon(Icons.remove_red_eye_outlined),
+                child: obscurePasswordCheck
+                    ? ImageIconWidget(path: ImageIconPath.eyeOff)
+                    : ImageIconWidget(path: ImageIconPath.eyeOn),
               ),
             );
           },
