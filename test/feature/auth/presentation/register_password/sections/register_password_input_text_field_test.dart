@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:solo_play_application/src/core/widgets/image_icon.dart';
 import 'package:solo_play_application/src/core/widgets/primary_text_field.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register_password/blocs/bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register_password/sections/sections.dart';
@@ -40,7 +41,7 @@ void main() {
           reason: '두 개의 PrimaryTextField가 렌더링 되어야 함');
       expect(find.text('비밀번호를 입력해주세요'), findsNWidgets(2),
           reason: '힌트 텍스트가 두 개 모두 표시되어야 함');
-      expect(find.byIcon(Icons.remove_red_eye_outlined), findsNWidgets(2),
+      expect(find.byType(ImageIconWidget), findsNWidgets(2),
           reason: '각 텍스트 필드마다 eye 아이콘이 존재해야 함');
       expect(find.byType(PasswordValidateText), findsNWidgets(2),
           reason: 'PasswordValidateText가 두 번 렌더링 되어야 함');
