@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:solo_play_application/src/features/auth/presentation/register_complete/views/register_ui.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register_complete/sections/register_complete_header.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register_complete/sections/register_complete_button_section.dart';
+import 'package:solo_play_application/src/features/auth/presentation/register_complete/views/register_complete_ui.dart';
 
 void main() {
-  group(RegisterUi, () {
+  group(RegisterCompleteUi, () {
     testWidgets(
         'should render header and button with correct layout and padding',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: RegisterUi(),
+            body: RegisterCompleteUi(),
           ),
         ),
       );
 
       // Find the RegisterUi widget
-      final registerUiFinder = find.byType(RegisterUi);
+      final registerUiFinder = find.byType(RegisterCompleteUi);
       expect(registerUiFinder, findsOneWidget);
 
       // Check for Padding with specific values
@@ -50,7 +50,7 @@ void main() {
 
       // Golden test
       await expectLater(
-        find.byType(RegisterUi),
+        find.byType(RegisterCompleteUi),
         matchesGoldenFile('goldens/register_ui.png'),
       );
     });
