@@ -51,7 +51,7 @@ void main() {
       // Golden test
       await expectLater(
         find.byType(RegisterCompleteUi),
-        matchesGoldenFile('goldens/register_ui.png'),
+        matchesGoldenFile('goldens/register-complete-ui-default.png'),
       );
     });
   });
