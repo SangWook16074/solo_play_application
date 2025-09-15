@@ -22,12 +22,16 @@ class ResendEmailSection extends StatelessWidget {
           onTap: () {
             // TODO: Implement resend email logic
           },
-          child: const Text(
-            '재전송',
-            style: TextStyle(
-              color: Color(0xffffffff),
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 14.0, horizontal: 19.0),
+            child: const Text(
+              '재전송',
+              style: TextStyle(
+                color: Color(0xffffffff),
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ),

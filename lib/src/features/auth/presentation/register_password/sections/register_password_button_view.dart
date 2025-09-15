@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:solo_play_application/src/core/router/router_path.dart';
 import 'package:solo_play_application/src/core/widgets/next_step_button.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register_password/blocs/bloc.dart';
 
@@ -16,7 +18,11 @@ class RegisterPasswordButtonView extends StatelessWidget {
       },
       builder: (context, isAvail) {
         return NextStepButton(
-          onTap: isAvail ? () {} : null,
+          onTap: isAvail
+              ? () {
+                  context.push(RouterPath.verificationIntro);
+                }
+              : null,
         );
       },
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // Import Bloc
 import 'package:solo_play_application/src/core/widgets/primary_text_field.dart';
 import 'package:solo_play_application/src/features/auth/presentation/verification/cubits/verification_code_cubit.dart'; // Import Cubit
+import 'package:solo_play_application/src/features/timer/presentation/pages/timer_page.dart';
 import 'package:solo_play_application/src/features/timer/presentation/views/timer_view.dart'; // Import TimerView
 
 class VerificationCodeInputSection extends StatelessWidget {
