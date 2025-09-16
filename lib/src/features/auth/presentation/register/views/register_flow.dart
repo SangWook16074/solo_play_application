@@ -7,12 +7,14 @@ class RegisterFlow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvokedWithResult: (didPop, result) {
-        
-      },
-      child: Scaffold(
-        appBar: AppBar(),
-        body: child,
+      onPopInvokedWithResult: (didPop, result) {},
+      child: GestureDetector(
+        onTap: FocusScope.of(context).unfocus,
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(),
+          body: child,
+        ),
       ),
     );
   }

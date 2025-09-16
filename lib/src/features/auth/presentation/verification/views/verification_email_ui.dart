@@ -5,33 +5,50 @@ import 'package:solo_play_application/src/features/auth/presentation/verificatio
 import 'package:solo_play_application/src/features/auth/presentation/verification/sections/verification_confirm_button_section.dart';
 
 class VerificationEmailUi extends StatelessWidget {
-  // Changed to StatelessWidget
   const VerificationEmailUi({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 62.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                VerificationEmailHeader(),
-                SizedBox(
-                  height: 85,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return GestureDetector(
+          onTap: FocusScope.of(context).unfocus,
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: SafeArea(
+                    bottom: true,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 62.0, horizontal: 16.0),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                VerificationEmailHeader(),
+                                SizedBox(
+                                  height: 85,
+                                ),
+                                VerificationCodeInputSection(),
+                                ResendEmailSection(),
+                              ],
+                            ),
+                          ),
+                          const VerificationConfirmButtonSection(),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-                VerificationCodeInputSection(),
-                ResendEmailSection(),
-              ],
+              ),
             ),
-            VerificationConfirmButtonSection(),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
