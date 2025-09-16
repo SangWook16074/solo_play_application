@@ -10,23 +10,29 @@ class RegisterEmailButtonView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserEmailBloc, UserEmailState>(
-      buildWhen: (prev, curr) =>
-          prev.status != curr.status || prev.email != curr.email,
-      builder: (context, state) {
-        final isEmailValid = state.status == UserEmailStatus.valid;
-
-        return NextStepButton(
-          onTap: isEmailValid
-              ? () {
-                  context.push(RouterPath.registerPassword);
-                  // context.read<UserEmailBloc>().add(
-                  //       UserEmailCheckDuplicate(email: state.email),
-                  //     );
-                }
-              : null,
-        );
+    return BlocListener<UserEmailBloc, UserEmailState>(
+      listener: (context, state) {
+        if (state.status == UserEmailStatus.avail) {
+          context.push(RouterPath.registerPassword);
+        }
       },
+      child: BlocBuilder<UserEmailBloc, UserEmailState>(
+        buildWhen: (prev, curr) =>
+            prev.status != curr.status || prev.email != curr.email,
+        builder: (context, state) {
+          final isEmailValid = state.status == UserEmailStatus.valid;
+
+          return NextStepButton(
+            onTap: isEmailValid
+                ? () {
+                    context.read<UserEmailBloc>().add(
+                          UserEmailCheckDuplicate(email: state.email),
+                        );
+                  }
+                : null,
+          );
+        },
+      ),
     );
   }
 }

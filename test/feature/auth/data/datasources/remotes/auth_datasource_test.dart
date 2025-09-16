@@ -10,7 +10,13 @@ import 'package:test/test.dart';
 
 class MockDio extends Mock implements Dio {}
 
+class FakeCheckEmailDuplicateRequest extends Fake
+    implements CheckEmailDuplicateRequest {}
+
 void main() {
+  setUpAll(() {
+    registerFallbackValue(FakeCheckEmailDuplicateRequest());
+  });
   group(AuthDatasourceImpl, () {
     late MockDio mockDio;
     late AuthDatasourceImpl authDatasourceImpl;
@@ -23,8 +29,8 @@ void main() {
       test('should returns success with data when statusCode == 200', () async {
         final request = CheckEmailDuplicateRequest(email: "test@test.com");
 
-        when(() => mockDio
-                .post(AuthApiPath.checkEmailDuplicate, data: request.toJson()))
+        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+                queryParameters: {'email': request.email}))
             .thenAnswer((_) async => Response(
                   requestOptions: RequestOptions(path: ""),
                   data: {
@@ -37,57 +43,128 @@ void main() {
 
         final result = await authDatasourceImpl.checkEmailDuplicate(request);
         verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
-            data: request.toJson())).called(1);
+            queryParameters: {'email': request.email})).called(1);
 
         expect(result is Success, true);
         expect((result as Success).value, "사용 가능한 이메일입니다.");
       });
 
-      test('should return failure with message when statusCode == 409',
+      test('should return failure with message when statusCode == 401',
           () async {
         final request = CheckEmailDuplicateRequest(email: "test@test.com");
 
-        when(() => mockDio
-                .post(AuthApiPath.checkEmailDuplicate, data: request.toJson()))
-            .thenAnswer((_) async => Response(
-                  requestOptions: RequestOptions(path: ""),
-                  data: {
-                    "status": "ERROR",
-                    "message": "이미 사용 중인 이메일입니다.",
-                  },
-                  statusCode: 409,
-                ));
+        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+            queryParameters: {'email': request.email})).thenThrow(DioException(
+          requestOptions: RequestOptions(path: ""),
+          response: Response(
+            requestOptions: RequestOptions(path: ""),
+            statusCode: 401,
+            data: {
+              "status": "ERROR",
+              "message": "이미 사용 중인 이메일입니다.",
+            },
+          ),
+          type: DioExceptionType.badResponse,
+        ));
 
         final result = await authDatasourceImpl.checkEmailDuplicate(request);
 
         verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
-            data: request.toJson())).called(1);
+            queryParameters: {'email': request.email})).called(1);
 
         expect(result is Failure, true);
         expect((result as Failure).message, "이미 사용 중인 이메일입니다.");
       });
 
-      test('should return failure with message when statusCode != 200 && 409',
+      test('should return failure with message when statusCode == 400',
           () async {
         final request = CheckEmailDuplicateRequest(email: "test@test.com");
 
-        when(() => mockDio
-                .post(AuthApiPath.checkEmailDuplicate, data: request.toJson()))
-            .thenAnswer((_) async => Response(
-                  requestOptions: RequestOptions(path: ""),
-                  data: {
-                    "status": "ERROR",
-                  },
-                  statusCode: 400,
-                ));
+        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+            queryParameters: {'email': request.email})).thenThrow(DioException(
+          requestOptions: RequestOptions(path: ""),
+          response: Response(
+            requestOptions: RequestOptions(path: ""),
+            statusCode: 400,
+            data: {
+              "status": "ERROR",
+              "message": "잘못된 요청입니다.",
+            },
+          ),
+          type: DioExceptionType.badResponse,
+        ));
 
         final result = await authDatasourceImpl.checkEmailDuplicate(request);
 
         verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
-            data: request.toJson())).called(1);
+            queryParameters: {'email': request.email})).called(1);
 
         expect(result is Failure, true);
-        expect((result as Failure).message, "서버와의 연결이 원할하지 않습니다");
+        expect((result as Failure).message, "알 수 없는 오류가 발생했습니다.");
+      });
+
+      test('should return failure with message when statusCode == 500',
+          () async {
+        final request = CheckEmailDuplicateRequest(email: "test@test.com");
+
+        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+            queryParameters: {'email': request.email})).thenThrow(DioException(
+          requestOptions: RequestOptions(path: ""),
+          response: Response(
+            requestOptions: RequestOptions(path: ""),
+            statusCode: 500,
+            data: {
+              "status": "ERROR",
+              "message": "서버 오류입니다.",
+            },
+          ),
+          type: DioExceptionType.badResponse,
+        ));
+
+        final result = await authDatasourceImpl.checkEmailDuplicate(request);
+
+        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+            queryParameters: {'email': request.email})).called(1);
+
+        expect(result is Failure, true);
+        expect((result as Failure).message, "알 수 없는 오류가 발생했습니다.");
+      });
+
+      test(
+          'should return failure with message when DioException with no response (network error) occurs',
+          () async {
+        final request = CheckEmailDuplicateRequest(email: "test@test.com");
+        final dioException = DioException(
+          requestOptions: RequestOptions(path: ""),
+          type: DioExceptionType.connectionError,
+        );
+        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+            queryParameters: {'email': request.email})).thenThrow(dioException);
+
+        final result = await authDatasourceImpl.checkEmailDuplicate(request);
+
+        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+            queryParameters: {'email': request.email})).called(1);
+
+        expect(result is Failure, true);
+        expect((result as Failure).message, "네트워크 연결을 확인해주세요.");
+      });
+
+      test('should return failure with message when an unexpected error occurs',
+          () async {
+        final request = CheckEmailDuplicateRequest(email: "test@test.com");
+        final unexpectedException = Exception("Something went wrong");
+        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+            queryParameters: request.toJson())).thenThrow(unexpectedException);
+
+        final result = await authDatasourceImpl.checkEmailDuplicate(request);
+
+        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+            queryParameters: request.toJson())).called(1);
+
+        expect(result is Failure, true);
+        expect((result as Failure).message,
+            "예상치 못한 오류가 발생했습니다: Exception: Something went wrong");
       });
     });
 
