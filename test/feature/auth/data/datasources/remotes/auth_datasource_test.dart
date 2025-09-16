@@ -29,20 +29,20 @@ void main() {
       test('should returns success with data when statusCode == 200', () async {
         final request = CheckEmailDuplicateRequest(email: "test@test.com");
 
-        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+        when(() => mockDio.get(AuthApiPath.checkEmailDuplicate,
                 queryParameters: {'email': request.email}))
             .thenAnswer((_) async => Response(
                   requestOptions: RequestOptions(path: ""),
                   data: {
                     "status": "SUCCESS",
-                    "message": "",
-                    "data": "사용 가능한 이메일입니다.",
+                    "message": "사용 가능한 이메일입니다.",
+                    "data": "",
                   },
                   statusCode: 200,
                 ));
 
         final result = await authDatasourceImpl.checkEmailDuplicate(request);
-        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+        verify(() => mockDio.get(AuthApiPath.checkEmailDuplicate,
             queryParameters: {'email': request.email})).called(1);
 
         expect(result is Success, true);
@@ -69,7 +69,7 @@ void main() {
 
         final result = await authDatasourceImpl.checkEmailDuplicate(request);
 
-        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+        verify(() => mockDio.get(AuthApiPath.checkEmailDuplicate,
             queryParameters: {'email': request.email})).called(1);
 
         expect(result is Failure, true);
@@ -80,7 +80,7 @@ void main() {
           () async {
         final request = CheckEmailDuplicateRequest(email: "test@test.com");
 
-        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+        when(() => mockDio.get(AuthApiPath.checkEmailDuplicate,
             queryParameters: {'email': request.email})).thenThrow(DioException(
           requestOptions: RequestOptions(path: ""),
           response: Response(
@@ -96,7 +96,7 @@ void main() {
 
         final result = await authDatasourceImpl.checkEmailDuplicate(request);
 
-        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+        verify(() => mockDio.get(AuthApiPath.checkEmailDuplicate,
             queryParameters: {'email': request.email})).called(1);
 
         expect(result is Failure, true);
@@ -107,7 +107,7 @@ void main() {
           () async {
         final request = CheckEmailDuplicateRequest(email: "test@test.com");
 
-        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+        when(() => mockDio.get(AuthApiPath.checkEmailDuplicate,
             queryParameters: {'email': request.email})).thenThrow(DioException(
           requestOptions: RequestOptions(path: ""),
           response: Response(
@@ -123,7 +123,7 @@ void main() {
 
         final result = await authDatasourceImpl.checkEmailDuplicate(request);
 
-        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+        verify(() => mockDio.get(AuthApiPath.checkEmailDuplicate,
             queryParameters: {'email': request.email})).called(1);
 
         expect(result is Failure, true);
@@ -138,12 +138,12 @@ void main() {
           requestOptions: RequestOptions(path: ""),
           type: DioExceptionType.connectionError,
         );
-        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+        when(() => mockDio.get(AuthApiPath.checkEmailDuplicate,
             queryParameters: {'email': request.email})).thenThrow(dioException);
 
         final result = await authDatasourceImpl.checkEmailDuplicate(request);
 
-        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+        verify(() => mockDio.get(AuthApiPath.checkEmailDuplicate,
             queryParameters: {'email': request.email})).called(1);
 
         expect(result is Failure, true);
@@ -154,12 +154,12 @@ void main() {
           () async {
         final request = CheckEmailDuplicateRequest(email: "test@test.com");
         final unexpectedException = Exception("Something went wrong");
-        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+        when(() => mockDio.get(AuthApiPath.checkEmailDuplicate,
             queryParameters: request.toJson())).thenThrow(unexpectedException);
 
         final result = await authDatasourceImpl.checkEmailDuplicate(request);
 
-        verify(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+        verify(() => mockDio.get(AuthApiPath.checkEmailDuplicate,
             queryParameters: request.toJson())).called(1);
 
         expect(result is Failure, true);
