@@ -49,16 +49,16 @@ void main() {
         expect((result as Success).value, "사용 가능한 이메일입니다.");
       });
 
-      test('should return failure with message when statusCode == 401',
+      test('should return failure with message when statusCode == 409',
           () async {
         final request = CheckEmailDuplicateRequest(email: "test@test.com");
 
-        when(() => mockDio.post(AuthApiPath.checkEmailDuplicate,
+        when(() => mockDio.get(AuthApiPath.checkEmailDuplicate,
             queryParameters: {'email': request.email})).thenThrow(DioException(
           requestOptions: RequestOptions(path: ""),
           response: Response(
             requestOptions: RequestOptions(path: ""),
-            statusCode: 401,
+            statusCode: 409,
             data: {
               "status": "ERROR",
               "message": "이미 사용 중인 이메일입니다.",
