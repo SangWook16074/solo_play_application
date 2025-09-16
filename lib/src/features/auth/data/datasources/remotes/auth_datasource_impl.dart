@@ -48,21 +48,34 @@ class AuthDatasourceImpl extends AuthDatasource {
   ///
   @override
   Future<Result<String>> checkEmailDuplicate(
-      CheckEmailDuplicateRequest request) {
-    return _dio
-        .post(AuthApiPath.checkEmailDuplicate, data: request.toJson())
-        .then((response) {
+      CheckEmailDuplicateRequest request) async {
+    try {
+      final response = await _dio.post(AuthApiPath.checkEmailDuplicate,
+          queryParameters: request.toJson());
       if (response.statusCode == 200) {
-        // 서버가 정상 응답을 반환 → 사용 가능한 이메일
         return Success(response.data["data"] as String);
-      } else if (response.statusCode == 409) {
-        // 서버가 이메일 중복(Conflict) 응답을 반환 → 이미 사용 중인 이메일
-        return Failure(response.data["message"] as String);
       } else {
-        // 정의되지 않은 상태 코드 → 일반적인 서버 연결 실패로 간주
-        return Failure("서버와의 연결이 원할하지 않습니다");
+        // This else block should ideally not be reached if Dio throws for non-2xx
+        return Failure("알 수 없는 오류가 발생했습니다.");
       }
-    });
+    } on DioException catch (e) {
+      if (e.response != null) {
+        if (e.response!.statusCode == 401) {
+          return Failure(
+              e.response!.data["message"] as String); // Email duplicated
+        } else if (e.response!.statusCode == 400 ||
+            e.response!.statusCode == 500) {
+          return Failure("알 수 없는 오류가 발생했습니다."); // Unknown error
+        } else {
+          return Failure("서버와의 연결이 원할하지 않습니다"); // Generic network error
+        }
+      } else {
+        // No response, e.g., network error
+        return Failure("네트워크 연결을 확인해주세요.");
+      }
+    } catch (e) {
+      return Failure("예상치 못한 오류가 발생했습니다: ${e.toString()}");
+    }
   }
 
   /// 로그인 요청 API 호출

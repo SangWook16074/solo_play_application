@@ -3,13 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:solo_play_application/src/core/widgets/next_step_button.dart';
+import 'package:solo_play_application/src/core/widgets/primary_text_field.dart'; // Added
 import 'package:solo_play_application/src/features/auth/presentation/user_email/blocs/bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/user_email/sections/sections.dart';
 import 'package:solo_play_application/src/features/auth/presentation/user_email/views/register_email_ui.dart';
+import 'package:solo_play_application/src/features/auth/presentation/user_email/widgets/validation_icon.dart'; // Added
 
 import '../mocks/mock_user_email_bloc.dart';
 
 void main() {
+  setUpAll(() {
+    registerFallbackValue(const UserEmailChanged(email: ''));
+    registerFallbackValue(const UserEmailCheckDuplicate(email: ''));
+  });
   group(RegisterEmailUI, () {
     late MockUserEmailBloc mockUserEmailBloc;
     late Widget widget;
@@ -68,7 +74,7 @@ void main() {
       expect(button.onTap, isNotNull);
     });
 
-    testWidgets("should show error message when status is conflict",
+    testWidgets("should render error state correctly when email is duplicated",
         (tester) async {
       when(() => mockUserEmailBloc.state).thenReturn(
         const UserEmailState(
@@ -79,8 +85,24 @@ void main() {
       );
 
       await tester.pumpWidget(widget);
+      await tester.pump(); // Ensure all widgets are rebuilt
 
+      // 1. PrimaryTextField의 isError가 활성화되어야
+      final primaryTextField =
+          tester.widget<PrimaryTextField>(find.byType(PrimaryTextField));
+      expect(primaryTextField.isError, isTrue);
+
+      // 2. RegisterEmailValidateTextView에 에러가 보여야 하며
       expect(find.text("이메일이 이미 존재합니다"), findsOneWidget);
+
+      // 3. RegisterEmailValidateIconView는 isValid가 false가 전달되어야 해
+      final validationIcon =
+          tester.widget<ValidationIcon>(find.byType(ValidationIcon));
+      expect(validationIcon.isValid, isFalse);
+
+      // 4. 골든테스트 실제 UI가 맞는지 확인
+      await expectLater(find.byType(RegisterEmailUI),
+          matchesGoldenFile('goldens/register-email-ui-conflict.png'));
     });
   });
 }
