@@ -18,9 +18,11 @@ void main() {
       mockUserEmailBloc = MockUserEmailBloc();
       when(() => mockUserEmailBloc.state).thenReturn(const UserEmailState());
       widget = MaterialApp(
-        home: BlocProvider<UserEmailBloc>.value(
-          value: mockUserEmailBloc,
-          child: const RegisterEmailUI(),
+        home: Scaffold(
+          body: BlocProvider<UserEmailBloc>.value(
+            value: mockUserEmailBloc,
+            child: const RegisterEmailUI(),
+          ),
         ),
       );
     });

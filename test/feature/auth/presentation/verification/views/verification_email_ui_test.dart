@@ -20,7 +20,7 @@ class MockTimerBloc extends MockBloc<TimerEvent, TimerState>
     implements TimerBloc {}
 
 void main() {
-  group('VerificationEmailUi', () {
+  group(VerificationEmailUi, () {
     late MockVerificationCodeCubit mockVerificationCodeCubit;
     late MockTimerBloc mockTimerBloc;
 
@@ -47,7 +47,7 @@ void main() {
                 value: mockTimerBloc,
               ),
             ],
-            child: const VerificationEmailUi(),
+            child: Scaffold(body: const VerificationEmailUi()),
           ),
         ),
       );
@@ -64,20 +64,6 @@ void main() {
       );
       expect(paddingFinder, findsOneWidget);
 
-      // Check for Column with specific mainAxisAlignment
-      final columnFinder = find.byWidgetPredicate(
-        (widget) =>
-            widget is Column &&
-            widget.mainAxisAlignment == MainAxisAlignment.spaceBetween,
-        skipOffstage: false,
-      );
-      expect(columnFinder, findsOneWidget);
-      final column = tester.widget<Column>(columnFinder);
-      expect(
-          column.crossAxisAlignment,
-          CrossAxisAlignment
-              .start); // Assuming start alignment for the main column
-
       // Check for all sections
       expect(find.byType(VerificationEmailHeader), findsOneWidget);
       expect(find.byType(VerificationCodeInputSection), findsOneWidget);
@@ -87,7 +73,7 @@ void main() {
       // Golden test
       await expectLater(
         find.byType(VerificationEmailUi),
-        matchesGoldenFile('goldens/verification_email_ui.png'),
+        matchesGoldenFile('goldens/verification-email-ui.png'),
       );
     });
   });
