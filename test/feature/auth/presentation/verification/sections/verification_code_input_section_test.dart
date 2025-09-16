@@ -21,7 +21,7 @@ class MockTimerBloc extends MockBloc<TimerEvent, TimerState>
     implements TimerBloc {}
 
 void main() {
-  group('VerificationCodeInputSection', () {
+  group(VerificationCodeInputSection, () {
     late MockVerificationCodeCubit mockVerificationCodeCubit;
     late MockTimerBloc mockTimerBloc;
 
@@ -30,8 +30,7 @@ void main() {
       mockTimerBloc = MockTimerBloc();
     });
 
-    testWidgets(
-        'displays text and PrimaryTextField with correct properties and layout',
+    testWidgets('should render text and PrimaryTextField correctly',
         (WidgetTester tester) async {
       whenListen(mockVerificationCodeCubit, Stream.fromIterable(['']),
           initialState: ''); // Initial state for Cubit
