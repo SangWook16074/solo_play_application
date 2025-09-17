@@ -9,46 +9,49 @@ class VerificationEmailUi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return GestureDetector(
-          onTap: FocusScope.of(context).unfocus,
-          child: SafeArea(
-            child: SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: IntrinsicHeight(
-                  child: SafeArea(
-                    bottom: true,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 62.0, horizontal: 16.0),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                VerificationEmailHeader(),
-                                SizedBox(
-                                  height: 85,
-                                ),
-                                VerificationCodeInputSection(),
-                                ResendEmailSection(),
-                              ],
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return GestureDetector(
+            onTap: FocusScope.of(context).unfocus,
+            child: SafeArea(
+              child: SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: IntrinsicHeight(
+                    child: SafeArea(
+                      bottom: true,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 62.0, horizontal: 16.0),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  VerificationEmailHeader(),
+                                  SizedBox(
+                                    height: 85,
+                                  ),
+                                  VerificationCodeInputSection(),
+                                  ResendEmailSection(),
+                                ],
+                              ),
                             ),
-                          ),
-                          const VerificationConfirmButtonSection(),
-                        ],
+                            const VerificationConfirmButtonSection(),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
