@@ -48,7 +48,7 @@ void main() {
 
       await expectLater(
         find.byType(RegisterEmailUI),
-        matchesGoldenFile('goldens/resister-email-ui-default.png'),
+        matchesGoldenFile('goldens/register-email-ui-default.png'),
       );
     });
 
@@ -72,6 +72,8 @@ void main() {
 
       final button = tester.widget<NextStepButton>(find.byType(NextStepButton));
       expect(button.onTap, isNotNull);
+      expectLater(find.byType(RegisterEmailUI),
+          matchesGoldenFile('goldens/register-email-ui-valid.png'));
     });
 
     testWidgets("should render error state correctly when email is duplicated",

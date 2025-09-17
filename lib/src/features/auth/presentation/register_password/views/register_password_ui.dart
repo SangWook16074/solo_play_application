@@ -6,44 +6,47 @@ class RegisterPasswordUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return GestureDetector(
-          onTap: FocusScope.of(context).unfocus,
-          child: SafeArea(
-            child: SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: IntrinsicHeight(
-                  child: SafeArea(
-                    bottom: true,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 62.0, horizontal: 16.0),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                RegisterPasswordHeader(),
-                                SizedBox(height: 48),
-                                RegisterPasswordInputTextField(),
-                                SizedBox(height: 4),
-                              ],
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return GestureDetector(
+            onTap: FocusScope.of(context).unfocus,
+            child: SafeArea(
+              child: SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: IntrinsicHeight(
+                    child: SafeArea(
+                      bottom: true,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 62.0, horizontal: 16.0),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  RegisterPasswordHeader(),
+                                  SizedBox(height: 48),
+                                  RegisterPasswordInputTextField(),
+                                  SizedBox(height: 4),
+                                ],
+                              ),
                             ),
-                          ),
-                          const RegisterPasswordButtonView(),
-                        ],
+                            const RegisterPasswordButtonView(),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

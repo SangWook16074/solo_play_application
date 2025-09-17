@@ -50,17 +50,17 @@ class AuthDatasourceImpl extends AuthDatasource {
   Future<Result<String>> checkEmailDuplicate(
       CheckEmailDuplicateRequest request) async {
     try {
-      final response = await _dio.post(AuthApiPath.checkEmailDuplicate,
+      final response = await _dio.get(AuthApiPath.checkEmailDuplicate,
           queryParameters: request.toJson());
       if (response.statusCode == 200) {
-        return Success(response.data["data"] as String);
+        return Success(response.data["message"] as String);
       } else {
         // This else block should ideally not be reached if Dio throws for non-2xx
         return Failure("알 수 없는 오류가 발생했습니다.");
       }
     } on DioException catch (e) {
       if (e.response != null) {
-        if (e.response!.statusCode == 401) {
+        if (e.response!.statusCode == 409) {
           return Failure(
               e.response!.data["message"] as String); // Email duplicated
         } else if (e.response!.statusCode == 400 ||
