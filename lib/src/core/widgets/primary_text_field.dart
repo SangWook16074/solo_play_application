@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class PrimaryTextField extends TextField {
   final String? hintText;
@@ -16,9 +15,10 @@ class PrimaryTextField extends TextField {
     this.suffixIcon,
     this.suffix,
     this.isError = false,
-    super.keyboardType, // Added keyboardType
+    super.keyboardType,
     super.maxLength,
     super.inputFormatters,
+    super.controller,
   }) : super(
             decoration: InputDecoration(
                 counterText: '',

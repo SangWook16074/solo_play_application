@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/register/bloc/register_bloc.dart';
+import 'package:solo_play_application/src/features/auth/presentation/register/bloc/register_state.dart';
 import 'package:solo_play_application/src/features/auth/presentation/verification/sections/verification_email_header.dart';
 import 'package:solo_play_application/src/features/auth/presentation/verification/sections/verification_code_input_section.dart';
 import 'package:solo_play_application/src/features/auth/presentation/verification/sections/resend_email_section.dart';
@@ -30,13 +33,20 @@ class VerificationEmailUi extends StatelessWidget {
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  VerificationEmailHeader(),
-                                  SizedBox(
+                                children: [
+                                  const VerificationEmailHeader(),
+                                  const SizedBox(
                                     height: 85,
                                   ),
-                                  VerificationCodeInputSection(),
-                                  ResendEmailSection(),
+                                  const VerificationCodeInputSection(),
+                                  BlocSelector<RegisterBloc, RegisterState, String>(
+                                    selector: (state) {
+                                      return state.register.email;
+                                    },
+                                    builder: (context, email) {
+                                      return ResendEmailSection(email: email);
+                                    },
+                                  ),
                                 ],
                               ),
                             ),
