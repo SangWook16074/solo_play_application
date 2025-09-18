@@ -55,3 +55,7 @@ app.*.map.json
 # GEMINI
 
 GEMINI.md
+
+# failure Golden File
+
+test/**/failure
