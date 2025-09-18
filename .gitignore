@@ -58,4 +58,4 @@ GEMINI.md
 
 # failure Golden File
 
-test/**/failure
+test/**/failures/
