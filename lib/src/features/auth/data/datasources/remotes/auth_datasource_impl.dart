@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:solo_play_application/src/core/utils/networks/result.dart';
 import 'package:solo_play_application/src/core/utils/typedefs/json_map.dart';
+import 'package:solo_play_application/src/features/auth/data/models/email_verification_request.dart';
 import 'package:solo_play_application/src/features/auth/data/models/jwt.dart';
 import 'package:solo_play_application/src/features/auth/data/models/register_request.dart';
 import 'package:solo_play_application/src/features/auth/data/utils/api_path.dart';
@@ -107,7 +106,8 @@ class AuthDatasourceImpl extends AuthDatasource {
     } on DioException catch (e) {
       if (e.response != null) {
         final dynamic errorData = e.response!.data;
-        if (errorData is Map<String, dynamic> && errorData.containsKey('message')) {
+        if (errorData is Map<String, dynamic> &&
+            errorData.containsKey('message')) {
           return Failure(errorData['message'] as String);
         } else {
           return Failure("알 수 없는 서버 응답 형식입니다.");
@@ -136,6 +136,35 @@ class AuthDatasourceImpl extends AuthDatasource {
           return Failure(e.response!.data['message'] as String);
         } else {
           return Failure("알 수 없는 오류가 발생했습니다.");
+        }
+      } else {
+        return Failure("네트워크 연결을 확인해주세요.");
+      }
+    } catch (e) {
+      return Failure("예상치 못한 오류가 발생했습니다: ${e.toString()}");
+    }
+  }
+
+  @override
+  Future<Result<String>> sendVerificationEmail(EmailVerificationRequest request) async {
+    try {
+      final response = await _dio.post(
+        AuthApiPath.sendVerificationEmail,
+        data: request.toJson(), // request.toJson() 사용
+      );
+      if (response.statusCode == 200) {
+        return Success(response.data["message"] as String);
+      } else {
+        return Failure(response.data['message'] as String? ?? "알 수 없는 오류가 발생했습니다.");
+      }
+    } on DioException catch (e) {
+      if (e.response != null) {
+        final dynamic errorData = e.response!.data;
+        if (errorData is Map<String, dynamic> &&
+            errorData.containsKey('message')) {
+          return Failure(errorData['message'] as String);
+        } else {
+          return Failure("알 수 없는 서버 응답 형식입니다.");
         }
       } else {
         return Failure("네트워크 연결을 확인해주세요.");

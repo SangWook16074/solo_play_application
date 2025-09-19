@@ -3,6 +3,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:solo_play_application/src/core/utils/networks/result.dart';
 import 'package:solo_play_application/src/features/auth/data/datasources/remotes/auth_datasource_impl.dart';
 import 'package:solo_play_application/src/features/auth/data/models/check_email_duplicate.dart';
+import 'package:solo_play_application/src/features/auth/data/models/email_verification_request.dart';
 import 'package:solo_play_application/src/features/auth/data/models/jwt.dart';
 import 'package:solo_play_application/src/features/auth/data/models/login.dart';
 import 'package:solo_play_application/src/features/auth/data/models/register_request.dart';
@@ -19,6 +20,9 @@ class FakeLoginRequest extends Fake implements LoginRequest {}
 
 class FakeRegisterRequest extends Fake implements RegisterRequest {}
 
+class FakeEmailVerificationRequest extends Fake
+    implements EmailVerificationRequest {}
+
 void main() {
   final defaultUserAgreement = UserAgreement(
     isOver14: true,
@@ -30,6 +34,7 @@ void main() {
     registerFallbackValue(FakeCheckEmailDuplicateRequest());
     registerFallbackValue(FakeLoginRequest());
     registerFallbackValue(FakeRegisterRequest());
+    registerFallbackValue(FakeEmailVerificationRequest());
   });
   group(AuthDatasourceImpl, () {
     late MockDio mockDio;
@@ -450,6 +455,64 @@ void main() {
         expect(result is Failure, true);
         expect((result as Failure).message,
             "예상치 못한 오류가 발생했습니다: Exception: Something went wrong");
+      });
+    });
+
+    group('when call /api/auth/send-verification-email', () {
+      setUp(() {
+        mockDio = MockDio();
+        authDatasourceImpl = AuthDatasourceImpl(dio: mockDio);
+      });
+
+      test('should return success with message when statusCode == 200', () async {
+        final request = EmailVerificationRequest(email: 'test@test.com');
+        when(
+          () => mockDio.post(AuthApiPath.sendVerificationEmail,
+              data: request.toJson()),
+        ).thenAnswer((_) async => Response(
+              requestOptions: RequestOptions(path: ""),
+              data: {
+                "status": "SUCCESS",
+                "message": "인증 이메일이 전송되었습니다.",
+                "data": "",
+              },
+              statusCode: 200,
+            ));
+
+        final result = await authDatasourceImpl.sendVerificationEmail(request);
+
+        verify(() => mockDio.post(AuthApiPath.sendVerificationEmail,
+            data: request.toJson())).called(1);
+
+        expect(result is Success, true);
+        expect((result as Success).value, "인증 이메일이 전송되었습니다.");
+      });
+
+      test('should return failure with message when statusCode == 400', () async {
+        final request = EmailVerificationRequest(email: 'test@test.com');
+        when(
+          () => mockDio.post(AuthApiPath.sendVerificationEmail,
+              data: request.toJson()),
+        ).thenThrow(DioException(
+          requestOptions: RequestOptions(path: ""),
+          response: Response(
+            requestOptions: RequestOptions(path: ""),
+            data: {
+              "errorCode": "INVALID_EMAIL",
+              "message": "유효하지 않은 이메일 형식입니다."
+            },
+            statusCode: 400,
+          ),
+          type: DioExceptionType.badResponse,
+        ));
+
+        final result = await authDatasourceImpl.sendVerificationEmail(request);
+
+        verify(() => mockDio.post(AuthApiPath.sendVerificationEmail,
+            data: request.toJson())).called(1);
+
+        expect(result is Failure, true);
+        expect((result as Failure).message, "유효하지 않은 이메일 형식입니다.");
       });
     });
   });
