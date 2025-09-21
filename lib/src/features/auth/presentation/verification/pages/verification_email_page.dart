@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solo_play_application/src/features/auth/domain/repositories/auth_repository.dart';
 import 'package:solo_play_application/src/features/auth/domain/usecases/send_verification_email_usecase.dart';
-import 'package:solo_play_application/src/features/auth/presentation/verification/cubits/verification_code_cubit.dart';
+import 'package:solo_play_application/src/features/auth/presentation/verification/bloc/verification_bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/verification/views/verification_email_ui.dart';
 import 'package:solo_play_application/src/features/timer/bloc/timer_bloc.dart';
 import 'package:solo_play_application/src/features/timer/bloc/timer_event.dart';
@@ -18,8 +18,8 @@ class VerificationEmailPage extends StatelessWidget {
         RepositoryProvider<SendVerificationEmailUsecase>(
             create: (context) => SendVerificationEmailUsecaseImpl(
                 authRepository: context.read<AuthRepository>())),
-        BlocProvider<VerificationCodeCubit>(
-          create: (context) => VerificationCodeCubit(
+        BlocProvider<VerificationBloc>(
+          create: (context) => VerificationBloc(
             sendVerificationEmailUsecase:
                 context.read<SendVerificationEmailUsecase>(),
           ),
