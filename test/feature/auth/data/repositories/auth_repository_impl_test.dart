@@ -8,6 +8,7 @@ import 'package:solo_play_application/src/features/auth/data/models/check_email_
 import 'package:solo_play_application/src/features/auth/data/models/email_verification_request.dart';
 import 'package:solo_play_application/src/features/auth/data/models/jwt.dart';
 import 'package:solo_play_application/src/features/auth/data/models/login.dart';
+import 'package:solo_play_application/src/features/auth/data/models/verify_code_request.dart';
 import 'package:solo_play_application/src/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:solo_play_application/src/features/auth/domain/entities/login_info.dart';
 import 'package:solo_play_application/src/features/auth/domain/repositories/auth_repository.dart';
@@ -232,6 +233,38 @@ void main() {
 
         verify(
           () => mockAuthDatasource.sendVerificationEmail(request),
+        ).called(1);
+
+        expect(result, isA<Failure>());
+      });
+    });
+
+    group('when called verifyCode', () {
+      test('should return correctly when success', () async {
+        final request = VerifyCodeRequest(email: 'test@test.com', code: '123456');
+        when(
+          () => mockAuthDatasource.verifyCode(request),
+        ).thenAnswer((_) async => Success('message'));
+
+        final result = await authRepository.verifyCode(request);
+
+        verify(
+          () => mockAuthDatasource.verifyCode(request),
+        ).called(1);
+
+        expect(result, isA<Success>());
+      });
+
+      test('should return correctly when failure', () async {
+        final request = VerifyCodeRequest(email: 'test@test.com', code: '123456');
+        when(
+          () => mockAuthDatasource.verifyCode(request),
+        ).thenAnswer((_) async => Failure('error'));
+
+        final result = await authRepository.verifyCode(request);
+
+        verify(
+          () => mockAuthDatasource.verifyCode(request),
         ).called(1);
 
         expect(result, isA<Failure>());
