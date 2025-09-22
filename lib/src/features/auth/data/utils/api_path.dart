@@ -4,4 +4,5 @@ class AuthApiPath {
   static const String login = "$path/login";
   static const String signup = "$path/signup";
   static const String sendVerificationEmail = "$path/email-verify";
+  static const String checkVerifyCode = "$path/email-confirm";
 }
