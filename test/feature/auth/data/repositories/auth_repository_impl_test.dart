@@ -11,6 +11,7 @@ import 'package:solo_play_application/src/features/auth/data/models/login.dart';
 import 'package:solo_play_application/src/features/auth/data/models/verify_code_request.dart';
 import 'package:solo_play_application/src/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:solo_play_application/src/features/auth/domain/entities/login_info.dart';
+import 'package:solo_play_application/src/features/auth/domain/entities/verify_code_info.dart';
 import 'package:solo_play_application/src/features/auth/domain/repositories/auth_repository.dart';
 import 'package:test/test.dart';
 
@@ -29,6 +30,7 @@ void main() {
       mockAuthDatasource = MockAuthDatasource();
       mockJwtStorage = MockJwtStorage();
       tokenController = StreamController<String?>.broadcast();
+      registerFallbackValue(VerifyCodeRequest(email: '', code: ''));
 
       // Mock the tokenStream getter
       when(() => mockJwtStorage.tokenStream)
@@ -240,31 +242,32 @@ void main() {
     });
 
     group('when called verifyCode', () {
+      final verifyCodeInfo = VerifyCodeInfo(email: 'test@test.com', code: '123456');
+      final verifyCodeRequest = VerifyCodeRequest(email: 'test@test.com', code: '123456');
+
       test('should return correctly when success', () async {
-        final request = VerifyCodeRequest(email: 'test@test.com', code: '123456');
         when(
-          () => mockAuthDatasource.verifyCode(request),
+          () => mockAuthDatasource.verifyCode(any()),
         ).thenAnswer((_) async => Success('message'));
 
-        final result = await authRepository.verifyCode(request);
+        final result = await authRepository.verifyCode(verifyCodeInfo);
 
         verify(
-          () => mockAuthDatasource.verifyCode(request),
+          () => mockAuthDatasource.verifyCode(verifyCodeRequest),
         ).called(1);
 
         expect(result, isA<Success>());
       });
 
       test('should return correctly when failure', () async {
-        final request = VerifyCodeRequest(email: 'test@test.com', code: '123456');
         when(
-          () => mockAuthDatasource.verifyCode(request),
+          () => mockAuthDatasource.verifyCode(any()),
         ).thenAnswer((_) async => Failure('error'));
 
-        final result = await authRepository.verifyCode(request);
+        final result = await authRepository.verifyCode(verifyCodeInfo);
 
         verify(
-          () => mockAuthDatasource.verifyCode(request),
+          () => mockAuthDatasource.verifyCode(verifyCodeRequest),
         ).called(1);
 
         expect(result, isA<Failure>());

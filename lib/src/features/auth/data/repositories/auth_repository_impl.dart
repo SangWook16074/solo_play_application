@@ -7,6 +7,7 @@ import 'package:solo_play_application/src/features/auth/data/models/jwt.dart';
 import 'package:solo_play_application/src/features/auth/data/models/login.dart';
 import 'package:solo_play_application/src/features/auth/data/models/verify_code_request.dart';
 import 'package:solo_play_application/src/features/auth/domain/entities/login_info.dart';
+import 'package:solo_play_application/src/features/auth/domain/entities/verify_code_info.dart';
 import 'package:solo_play_application/src/features/auth/domain/repositories/auth_repository.dart';
 
 enum AuthenticateStatus { unknown, authenticated, unauthenticated }
@@ -66,8 +67,9 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Result<String>> verifyCode(VerifyCodeRequest request) {
-    return _authDatasource.verifyCode(request);
+  Future<Result<String>> verifyCode(VerifyCodeInfo request) {
+    return _authDatasource.verifyCode(
+        VerifyCodeRequest(email: request.email, code: request.code));
   }
 
   /// 로그인을 수행합니다.
