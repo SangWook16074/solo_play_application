@@ -138,11 +138,7 @@ class AuthRepositoryImpl extends AuthRepository {
     final result = await _authDatasource.register(request);
 
     // 5. Handle result
-    if (result is Success<Jwt>) {
-      final jwt = result.value;
-      // Save new tokens
-      await _jwtStorage.saveAccessToken(jwt.accessToken);
-      await _jwtStorage.saveRefreshToken(jwt.refreshToken);
+    if (result is Success<String>) {
       // Delete temporary proof token
       await _proofTokenStorage.deleteProofToken();
       return Success(null);

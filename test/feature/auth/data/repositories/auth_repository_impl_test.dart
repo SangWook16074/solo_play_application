@@ -326,9 +326,7 @@ void main() {
       test('should delete proof token when registration is successful', () async {
         // Arrange
         when(() => mockProofTokenStorage.readProofToken()).thenAnswer((_) async => proofToken);
-        when(() => mockAuthDatasource.register(registerRequest)).thenAnswer((_) async => Success(jwt));
-        when(() => mockJwtStorage.saveAccessToken(jwt.accessToken)).thenAnswer((_) async => Future.value());
-        when(() => mockJwtStorage.saveRefreshToken(jwt.refreshToken)).thenAnswer((_) async => Future.value());
+        when(() => mockAuthDatasource.register(registerRequest)).thenAnswer((_) async => Success('회원가입 성공'));
         when(() => mockProofTokenStorage.deleteProofToken()).thenAnswer((_) async => Future.value());
 
         // Act
@@ -338,9 +336,9 @@ void main() {
         expect(result, isA<Success>());
         verify(() => mockProofTokenStorage.readProofToken()).called(1);
         verify(() => mockAuthDatasource.register(registerRequest)).called(1);
-        verify(() => mockJwtStorage.saveAccessToken(jwt.accessToken)).called(1);
-        verify(() => mockJwtStorage.saveRefreshToken(jwt.refreshToken)).called(1);
         verify(() => mockProofTokenStorage.deleteProofToken()).called(1);
+        verifyNever(() => mockJwtStorage.saveAccessToken(any()));
+        verifyNever(() => mockJwtStorage.saveRefreshToken(any()));
       });
     });
   });

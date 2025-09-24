@@ -139,12 +139,12 @@ class AuthDatasourceImpl extends AuthDatasource {
   /// - [Failure]<String> : 기타 상태 코드이거나 예외 발생 시
   ///   → 기본 메시지 `"서버와의 연결이 원할하지 않습니다"` 반환
   @override
-  Future<Result<Jwt>> register(RegisterRequest request) async {
+  Future<Result<String>> register(RegisterRequest request) async {
     try {
       final response =
           await _dio.post(AuthApiPath.signup, data: request.toJson());
       if (response.statusCode == 200) {
-        return Success(Jwt.fromJson(response.data['data'] as JsonMap));
+        return Success(response.data['message'] as String);
       } else {
         return Failure(response.data['message'] as String);
       }
