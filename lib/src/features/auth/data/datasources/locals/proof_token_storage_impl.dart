@@ -18,7 +18,7 @@ class ProofTokenStorageImpl implements ProofTokenStorage {
 
   /// 저장소에서 사용될 토큰의 키 (Key) - 테스트 코드에서만 접근 가능
   @visibleForTesting
-  static const _proofTokenKey = 'proof_token';
+  static const proofTokenKey = 'proof_token';
 
   /// 본인인증 임시 토큰을 저장합니다.
   ///
@@ -26,7 +26,12 @@ class ProofTokenStorageImpl implements ProofTokenStorage {
   /// [FlutterSecureStorage]에 저장합니다.
   @override
   Future<void> saveProofToken(String proofToken) async {
-    await _storage.write(key: _proofTokenKey, value: proofToken);
+    await _storage.write(key: proofTokenKey, value: proofToken);
+  }
+
+  @override
+  Future<String?> readProofToken() async {
+    return await _storage.read(key: proofTokenKey);
   }
 
   /// 저장된 본인인증 임시 토큰을 삭제합니다.
@@ -34,6 +39,6 @@ class ProofTokenStorageImpl implements ProofTokenStorage {
   /// [_proofTokenKey]를 사용하여 [FlutterSecureStorage]에서 해당 토큰을 삭제합니다.
   @override
   Future<void> deleteProofToken() async {
-    await _storage.delete(key: _proofTokenKey);
+    await _storage.delete(key: proofTokenKey);
   }
 }

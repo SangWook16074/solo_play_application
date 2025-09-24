@@ -12,27 +12,33 @@ void main() {
 
   setUp(() {
     mockFlutterSecureStorage = MockFlutterSecureStorage();
-    proofTokenStorage = ProofTokenStorageImpl(storage: mockFlutterSecureStorage);
+    proofTokenStorage =
+        ProofTokenStorageImpl(storage: mockFlutterSecureStorage);
+    registerFallbackValue(const Duration(seconds: 1));
   });
 
-  group('ProofTokenStorage', () {
+  group(ProofTokenStorage, () {
     const proofToken = 'test_token';
-    const proofTokenKey = 'proof_token';
+    const proofTokenKey = ProofTokenStorageImpl.proofTokenKey;
 
-    test('should call FlutterSecureStorage.write to save the proof token', () async {
+    test('should call FlutterSecureStorage.write to save the proof token',
+        () async {
       // Arrange
-      when(() => mockFlutterSecureStorage.write(key: proofTokenKey, value: proofToken))
-          .thenAnswer((_) async => Future.value());
+      when(() => mockFlutterSecureStorage.write(
+          key: proofTokenKey,
+          value: proofToken)).thenAnswer((_) async => Future.value());
 
       // Act
       await proofTokenStorage.saveProofToken(proofToken);
 
       // Assert
-      verify(() => mockFlutterSecureStorage.write(key: proofTokenKey, value: proofToken)).called(1);
+      verify(() => mockFlutterSecureStorage.write(
+          key: proofTokenKey, value: proofToken)).called(1);
       verifyNoMoreInteractions(mockFlutterSecureStorage);
     });
 
-    test('should call FlutterSecureStorage.delete to delete the proof token', () async {
+    test('should call FlutterSecureStorage.delete to delete the proof token',
+        () async {
       // Arrange
       when(() => mockFlutterSecureStorage.delete(key: proofTokenKey))
           .thenAnswer((_) async => Future.value());
@@ -41,7 +47,23 @@ void main() {
       await proofTokenStorage.deleteProofToken();
 
       // Assert
-      verify(() => mockFlutterSecureStorage.delete(key: proofTokenKey)).called(1);
+      verify(() => mockFlutterSecureStorage.delete(key: proofTokenKey))
+          .called(1);
+      verifyNoMoreInteractions(mockFlutterSecureStorage);
+    });
+
+    test('should call FlutterSecureStorage.read to read the proof token',
+        () async {
+      // Arrange
+      when(() => mockFlutterSecureStorage.read(key: proofTokenKey))
+          .thenAnswer((_) async => proofToken);
+
+      // Act
+      final result = await proofTokenStorage.readProofToken();
+
+      // Assert
+      expect(result, proofToken);
+      verify(() => mockFlutterSecureStorage.read(key: proofTokenKey)).called(1);
       verifyNoMoreInteractions(mockFlutterSecureStorage);
     });
   });
