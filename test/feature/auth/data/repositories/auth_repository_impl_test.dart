@@ -340,6 +340,52 @@ void main() {
         verifyNever(() => mockJwtStorage.saveAccessToken(any()));
         verifyNever(() => mockJwtStorage.saveRefreshToken(any()));
       });
+
+      test('should return Failure when proof token is null', () async {
+        // Arrange
+        when(() => mockProofTokenStorage.readProofToken()).thenAnswer((_) async => null);
+
+        // Act
+        final result = await authRepository.register(registerInfo);
+
+        // Assert
+        expect(result, isA<Failure>());
+        expect((result as Failure).message, '본인인증이 완료되지 않았습니다.');
+        verify(() => mockProofTokenStorage.readProofToken()).called(1);
+        verifyNever(() => mockAuthDatasource.register(any()));
+      });
+
+      test('should return Failure when datasource fails', () async {
+        // Arrange
+        when(() => mockProofTokenStorage.readProofToken()).thenAnswer((_) async => proofToken);
+        when(() => mockAuthDatasource.register(registerRequest))
+            .thenAnswer((_) async => Failure('이미 가입된 이메일입니다.'));
+
+        // Act
+        final result = await authRepository.register(registerInfo);
+
+        // Assert
+        expect(result, isA<Failure>());
+        expect((result as Failure).message, '이미 가입된 이메일입니다.');
+        verify(() => mockProofTokenStorage.readProofToken()).called(1);
+        verify(() => mockAuthDatasource.register(registerRequest)).called(1);
+        verifyNever(() => mockProofTokenStorage.deleteProofToken());
+      });
+    });
+
+    group('when called logout', () {
+      test('should call deleteAccessToken and deleteRefreshToken on jwtStorage', () async {
+        // Arrange
+        when(() => mockJwtStorage.deleteAccessToken()).thenAnswer((_) async => Future.value());
+        when(() => mockJwtStorage.deleteRefreshToken()).thenAnswer((_) async => Future.value());
+
+        // Act
+        await authRepository.logout();
+
+        // Assert
+        verify(() => mockJwtStorage.deleteAccessToken()).called(1);
+        verify(() => mockJwtStorage.deleteRefreshToken()).called(1);
+      });
     });
   });
 }
