@@ -283,7 +283,7 @@ void main() {
             userAgreement: defaultUserAgreement,
             email: 'test@test.com',
             password: 'test-password',
-            code: '123456');
+            proofToken: 'test-proof-token');
         when(
           () => mockDio.post(AuthApiPath.signup, data: request.toJson()),
         ).thenAnswer((_) async => Response(
@@ -316,7 +316,7 @@ void main() {
             userAgreement: defaultUserAgreement,
             email: 'test@test.com',
             password: 'test-password',
-            code: '123456');
+            proofToken: 'test-proof-token');
         when(() => mockDio.post(AuthApiPath.signup, data: request.toJson()))
             .thenAnswer((_) async => Response(
                   requestOptions: RequestOptions(path: ''),
@@ -334,7 +334,7 @@ void main() {
             userAgreement: defaultUserAgreement,
             email: 'test@test.com',
             password: 'test-password',
-            code: '123456');
+            proofToken: 'test-proof-token');
         when(() => mockDio.post(AuthApiPath.signup, data: request.toJson()))
             .thenThrow(DioException(
           requestOptions: RequestOptions(path: ''),
@@ -356,7 +356,7 @@ void main() {
             userAgreement: defaultUserAgreement,
             email: 'test@test.com',
             password: 'test-password',
-            code: '123456');
+            proofToken: 'test-proof-token');
         final dioException = DioException(
           requestOptions: RequestOptions(path: ""),
           type: DioExceptionType.connectionError,
@@ -379,7 +379,7 @@ void main() {
             userAgreement: defaultUserAgreement,
             email: 'test@test.com',
             password: 'test-password',
-            code: '123456');
+            proofToken: 'test-proof-token');
         final unexpectedException = Exception("Something went wrong");
         when(() => mockDio.post(AuthApiPath.signup, data: request.toJson()))
             .thenThrow(unexpectedException);
@@ -401,7 +401,8 @@ void main() {
         authDatasourceImpl = AuthDatasourceImpl(dio: mockDio);
       });
 
-      test('should return success with message when statusCode == 200', () async {
+      test('should return success with message when statusCode == 200',
+          () async {
         final request = EmailVerificationRequest(email: 'test@test.com');
         when(
           () => mockDio.post(AuthApiPath.sendVerificationEmail,
@@ -427,8 +428,9 @@ void main() {
 
       test('should return failure when status code is not 200', () async {
         final request = EmailVerificationRequest(email: 'test@test.com');
-        when(() => mockDio.post(AuthApiPath.sendVerificationEmail,
-            data: request.toJson())).thenAnswer((_) async => Response(
+        when(() =>
+            mockDio.post(AuthApiPath.sendVerificationEmail,
+                data: request.toJson())).thenAnswer((_) async => Response(
               requestOptions: RequestOptions(path: ''),
               data: {'message': 'Accepted'},
               statusCode: 202,
