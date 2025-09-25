@@ -8,21 +8,15 @@ import 'package:solo_play_application/src/core/router/router_path.dart';
 import 'package:solo_play_application/src/core/widgets/primary_button.dart';
 import 'package:solo_play_application/src/features/auth/domain/entities/register.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register/bloc/register_bloc.dart';
-import 'package:solo_play_application/src/features/auth/presentation/register/bloc/register_event.dart';
 import 'package:solo_play_application/src/features/auth/presentation/register/bloc/register_state.dart';
 import 'package:solo_play_application/src/features/auth/presentation/verification/bloc/verification_bloc.dart';
 import 'package:solo_play_application/src/features/auth/presentation/verification/bloc/verification_event.dart';
 import 'package:solo_play_application/src/features/auth/presentation/verification/bloc/verification_state.dart';
 import 'package:solo_play_application/src/features/auth/presentation/verification/sections/verification_intro_button_section.dart';
 
-class MockRegisterBloc extends MockBloc<RegisterEvent, RegisterState>
-    implements RegisterBloc {}
-
-class MockVerificationBloc
-    extends MockBloc<VerificationEvent, VerificationState>
-    implements VerificationBloc {}
-
-class MockGoRouter extends Mock implements GoRouter {}
+import '../mocks/mock_register_bloc.dart';
+import '../mocks/mock_verification_bloc.dart';
+import '../mocks/mock_go_router.dart';
 
 void main() {
   group(VerificationIntroButtonSection, () {
@@ -106,11 +100,12 @@ void main() {
       await tester.tap(find.byType(PrimaryButton));
       await tester.pumpAndSettle();
 
-      verify(() => mockVerificationBloc
-          .add(const VerificationEvent.verificationEmailSent(testEmail))).called(1);
+      verify(() => mockVerificationBloc.add(
+          const VerificationEvent.verificationEmailSent(testEmail))).called(1);
     });
 
-    testWidgets('should navigate to VerificationEmailPage on successful email sent',
+    testWidgets(
+        'should navigate to VerificationEmailPage on successful email sent',
         (tester) async {
       whenListen(
         mockVerificationBloc,

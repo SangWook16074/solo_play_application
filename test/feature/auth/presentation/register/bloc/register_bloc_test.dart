@@ -32,8 +32,9 @@ void main() {
 
     blocTest<RegisterBloc, RegisterState>(
       'emits [RegisterState] with updated terms agreement when UpdateTermsAgreement is added.',
-      build: () => RegisterBloc(mockUserRegisterUsecase),
-      act: (bloc) => bloc.add(const UpdateTermsAgreement(userAgreement: userAgreement)),
+      build: () => RegisterBloc(userRegisterUsecase: mockUserRegisterUsecase),
+      act: (bloc) =>
+          bloc.add(const UpdateTermsAgreement(userAgreement: userAgreement)),
       expect: () => [
         const RegisterState(
           register: Register(
@@ -46,7 +47,7 @@ void main() {
 
     blocTest<RegisterBloc, RegisterState>(
       'emits [RegisterState] with updated email when UpdateEmail is added.',
-      build: () => RegisterBloc(mockUserRegisterUsecase),
+      build: () => RegisterBloc(userRegisterUsecase: mockUserRegisterUsecase),
       act: (bloc) => bloc.add(const UpdateEmail(email: 'test@example.com')),
       expect: () => [
         const RegisterState(
@@ -57,7 +58,7 @@ void main() {
 
     blocTest<RegisterBloc, RegisterState>(
       'emits [RegisterState] with updated password when UpdatePassword is added.',
-      build: () => RegisterBloc(mockUserRegisterUsecase),
+      build: () => RegisterBloc(userRegisterUsecase: mockUserRegisterUsecase),
       act: (bloc) => bloc.add(const UpdatePassword(password: 'password')),
       expect: () => [
         const RegisterState(
@@ -71,16 +72,19 @@ void main() {
       build: () {
         when(() => mockUserRegisterUsecase.call(any()))
             .thenAnswer((_) async => const Result.success(null));
-        return RegisterBloc(mockUserRegisterUsecase);
+        return RegisterBloc(userRegisterUsecase: mockUserRegisterUsecase);
       },
       act: (bloc) {
         bloc.add(const UpdateEmail(email: 'test@example.com'));
         bloc.add(const UpdatePassword(password: 'password'));
-        bloc.add(const RegisterSubmitted(email: 'test@example.com', password: 'password'));
+        bloc.add(const RegisterSubmitted(
+            email: 'test@example.com', password: 'password'));
       },
       expect: () => [
         const RegisterState(register: Register(email: 'test@example.com')),
-        const RegisterState(register: Register(email: 'test@example.com', password: 'password')),
+        const RegisterState(
+            register:
+                Register(email: 'test@example.com', password: 'password')),
         const RegisterState(
           register: Register(email: 'test@example.com', password: 'password'),
           status: RegisterStatus.loading,
@@ -100,18 +104,21 @@ void main() {
     blocTest<RegisterBloc, RegisterState>(
       'emits [RegisterStatus.loading, RegisterStatus.error] when RegisterSubmitted is added and registration fails.',
       build: () {
-        when(() => mockUserRegisterUsecase.call(any()))
-            .thenAnswer((_) async => const Result.failure('Registration failed'));
-        return RegisterBloc(mockUserRegisterUsecase);
+        when(() => mockUserRegisterUsecase.call(any())).thenAnswer(
+            (_) async => const Result.failure('Registration failed'));
+        return RegisterBloc(userRegisterUsecase: mockUserRegisterUsecase);
       },
       act: (bloc) {
         bloc.add(const UpdateEmail(email: 'test@example.com'));
         bloc.add(const UpdatePassword(password: 'password'));
-        bloc.add(const RegisterSubmitted(email: 'test@example.com', password: 'password'));
+        bloc.add(const RegisterSubmitted(
+            email: 'test@example.com', password: 'password'));
       },
       expect: () => [
         const RegisterState(register: Register(email: 'test@example.com')),
-        const RegisterState(register: Register(email: 'test@example.com', password: 'password')),
+        const RegisterState(
+            register:
+                Register(email: 'test@example.com', password: 'password')),
         const RegisterState(
           register: Register(email: 'test@example.com', password: 'password'),
           status: RegisterStatus.loading,

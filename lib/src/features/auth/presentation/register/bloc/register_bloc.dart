@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solo_play_application/src/features/auth/domain/entities/user_agreement.dart';
 import 'package:solo_play_application/src/features/auth/domain/usecases/user_register_usecase.dart';
 import 'package:solo_play_application/src/core/utils/networks/result.dart';
 
@@ -9,7 +8,10 @@ import 'register_state.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final UserRegisterUsecase _userRegisterUsecase;
 
-  RegisterBloc(this._userRegisterUsecase) : super(const RegisterState()) {
+  RegisterBloc({
+    required UserRegisterUsecase userRegisterUsecase,
+  })  : _userRegisterUsecase = userRegisterUsecase,
+        super(const RegisterState()) {
     on<UpdateTermsAgreement>(_onUpdateTermsAgreement);
     on<UpdateEmail>(_onUpdateEmail);
     on<UpdatePassword>(_onUpdatePassword);
@@ -70,4 +72,3 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     ));
   }
 }
-

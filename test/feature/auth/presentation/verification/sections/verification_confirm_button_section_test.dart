@@ -15,15 +15,9 @@ import 'package:solo_play_application/src/features/auth/presentation/verificatio
 import 'package:solo_play_application/src/features/auth/presentation/verification/bloc/verification_state.dart';
 import 'package:solo_play_application/src/features/auth/presentation/verification/sections/verification_confirm_button_section.dart';
 
-// Mock Blocs for testing
-class MockVerificationBloc
-    extends MockBloc<VerificationEvent, VerificationState>
-    implements VerificationBloc {}
-
-class MockRegisterBloc extends MockBloc<RegisterEvent, RegisterState>
-    implements RegisterBloc {}
-
-class MockGoRouter extends Mock implements GoRouter {}
+import '../mocks/mock_verification_bloc.dart';
+import '../mocks/mock_register_bloc.dart';
+import '../mocks/mock_go_router.dart';
 
 void main() {
   group(VerificationConfirmButtonSection, () {
@@ -35,7 +29,8 @@ void main() {
       registerFallbackValue(VerificationEvent.verificationSubmitted('', ''));
       registerFallbackValue(RegisterState());
       registerFallbackValue(Uri.parse('/'));
-      registerFallbackValue(RegisterEvent.registerSubmitted(email: '', password: ''));
+      registerFallbackValue(
+          RegisterEvent.registerSubmitted(email: '', password: ''));
     });
 
     setUp(() {
@@ -58,7 +53,8 @@ void main() {
           home: Scaffold(
             body: MultiBlocProvider(
               providers: [
-                BlocProvider<VerificationBloc>.value(value: mockVerificationBloc),
+                BlocProvider<VerificationBloc>.value(
+                    value: mockVerificationBloc),
                 BlocProvider<RegisterBloc>.value(value: mockRegisterBloc),
               ],
               child: const VerificationConfirmButtonSection(),
@@ -105,7 +101,8 @@ void main() {
           home: Scaffold(
             body: MultiBlocProvider(
               providers: [
-                BlocProvider<VerificationBloc>.value(value: mockVerificationBloc),
+                BlocProvider<VerificationBloc>.value(
+                    value: mockVerificationBloc),
                 BlocProvider<RegisterBloc>.value(value: mockRegisterBloc),
               ],
               child: const VerificationConfirmButtonSection(),
@@ -150,8 +147,8 @@ void main() {
 
       when(() => mockVerificationBloc.state)
           .thenReturn(const VerificationState(code: testCode));
-      when(() => mockRegisterBloc.state)
-          .thenReturn(RegisterState(register: Register(email: testEmail, password: testPassword)));
+      when(() => mockRegisterBloc.state).thenReturn(RegisterState(
+          register: Register(email: testEmail, password: testPassword)));
       when(() => mockVerificationBloc.add(any())).thenReturn(null);
       // when(() => mockRegisterBloc.add(any())).thenReturn(null); // setUp에서 처리
 
@@ -182,7 +179,8 @@ void main() {
       //     .called(1);
     });
 
-    testWidgets('navigates to verificationComplete when verification and registration are successful',
+    testWidgets(
+        'navigates to verificationComplete when verification and registration are successful',
         (WidgetTester tester) async {
       // Arrange
       const testEmail = 'test@example.com';
@@ -192,14 +190,15 @@ void main() {
       whenListen(
         mockVerificationBloc,
         Stream.fromIterable([
-          const VerificationState(status: VerificationStatus.verified, code: '123456'),
+          const VerificationState(
+              status: VerificationStatus.verified, code: '123456'),
         ]),
         initialState: const VerificationState(code: '123456'),
       );
 
       // RegisterBloc의 초기 상태 설정
-      when(() => mockRegisterBloc.state).thenReturn(
-          RegisterState(register: Register(email: testEmail, password: testPassword)));
+      when(() => mockRegisterBloc.state).thenReturn(RegisterState(
+          register: Register(email: testEmail, password: testPassword)));
 
       // RegisterBloc이 RegisterSubmitted 이벤트를 받았을 때 success 상태를 방출하도록 설정
       whenListen(
@@ -214,7 +213,8 @@ void main() {
             status: RegisterStatus.success,
           ),
         ]),
-        initialState: RegisterState(register: Register(email: testEmail, password: testPassword)),
+        initialState: RegisterState(
+            register: Register(email: testEmail, password: testPassword)),
       );
 
       when(() => mockGoRouter.push(any())).thenAnswer((_) async => '');
@@ -240,7 +240,8 @@ void main() {
       await tester.pumpAndSettle();
 
       // Assert
-      verify(() => mockRegisterBloc.add(any(that: isA<RegisterSubmitted>()))) // 추가된 부분
+      verify(() => mockRegisterBloc
+              .add(any(that: isA<RegisterSubmitted>()))) // 추가된 부분
           .called(1);
       verify(() => mockGoRouter.push(RouterPath.verificationComplete))
           .called(1);
