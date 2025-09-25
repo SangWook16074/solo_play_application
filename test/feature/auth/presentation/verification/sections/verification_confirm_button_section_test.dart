@@ -35,12 +35,15 @@ void main() {
       registerFallbackValue(VerificationEvent.verificationSubmitted('', ''));
       registerFallbackValue(RegisterState());
       registerFallbackValue(Uri.parse('/'));
+      registerFallbackValue(RegisterEvent.registerSubmitted(email: '', password: ''));
     });
 
     setUp(() {
       mockVerificationBloc = MockVerificationBloc();
       mockRegisterBloc = MockRegisterBloc();
       mockGoRouter = MockGoRouter();
+      when(() => mockRegisterBloc.add(any())).thenReturn(null);
+      when(() => mockRegisterBloc.state).thenReturn(const RegisterState());
     });
 
     testWidgets('displays disabled button when input is less than 6 characters',
@@ -53,8 +56,11 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: BlocProvider<VerificationBloc>.value(
-              value: mockVerificationBloc,
+            body: MultiBlocProvider(
+              providers: [
+                BlocProvider<VerificationBloc>.value(value: mockVerificationBloc),
+                BlocProvider<RegisterBloc>.value(value: mockRegisterBloc),
+              ],
               child: const VerificationConfirmButtonSection(),
             ),
           ),
@@ -97,8 +103,11 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: BlocProvider<VerificationBloc>.value(
-              value: mockVerificationBloc,
+            body: MultiBlocProvider(
+              providers: [
+                BlocProvider<VerificationBloc>.value(value: mockVerificationBloc),
+                BlocProvider<RegisterBloc>.value(value: mockRegisterBloc),
+              ],
               child: const VerificationConfirmButtonSection(),
             ),
           ),
@@ -137,22 +146,24 @@ void main() {
       // Arrange
       const testEmail = 'test@example.com';
       const testCode = '123456';
+      const testPassword = 'password';
 
       when(() => mockVerificationBloc.state)
           .thenReturn(const VerificationState(code: testCode));
       when(() => mockRegisterBloc.state)
-          .thenReturn(RegisterState(register: Register(email: testEmail)));
+          .thenReturn(RegisterState(register: Register(email: testEmail, password: testPassword)));
       when(() => mockVerificationBloc.add(any())).thenReturn(null);
+      // when(() => mockRegisterBloc.add(any())).thenReturn(null); // setUp에서 처리
 
       await tester.pumpWidget(
         MaterialApp(
-          home: BlocProvider<RegisterBloc>.value(
-            value: mockRegisterBloc,
-            child: BlocProvider<VerificationBloc>.value(
-              value: mockVerificationBloc,
-              child: const Scaffold(
-                body: VerificationConfirmButtonSection(),
-              ),
+          home: MultiBlocProvider(
+            providers: [
+              BlocProvider<RegisterBloc>.value(value: mockRegisterBloc),
+              BlocProvider<VerificationBloc>.value(value: mockVerificationBloc),
+            ],
+            child: const Scaffold(
+              body: VerificationConfirmButtonSection(),
             ),
           ),
         ),
@@ -167,43 +178,70 @@ void main() {
       verify(() => mockVerificationBloc.add(
               VerificationEvent.verificationSubmitted(testEmail, testCode)))
           .called(1);
+      // verify(() => mockRegisterBloc.add(any(that: isA<RegisterSubmitted>()))) // 이 라인 제거
+      //     .called(1);
     });
 
-    testWidgets('navigates to verificationComplete when status is verified',
+    testWidgets('navigates to verificationComplete when verification and registration are successful',
         (WidgetTester tester) async {
       // Arrange
+      const testEmail = 'test@example.com';
+      const testPassword = 'password';
+
+      // VerificationBloc이 verified 상태를 방출하도록 설정
       whenListen(
         mockVerificationBloc,
         Stream.fromIterable([
-          const VerificationState(status: VerificationStatus.verified),
+          const VerificationState(status: VerificationStatus.verified, code: '123456'),
         ]),
-        initialState: const VerificationState(),
+        initialState: const VerificationState(code: '123456'),
       );
+
+      // RegisterBloc의 초기 상태 설정
       when(() => mockRegisterBloc.state).thenReturn(
-          const RegisterState(register: Register(email: 'test@example.com')));
+          RegisterState(register: Register(email: testEmail, password: testPassword)));
+
+      // RegisterBloc이 RegisterSubmitted 이벤트를 받았을 때 success 상태를 방출하도록 설정
+      whenListen(
+        mockRegisterBloc,
+        Stream.fromIterable([
+          RegisterState(
+            register: Register(email: testEmail, password: testPassword),
+            status: RegisterStatus.loading,
+          ),
+          RegisterState(
+            register: Register(email: testEmail, password: testPassword),
+            status: RegisterStatus.success,
+          ),
+        ]),
+        initialState: RegisterState(register: Register(email: testEmail, password: testPassword)),
+      );
+
       when(() => mockGoRouter.push(any())).thenAnswer((_) async => '');
 
       await tester.pumpWidget(
         MaterialApp(
-          home: BlocProvider<RegisterBloc>.value(
-            value: mockRegisterBloc,
-            child: BlocProvider<VerificationBloc>.value(
-              value: mockVerificationBloc,
-              child: InheritedGoRouter(
-                goRouter: mockGoRouter,
-                child: const Scaffold(
-                  body: VerificationConfirmButtonSection(),
-                ),
+          home: MultiBlocProvider(
+            providers: [
+              BlocProvider<RegisterBloc>.value(value: mockRegisterBloc),
+              BlocProvider<VerificationBloc>.value(value: mockVerificationBloc),
+            ],
+            child: InheritedGoRouter(
+              goRouter: mockGoRouter,
+              child: const Scaffold(
+                body: VerificationConfirmButtonSection(),
               ),
             ),
           ),
         ),
       );
 
-      // Act - No direct interaction needed, just pump to trigger listener
+      // Act - VerificationBloc의 verified 상태가 트리거되고, RegisterBloc의 success 상태가 트리거될 때까지 기다림
       await tester.pumpAndSettle();
 
       // Assert
+      verify(() => mockRegisterBloc.add(any(that: isA<RegisterSubmitted>()))) // 추가된 부분
+          .called(1);
       verify(() => mockGoRouter.push(RouterPath.verificationComplete))
           .called(1);
     });
@@ -229,15 +267,15 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: BlocProvider<RegisterBloc>.value(
-            value: mockRegisterBloc,
-            child: BlocProvider<VerificationBloc>.value(
-              value: mockVerificationBloc,
-              child: InheritedGoRouter(
-                goRouter: mockGoRouter,
-                child: const Scaffold(
-                  body: VerificationConfirmButtonSection(),
-                ),
+          home: MultiBlocProvider(
+            providers: [
+              BlocProvider<RegisterBloc>.value(value: mockRegisterBloc),
+              BlocProvider<VerificationBloc>.value(value: mockVerificationBloc),
+            ],
+            child: InheritedGoRouter(
+              goRouter: mockGoRouter,
+              child: const Scaffold(
+                body: VerificationConfirmButtonSection(),
               ),
             ),
           ),
