@@ -80,8 +80,7 @@ void main() {
       act: (bloc) {
         bloc.add(const UpdateEmail(email: 'test@example.com'));
         bloc.add(const UpdatePassword(password: 'password'));
-        bloc.add(const RegisterSubmitted(
-            email: 'test@example.com', password: 'password'));
+        bloc.add(const RegisterSubmitted());
       },
       expect: () => [
         const RegisterState(
@@ -120,8 +119,7 @@ void main() {
       act: (bloc) {
         bloc.add(const UpdateEmail(email: 'test@example.com'));
         bloc.add(const UpdatePassword(password: 'password'));
-        bloc.add(const RegisterSubmitted(
-            email: 'test@example.com', password: 'password'));
+        bloc.add(const RegisterSubmitted());
       },
       expect: () => [
         const RegisterState(
