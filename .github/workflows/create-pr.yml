@@ -44,17 +44,16 @@ jobs:
             exit 0
           fi
           
-          # Gemini API에 보낼 프롬프트를 안전하게 구성합니다.
-          read -r -d '' PROMPT_BODY <<'EOF'
-다음은 Pull Request의 코드 변경사항(diff)입니다. 이 변경사항을 분석해서 한국어로 전문적인 Pull Request 설명을 작성해주세요. 제목, 주요 변경사항 요약, 그리고 상세한 변경 내용 목록을 포함해야 합니다. 마크다운 형식으로 작성해주세요.
+          # AI Prompt를 여러 줄의 변수로 안전하게 생성합니다.
+          LINE1="다음은 Pull Request의 코드 변경사항(diff)입니다. 이 변경사항을 분석해서 한국어로 전문적인 Pull Request 설명을 작성해주세요."
+          LINE2="제목, 주요 변경사항 요약, 그리고 상세한 변경 내용 목록을 포함해야 합니다. 마크다운 형식으로 작성해주세요."
+          LINE3="Diff:"
+          LINE4="```diff"
+          LINE5="$DIFF"
+          LINE6="```"
 
-Diff:
-```diff
-EOF
-
-          PROMPT_TEXT="$PROMPT_BODY
-$DIFF
-```"
+          # printf 를 사용하여 여러 줄의 문자열을 안전하게 조합합니다.
+          PROMPT_TEXT=$(printf "%s\n\n%s\n\n%s\n%s\n%s\n%s" "$LINE1" "$LINE2" "$LINE3" "$LINE4" "$LINE5" "$LINE6")
 
           JSON_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" \
             '{ "contents": [ { "parts": [ { "text": $text } ] } ] }')
