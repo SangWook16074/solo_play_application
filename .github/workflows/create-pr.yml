@@ -1,4 +1,4 @@
-name: Create Pull Request
+name: Create Pull Request with AI Summary
 
 on:
   push:
@@ -17,9 +17,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # Needed to compare with develop branch
 
-      - name: Create Pull Request with AI Summary
+      - name: Generate PR Content and Create PR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -28,40 +28,54 @@ jobs:
 
           BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
           
-          EXISTING_PR=$(gh pr list --head "$BRANCH_NAME" --json number -q 'map(.number) | .[]')
-          if [ -n "$EXISTING_PR" ]; then
-            echo "A pull request for this branch already exists: #$EXISTING_PR"
+          # 1. Check if a PR already exists
+          if gh pr list --head "$BRANCH_NAME" --json number -q 'map(.number) | .[]' | grep -q .; then
+            echo "A pull request for this branch already exists."
             exit 0
           fi
 
-          echo "Creating a new pull request with AI summary."
+          echo "Creating a new pull request..."
 
-          git fetch origin develop
-          DIFF_CONTENT=$(git diff origin/develop..."$BRANCH_NAME")
+          # 2. Gather information for the AI
+          TEMPLATE_CONTENT=$(cat .github/pull_request_template.md)
+          COMMIT_LOG=$(git log origin/develop..HEAD --pretty=format:"- %s")
+          DIFF_CONTENT=$(git diff origin/develop..HEAD)
 
-          if [ -z "$DIFF_CONTENT" ]; then
+          # Exit if there are no changes
+          if [ -z "$COMMIT_LOG" ] && [ -z "$DIFF_CONTENT" ]; then
             echo "No changes to create a pull request."
             exit 0
           fi
-          
-          PROMPT_BODY="다음은 Pull Request의 코드 변경사항(diff)입니다. 이 변경사항을 분석해서 한국어로 전문적인 Pull Request 설명을 작성해주세요. 제목, 주요 변경사항 요약, 그리고 상세한 변경 내용 목록을 포함해야 합니다. 마크다운 형식으로 작성해주세요."
-          
-          # 파이프로 받은 대용량 diff 데이터를 jq를 이용해 JSON으로 생성합니다. 이것이 표준적인 방법입니다.
-          JSON_PAYLOAD=$(echo "$DIFF_CONTENT" | jq -R -s --arg prompt_body "$PROMPT_BODY" 
-            '{ "contents": [ { "parts": [ { "text": ($prompt_body + "\n\nDiff:\n```diff\n" + . + "\n```") } ] } ] }')
 
-          AI_SUMMARY=$(curl -s -f -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=$GEMINI_API_KEY" \
+          # 3. Build the JSON payload for the Gemini API
+          # The large DIFF_CONTENT is piped to jq's stdin to avoid argument length limits.
+          JSON_PAYLOAD=$(printf "%s" "$DIFF_CONTENT" | jq -R -s \
+            --arg template "$TEMPLATE_CONTENT" \
+            --arg log "$COMMIT_LOG" \
+            '{ 
+              "contents": [ 
+                { 
+                  "parts": [ 
+                    { 
+                      "text": "당신은 전문 소프트웨어 엔지니어입니다. 당신의 임무는 한국어로 Pull Request 설명을 작성하는 것입니다. 제공된 템플릿, 커밋 로그, 코드 변경사항(diff)을 사용해 주세요.\n\n1.  **템플릿 채우기**: 커밋 로그와 diff의 정보를 사용하여 템플릿의 각 섹션(`## 설명`, `## 변경 사항`, `## 테스트`)을 채워주세요.\n2.  **변경 내용 요약**: 전체 변경 사항에 대해 간결하고 명확한 요약을 만들어주세요.\n3.  **전문적인 톤**: 전문적이고 명확한 어조를 사용해야 합니다.\n\n**채워야 할 템플릿:**\n---\n" + $template + "\n---\n\n**커밋 로그:**\n---\n" + $log + "\n---\n\n**코드 변경점:**\n---\n```diff\n" + . + "\n```"
+                    }
+                  ]
+                }
+              ]
+            }')
+
+          # 4. Call the Gemini API
+          AI_BODY=$(curl -s -f -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=$GEMINI_API_KEY" \
             -H "Content-Type: application/json" \
-            -d "$JSON_PAYLOAD" | jq -r '.candidates[0].content.parts[0].text') || echo "AI 요약 생성에 실패했습니다."
+            -d "$JSON_PAYLOAD" | jq -r '.candidates[0].content.parts[0].text')
 
-          PR_TITLE=$(echo "$AI_SUMMARY" | head -n 1 | sed 's/# //')
-          PR_BODY=$(echo "$AI_SUMMARY" | tail -n +2)
-
-          if [ -z "$PR_TITLE" ]; then
-            PR_TITLE="Feat: $BRANCH_NAME"
+          # Fallback if AI fails
+          if [ -z "$AI_BODY" ]; then
+            echo "AI summary generation failed. Creating PR with basic information."
+            AI_BODY="AI 요약 생성에 실패했습니다.\n\n**커밋 로그:**\n$COMMIT_LOG"
           fi
-          if [ -z "$PR_BODY" ]; then
-            PR_BODY="AI 요약 생성에 실패했습니다. 수동으로 작성해주세요."
-          fi
-
-          gh pr create --base develop --title "$PR_TITLE" --body "$PR_BODY"
+          
+          # 5. Create the Pull Request
+          # Use the first line of the commit log as the title
+          PR_TITLE=$(git log -1 --pretty=%s)
+          gh pr create --base develop --title "$PR_TITLE" --body "$AI_BODY"
