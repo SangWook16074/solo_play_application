@@ -30,7 +30,6 @@ jobs:
         id: gemini
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-
         run: |
           python << 'EOF'
           import os, requests, json
@@ -55,11 +54,16 @@ jobs:
 
           resp = requests.post(
               "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent",
-              headers={"Content-Type": "application/json", "Authorization": f"Bearer {GEMINI_API_KEY}"},
+              headers={"Content-Type": "application/json"},
+              params={"key": GEMINI_API_KEY},  # ✅ key 파라미터 방식
               json={"contents": [{"parts": [{"text": prompt}]}]}
           )
 
+          print("DEBUG RESPONSE:", resp.text)  # ✅ 응답 전체 출력
           data = resp.json()
+          if "candidates" not in data:
+              raise RuntimeError(f"Gemini API Error: {data}")
+
           text = data["candidates"][0]["content"]["parts"][0]["text"]
 
           # Gemini 결과를 환경변수로 export
