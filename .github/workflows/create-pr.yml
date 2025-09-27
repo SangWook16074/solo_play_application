@@ -53,7 +53,7 @@ jobs:
           """
 
           resp = requests.post(
-              "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro-latest:generateContent",
+              "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
               headers={"Content-Type": "application/json"},
               params={"key": GEMINI_API_KEY},  # ✅ key 파라미터 방식
               json={"contents": [{"parts": [{"text": prompt}]}]}
