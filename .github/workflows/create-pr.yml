@@ -28,6 +28,9 @@ jobs:
 
       - name: Generate PR description with Gemini
         id: gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
         run: |
           python << 'EOF'
           import os, requests, json
