@@ -44,16 +44,16 @@ jobs:
             exit 0
           fi
           
-          # 쉘에서 문자열을 조합하는 대신, jq를 사용하여 안전하게 JSON 페이로드를 생성합니다.
+          # 대용량 diff 내용을 인자 대신 파이프로 전달하여 jq로 JSON을 생성합니다.
           PROMPT_BODY="다음은 Pull Request의 코드 변경사항(diff)입니다. 이 변경사항을 분석해서 한국어로 전문적인 Pull Request 설명을 작성해주세요. 제목, 주요 변경사항 요약, 그리고 상세한 변경 내용 목록을 포함해야 합니다. 마크다운 형식으로 작성해주세요."
           
-          JSON_PAYLOAD=$(jq -n \
-            --arg prompt_body "$PROMPT_BODY" \
-            --arg diff_content "$DIFF_CONTENT" \
+          JSON_PAYLOAD=$(echo "$DIFF_CONTENT" | jq -n 
+            --arg prompt_body "$PROMPT_BODY"
+            --raw-input --slurp --arg diff_content "$(cat)"
             '{ "contents": [ { "parts": [ { "text": ($prompt_body + "\n\nDiff:\n```diff\n" + $diff_content + "\n```") } ] } ] }')
 
-          AI_SUMMARY=$(curl -s -f -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=$GEMINI_API_KEY" \
-            -H "Content-Type: application/json" \
+          AI_SUMMARY=$(curl -s -f -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=$GEMINI_API_KEY" 
+            -H "Content-Type: application/json" 
             -d "$JSON_PAYLOAD" | jq -r '.candidates[0].content.parts[0].text') || echo "AI 요약 생성에 실패했습니다."
 
           PR_TITLE=$(echo "$AI_SUMMARY" | head -n 1 | sed 's/# //')
