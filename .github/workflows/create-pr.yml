@@ -15,7 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        # We need to fetch more than the latest commit to get the diff
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -25,21 +24,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          set -e # Exit immediately if a command exits with a non-zero status.
+          set -e
 
           BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
           
-          # PR이 이미 존재하는지 확인합니다.
           EXISTING_PR=$(gh pr list --head "$BRANCH_NAME" --json number -q 'map(.number) | .[]')
-
           if [ -n "$EXISTING_PR" ]; then
             echo "A pull request for this branch already exists: #$EXISTING_PR"
             exit 0
           fi
 
-          echo "No existing PR found. Creating a new pull request with AI summary."
+          echo "Creating a new pull request with AI summary."
 
-          # develop 브랜치와의 코드 차이를 가져옵니다.
           git fetch origin develop
           DIFF=$(git diff origin/develop..."$BRANCH_NAME")
 
@@ -48,24 +44,28 @@ jobs:
             exit 0
           fi
           
-          # Gemini API에 보낼 프롬프트를 구성합니다.
-          PROMPT_TEXT="다음은 Pull Request의 코드 변경사항(diff)입니다. 이 변경사항을 분석해서 한국어로 전문적인 Pull Request 설명을 작성해주세요. 제목, 주요 변경사항 요약, 그리고 상세한 변경 내용 목록을 포함해야 합니다. 마크다운 형식으로 작성해주세요.\n\nDiff:\n```diff\n$DIFF\n```"
+          # Gemini API에 보낼 프롬프트를 안전하게 구성합니다.
+          read -r -d '' PROMPT_BODY <<'EOF'
+다음은 Pull Request의 코드 변경사항(diff)입니다. 이 변경사항을 분석해서 한국어로 전문적인 Pull Request 설명을 작성해주세요. 제목, 주요 변경사항 요약, 그리고 상세한 변경 내용 목록을 포함해야 합니다. 마크다운 형식으로 작성해주세요.
 
-          # JSON 페이로드를 생성합니다.
+Diff:
+```diff
+EOF
+
+          PROMPT_TEXT="$PROMPT_BODY
+$DIFF
+```"
+
           JSON_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" \
             '{ "contents": [ { "parts": [ { "text": $text } ] } ] }')
 
-          # Gemini API를 호출하여 요약본을 생성합니다.
-          # API 호출 실패 시 스크립트가 중단되지 않도록 처리합니다.
           AI_SUMMARY=$(curl -s -f -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=$GEMINI_API_KEY" \
             -H "Content-Type: application/json" \
             -d "$JSON_PAYLOAD" | jq -r '.candidates[0].content.parts[0].text') || echo "AI 요약 생성에 실패했습니다."
 
-          # AI 요약본에서 제목과 본문을 분리합니다.
           PR_TITLE=$(echo "$AI_SUMMARY" | head -n 1 | sed 's/# //')
           PR_BODY=$(echo "$AI_SUMMARY" | tail -n +2)
 
-          # 제목이나 본문이 비어있을 경우 기본값을 사용합니다.
           if [ -z "$PR_TITLE" ]; then
             PR_TITLE="Feat: $BRANCH_NAME"
           fi
@@ -73,5 +73,4 @@ jobs:
             PR_BODY="AI 요약 생성에 실패했습니다. 수동으로 작성해주세요."
           fi
 
-          # Pull Request를 생성합니다.
           gh pr create --base develop --title "$PR_TITLE" --body "$PR_BODY"
