@@ -21,7 +21,7 @@ void main() {
       'email': tEmail,
       'password': tPassword,
       'proofToken': tProofToken,
-      'userAgreement': {
+      'agreement': {
         'isOver14': true,
         'isAgreedToTerms': true,
         'isAgreedToMarketing': true,
